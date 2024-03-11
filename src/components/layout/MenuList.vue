@@ -1,0 +1,88 @@
+<template>
+  <q-list>
+    <q-item
+      clickable
+      @click="$router.push('/')"
+    >
+      <q-item-section
+        side
+      >
+        <q-icon
+          name="home"
+        />
+      </q-item-section>
+      <q-item-section>
+        Home
+      </q-item-section>
+    </q-item>
+    <q-item
+      clickable
+      @click="$router.push('profiles')"
+    >
+      <q-item-section
+        side
+      >
+        <q-icon
+          name="list"
+        />
+      </q-item-section>
+      <q-item-section>
+        Profiles
+      </q-item-section>
+    </q-item>
+    <q-item
+      clickable
+      @click="$router.push('calculator')"
+    >
+      <q-item-section
+        side
+      >
+        <q-icon
+          name="calculate"
+        />
+      </q-item-section>
+      <q-item-section>
+        Calculator
+      </q-item-section>
+    </q-item>
+    <q-separator />
+    <q-item
+      clickable
+      @click="$router.push('settings')"
+    >
+      <q-item-section
+        side
+      >
+        <q-icon
+          name="settings"
+        />
+      </q-item-section>
+      <q-item-section>
+        Settings
+      </q-item-section>
+    </q-item><q-item
+      clickable
+      @click="$router.push('about')"
+    >
+      <q-item-section
+        side
+      >
+        <q-icon
+          name="info"
+        />
+      </q-item-section>
+      <q-item-section>
+        About
+      </q-item-section>
+    </q-item>
+  </q-list>
+</template>
+
+<script>
+export default {
+  // name: 'ComponentName',
+  setup () {
+    return {}
+  }
+}
+</script>

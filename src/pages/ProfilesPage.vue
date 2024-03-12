@@ -77,6 +77,16 @@
                 </q-item>
               </q-list>
             </q-card-section>
+            <q-card-actions
+              vertical
+            >
+              <q-btn
+                outline
+                @click="removeProfile(index)"
+              >
+                Remove
+              </q-btn>
+            </q-card-actions>
           </q-card>
         </div>
       </div>
@@ -89,40 +99,46 @@
       <q-card
         style="width: 700px; max-width: 80vw;"
       >
-        <q-card-section
-          class="row items-center q-pb-none"
+        <q-form
+          @submit="addNewProfile"
         >
-          <div class="text-h6">
-            Add new profile
-          </div>
-          <q-space />
-          <q-btn
-            v-close-popup
-            icon="close"
-            flat
-            round
-            dense
-          />
-        </q-card-section>
+          <q-card-section
+            class="row items-center q-pb-none"
+          >
+            <div class="text-h6">
+              Add new profile
+            </div>
+            <q-space />
+            <q-btn
+              v-close-popup
+              icon="close"
+              flat
+              round
+              dense
+            />
+          </q-card-section>
 
-        <q-card-section class="q-pt-none">
-          Enter your bullet and rifle data.
-        </q-card-section>
+          <q-card-section class="q-pt-none">
+            Enter your bullet and rifle data.
+          </q-card-section>
 
-        <q-card-section class="q-mt-sm">
-          <q-form>
+          <q-card-section class="q-mt-sm">
             <q-input
               v-model="newProfile.rifleName"
               label="Weapon"
               filled
               type="text"
               class="q-mb-md"
+              lazy-rules
+              :rules="[ val => val && val.length > 0 || 'Please name your weapon']"
             />
             <q-input
               v-model="newProfile.rifleOptic"
               label="Optic"
               filled
               type="text"
+              lazy-rules
+              :rules="[ val => val && val.length > 0 || 'Please name your optic']"
             />
             <div class="row q-mt-md">
               <div class="col-xs-6 col-sm-9">
@@ -131,6 +147,9 @@
                   label="Optic height"
                   filled
                   type="number"
+                  step="any"
+                  lazy-rules
+                  :rules="[ val => val && val > 0 || 'Optic height must be positive']"
                 />
               </div>
               <div class="col-xs-6 col-sm-3 flex items-center q-pl-sm">
@@ -155,7 +174,10 @@
                   v-model="newProfile.bulletWeight"
                   label="Bullet weight"
                   filled
+                  step="any"
                   type="number"
+                  lazy-rules
+                  :rules="[ val => val && val > 0 || 'Bullet weight must be positive']"
                 />
               </div>
               <div class="col-xs-6 col-sm-3 flex items-center q-pl-sm">
@@ -175,7 +197,10 @@
                   v-model="newProfile.bulletVelocity"
                   label="Velocity"
                   filled
+                  step="any"
                   type="number"
+                  lazy-rules
+                  :rules="[ val => val && val > 0 || 'Velocity must be positive']"
                 />
               </div>
               <div class="col-xs-6 col-sm-3 flex items-center q-pl-sm">
@@ -195,7 +220,10 @@
                   v-model="newProfile.bulletBallisticCoefficient"
                   label="Ballistic coefficient"
                   filled
+                  step="any"
                   type="number"
+                  lazy-rules
+                  :rules="[ val => val && val > 0 || 'Ballistic coefficient must be positive']"
                 />
               </div>
               <div class="col-xs-6 col-sm-3 flex items-center q-pl-sm">
@@ -209,19 +237,19 @@
                 />
               </div>
             </div>
-          </q-form>
-        </q-card-section>
+          </q-card-section>
 
-        <q-card-actions
-          align="right"
-        >
-          <q-btn
-            flat
-            label="Add"
-            color="primary"
-            @click="addNewProfile"
-          />
-        </q-card-actions>
+          <q-card-actions
+            align="right"
+          >
+            <q-btn
+              flat
+              label="Add"
+              color="primary"
+              type="submit"
+            />
+          </q-card-actions>
+        </q-form>
       </q-card>
     </q-dialog>
   </q-page>
@@ -235,18 +263,7 @@ export default {
   data: function () {
     return {
       newProfileDialog: false,
-      newProfile: {
-        rifleName: '',
-        rifleOptic: '',
-        rifleOpticHeight: 0,
-        rifleOpticHeightUnit: 'inch',
-        bulletWeight: 0,
-        bulletWeightUnit: 'grain',
-        bulletVelocity: 0,
-        bulletVelocityUnit: 'FPS',
-        bulletBallisticCoefficient: 0,
-        bulletBallisticCoefficientProfile: 'G1'
-      },
+      newProfile: this.blankProfile(),
       profilesArray: []
     }
   },
@@ -254,28 +271,47 @@ export default {
     this.profilesArray = JSON.parse(LocalStorage.getItem('profiles')) || []
   },
   methods: {
-    addNewProfile () {
-      // push the new item into the profiles array
-      this.profilesArray.push(this.newProfile)
-
-      // save to local storage
-      LocalStorage.set('profiles', JSON.stringify(this.profilesArray))
-
-      // reset the form
-      this.newProfile = {
+    blankProfile () {
+      return {
         rifleName: '',
         rifleOptic: '',
-        rifleOpticHeight: 0,
+        rifleOpticHeight: 0.0,
         rifleOpticHeightUnit: 'inch',
         bulletWeight: 0,
         bulletWeightUnit: 'grain',
-        bulletVelocity: 0,
+        bulletVelocity: 0.0,
         bulletVelocityUnit: 'FPS',
         bulletBallisticCoefficient: 0,
         bulletBallisticCoefficientProfile: 'G1'
       }
+    },
+    addNewProfile () {
+      // push the new item into the profiles array
+      this.profilesArray.push(this.newProfile)
+
+      // persist data
+      this.persistProfiles()
+
+      // reset the form
+      this.newProfile = this.blankProfile()
+
       // close window
       this.newProfileDialog = false
+    },
+    removeProfile (index) {
+      this.$q.dialog({
+        title: 'Confirm',
+        message: 'Are you sure you want to remove this profile ?',
+        cancel: true
+      }).onOk(() => {
+        // remove profile from profilesArray
+        this.profilesArray.splice(index, 1)
+        // persist data
+        this.persistProfiles()
+      })
+    },
+    persistProfiles () {
+      LocalStorage.set('profiles', JSON.stringify(this.profilesArray))
     }
   }
 

@@ -2,73 +2,83 @@
   <q-page padding>
     <!-- content -->
     <div>
-      <p class="text-h6">
-        Profiles
-      </p>
-      <p>Manage your bullet profiles.</p>
-      <q-btn
-        icon="add"
-        rounded
-        class="q-mt-sm"
-        color="primary"
-        @click="newProfileDialog=true"
-      >
-        Add new profile
-      </q-btn>
-      <div class="row">
-        <q-card
-          class="col-sm q-mt-md"
-          padding
-          bordered
-          style="max-width: 320px;"
+      <div class="q-ma-md">
+        <p class="text-h6">
+          Profiles
+        </p>
+        <p>Manage your bullet profiles.</p>
+        <q-btn
+          icon="add"
+          rounded
+          class="q-mt-sm"
+          color="primary"
+          @click="newProfileDialog=true"
         >
-          <q-card-section>
-            <div class="text-h6">
-              AR15 16''
-            </div>
-            <div>
-              Trijicon ACOG
-            </div>
-            <div>3.5 in height over bore</div>
-          </q-card-section>
-          <q-card-section>
-            <q-list>
-              <q-item>
-                <q-item-section>
-                  <q-icon
-                    name="scale"
-                    size="md"
-                  />
-                </q-item-section>
-                <q-item-section class="text-bold">
-                  55 gr
-                </q-item-section>
-              </q-item>
-              <q-item>
-                <q-item-section>
-                  <q-icon
-                    name="speed"
-                    size="md"
-                  />
-                </q-item-section>
-                <q-item-section class="text-bold">
-                  2735 FPS
-                </q-item-section>
-              </q-item>
-              <q-item>
-                <q-item-section>
-                  <q-icon
-                    name="moving"
-                    size="md"
-                  />
-                </q-item-section>
-                <q-item-section class="text-bold">
-                  0.321 G1
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-card-section>
-        </q-card>
+          Add new profile
+        </q-btn>
+      </div>
+
+      <div class="row">
+        <div
+          v-for="(profile, index) in profilesArray"
+          :key="index"
+          class="col-xs-12 col-sm-4 col-md-3 q-pa-md"
+        >
+          <q-card
+
+            class=""
+            padding
+            bordered
+            flat
+          >
+            <q-card-section>
+              <div class="text-h6">
+                {{ profile.rifleName }}
+              </div>
+              <div>
+                {{ profile.rifleOptic }}
+              </div>
+              <div>{{ profile.rifleOpticHeight }} {{ profile.rifleOpticHeightUnit }} height over bore</div>
+            </q-card-section>
+            <q-card-section>
+              <q-list>
+                <q-item>
+                  <q-item-section>
+                    <q-icon
+                      name="scale"
+                      size="md"
+                    />
+                  </q-item-section>
+                  <q-item-section class="text-bold">
+                    {{ profile.bulletWeight }} {{ profile.bulletWeightUnit }}
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-icon
+                      name="speed"
+                      size="md"
+                    />
+                  </q-item-section>
+                  <q-item-section class="text-bold">
+                    {{ profile.bulletVelocity }} {{ profile.bulletVelocityUnit }}
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-icon
+                      name="moving"
+                      size="md"
+                    />
+                  </q-item-section>
+                  <q-item-section class="text-bold">
+                    {{ profile.bulletBallisticCoefficient }} {{ profile.bulletBallisticCoefficientProfile }}
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-card-section>
+          </q-card>
+        </div>
       </div>
     </div>
     <q-dialog
@@ -102,12 +112,14 @@
         <q-card-section class="q-mt-sm">
           <q-form>
             <q-input
+              v-model="newProfile.rifleName"
               label="Weapon"
               filled
               type="text"
               class="q-mb-md"
             />
             <q-input
+              v-model="newProfile.rifleOptic"
               label="Optic"
               filled
               type="text"
@@ -115,18 +127,18 @@
             <div class="row q-mt-md">
               <div class="col-xs-6 col-sm-9">
                 <q-input
+                  v-model="newProfile.rifleOpticHeight"
                   label="Optic height"
                   filled
                   type="number"
-                  class=""
                 />
               </div>
               <div class="col-xs-6 col-sm-3 flex items-center q-pl-sm">
                 <q-btn-toggle
-                  v-model="opticHeightUnit"
+                  v-model="newProfile.rifleOpticHeightUnit"
                   no-caps
                   :options="[
-                    {label: 'inch', value: 'in'},
+                    {label: 'inch', value: 'inch'},
                     {label: 'cm', value: 'cm'}
                   ]"
                 />
@@ -140,19 +152,19 @@
             <div class="row q-mt-md">
               <div class="col-xs-6 col-sm-9">
                 <q-input
+                  v-model="newProfile.bulletWeight"
                   label="Bullet weight"
                   filled
                   type="number"
-                  class=""
                 />
               </div>
               <div class="col-xs-6 col-sm-3 flex items-center q-pl-sm">
                 <q-btn-toggle
-                  v-model="bulletWeightUnit"
+                  v-model="newProfile.bulletWeightUnit"
                   no-caps
                   :options="[
-                    {label: 'grains', value: 'gr'},
-                    {label: 'grams', value: 'g'}
+                    {label: 'grain', value: 'grain'},
+                    {label: 'gram', value: 'gram'}
                   ]"
                 />
               </div>
@@ -160,6 +172,7 @@
             <div class="row q-mt-md">
               <div class="col-xs-6 col-sm-9">
                 <q-input
+                  v-model="newProfile.bulletVelocity"
                   label="Velocity"
                   filled
                   type="number"
@@ -167,11 +180,11 @@
               </div>
               <div class="col-xs-6 col-sm-3 flex items-center q-pl-sm">
                 <q-btn-toggle
-                  v-model="velocityUnit"
+                  v-model="newProfile.bulletVelocityUnit"
                   no-caps
                   :options="[
-                    {label: 'FPS', value: 'fps'},
-                    {label: 'm/s', value: 'ms'}
+                    {label: 'FPS', value: 'FPS'},
+                    {label: 'm/s', value: 'm/s'}
                   ]"
                 />
               </div>
@@ -179,6 +192,7 @@
             <div class="row q-mt-md">
               <div class="col-xs-6 col-sm-9">
                 <q-input
+                  v-model="newProfile.bulletBallisticCoefficient"
                   label="Ballistic coefficient"
                   filled
                   type="number"
@@ -186,11 +200,11 @@
               </div>
               <div class="col-xs-6 col-sm-3 flex items-center q-pl-sm">
                 <q-btn-toggle
-                  v-model="ballisticCoefficientProfile"
+                  v-model="newProfile.bulletBallisticCoefficientProfile"
                   no-caps
                   :options="[
-                    {label: 'G1', value: 'g1'},
-                    {label: 'G7', value: 'g7'}
+                    {label: 'G1', value: 'G1'},
+                    {label: 'G7', value: 'G7'}
                   ]"
                 />
               </div>
@@ -202,10 +216,10 @@
           align="right"
         >
           <q-btn
-            v-close-popup
             flat
             label="Add"
             color="primary"
+            @click="addNewProfile"
           />
         </q-card-actions>
       </q-card>
@@ -214,16 +228,54 @@
 </template>
 
 <script>
+import { LocalStorage } from 'quasar'
 
 export default {
   // name: 'PageName',
   data: function () {
     return {
       newProfileDialog: false,
-      opticHeightUnit: 'in',
-      bulletWeightUnit: 'gr',
-      velocityUnit: 'fps',
-      ballisticCoefficientProfile: 'g1'
+      newProfile: {
+        rifleName: '',
+        rifleOptic: '',
+        rifleOpticHeight: 0,
+        rifleOpticHeightUnit: 'inch',
+        bulletWeight: 0,
+        bulletWeightUnit: 'grain',
+        bulletVelocity: 0,
+        bulletVelocityUnit: 'FPS',
+        bulletBallisticCoefficient: 0,
+        bulletBallisticCoefficientProfile: 'G1'
+      },
+      profilesArray: []
+    }
+  },
+  mounted () {
+    this.profilesArray = JSON.parse(LocalStorage.getItem('profiles')) || []
+  },
+  methods: {
+    addNewProfile () {
+      // push the new item into the profiles array
+      this.profilesArray.push(this.newProfile)
+
+      // save to local storage
+      LocalStorage.set('profiles', JSON.stringify(this.profilesArray))
+
+      // reset the form
+      this.newProfile = {
+        rifleName: '',
+        rifleOptic: '',
+        rifleOpticHeight: 0,
+        rifleOpticHeightUnit: 'inch',
+        bulletWeight: 0,
+        bulletWeightUnit: 'grain',
+        bulletVelocity: 0,
+        bulletVelocityUnit: 'FPS',
+        bulletBallisticCoefficient: 0,
+        bulletBallisticCoefficientProfile: 'G1'
+      }
+      // close window
+      this.newProfileDialog = false
     }
   }
 

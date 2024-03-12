@@ -1,94 +1,92 @@
 <template>
   <q-page padding>
     <!-- content -->
-    <div>
-      <div class="q-ma-md">
-        <p class="text-h6">
-          Profiles
-        </p>
-        <p>Manage your bullet profiles.</p>
-        <q-btn
-          icon="add"
-          rounded
-          class="q-mt-sm"
-          color="primary"
-          @click="newProfileDialog=true"
-        >
-          Add new profile
-        </q-btn>
-      </div>
+    <div class="q-ma-md">
+      <p class="text-h6">
+        Profiles
+      </p>
+      <p>Manage your bullet profiles.</p>
+      <q-btn
+        icon="add"
+        rounded
+        class="q-mt-sm"
+        color="primary"
+        @click="newProfileDialog=true"
+      >
+        Add new profile
+      </q-btn>
+    </div>
 
-      <div class="row">
-        <div
-          v-for="(profile, index) in profilesArray"
-          :key="index"
-          class="col-xs-12 col-sm-4 col-md-3 q-pa-md"
-        >
-          <q-card
+    <div class="row">
+      <div
+        v-for="(profile, index) in profilesArray"
+        :key="index"
+        class="col-xs-12 col-sm-4 col-md-3 q-pa-md"
+      >
+        <q-card
 
-            class=""
-            padding
-            bordered
-            flat
+          class=""
+          padding
+          bordered
+          flat
+        >
+          <q-card-section>
+            <div class="text-h6">
+              {{ profile.rifleName }}
+            </div>
+            <div>
+              {{ profile.rifleOptic }}
+            </div>
+            <div>{{ profile.rifleOpticHeight }} {{ profile.rifleOpticHeightUnit }} height over bore</div>
+          </q-card-section>
+          <q-card-section>
+            <q-list>
+              <q-item>
+                <q-item-section>
+                  <q-icon
+                    name="scale"
+                    size="md"
+                  />
+                </q-item-section>
+                <q-item-section class="text-bold">
+                  {{ profile.bulletWeight }} {{ profile.bulletWeightUnit }}
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-icon
+                    name="speed"
+                    size="md"
+                  />
+                </q-item-section>
+                <q-item-section class="text-bold">
+                  {{ profile.bulletVelocity }} {{ profile.bulletVelocityUnit }}
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-icon
+                    name="moving"
+                    size="md"
+                  />
+                </q-item-section>
+                <q-item-section class="text-bold">
+                  {{ profile.bulletBallisticCoefficient }} {{ profile.bulletBallisticCoefficientProfile }}
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-card-section>
+          <q-card-actions
+            vertical
           >
-            <q-card-section>
-              <div class="text-h6">
-                {{ profile.rifleName }}
-              </div>
-              <div>
-                {{ profile.rifleOptic }}
-              </div>
-              <div>{{ profile.rifleOpticHeight }} {{ profile.rifleOpticHeightUnit }} height over bore</div>
-            </q-card-section>
-            <q-card-section>
-              <q-list>
-                <q-item>
-                  <q-item-section>
-                    <q-icon
-                      name="scale"
-                      size="md"
-                    />
-                  </q-item-section>
-                  <q-item-section class="text-bold">
-                    {{ profile.bulletWeight }} {{ profile.bulletWeightUnit }}
-                  </q-item-section>
-                </q-item>
-                <q-item>
-                  <q-item-section>
-                    <q-icon
-                      name="speed"
-                      size="md"
-                    />
-                  </q-item-section>
-                  <q-item-section class="text-bold">
-                    {{ profile.bulletVelocity }} {{ profile.bulletVelocityUnit }}
-                  </q-item-section>
-                </q-item>
-                <q-item>
-                  <q-item-section>
-                    <q-icon
-                      name="moving"
-                      size="md"
-                    />
-                  </q-item-section>
-                  <q-item-section class="text-bold">
-                    {{ profile.bulletBallisticCoefficient }} {{ profile.bulletBallisticCoefficientProfile }}
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </q-card-section>
-            <q-card-actions
-              vertical
+            <q-btn
+              outline
+              @click="removeProfile(index)"
             >
-              <q-btn
-                outline
-                @click="removeProfile(index)"
-              >
-                Remove
-              </q-btn>
-            </q-card-actions>
-          </q-card>
-        </div>
+              Remove
+            </q-btn>
+          </q-card-actions>
+        </q-card>
       </div>
     </div>
     <q-dialog

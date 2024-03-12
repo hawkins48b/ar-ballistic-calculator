@@ -1,12 +1,17 @@
 <template>
   <q-page padding>
+    <div>
+      <p class="text-h4 q-ma-md">
+        Settings
+      </p>
+    </div>
     <div class="row">
       <q-card
         flat
-        bordered
         class="col-xs-12 col-sm-4"
+        :class="{'bg-grey-3':!$q.dark.isActive}"
       >
-        <q-card-section>
+        <q-card-section class="text-h6">
           General
         </q-card-section>
         <q-card-section>

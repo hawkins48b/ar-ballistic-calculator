@@ -5,8 +5,8 @@
     <div class="row">
       <q-card
         flat
-        bordered
-        class="text-center col-xs-12 col-sm-4"
+        class="text-center col-xs-12 col-sm-4 q-ma-md"
+        :class="{'bg-grey-3':!$q.dark.isActive}"
       >
         <h3>AR Ballistic Calculator</h3>
         <p>Version 1.0</p>

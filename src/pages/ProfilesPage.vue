@@ -1,20 +1,29 @@
 <template>
   <q-page padding>
     <!-- content -->
-    <div class="q-ma-md">
-      <p class="text-h6">
+    <div class=" q-ma-md">
+      <p class="text-h4">
         Profiles
       </p>
-      <p>Manage your bullet profiles.</p>
-      <q-btn
-        icon="add"
-        rounded
-        class="q-mt-sm"
-        color="primary"
-        @click="newProfileDialog=true"
-      >
-        Add new profile
-      </q-btn>
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <q-card
+            class="q-pa-md"
+            flat
+            :class="{'bg-grey-3':!$q.dark.isActive}"
+          >
+            <p>Manage your bullet profiles.</p>
+            <q-btn
+              icon="add"
+              class="q-mt-sm"
+              color="primary"
+              @click="newProfileDialog=true"
+            >
+              Add new profile
+            </q-btn>
+          </q-card>
+        </div>
+      </div>
     </div>
 
     <div class="row">
@@ -27,7 +36,7 @@
 
           class=""
           padding
-          bordered
+          :class="{'bg-grey-3':!$q.dark.isActive}"
           flat
         >
           <q-card-section>
@@ -40,6 +49,9 @@
             <div>{{ profile.rifleOpticHeight }} {{ profile.rifleOpticHeightUnit }} height over bore</div>
           </q-card-section>
           <q-card-section>
+            <p class="text-bold">
+              {{ profile.bulletName }}
+            </p>
             <q-list>
               <q-item>
                 <q-item-section>
@@ -91,7 +103,6 @@
     </div>
     <q-dialog
       v-model="newProfileDialog"
-      persistent
       medium-width
     >
       <q-card
@@ -163,6 +174,16 @@
             </div>
 
             <q-separator
+              class="q-mt-md"
+            />
+
+            <q-input
+              v-model="newProfile.bulletName"
+              label="Bullet name"
+              filled
+              type="text"
+              lazy-rules
+              :rules="[ val => val && val.length > 0 || 'Please name your ammo']"
               class="q-mt-md"
             />
 
@@ -275,6 +296,7 @@ export default {
         rifleOptic: '',
         rifleOpticHeight: 0.0,
         rifleOpticHeightUnit: 'inch',
+        bulletName: '',
         bulletWeight: 0,
         bulletWeightUnit: 'grain',
         bulletVelocity: 0.0,

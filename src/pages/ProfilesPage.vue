@@ -130,15 +130,12 @@
 
           <q-card-section class="q-pt-none">
             Enter your bullet and rifle data.
-          </q-card-section>
-
-          <q-card-section class="q-mt-sm">
             <q-input
               v-model="newProfile.rifleName"
               label="Weapon"
               filled
               type="text"
-              class="q-mb-md"
+              class="q-mt-md"
               lazy-rules
               :rules="[ val => val && val.length > 0 || 'Please name your weapon']"
             />
@@ -149,20 +146,19 @@
               type="text"
               lazy-rules
               :rules="[ val => val && val.length > 0 || 'Please name your optic']"
+              class="q-mt-md"
             />
-            <div class="row q-mt-md">
-              <div class="col-xs-6 col-sm-9">
-                <q-input
-                  v-model="newProfile.rifleOpticHeight"
-                  label="Optic height"
-                  filled
-                  type="number"
-                  step="any"
-                  lazy-rules
-                  :rules="[ val => val && val > 0 || 'Optic height must be positive']"
-                />
-              </div>
-              <div class="col-xs-6 col-sm-3 flex items-center q-pl-sm">
+            <q-input
+              v-model="newProfile.rifleOpticHeight"
+              label="Optic height"
+              filled
+              type="number"
+              step="any"
+              lazy-rules
+              :rules="[ val => val && val > 0 || 'Optic height must be positive']"
+              class="q-mt-md"
+            >
+              <template #append>
                 <q-btn-toggle
                   v-model="newProfile.rifleOpticHeightUnit"
                   no-caps
@@ -171,8 +167,8 @@
                     {label: 'cm', value: 'cm'}
                   ]"
                 />
-              </div>
-            </div>
+              </template>
+            </q-input>
 
             <q-separator
               class="q-mt-md"
@@ -188,19 +184,17 @@
               class="q-mt-md"
             />
 
-            <div class="row q-mt-md">
-              <div class="col-xs-6 col-sm-9">
-                <q-input
-                  v-model="newProfile.bulletWeight"
-                  label="Bullet weight"
-                  filled
-                  step="any"
-                  type="number"
-                  lazy-rules
-                  :rules="[ val => val && val > 0 || 'Bullet weight must be positive']"
-                />
-              </div>
-              <div class="col-xs-6 col-sm-3 flex items-center q-pl-sm">
+            <q-input
+              v-model="newProfile.bulletWeight"
+              label="Bullet weight"
+              filled
+              step="any"
+              type="number"
+              lazy-rules
+              :rules="[ val => val && val > 0 || 'Bullet weight must be positive']"
+              class="q-mt-md"
+            >
+              <template #append>
                 <q-btn-toggle
                   v-model="newProfile.bulletWeightUnit"
                   no-caps
@@ -209,44 +203,40 @@
                     {label: 'gram', value: 'gram'}
                   ]"
                 />
-              </div>
-            </div>
-            <div class="row q-mt-md">
-              <div class="col-xs-6 col-sm-9">
-                <q-input
-                  v-model="newProfile.bulletVelocity"
-                  label="Velocity"
-                  filled
-                  step="any"
-                  type="number"
-                  lazy-rules
-                  :rules="[ val => val && val > 0 || 'Velocity must be positive']"
-                />
-              </div>
-              <div class="col-xs-6 col-sm-3 flex items-center q-pl-sm">
+              </template>
+            </q-input>
+            <q-input
+              v-model="newProfile.bulletVelocity"
+              label="Velocity"
+              filled
+              step="any"
+              type="number"
+              lazy-rules
+              :rules="[ val => val && val > 0 || 'Velocity must be positive']"
+              class="q-mt-md"
+            >
+              <template #append>
                 <q-btn-toggle
-                  v-model="newProfile.bulletVelocityUnit"
+                  v-model="newProfile.bulletWeightUnit"
                   no-caps
                   :options="[
-                    {label: 'FPS', value: 'FPS'},
-                    {label: 'm/s', value: 'm/s'}
+                    {label: 'grain', value: 'grain'},
+                    {label: 'gram', value: 'gram'}
                   ]"
                 />
-              </div>
-            </div>
-            <div class="row q-mt-md">
-              <div class="col-xs-6 col-sm-9">
-                <q-input
-                  v-model="newProfile.bulletBallisticCoefficient"
-                  label="Ballistic coefficient"
-                  filled
-                  step="any"
-                  type="number"
-                  lazy-rules
-                  :rules="[ val => val && val > 0 || 'Ballistic coefficient must be positive']"
-                />
-              </div>
-              <div class="col-xs-6 col-sm-3 flex items-center q-pl-sm">
+              </template>
+            </q-input>
+            <q-input
+              v-model="newProfile.bulletBallisticCoefficient"
+              label="Ballistic coefficient"
+              filled
+              step="any"
+              type="number"
+              lazy-rules
+              :rules="[ val => val && val > 0 || 'Ballistic coefficient must be positive']"
+              class="q-mt-md"
+            >
+              <template #append>
                 <q-btn-toggle
                   v-model="newProfile.bulletBallisticCoefficientProfile"
                   no-caps
@@ -255,8 +245,8 @@
                     {label: 'G7', value: 'G7'}
                   ]"
                 />
-              </div>
-            </div>
+              </template>
+            </q-input>
           </q-card-section>
 
           <q-card-actions

@@ -7,20 +7,18 @@
     <q-form
       @submit="calculateMBPR"
     >
-      <div class="row q-mt-md">
-        <div class="col-xs-6 col-sm-9">
-          <q-input
-            v-model="targetSize"
-            label="Target size"
-            filled
-            type="number"
-            step="any"
-            hint="18 inch / 45 cm is recommended"
-            lazy-rules
-            :rules="[ val => val && val > 0 || 'Target size must be positive']"
-          />
-        </div>
-        <div class="col-xs-6 col-sm-3 flex items-center q-pl-sm">
+      <q-input
+        v-model="targetSize"
+        label="Target size"
+        filled
+        type="number"
+        step="any"
+        hint="18 inch / 45 cm is recommended"
+        lazy-rules
+        :rules="[ val => val && val > 0 || 'Target size must be positive']"
+        class="q-mt-md"
+      >
+        <template #append>
           <q-btn-toggle
             v-model="targetSizeUnit"
             no-caps
@@ -29,8 +27,9 @@
               {label: 'cm', value: 'cm'}
             ]"
           />
-        </div>
-      </div>
+        </template>
+      </q-input>
+
       <q-btn
         filled
         color="primary"

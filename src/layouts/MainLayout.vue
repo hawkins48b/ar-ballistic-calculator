@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          AR Ballistic calculator
+          ZeroIQ
         </q-toolbar-title>
 
         <q-btn

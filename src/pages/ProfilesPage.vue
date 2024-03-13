@@ -107,6 +107,7 @@
     >
       <q-card
         style="width: 700px; max-width: 80vw;"
+        flat
       >
         <q-form
           @submit="addNewProfile"

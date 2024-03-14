@@ -50,7 +50,7 @@
           </q-card-section>
           <q-card-section>
             <p class="text-bold">
-              {{ profile.bulletName }}
+              {{ profile.bulletName }} {{ profile.bulletDiameter }}
             </p>
             <q-list>
               <q-item>
@@ -182,7 +182,34 @@
               lazy-rules
               :rules="[ val => val && val.length > 0 || 'Please name your ammo']"
               class="q-mt-md"
+              hint="Manufacturer and type"
             />
+
+            <q-input
+              v-model="newProfile.bulletDiameter"
+              label="Bullet diameter"
+              filled
+              step="any"
+              type="number"
+              lazy-rules
+              :rules="[
+                val => val && val > 0 || 'Bullet diameter must be positive',
+                val => val && val < 13 || val + ' ' + newProfile.bulletDiameterUnit +' is a big bullet, are you missing a comma ?'
+              ]"
+              class="q-mt-md"
+              hint="e.g .233 inch or 5.56 mm"
+            >
+              <template #append>
+                <q-btn-toggle
+                  v-model="newProfile.bulletDiameterUnit"
+                  no-caps
+                  :options="[
+                    {label: 'inch', value: 'inch'},
+                    {label: 'mm', value: 'mm'}
+                  ]"
+                />
+              </template>
+            </q-input>
 
             <q-input
               v-model="newProfile.bulletWeight"
@@ -217,11 +244,11 @@
             >
               <template #append>
                 <q-btn-toggle
-                  v-model="newProfile.bulletWeightUnit"
+                  v-model="newProfile.bulletVelocityUnit"
                   no-caps
                   :options="[
-                    {label: 'grain', value: 'grain'},
-                    {label: 'gram', value: 'gram'}
+                    {label: 'FPS', value: 'FPS'},
+                    {label: 'm/s', value: 'm/s'}
                   ]"
                 />
               </template>
@@ -288,6 +315,8 @@ export default {
         rifleOpticHeight: 0.0,
         rifleOpticHeightUnit: 'inch',
         bulletName: '',
+        bulletDiameter: 0,
+        bulletDiameterUnit: 'inch',
         bulletWeight: 0,
         bulletWeightUnit: 'grain',
         bulletVelocity: 0.0,

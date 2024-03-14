@@ -55,21 +55,31 @@
           :profile="profile"
         />
       </div>
-    </div>
+      <div class="col-xs-12 col-sm-4 q-pa-md">
+        <BallisticCalculatorCard
+          flat
+          class="q-pa-md"
+          :class="{'bg-grey-3':!$q.dark.isActive}"
+          :profile="profile"
+        />
+      </div>
 
-    <div class="q-ma-md" />
+      <div class="q-ma-md" />
+    </div>
   </q-page>
 </template>
 
 <script>
 import { LocalStorage } from 'quasar'
 import MaximumPointBlankRangeCard from 'components/calculator/MaximumPointBlankRangeCard.vue'
+import BallisticCalculatorCard from 'components/calculator/BallisticCalculatorCard.vue'
 
 export default {
   // name: 'PageName',
 
   components: {
-    MaximumPointBlankRangeCard
+    MaximumPointBlankRangeCard,
+    BallisticCalculatorCard
   },
 
   data: function () {

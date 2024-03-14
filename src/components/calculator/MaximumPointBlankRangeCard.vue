@@ -39,13 +39,8 @@
         Calculate MBPR
       </q-btn>
     </q-form>
-    <maximum-point-blank-range-result-dialog
-      :profile="profile"
-      :target-size="targetSize"
-      :target-size-unit="targetSizeUnit"
-    />
 
-    <maximum-point-blank-range-result-dialog
+    <MaximumPointBlankRangeResultsDialog
       ref="resultDialog"
       :profile="profile"
       :target-size="targetSize"
@@ -55,9 +50,9 @@
 </template>
 
 <script>
-import MaximumPointBlankRangeResultDialog from './MaximumPointBlankRangeResultDialog.vue'
+import MaximumPointBlankRangeResultsDialog from 'components/calculator/MaximumPointBlankRangeResultsDialog.vue'
 export default {
-  components: { MaximumPointBlankRangeResultDialog },
+  components: { MaximumPointBlankRangeResultsDialog },
   // name: 'ComponentName',
   props: {
     profile: {
@@ -81,7 +76,7 @@ export default {
       if (this.profile === null) {
         this.$q.dialog({
           title: 'Warning',
-          message: 'You must select a profile before calculation'
+          message: 'You must select a profile before calculation.'
         })
       } else {
         this.$refs.resultDialog.show()

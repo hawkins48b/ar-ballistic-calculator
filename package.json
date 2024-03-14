@@ -1,8 +1,8 @@
 {
-  "name": "ar-ballistic-calculator",
+  "name": "cw-zero-iq",
   "version": "0.0.1",
   "description": "A simple ballistic calculator for AR",
-  "productName": "AR Ballistic calculator",
+  "productName": "ZeroIQ",
   "author": "Quentin Mathey <q.mathey@gmail.com>",
   "private": true,
   "scripts": {

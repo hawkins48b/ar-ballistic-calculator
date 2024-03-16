@@ -8,7 +8,8 @@
         class="text-center col-xs-12 col-sm-4 q-ma-md"
         :class="{'bg-grey-3':!$q.dark.isActive}"
       >
-        <h3>AR Ballistic Calculator</h3>
+        <h3>ZeroIQ</h3>
+        <h4> Ballistic Calculator</h4>
         <p>Version 1.0</p>
         <p>
           Developped by <a

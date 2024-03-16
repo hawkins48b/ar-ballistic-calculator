@@ -8,11 +8,11 @@
         side
       >
         <q-icon
-          name="home"
+          name="apps"
         />
       </q-item-section>
       <q-item-section>
-        Home
+        Dashboard
       </q-item-section>
     </q-item>
     <q-item
@@ -45,7 +45,6 @@
         Calculator
       </q-item-section>
     </q-item>
-    <q-separator />
     <q-item
       clickable
       @click="$router.push('settings')"
@@ -60,7 +59,8 @@
       <q-item-section>
         Settings
       </q-item-section>
-    </q-item><q-item
+    </q-item>
+    <q-item
       clickable
       @click="$router.push('about')"
     >

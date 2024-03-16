@@ -23,7 +23,7 @@
           target="_blank"
         >
           <q-img
-            src="~assets/cw-logo.svg"
+            src="~assets/cw-logo-white.svg"
             style="height: 25px;width:30px"
           />
         </q-btn>
@@ -35,13 +35,6 @@
       show-if-above
       bordered
     >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Navigate
-        </q-item-label>
-      </q-list>
       <MenuList />
     </q-drawer>
 

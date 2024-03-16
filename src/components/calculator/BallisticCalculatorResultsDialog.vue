@@ -30,6 +30,7 @@
           :rows="resultsRows"
           :colums="resultsColumns"
           :row-key="resultsKey"
+          :rows-per-page-options="[0]"
         />
       </q-card-section>
     </q-card>

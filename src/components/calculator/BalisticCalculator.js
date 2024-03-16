@@ -41,8 +41,11 @@ export function calculateG1ElevationAdjustments (
     const zeroingAdjustment = position <= zeroingDistance ? 0 : (position - zeroingDistance) * Math.tan(Math.asin(velocity / initialVelocity) + rifleAngle)
 
     // Append the elevation adjustment to the list for every 'step' meters
-    if (Math.round(position) % step === 0) {
-      elevationAdjustments.push({ distance: Math.round(position), adjustment: Math.round(zeroingAdjustment * 10) / 10, time: Math.round(totalTime * 10) / 10 })
+    const myDistance = Math.round(position)
+    if (myDistance % step === 0 || myDistance === 0) {
+      if (!checkIfDistanceExist(elevationAdjustments, myDistance)) {
+        elevationAdjustments.push({ distance: myDistance, adjustment: Math.round(zeroingAdjustment * 10) / 10, time: Math.round(totalTime * 10) / 10 })
+      }
     }
 
     // Increment time
@@ -110,4 +113,14 @@ export function getCrossSectionalArea (
   bulletDiameter // in Meter
 ) {
   return Math.PI * Math.pow(0.5 * bulletDiameter, 2) // in m^2
+}
+
+function checkIfDistanceExist (array, distance) {
+  let distanceFound = false
+  for (const item of array) {
+    if (item.distance === distance) {
+      distanceFound = true
+    }
+  }
+  return distanceFound
 }

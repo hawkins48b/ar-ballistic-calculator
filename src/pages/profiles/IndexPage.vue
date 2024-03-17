@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <!-- content -->
-    <div class="row">
+    <div class="row q-ml-sm">
       <div class="col-xs-12 col-md-4">
         <q-card
           flat
@@ -29,6 +29,7 @@
         <ProfileCard
           :profile="profile"
           :index="index"
+          @removed-profile="reloadProfiles"
         />
       </div>
     </div>
@@ -48,10 +49,14 @@ export default {
       profiles: []
     }
   },
-  // name: 'PageName',
   mounted () {
     // get list of profiles
     this.profiles = JSON.parse(LocalStorage.getItem('profiles'))
+  },
+  methods: {
+    reloadProfiles () {
+      this.profiles = JSON.parse(LocalStorage.getItem('profiles'))
+    }
   }
 }
 </script>

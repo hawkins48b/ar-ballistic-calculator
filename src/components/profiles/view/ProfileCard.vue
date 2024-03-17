@@ -99,6 +99,9 @@ export default {
       required: true
     }
   },
+  emits: [
+    'removedProfile'
+  ],
   methods: {
     removeProfile (index) {
       this.$q.dialog({
@@ -114,6 +117,9 @@ export default {
 
         // persist data
         LocalStorage.set('profiles', JSON.stringify(profiles))
+
+        // notify parent
+        this.$emit('removedProfile')
       })
     }
   }

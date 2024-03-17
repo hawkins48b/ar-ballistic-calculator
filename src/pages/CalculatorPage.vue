@@ -1,9 +1,9 @@
 <template>
   <q-page padding>
     <!-- content -->
-    <p class="text-h4 q-ma-md">
+    <div class="text-h3 q-mb-md">
       Calculator
-    </p>
+    </div>
     <div
       v-if="profileOptions.length == 0"
       class="row"
@@ -26,45 +26,46 @@
         </q-btn>
       </q-card>
     </div>
-    <div
-      v-if="profileOptions.length > 0"
-      class="row"
-    >
-      <div class="col-xs-12 col-sm-4 q-pa-md">
-        <q-card
-          flat
-          class="q-pa-md"
-          :class="{'bg-grey-3':!$q.dark.isActive}"
-        >
-          <p class="text-h4">
-            Profile
-          </p>
-          <p>Select a profile</p>
-          <q-select
-            v-model="profileOption"
-            filled
-            :options="profileOptions"
+    <div v-if="profileOptions.length > 0">
+      <div
+        class="row"
+      >
+        <div class="col-xs-12 col-sm-4 q-pa-sm">
+          <q-card
+            flat
+            class="q-pa-md"
+            :class="{'bg-grey-3':!$q.dark.isActive}"
+          >
+            <p class="text-h4">
+              Profile
+            </p>
+            <p>Select a profile</p>
+            <q-select
+              v-model="profileOption"
+              filled
+              :options="profileOptions"
+            />
+          </q-card>
+        </div>
+      </div>
+      <div class="row q-mt-md">
+        <div class="col-xs-12 col-sm-4 q-pa-sm">
+          <BallisticCalculatorCard
+            flat
+            class="q-pa-md"
+            :class="{'bg-grey-3':!$q.dark.isActive}"
+            :profile="profile"
           />
-        </q-card>
+        </div>
+        <div class="col-xs-12 col-sm-4 q-pa-sm">
+          <MaximumPointBlankRangeCard
+            flat
+            class="q-pa-md"
+            :class="{'bg-grey-3':!$q.dark.isActive}"
+            :profile="profile"
+          />
+        </div>
       </div>
-      <div class="col-xs-12 col-sm-4 q-pa-md">
-        <MaximumPointBlankRangeCard
-          flat
-          class="q-pa-md"
-          :class="{'bg-grey-3':!$q.dark.isActive}"
-          :profile="profile"
-        />
-      </div>
-      <div class="col-xs-12 col-sm-4 q-pa-md">
-        <BallisticCalculatorCard
-          flat
-          class="q-pa-md"
-          :class="{'bg-grey-3':!$q.dark.isActive}"
-          :profile="profile"
-        />
-      </div>
-
-      <div class="q-ma-md" />
     </div>
   </q-page>
 </template>
@@ -102,7 +103,7 @@ export default {
     this.profileOptions = []
     this.persistedProfiles.forEach((item, index) => {
       this.profileOptions.push({
-        label: item.rifleName + ' ' + item.rifleOptic + ' ' + item.bulletName + ' ' + item.bulletWeight + ' ' + item.bulletWeightUnit,
+        label: item.rifle + ' ' + item.optic + ' ' + item.bulletName + ' ' + item.bulletDiameter + ' ' + item.bulletDiameterUnit + ' ' + item.bulletWeight + ' ' + item.bulletWeightUnit,
         value: item
       })
     })

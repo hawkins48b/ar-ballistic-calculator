@@ -24,7 +24,7 @@
           href="https://chocolate-warfare.com"
           target="_blank"
         >Chocolate Warfare
-          <q-icon name="eva-diagonal-arrow-right-up-outline" /></a>
+        </a>
       </div>
     </q-drawer>
 

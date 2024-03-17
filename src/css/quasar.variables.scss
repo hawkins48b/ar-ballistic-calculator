@@ -14,8 +14,12 @@
 
 // src/css/quasar.variables.scss
 
-$primary   : #778ca3;
-$secondary : #0fb9b1;
+@import url('https://fonts.googleapis.com/css2?family=Mallanna&display=swap');
+
+$typography-font-family : "Mallanna", sans-serif !default;
+
+$primary   : #097a34;
+$secondary : #3498db;
 $accent    : #a55eea;
 
 $dark      : #1d1d1d;

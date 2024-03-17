@@ -1,44 +1,41 @@
 <template>
   <q-layout view="lHh lpR fFf">
-    <q-header>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
-        <q-toolbar-title>
-          ZeroIQ
-        </q-toolbar-title>
-
-        <q-btn
-          flat
-          round
-          href="https://chocolate-warfare.com"
-          tag="a"
-          target="_blank"
-        >
-          <q-img
-            src="~assets/cw-logo-white.svg"
-            style="height: 25px;width:30px"
-          />
-        </q-btn>
-      </q-toolbar>
-    </q-header>
-
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
-      bordered
+      class="bg-grey-3"
+      :class="{'bg-grey-10':$q.dark.isActive}"
     >
-      <MenuList />
+      <div
+        class="text-center q-mt-md cursor-pointer"
+        @click="$router.push('/')"
+      >
+        <div class="text-h3">
+          ZRO
+        </div>
+        <div class="text-h6 text-italic ">
+          Ballistic calculator
+        </div>
+      </div>
+
+      <MenuList class="q-mt-sm" />
+      <div class="text-center q-mt-md">
+        by <a
+          href="https://chocolate-warfare.com"
+          target="_blank"
+        >Chocolate Warfare
+          <q-icon name="eva-diagonal-arrow-right-up-outline" /></a>
+      </div>
     </q-drawer>
 
     <q-page-container>
+      <q-btn
+        class="mobile-only q-ma-md"
+        flat
+        round
+        icon="eva-menu-2-outline"
+        @click="leftDrawerOpen = true"
+      />
       <router-view />
     </q-page-container>
   </q-layout>
@@ -72,3 +69,9 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss">
+q-router-link--active .q-icon {
+  color:$primary !important
+
+}
+</style>

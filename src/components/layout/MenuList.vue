@@ -1,78 +1,22 @@
 <template>
   <q-list>
     <q-item
+      v-for="(item, index) in menuList"
+      :key="index"
       clickable
-      @click="$router.push('/')"
+      :to="item.path"
+      active-class="bg-primary text-white"
     >
       <q-item-section
+        avatar
         side
       >
         <q-icon
-          name="apps"
+          :name="item.icon"
         />
       </q-item-section>
       <q-item-section>
-        Dashboard
-      </q-item-section>
-    </q-item>
-    <q-item
-      clickable
-      @click="$router.push('profiles')"
-    >
-      <q-item-section
-        side
-      >
-        <q-icon
-          name="list"
-        />
-      </q-item-section>
-      <q-item-section>
-        Profiles
-      </q-item-section>
-    </q-item>
-    <q-item
-      clickable
-      @click="$router.push('calculator')"
-    >
-      <q-item-section
-        side
-      >
-        <q-icon
-          name="calculate"
-        />
-      </q-item-section>
-      <q-item-section>
-        Calculator
-      </q-item-section>
-    </q-item>
-    <q-item
-      clickable
-      @click="$router.push('settings')"
-    >
-      <q-item-section
-        side
-      >
-        <q-icon
-          name="settings"
-        />
-      </q-item-section>
-      <q-item-section>
-        Settings
-      </q-item-section>
-    </q-item>
-    <q-item
-      clickable
-      @click="$router.push('about')"
-    >
-      <q-item-section
-        side
-      >
-        <q-icon
-          name="info"
-        />
-      </q-item-section>
-      <q-item-section>
-        About
+        {{ item.label }}
       </q-item-section>
     </q-item>
   </q-list>
@@ -80,9 +24,46 @@
 
 <script>
 export default {
-  // name: 'ComponentName',
   setup () {
-    return {}
+    return {
+    }
+  },
+  data () {
+    return {
+      menuList: [
+        {
+          path: '/dashboard',
+          icon: 'eva-grid-outline',
+          label: 'Dashboard'
+        },
+        {
+          path: '/profiles',
+          icon: 'eva-list-outline',
+          label: 'Profiles'
+        },
+        {
+          path: '/calculator',
+          icon: 'eva-layers-outline',
+          label: 'Calculator'
+        },
+        {
+          path: '/settings',
+          icon: 'eva-settings-2-outline',
+          label: 'Settings'
+        },
+        {
+          path: '/about',
+          icon: 'eva-info-outline',
+          label: 'About'
+        }
+      ]
+    }
+  },
+  mounted () {
+    console.log()
+  },
+  methods: {
   }
+
 }
 </script>

@@ -14,7 +14,7 @@
           >
             <p>Manage your bullet profiles.</p>
             <q-btn
-              icon="add"
+              icon="eva-plus-outline"
               class="q-mt-sm"
               color="primary"
               @click="newProfileDialog=true"

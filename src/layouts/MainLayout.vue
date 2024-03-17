@@ -30,7 +30,7 @@
 
     <q-page-container>
       <q-btn
-        class="mobile-only q-ma-md"
+        class="lt-md q-ma-md"
         flat
         round
         icon="eva-menu-2-outline"

@@ -33,27 +33,27 @@ export default {
       menuList: [
         {
           path: '/dashboard',
-          icon: 'eva-grid-outline',
+          icon: 'apps',
           label: 'Dashboard'
         },
         {
           path: '/profiles',
-          icon: 'eva-list-outline',
+          icon: 'list',
           label: 'Profiles'
         },
         {
           path: '/calculator',
-          icon: 'eva-layers-outline',
+          icon: 'calculate',
           label: 'Calculator'
         },
         {
           path: '/settings',
-          icon: 'eva-settings-2-outline',
+          icon: 'settings',
           label: 'Settings'
         },
         {
           path: '/about',
-          icon: 'eva-info-outline',
+          icon: 'info',
           label: 'About'
         }
       ]

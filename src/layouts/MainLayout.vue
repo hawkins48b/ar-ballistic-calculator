@@ -33,7 +33,7 @@
         class="lt-md q-ma-md"
         flat
         round
-        icon="eva-menu-2-outline"
+        icon="menu"
         @click="leftDrawerOpen = true"
       />
       <router-view />
@@ -54,7 +54,7 @@ export default defineComponent({
   },
 
   setup () {
-    const leftDrawerOpen = ref(false)
+    const leftDrawerOpen = ref(true)
 
     return {
       leftDrawerOpen,

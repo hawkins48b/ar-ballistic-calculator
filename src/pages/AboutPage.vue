@@ -23,6 +23,12 @@
             <q-icon name="eva-diagonal-arrow-right-up-outline" /></a>
         </p>
         <p>
+          This calculator is Open Source.<br>You can access the source code on <a
+            href="https://github.com/hawkins48b/cw-zro"
+            target="_blank"
+          >Github <q-icon name="eva-diagonal-arrow-right-up-outline" /></a>
+        </p>
+        <p>
           <a
             href="https://chocolate-warfare.com"
             target="_blank"

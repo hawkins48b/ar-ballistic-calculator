@@ -3,11 +3,12 @@ export function zeroDistanceInMeters (
   unit
 ) {
   let zeroDistanceInMeter = 0
+
   if (unit === 'meter') {
-    zeroDistanceInMeter = parseFloat(value)
+    zeroDistanceInMeter = Number(value)
   }
   if (unit === 'yard') {
-    zeroDistanceInMeter = parseFloat(value) * 0.9144
+    zeroDistanceInMeter = Number(value) * 0.9144
   }
   return zeroDistanceInMeter
 }
@@ -18,10 +19,10 @@ export function distanceStepInMeter (
 ) {
   let distanceStepInMeter = 0
   if (unit === 'meter') {
-    distanceStepInMeter = parseFloat(value)
+    distanceStepInMeter = Number(value)
   }
   if (unit === 'yard') {
-    distanceStepInMeter = parseFloat(value) * 0.9144
+    distanceStepInMeter = Number(value) * 0.9144
   }
   return distanceStepInMeter
 }
@@ -32,10 +33,10 @@ export function elevationInMetersToUnit (
 ) {
   let distanceInMetersToUnit = 0
   if (unit === 'meter') {
-    distanceInMetersToUnit = parseFloat(value)
+    distanceInMetersToUnit = Number(value)
   }
   if (unit === 'yard') {
-    distanceInMetersToUnit = parseFloat(value) / 0.9144
+    distanceInMetersToUnit = Number(value) / 0.9144
   }
   return distanceInMetersToUnit
 }
@@ -46,10 +47,10 @@ export function distanceMaxInMeter (
 ) {
   let distanceMaxInMeter = 0
   if (unit === 'meter') {
-    distanceMaxInMeter = parseFloat(value)
+    distanceMaxInMeter = Number(value)
   }
   if (unit === 'yard') {
-    distanceMaxInMeter = parseFloat(value) * 0.9144
+    distanceMaxInMeter = Number(value) * 0.9144
   }
   return distanceMaxInMeter
 }
@@ -60,10 +61,10 @@ export function opticHeightInMeter (
 ) {
   let opticHeightInMeter = 0
   if (unit === 'cm') {
-    opticHeightInMeter = parseFloat(value) / 100
+    opticHeightInMeter = Number(value) / 100
   }
   if (unit === 'inch') {
-    opticHeightInMeter = parseFloat(value) * 0.0254
+    opticHeightInMeter = Number(value) * 0.0254
   }
   return opticHeightInMeter
 }
@@ -74,10 +75,10 @@ export function bulletDiameterInMeter (
 ) {
   let bulletDiameterInMeter = 0
   if (unit === 'mm') {
-    bulletDiameterInMeter = parseFloat(value) / 1000
+    bulletDiameterInMeter = Number(value) / 1000
   }
   if (unit === 'inch') {
-    bulletDiameterInMeter = parseFloat(value) * 0.0254
+    bulletDiameterInMeter = Number(value) * 0.0254
   }
   return bulletDiameterInMeter
 }
@@ -88,10 +89,10 @@ export function bulletWeightInKg (
 ) {
   let bulletWeightInKg = 0
   if (unit === 'grain') {
-    bulletWeightInKg = parseFloat(value) * 0.00006479891
+    bulletWeightInKg = Number(value) * 0.00006479891
   }
   if (unit === 'gram') {
-    bulletWeightInKg = parseFloat(value) / 1000
+    bulletWeightInKg = Number(value) / 1000
   }
   return bulletWeightInKg
 }
@@ -102,10 +103,10 @@ export function velocityInMetersPerSecond (
 ) {
   let velocityInMetersPerSecond = 0
   if (unit === 'm/s') {
-    velocityInMetersPerSecond = parseFloat(value)
+    velocityInMetersPerSecond = Number(value)
   }
   if (unit === 'FPS') {
-    velocityInMetersPerSecond = parseFloat(value) * 0.3048
+    velocityInMetersPerSecond = Number(value) * 0.3048
   }
   return velocityInMetersPerSecond
 }

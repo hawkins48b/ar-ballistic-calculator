@@ -1,13 +1,29 @@
 <template>
-  <q-table
-    flat
-    bordered
-    :rows="resultsRows"
-    :colums="resultsColumns"
-    :row-key="resultsKey"
-    :rows-per-page-options="[0]"
-    hide-footer
-  />
+  <q-markup-table flat>
+    <thead>
+      <tr>
+        <th class="text-left">
+          Distance
+        </th>
+        <th class="text-left">
+          Elevation
+        </th>
+        <th class="text-left">
+          Flight time
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        v-for="(row, index) in resultsRows"
+        :key="index"
+      >
+        <td> {{ row.distance }}</td>
+        <td> {{ row.elevation }}</td>
+        <td> {{ row.flightTime }}</td>
+      </tr>
+    </tbody>
+  </q-markup-table>
 </template>
 
 <script>
@@ -26,40 +42,11 @@ export default {
   data: function () {
     return {
       calcArgs: JSON.parse(LocalStorage.getItem('bc-args')),
-      resultsRows: [],
-      resultsColumns: [
-        {
-          name: 'distance',
-          required: true,
-          label: 'Distance',
-          align: 'left',
-          sortable: false,
-          field: row => row.name,
-          format: val => `${val}`
-        },
-        {
-          name: 'adjustment',
-          required: true,
-          label: 'Elevation (cm)',
-          align: 'left',
-          field: row => row.name,
-          format: val => `${val}`
-        },
-        {
-          name: 'time',
-          required: true,
-          label: 'Flight time',
-          align: 'left',
-          field: row => row.name,
-          format: val => `${val}`
-        }
-      ],
-      resultsKey: 'distance'
+      resultsRows: []
     }
   },
   mounted () {
     this.resultsRows = calculateAdjustments(this.calcArgs)
-    console.log(this.resultsRows)
   }
 }
 </script>

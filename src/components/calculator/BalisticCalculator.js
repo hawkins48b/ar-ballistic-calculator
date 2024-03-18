@@ -3,113 +3,115 @@ import {
   // distanceStepInMeter,
   distanceMaxInMeter,
   opticHeightInMeter,
-  // bulletDiameterInMeter,
+  bulletDiameterInMeter,
   bulletWeightInKg,
   velocityInMetersPerSecond
 } from './UnitConverter.js'
 
 function ballisticCalculatorG1 (
-  bulletWeight,
-  initialSpeed,
-  ballisticCoefficient,
-  airDensity,
-  maxDistance,
-  opticHeight,
-  zeroDistance) {
-  const g = 9.81 // Acceleration due to gravity (m/s^2)
+  bulletWeight, // Kilograms (kg)
+  bulletCrossSectionalArea, // m2
+  initialSpeed, // Meters per second (m/s)
+  ballisticCoefficient, // Dimensionless
+  airDensity, // Kilograms per cubic meter (kg/m³)
+  maxDistance, // Meters (m)
+  opticHeight, // Meters (m)
+  zeroDistance // Meters (m)
+) {
+  console.log('bulletWeight', bulletWeight)
+  console.log('initialSpeed', initialSpeed)
+  console.log('ballisticCoefficient', ballisticCoefficient)
+  console.log('airDensity', airDensity)
+  console.log('maxDistance', maxDistance)
+  console.log('opticHeight', opticHeight)
+  console.log('zeroDistance', zeroDistance)
+  console.log('----------------------------')
+  const g = 9.81 // Acceleration due to gravity (m/s²)
   const timeStep = 0.001 // Time step for calculation
   const results = []
   let distance = 0
   let elevation = -opticHeight // Initial elevation
   let flightTime = 0
+  let velocity = initialSpeed
 
-  // while (distance <= maxDistance) {
-  // Calculate drag force
-  const dragForce = 0.5 * ballisticCoefficient * airDensity * Math.pow(initialSpeed, 2)
-  console.log('dragForce', dragForce)
-
-  // Calculate acceleration due to drag
-  // const dragAccel = -dragForce / bulletWeight
-  const dragAccel = -0.31
-  console.log('dragAccel', dragAccel)
-
-  // Calculate gravitational acceleration component
-  const gravityAccel = -g
-  console.log('gravityAccel', gravityAccel)
-
-  // Calculate total acceleration
-  const totalAccel = gravityAccel + dragAccel
-  console.log('totalAccel', totalAccel)
-
-  // Calculate new velocity using acceleration
-  const newVelocity = initialSpeed + totalAccel * timeStep
-  console.log('newVelocity', newVelocity)
-
-  // Calculate new distance using velocity
-  const newDistance = distance + newVelocity * timeStep
-  console.log('newDistance', newDistance)
-
-  // Calculate new elevation using bullet trajectory
-  const newElevation = -opticHeight + Math.atan((newDistance - zeroDistance) / zeroDistance) * (180 / Math.PI) * 100
-  console.log('newElevation', newElevation)
-
-  // Update variables
-  initialSpeed = newVelocity
-  distance = newDistance
-  elevation = newElevation
-
-  // Push results to arrays
+  // Push initial result with t = 0 and elevation equal to -opticHeight
   results.push({
-    distance,
-    elevation,
-    flightTime
+    distance: 0,
+    elevation: Math.round(-opticHeight * 100 * 10) / 10,
+    flightTime: 0
   })
 
-  flightTime += timeStep
-  // }
+  while (distance <= maxDistance) {
+  // Calculate drag force using ballistic coefficient
+    const dragForce = 0.5 * airDensity * Math.pow(velocity, 2) * ballisticCoefficient * bulletCrossSectionalArea
+    console.log('dragForce', dragForce)
+    // Calculate acceleration due to drag
+    const dragAccel = -dragForce / bulletWeight
+    console.log('dragAccel', dragAccel)
+
+    // Calculate gravitational acceleration component
+    const gravityAccel = -g
+    console.log('gravityAccel', gravityAccel)
+
+    // Calculate total acceleration
+    const totalAccel = gravityAccel + dragAccel
+    console.log('totalAccel', totalAccel)
+
+    // Use simple Euler integration to update velocity and distance
+    velocity += totalAccel * timeStep
+    console.log('velocity', velocity)
+
+    distance += velocity * timeStep
+    console.log('distance', distance)
+
+    // Calculate new elevation using bullet trajectory and gravity
+    elevation = -opticHeight +
+      Math.atan((distance - zeroDistance) / zeroDistance) * opticHeight * 100 -
+      0.5 * g * Math.pow(flightTime, 2)
+    console.log('elevation', elevation)
+
+    // Push results to arrays
+    results.push({
+      distance: Math.round(distance),
+      elevation: Math.round(elevation * 10) / 10,
+      flightTime: Math.round(flightTime * 10) / 10
+    })
+
+    // Update flight time
+    flightTime += timeStep
+  }
+
+  // remove duplicates
 
   return results
 }
 
 export function calculateAdjustments (calcArgs) {
-  const results = []
+  let results = []
+
+  const bulletWeight = bulletWeightInKg(calcArgs.profile.bulletWeight, calcArgs.profile.bulletWeightUnit)
+  const bulletCrossSectionalArea = getCrossSectionalArea(bulletDiameterInMeter(calcArgs.profile.bulletDiameter, calcArgs.profile.bulletDiameterUnit))
+  const velocity = velocityInMetersPerSecond(calcArgs.profile.bulletVelocity, calcArgs.profile.bulletVelocityUnit)
+  const ballisticCoefficient = Number(calcArgs.profile.bulletBallisticCoefficient)
+  const airDensity = 1.225
+  const distanceMax = distanceMaxInMeter(calcArgs.resultsRange, calcArgs.resultsUnit)
+  const opticHeight = opticHeightInMeter(calcArgs.profile.opticHeight, calcArgs.profile.opticHeightUnit)
+  const zeroDistance = zeroDistanceInMeters(calcArgs.zeroDistance, calcArgs.zeroDistanceUnit)
+
   if (calcArgs.profile.bulletBallisticCoefficientProfile === 'G1') {
-    const results = ballisticCalculatorG1(
-      bulletWeightInKg(calcArgs.profile.bulletWeight, calcArgs.profile.bulletWeightUnit),
-      velocityInMetersPerSecond(calcArgs.profile.bulletVelocity, calcArgs.profile.bulletVelocityUnit),
-      calcArgs.profile.bulletBallisticCoefficient,
-      1.225,
-      distanceMaxInMeter(calcArgs.resultsRange, calcArgs.resultsRangeUnit),
-      opticHeightInMeter(calcArgs.profile.opticHeight, calcArgs.profile.opticHeightUnit),
-      zeroDistanceInMeters(calcArgs.zeroDistance, calcArgs.zeroDistanceUnit)
+    results = ballisticCalculatorG1(
+      bulletWeight,
+      bulletCrossSectionalArea,
+      velocity,
+      ballisticCoefficient,
+      airDensity,
+      distanceMax,
+      opticHeight,
+      zeroDistance
     )
 
-    console.log(results)
-
-    /*
-  bulletWeight,
-  initialSpeed,
-  ballisticCoefficient,
-  airDensity,
-  maxDistance,
-  opticHeight,
-  zeroDistance
-  */
+    console.log('calculateAdjustments', results)
   }
-  /*
-  if (calcArgs.profile.bulletBallisticCoefficientProfile === 'G7') {
-    results = calculateG7ElevationAdjustments(
-      calcArgs.profile.bulletBallisticCoefficient,
-      opticHeightInMeter(calcArgs.profile.rifleOpticHeight, calcArgs.profile.rifleOpticHeightUnit),
-      zeroDistanceInMeters(calcArgs.zeroDistance, calcArgs.zeroDistanceUnit),
-      bulletWeightInKg(calcArgs.profile.bulletWeight, calcArgs.profile.bulletWeightUnit),
-      getCrossSectionalArea(bulletDiameterInMeter(calcArgs.profile.bulletDiameter, calcArgs.profile.bulletDiameterUnit)),
-      velocityInMetersPerSecond(calcArgs.profile.bulletVelocity, calcArgs.profile.bulletVelocityUnit),
-      distanceMaxInMeter(calcArgs.resultsRange, calcArgs.resultsUnit),
-      distanceStepInMeter(calcArgs.resultsStep, calcArgs.resultsUnit)
-    )
-  }
-  */
 
   return results
 }

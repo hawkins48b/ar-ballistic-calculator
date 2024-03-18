@@ -29,13 +29,20 @@
     </q-drawer>
 
     <q-page-container>
-      <q-btn
-        class="lt-md q-ma-md"
-        flat
-        round
-        icon="menu"
-        @click="leftDrawerOpen = true"
-      />
+      <div class="row justify-start lt-md ">
+        <div class="">
+          <q-btn
+            class="q-ma-md"
+            flat
+            round
+            icon="menu"
+            @click="leftDrawerOpen = true"
+          />
+        </div>
+        <div class=" text-h3 q-mt-sm">
+          ZRO
+        </div>
+      </div>
       <router-view />
     </q-page-container>
   </q-layout>

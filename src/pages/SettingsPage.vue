@@ -1,10 +1,8 @@
 <template>
   <q-page padding>
-    <div>
-      <p class="text-h4 q-ma-md">
-        Settings
-      </p>
-    </div>
+    <p class="text-h3">
+      Settings
+    </p>
     <div class="row">
       <q-card
         flat

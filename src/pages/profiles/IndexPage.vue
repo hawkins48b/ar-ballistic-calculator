@@ -29,6 +29,7 @@
         <ProfileCard
           :profile="profile"
           :index="index"
+          removable
           @removed-profile="reloadProfiles"
         />
       </div>

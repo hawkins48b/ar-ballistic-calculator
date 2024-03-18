@@ -8,7 +8,7 @@
       @submit="calculateBallistic"
     >
       <q-input
-        v-model="zeroDistance"
+        v-model="calcArgs.zeroDistance"
         label="Zero distance"
         filled
         type="number"
@@ -19,7 +19,7 @@
       >
         <template #append>
           <q-btn-toggle
-            v-model="zeroDistanceUnit"
+            v-model="calcArgs.zeroDistanceUnit"
             no-caps
             :options="[
               {label: 'yard', value: 'yard'},
@@ -32,7 +32,7 @@
       <div>
         <p>Results Unit</p>
         <q-btn-toggle
-          v-model="resultsUnit"
+          v-model="calcArgs.resultsUnit"
           no-caps
           :options="[
             {label: 'yard', value: 'yard'},
@@ -42,7 +42,7 @@
       </div>
 
       <q-input
-        v-model="resultsRange"
+        v-model="calcArgs.resultsRange"
         label="Range"
         filled
         type="number"
@@ -53,7 +53,7 @@
       />
 
       <q-input
-        v-model="resultsStep"
+        v-model="calcArgs.resultsStep"
         label="Step"
         filled
         type="number"
@@ -72,26 +72,14 @@
         Results
       </q-btn>
     </q-form>
-
-    <BallisticCalculatorResultsDialog
-      ref="resultsDialog"
-      :profile="profile"
-      :zero-distance="zeroDistance"
-      :zero-distance-unit="zeroDistanceUnit"
-      :results-unit="resultsUnit"
-      :results-range="resultsRange"
-      :results-step="resultsStep"
-    />
   </q-card>
 </template>
 
 <script>
-
-import BallisticCalculatorResultsDialog from 'components/calculator/BallisticCalculatorResultsDialog.vue'
+import { LocalStorage } from 'quasar'
 
 export default {
   components: {
-    BallisticCalculatorResultsDialog
   },
   // name: 'ComponentName',
   props: {
@@ -103,17 +91,20 @@ export default {
   },
   data: function () {
     return {
-      zeroDistance: 25,
-      zeroDistanceUnit: 'yard',
-      resultsUnit: 'yard',
-      resultsRange: 500,
-      resultsStep: 25,
-      showResults: false
+      calcArgs: JSON.parse(LocalStorage.getItem('bc-args')) || this.newCalcArgs()
     }
   },
-  mounted () {
-  },
   methods: {
+    newCalcArgs () {
+      return {
+        zeroDistance: 25,
+        zeroDistanceUnit: 'yard',
+        resultsUnit: 'yard',
+        resultsRange: 500,
+        resultsStep: 25,
+        profile: null
+      }
+    },
     calculateBallistic () {
       // ensure a profile is selected
       if (this.profile === null) {
@@ -122,7 +113,13 @@ export default {
           message: 'You must select a profile before calculation.'
         })
       } else {
-        this.$refs.resultsDialog.show()
+        // persists calculator arguments
+        this.calcArgs.profile = this.profile
+        LocalStorage.set('bc-args', JSON.stringify(this.calcArgs))
+        // go to results page
+        this.$router.push({
+          path: 'calculator/bc-results'
+        })
       }
     }
   }

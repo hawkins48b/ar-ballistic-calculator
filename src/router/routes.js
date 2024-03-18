@@ -14,7 +14,14 @@ const routes = [
           { path: 'add', component: () => import('pages/profiles/AddProfilePage.vue') }
         ]
       },
-      { path: 'calculator', component: () => import('pages/CalculatorPage.vue') },
+      {
+        path: 'calculator',
+        component: () => import('pages/CalculatorPage.vue'),
+        children: [
+          { path: '', component: () => import('pages/calculator/IndexPage.vue') },
+          { path: 'bc-results', component: () => import('pages/calculator/BallisticCalculatorResultsPage.vue') }
+        ]
+      },
       { path: 'settings', component: () => import('pages/SettingsPage.vue') },
       { path: 'about', component: () => import('pages/AboutPage.vue') }
     ]

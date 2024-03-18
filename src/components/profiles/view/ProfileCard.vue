@@ -2,7 +2,6 @@
   <q-card
     :class="{'bg-grey-3':!$q.dark.isActive}"
     flat
-    class=""
   >
     <div class="row">
       <div class="col">
@@ -76,6 +75,7 @@
     </div>
 
     <q-btn
+      v-if="removable"
       outline
       class="q-ma-md"
       @click="removeProfile(index)"
@@ -96,7 +96,13 @@ export default {
     },
     index: {
       type: Number,
-      required: true
+      required: false,
+      default: -1
+    },
+    removable: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   emits: [

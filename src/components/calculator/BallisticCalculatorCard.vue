@@ -22,24 +22,12 @@
             v-model="calcArgs.zeroDistanceUnit"
             no-caps
             :options="[
-              {label: 'yard', value: 'yard'},
-              {label: 'meter', value: 'meter'}
+              {label: 'YD', value: 'YD'},
+              {label: 'M', value: 'M'}
             ]"
           />
         </template>
       </q-input>
-
-      <div>
-        <p>Results Unit</p>
-        <q-btn-toggle
-          v-model="calcArgs.resultsUnit"
-          no-caps
-          :options="[
-            {label: 'yard', value: 'yard'},
-            {label: 'meter', value: 'meter'}
-          ]"
-        />
-      </div>
 
       <q-input
         v-model="calcArgs.resultsRange"
@@ -50,7 +38,18 @@
         lazy-rules
         :rules="[ val => val && val > 0 || 'Range must be positive']"
         class="q-mt-md"
-      />
+      >
+        <template #append>
+          <q-btn-toggle
+            v-model="calcArgs.resultsUnit"
+            no-caps
+            :options="[
+              {label: 'YD', value: 'YD'},
+              {label: 'M', value: 'M'}
+            ]"
+          />
+        </template>
+      </q-input>
 
       <q-input
         v-model="calcArgs.resultsStep"
@@ -61,7 +60,18 @@
         lazy-rules
         :rules="[ val => val && val > 0 || 'Step must be positive']"
         class="q-mt-md"
-      />
+      >
+        <template #append>
+          <q-btn-toggle
+            v-model="calcArgs.resultsUnit"
+            no-caps
+            :options="[
+              {label: 'YD', value: 'YD'},
+              {label: 'M', value: 'M'}
+            ]"
+          />
+        </template>
+      </q-input>
 
       <q-btn
         filled
@@ -98,8 +108,8 @@ export default {
     newCalcArgs () {
       return {
         zeroDistance: 25,
-        zeroDistanceUnit: 'yard',
-        resultsUnit: 'yard',
+        zeroDistanceUnit: 'YD',
+        resultsUnit: 'YD',
         resultsRange: 500,
         resultsStep: 25,
         profile: null

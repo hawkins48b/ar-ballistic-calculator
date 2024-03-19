@@ -23,8 +23,8 @@
             v-model="targetSizeUnit"
             no-caps
             :options="[
-              {label: 'inch', value: 'inch'},
-              {label: 'cm', value: 'cm'}
+              {label: 'IN', value: 'IN'},
+              {label: 'CM', value: 'CM'}
             ]"
           />
         </template>
@@ -64,7 +64,7 @@ export default {
   data: function () {
     return {
       targetSize: 18,
-      targetSizeUnit: 'inch',
+      targetSizeUnit: 'IN',
       showResults: false
     }
   },

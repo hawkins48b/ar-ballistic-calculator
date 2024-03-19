@@ -37,8 +37,8 @@
           v-model="localProfile.bulletDiameterUnit"
           no-caps
           :options="[
-            {label: 'inch', value: 'inch'},
-            {label: 'mm', value: 'mm'}
+            {label: 'IN', value: 'IN'},
+            {label: 'MM', value: 'MM'}
           ]"
         />
       </template>
@@ -59,8 +59,8 @@
           v-model="localProfile.bulletWeightUnit"
           no-caps
           :options="[
-            {label: 'grain', value: 'grain'},
-            {label: 'gram', value: 'gram'}
+            {label: 'GR', value: 'GR'},
+            {label: 'G', value: 'G'}
           ]"
         />
       </template>
@@ -81,7 +81,7 @@
           no-caps
           :options="[
             {label: 'FPS', value: 'FPS'},
-            {label: 'm/s', value: 'm/s'}
+            {label: 'M/S', value: 'M/S'}
           ]"
         />
       </template>

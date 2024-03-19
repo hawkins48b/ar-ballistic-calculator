@@ -19,10 +19,10 @@
           <q-item>
             <q-item-section>
               <q-item-label overline>
-                RESULTS
+                WIND
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ calcArgs.resultsUnit }}
+                @tbd
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -36,7 +36,7 @@
                 RANGE
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ calcArgs.resultsRange }}
+                {{ calcArgs.resultsRange }} {{ calcArgs.resultsUnit }}
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -46,7 +46,7 @@
                 STEP
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ calcArgs.resultsStep }}
+                {{ calcArgs.resultsStep }} {{ calcArgs.resultsUnit }}
               </q-item-label>
             </q-item-section>
           </q-item>

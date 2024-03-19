@@ -26,7 +26,7 @@
       <div
         class="row"
       >
-        <div class="col-xs-12 col-sm-6 col-md-4 q-pa-sm">
+        <div class="col-xs-12 col-sm-6 col-md-8 q-pa-sm">
           <q-card
             flat
             class="q-pa-md"
@@ -40,6 +40,7 @@
               v-model="profileOption"
               filled
               :options="profileOptions"
+              label="Profile"
             />
           </q-card>
         </div>
@@ -99,10 +100,28 @@ export default {
     this.profileOptions = []
     this.persistedProfiles.forEach((item, index) => {
       this.profileOptions.push({
-        label: item.rifle + ' ' + item.optic + ' ' + item.bulletName + ' ' + item.bulletDiameter + ' ' + item.bulletDiameterUnit + ' ' + item.bulletWeight + ' ' + item.bulletWeightUnit,
+        label: this.itemName(item),
         value: item
       })
     })
+
+    // default value
+    const calcArgs = JSON.parse(LocalStorage.getItem('bc-args'))
+    if (calcArgs !== null) {
+      this.persistedProfiles.forEach((item, index) => {
+        if (this.itemName(calcArgs.profile) === this.itemName(item)) {
+          this.profileOption = {
+            label: this.itemName(item),
+            value: item
+          }
+        }
+      })
+    }
+  },
+  methods: {
+    itemName (profile) {
+      return profile.rifle + ' ' + profile.optic + ' ' + profile.bulletName + ' ' + profile.bulletDiameter + ' ' + profile.bulletDiameterUnit + ' ' + profile.bulletWeight + ' ' + profile.bulletWeightUnit
+    }
   }
 }
 </script>

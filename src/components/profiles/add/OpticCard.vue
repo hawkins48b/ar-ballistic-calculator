@@ -33,8 +33,8 @@
           v-model="localProfile.opticHeightUnit"
           no-caps
           :options="[
-            {label: 'inch', value: 'inch'},
-            {label: 'cm', value: 'cm'}
+            {label: 'IN', value: 'IN'},
+            {label: 'CM', value: 'CM'}
           ]"
         />
       </template>

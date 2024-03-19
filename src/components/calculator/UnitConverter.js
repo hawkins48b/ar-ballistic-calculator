@@ -1,112 +1,120 @@
-export function zeroDistanceInMeters (
+// constants
+
+// distance
+const METER_TO_YARD = 1.093613
+const METER_TO_INCH = 39.37008
+const METER_TO_FEET = 3.28084
+
+// weight
+const GRAM_TO_GRAIN = 15.43236
+const GRAM_TO_OZ = 0.03527396
+const GRAM_TO_LB = 0.002204623
+
+// speed
+const METER_PER_SECOND_TO_KILOMETER_PER_HOUR = 3.6
+const METER_PER_SECOND_TO_FEET_PER_SECOND = 3.2808399
+const METER_PER_SECOND_TO_MILE_PER_HOUR = 2.236936
+
+// angle
+const MRAD_TO_MOA = 3.43774677
+
+export function convertLengthToMeter (
   value,
   unit
 ) {
-  let zeroDistanceInMeter = 0
+  let meter = 0
 
-  if (unit === 'meter') {
-    zeroDistanceInMeter = Number(value)
+  if (unit === 'KM') {
+    meter = Number(value) * 1000
   }
-  if (unit === 'yard') {
-    zeroDistanceInMeter = Number(value) * 0.9144
+  if (unit === 'M') {
+    meter = Number(value)
   }
-  return zeroDistanceInMeter
+  if (unit === 'CM') {
+    meter = Number(value) / 100
+  }
+  if (unit === 'MM') {
+    meter = Number(value) / 1000
+  }
+  if (unit === 'YD') {
+    meter = Number(value) / METER_TO_YARD
+  }
+  if (unit === 'FT') {
+    meter = Number(value) / METER_TO_FEET
+  }
+  if (unit === 'IN') {
+    meter = Number(value) / METER_TO_INCH
+  }
+
+  return meter
 }
 
-export function distanceStepInMeter (
-  value,
-  unit
+export function convertMeterToCM (
+  value
 ) {
-  let distanceStepInMeter = 0
-  if (unit === 'meter') {
-    distanceStepInMeter = Number(value)
-  }
-  if (unit === 'yard') {
-    distanceStepInMeter = Number(value) * 0.9144
-  }
-  return distanceStepInMeter
+  return Number(value) * 100
 }
 
-export function elevationInMetersToUnit (
-  value,
-  unit
+export function convertMeterToYard (
+  value
 ) {
-  let distanceInMetersToUnit = 0
-  if (unit === 'meter') {
-    distanceInMetersToUnit = Number(value)
-  }
-  if (unit === 'yard') {
-    distanceInMetersToUnit = Number(value) / 0.9144
-  }
-  return distanceInMetersToUnit
+  return Number(value) * METER_TO_YARD
 }
 
-export function distanceMaxInMeter (
-  value,
-  unit
+export function convertMeterToInch (
+  value
 ) {
-  let distanceMaxInMeter = 0
-  if (unit === 'meter') {
-    distanceMaxInMeter = Number(value)
-  }
-  if (unit === 'yard') {
-    distanceMaxInMeter = Number(value) * 0.9144
-  }
-  return distanceMaxInMeter
+  return Number(value) * METER_TO_INCH
 }
 
-export function opticHeightInMeter (
+export function convertWeightToGram (
   value,
   unit
 ) {
-  let opticHeightInMeter = 0
-  if (unit === 'cm') {
-    opticHeightInMeter = Number(value) / 100
+  let gram = 0
+
+  if (unit === 'G') {
+    gram = Number(value)
   }
-  if (unit === 'inch') {
-    opticHeightInMeter = Number(value) * 0.0254
+  if (unit === 'KG') {
+    gram = Number(value) * 1000
   }
-  return opticHeightInMeter
+  if (unit === 'TON') {
+    gram = Number(value) * 1000000
+  }
+  if (unit === 'GR') {
+    gram = Number(value) / GRAM_TO_GRAIN
+  }
+  if (unit === 'OZ') {
+    gram = Number(value) / GRAM_TO_OZ
+  }
+  if (unit === 'LB') {
+    gram = Number(value) / GRAM_TO_LB
+  }
+
+  return gram
 }
 
-export function bulletDiameterInMeter (
+export function convertSpeedToMeterPerSecond (
   value,
   unit
 ) {
-  let bulletDiameterInMeter = 0
-  if (unit === 'mm') {
-    bulletDiameterInMeter = Number(value) / 1000
+  let meterPerSecond = 0
+  if (unit === 'M/S') {
+    meterPerSecond = Number(value)
   }
-  if (unit === 'inch') {
-    bulletDiameterInMeter = Number(value) * 0.0254
-  }
-  return bulletDiameterInMeter
-}
-
-export function bulletWeightInKg (
-  value,
-  unit
-) {
-  let bulletWeightInKg = 0
-  if (unit === 'grain') {
-    bulletWeightInKg = Number(value) * 0.00006479891
-  }
-  if (unit === 'gram') {
-    bulletWeightInKg = Number(value) / 1000
-  }
-  return bulletWeightInKg
-}
-
-export function velocityInMetersPerSecond (
-  value,
-  unit
-) {
-  let velocityInMetersPerSecond = 0
-  if (unit === 'm/s') {
-    velocityInMetersPerSecond = Number(value)
+  if (unit === 'KM/H') {
+    meterPerSecond = Number(value) / METER_PER_SECOND_TO_KILOMETER_PER_HOUR
   }
   if (unit === 'FPS') {
-    velocityInMetersPerSecond = Number(value) * 0.3048
+    meterPerSecond = Number(value) / METER_PER_SECOND_TO_FEET_PER_SECOND
   }
-  return velocityInMetersPerSecond
+  if (unit === 'MPH') {
+    meterPerSecond = Number(value) / METER_PER_SECOND_TO_MILE_PER_HOUR
+  }
+  return meterPerSecond
+}
+
+export function convertMRADtoMOA (value) {
+  return Number(value) * MRAD_TO_MOA
 }

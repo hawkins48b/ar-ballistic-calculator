@@ -14,15 +14,18 @@
     </div>
 
     <div class="row">
-      <div class="col-xs-12 col-md-4 q-pa-sm">
+      <div class="col-xs-12 col-md-6 q-pa-sm">
         <ProfileCard
           :profile="calcArgs.profile"
         />
       </div>
-      <div class="col-xs-12 col-md-4 q-pa-sm">
+      <div class="col-xs-12 col-md-6 q-pa-sm">
         <BallisticCalculatorArgsCard />
       </div>
     </div>
+    <q-btn color="primary q-mt-sm q-ml-sm">
+      Export to Excel
+    </q-btn>
     <BCTable
       class="q-ml-sm q-mt-md"
     />

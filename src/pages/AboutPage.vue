@@ -14,7 +14,7 @@
         <div class="text-h6 text-italic">
           Ballistic Calculator
         </div>
-        <p>Version 1.0</p>
+        <p>Version {{ appVersion }}</p>
         <p>
           Developped by <a
             href="https://chocolate-warfare.com"
@@ -53,7 +53,15 @@
 </template>
 
 <script>
+
+import { version } from '../../package.json'
+
 export default {
   // name: 'PageName',
+  data: function () {
+    return {
+      appVersion: version
+    }
+  }
 }
 </script>

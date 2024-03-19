@@ -3,7 +3,7 @@
     <p class="text-h4">
       Ballistic Calculator
     </p>
-    <p>Bullet path data</p>
+    <p>Distances</p>
     <q-form
       @submit="calculateBallistic"
     >
@@ -16,6 +16,7 @@
         lazy-rules
         :rules="[ val => val && val > 0 || 'Zero distance must be positive']"
         class="q-mt-md"
+        hint="The distance where you zeroed your optic"
       >
         <template #append>
           <q-btn-toggle
@@ -38,6 +39,7 @@
         lazy-rules
         :rules="[ val => val && val > 0 || 'Range must be positive']"
         class="q-mt-md"
+        hint="Maximum range for the calculation"
       >
         <template #append>
           <q-btn-toggle
@@ -60,6 +62,7 @@
         lazy-rules
         :rules="[ val => val && val > 0 || 'Step must be positive']"
         class="q-mt-md"
+        hint="25 is a recommended value"
       >
         <template #append>
           <q-btn-toggle

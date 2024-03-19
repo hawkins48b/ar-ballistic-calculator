@@ -23,9 +23,7 @@
         <BallisticCalculatorArgsCard />
       </div>
     </div>
-    <q-btn color="primary q-mt-sm q-ml-sm">
-      Export to Excel
-    </q-btn>
+    <ExportButton color="primary q-mt-sm q-ml-sm" />
     <BCTable
       class="q-ml-sm q-mt-md"
     />
@@ -35,6 +33,7 @@
 <script>
 import ProfileCard from 'components/profiles/view/ProfileCard.vue'
 import BallisticCalculatorArgsCard from 'components/calculator/results/BallisticCalculatorArgsCard.vue'
+import ExportButton from 'components/calculator/results/ExportButton.vue'
 import BCTable from 'components/calculator/results/BCTable.vue'
 import { LocalStorage } from 'quasar'
 
@@ -42,6 +41,7 @@ export default {
   components: {
     ProfileCard,
     BallisticCalculatorArgsCard,
+    ExportButton,
     BCTable
   },
   data: function () {

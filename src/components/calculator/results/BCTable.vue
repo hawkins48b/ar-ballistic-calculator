@@ -7,6 +7,8 @@
     row-key="distance"
     :loading="loading"
     :rows-per-page-options="[0]"
+    :class="{'bg-grey-3':!$q.dark.isActive}"
+    hide-pagination
   >
     <template #top="props">
       <div class="col-2 q-table__title">

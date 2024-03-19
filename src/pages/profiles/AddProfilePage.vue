@@ -106,7 +106,7 @@ export default {
     */
     persistProfiles () {
       // get profiles
-      const profiles = JSON.parse(LocalStorage.getItem('profiles'))
+      const profiles = JSON.parse(LocalStorage.getItem('profiles')) || []
       // add profiles to the list
       profiles.push(this.profile)
       // persists profiles

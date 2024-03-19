@@ -1,12 +1,8 @@
 <template>
   <q-page padding>
-    <!-- content -->
-    Profiles
+    <div class="text-h3 q-mb-md">
+      Profiles
+    </div>
+    <router-view />
   </q-page>
 </template>
-
-<script>
-export default {
-  // name: 'PageName',
-}
-</script>

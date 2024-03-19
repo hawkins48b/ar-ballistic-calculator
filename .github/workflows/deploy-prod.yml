@@ -1,15 +1,15 @@
-name: Deploy Dev
+name: Deploy Prod
 
 on:
   push:
     branches:
-      - develop
+      - master
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: prod
     steps:
       - name: Setup environment
         uses: actions/checkout@v4

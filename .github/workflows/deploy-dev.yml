@@ -31,5 +31,5 @@ jobs:
           HOST: ${{secrets.SERVER_HOST}}
           USER: ${{secrets.SSH_USER}}
           PASSWORD: ${{secrets.SSH_USER}}
-          TARGET: ${{secrets.SERVER_PWD}}
+          TARGET: ${{secrets.SERVER_PATH}}
           SOURCE: ./dist/pwa/

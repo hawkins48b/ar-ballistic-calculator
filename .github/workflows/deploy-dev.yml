@@ -22,7 +22,8 @@ jobs:
       - run: yarn global add @quasar/cli
 
       - name: Build Project
-        run: quasar build -m pwa
+        run: yarn
+      - run: quasar build -m pwa
 
       - name: Rsync to the host
         uses: up9cloud/action-rsync@v1.4

@@ -143,41 +143,47 @@ export default {
           name: 'distanceYD',
           field: 'distanceYD',
           label: 'Distance (YD)',
-          format: (val, row) => `${Math.round(val)}`
+          format: (val, row) => `${Math.round(val)}`,
+          align: 'left'
         },
         // distance
         {
           name: 'distanceM',
           field: 'distanceM',
           label: 'Distance (M)',
-          format: (val, row) => `${Math.round(val)}`
+          format: (val, row) => `${Math.round(val)}`,
+          align: 'left'
         },
         {
           name: 'elevationIN',
           field: 'elevationIN',
           label: 'Elevation (IN)',
-          format: (val, row) => `${Math.round(val * 10) / 10}`
+          format: (val, row) => `${Math.round(val * 10) / 10}`,
+          align: 'left'
         },
         // elevation
         {
           name: 'elevationCM',
           field: 'elevationCM',
           label: 'Elevation (CM)',
-          format: (val, row) => `${Math.round(val * 10) / 10}`
+          format: (val, row) => `${Math.round(val * 10) / 10}`,
+          align: 'left'
         },
         // correction
         {
           name: 'correctionMOA',
           field: 'correctionMOA',
           label: 'Correction (MOA)',
-          format: (val, row) => `${Math.round(val * 10) / 10}`
+          format: (val, row) => `${Math.round(val * 10) / 10}`,
+          align: 'left'
         },
 
         {
           name: 'correctionMRAD',
           field: 'correctionMRAD',
           label: 'Correction (MRAD)',
-          format: (val, row) => `${Math.round(val * 10) / 10}`
+          format: (val, row) => `${Math.round(val * 10) / 10}`,
+          align: 'left'
         }
       ],
       visibleColumns: []
@@ -204,7 +210,6 @@ export default {
     startBallisticCalculator () {
       this.rows = calculateAdjustments(this.calcArgs)
       this.loading = false
-      console.log('rows', this.rows)
     }
   }
 }

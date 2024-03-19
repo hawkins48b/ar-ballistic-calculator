@@ -24,7 +24,7 @@
       </div>
     </div>
     <ExportButton color="primary q-mt-sm q-ml-sm" />
-    <BCTable
+    <ElevationTable
       class="q-ml-sm q-mt-md"
     />
   </q-page>
@@ -34,7 +34,7 @@
 import ProfileCard from 'components/profiles/view/ProfileCard.vue'
 import BallisticCalculatorArgsCard from 'components/calculator/results/BallisticCalculatorArgsCard.vue'
 import ExportButton from 'components/calculator/results/ExportButton.vue'
-import BCTable from 'components/calculator/results/BCTable.vue'
+import ElevationTable from 'components/calculator/results/ElevationTable.vue'
 import { LocalStorage } from 'quasar'
 
 export default {
@@ -42,7 +42,7 @@ export default {
     ProfileCard,
     BallisticCalculatorArgsCard,
     ExportButton,
-    BCTable
+    ElevationTable
   },
   data: function () {
     return {

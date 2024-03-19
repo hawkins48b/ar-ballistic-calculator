@@ -11,7 +11,12 @@
     "dev": "quasar dev",
     "build": "quasar build",
     "git": "git add . && git commit -m",
-    "postgit": "git push && npm version patch && git push"
+    "patch": "npm run git",
+    "postpatch": "git push && npm version patch && git push",
+    "minor": "npm run git",
+    "postminor": "git push && npm version minor && git push",
+    "major": "npm run git",
+    "postmajor": "git push && npm version major && git push"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",

@@ -90,20 +90,6 @@ export default {
       // back to profiles
       this.$router.push('/profiles')
     },
-    /*
-    removeProfile (index) {
-      this.$q.dialog({
-        title: 'Confirm',
-        message: 'Are you sure you want to remove this profile ?',
-        cancel: true
-      }).onOk(() => {
-        // remove profile from profilesArray
-        this.profilesArray.splice(index, 1)
-        // persist data
-        this.persistProfiles()
-      })
-    },
-    */
     persistProfiles () {
       // get profiles
       const profiles = JSON.parse(LocalStorage.getItem('profiles')) || []

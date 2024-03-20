@@ -2,7 +2,7 @@
   "name": "cw-zro",
   "version": "0.1.13",
   "description": "A simple ballistic calculator",
-  "productName": "ZRO",
+  "productName": "ZRO - Ballistic Calculator",
   "author": "Quentin Mathey <q.mathey@gmail.com>",
   "private": true,
   "scripts": {

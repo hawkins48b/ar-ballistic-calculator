@@ -107,7 +107,7 @@ export default {
           })
           serieName = 'Elevation (IN)'
           xAxisTitle = 'RANGE (YD)'
-          yAxisTitle = 'ELEVATION (YD)'
+          yAxisTitle = 'ELEVATION (IN)'
         }
         if (this.calcArgs.resultsUnit === 'M') {
           let elevation = Number(element.elevationCM)

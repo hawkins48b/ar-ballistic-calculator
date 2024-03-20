@@ -118,3 +118,7 @@ export function convertSpeedToMeterPerSecond (
 export function convertMRADtoMOA (value) {
   return Number(value) * MRAD_TO_MOA
 }
+
+export function convertMStoFPS (value) {
+  return Number(value) * METER_PER_SECOND_TO_FEET_PER_SECOND
+}

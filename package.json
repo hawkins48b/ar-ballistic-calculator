@@ -20,10 +20,12 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",
+    "apexcharts": "^3.48.0",
     "axios": "^1.2.1",
     "quasar": "^2.8.0",
     "vue": "^3.4.18",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vue3-apexcharts": "^1.5.2"
   },
   "devDependencies": {
     "@quasar/app-vite": "^1.8.0",

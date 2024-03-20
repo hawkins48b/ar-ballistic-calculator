@@ -70,7 +70,7 @@ export default defineComponent({
       }
     }
   },
-  mounted () {
+  created () {
     // set theme
     this.$q.dark.set(JSON.parse(LocalStorage.getItem('settings.darkMode')))
   }

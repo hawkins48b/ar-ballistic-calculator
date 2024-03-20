@@ -129,7 +129,6 @@ import {
 import { LocalStorage } from 'quasar'
 
 export default {
-
   setup () {
     return {}
   },
@@ -199,7 +198,6 @@ export default {
   },
   methods: {
     initVisibleColumns () {
-      console.log('this.calcArgs.resultUnits', this.calcArgs.resultUnits)
       if (this.calcArgs.resultsUnit === 'YD') {
         this.visibleColumns = ['distanceYD', 'elevationIN', 'correctionMOA']
       }

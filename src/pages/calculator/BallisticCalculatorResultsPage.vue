@@ -23,7 +23,10 @@
         <BallisticCalculatorArgsCard />
       </div>
     </div>
-    <ExportButton color="primary q-mt-sm q-ml-sm" />
+    <ElevationChart
+      class="q-ml-sm q-mt-sm"
+    />
+    <ExportButton color="primary q-mt-md q-ml-sm" />
     <ElevationTable
       class="q-ml-sm q-mt-md"
     />
@@ -34,6 +37,7 @@
 import ProfileCard from 'components/profiles/view/ProfileCard.vue'
 import BallisticCalculatorArgsCard from 'components/calculator/results/BallisticCalculatorArgsCard.vue'
 import ExportButton from 'components/calculator/results/ExportButton.vue'
+import ElevationChart from 'components/calculator/results/ElevationChart.vue'
 import ElevationTable from 'components/calculator/results/ElevationTable.vue'
 import { LocalStorage } from 'quasar'
 
@@ -42,6 +46,7 @@ export default {
     ProfileCard,
     BallisticCalculatorArgsCard,
     ExportButton,
+    ElevationChart,
     ElevationTable
   },
   data: function () {

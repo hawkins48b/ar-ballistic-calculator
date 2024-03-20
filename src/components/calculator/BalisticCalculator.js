@@ -54,9 +54,8 @@ export function calculateAdjustments (calcArgs) {
       distanceM
     )
 
-    const elevationM = ballisticResults.elevationM
-
     // elevation results in different units
+    const elevationM = ballisticResults.elevationM
     const elevationCM = convertMeterToCM(elevationM)
     const elevationIN = convertMeterToInch(elevationM)
 

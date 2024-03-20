@@ -122,7 +122,7 @@ function ballisticCalculator (
   let velocityY = initialVelocityMS * Math.sin(angleRadian) // Initial velocity in y-direction
   let xPosition = 0 // Initial x-position
   let yPosition = initialYpositionM // Initial y-position
-  const timeStep = 0.001
+  const timeStep = 0.0001
 
   // Loop until the projectile reaches the requested distance
   while (xPosition < requestedDistanceM) {

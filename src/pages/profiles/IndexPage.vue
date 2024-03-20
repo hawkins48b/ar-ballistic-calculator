@@ -1,8 +1,8 @@
 <template>
-  <q-page>
+  <div>
     <!-- content -->
-    <div class="row q-ml-sm">
-      <div class="col-xs-12 col-md-4">
+    <div class="row">
+      <div class="col-xs-12 col-md-4 q-pa-sm">
         <q-card
           flat
           class="q-pa-md"
@@ -20,7 +20,7 @@
         </q-card>
       </div>
     </div>
-    <div class="row q-mt-md">
+    <div class="row">
       <div
         v-for="(profile, index) in profiles"
         :key="index"
@@ -34,7 +34,7 @@
         />
       </div>
     </div>
-  </q-page>
+  </div>
 </template>
 
 <script>

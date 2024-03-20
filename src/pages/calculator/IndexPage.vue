@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <div>
     <div
       v-if="profileOptions.length == 0"
       class="row"
@@ -64,7 +64,7 @@
         </div>
       </div>
     </div>
-  </q-page>
+  </div>
 </template>
 
 <script>

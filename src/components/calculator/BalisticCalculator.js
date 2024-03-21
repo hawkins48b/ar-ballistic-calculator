@@ -75,7 +75,6 @@ export function calculateAdjustments (calcArgs) {
     )
     distanceM += distanceStepM
   }
-  console.log(results)
   return results
 }
 
@@ -121,8 +120,11 @@ function ballisticCalculator (
   let velocityY = initialVelocityMS * Math.sin(angleRadian) // Initial velocity in y-direction
   let xPosition = 0 // Initial x-position
   let yPosition = initialYpositionM // Initial y-position
-  let finalVelocity = 0 // Variable to store the final velocity
   const timeStep = 0.001
+
+  // results
+  let finalVelocity = 0 // Variable to store the final velocity
+  let elevationM = yPosition
 
   // Loop until the projectile reaches the requested distance
   while (xPosition < requestedDistanceM) {
@@ -173,18 +175,19 @@ function ballisticCalculator (
     // Update final velocity when the projectile reaches the requested distance
     if (xPosition >= requestedDistanceM) {
       finalVelocity = Math.sqrt(velocityX ** 2 + velocityY ** 2)
+      elevationM = yPosition
     }
   }
 
   return {
-    elevationM: yPosition,
+    elevationM,
     velocityMS: finalVelocity
   }
 }
 
 export function calculateDragForce (
   airDensityKGM3,
-  velocity,
+  velocityMS,
   ballisticCoefficient,
   ballisticCoefficientProfile,
   bulletCrossSectionalAreaM2
@@ -192,7 +195,7 @@ export function calculateDragForce (
   let dragForce = 0
 
   if (ballisticCoefficientProfile === 'G1') {
-    dragForce = 0.5 * airDensityKGM3 * Math.pow(velocity, 2) * ballisticCoefficient * bulletCrossSectionalAreaM2
+    dragForce = 0.5 * airDensityKGM3 * Math.pow(velocityMS, 2) * ballisticCoefficient * bulletCrossSectionalAreaM2
   }
 
   return dragForce

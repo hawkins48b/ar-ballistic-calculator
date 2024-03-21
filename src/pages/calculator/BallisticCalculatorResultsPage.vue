@@ -41,6 +41,9 @@ import ElevationChart from 'components/calculator/results/ElevationChart.vue'
 import ElevationTable from 'components/calculator/results/ElevationTable.vue'
 import { LocalStorage } from 'quasar'
 
+import * as BC from 'js-ballistics'
+import Calculator from 'js-ballistics'
+
 export default {
   components: {
     ProfileCard,
@@ -53,6 +56,45 @@ export default {
     return {
       calcArgs: JSON.parse(LocalStorage.getItem('bc-args'))
     }
+  },
+  mounted () {
+    // Create a Measure object (example)
+    const exampleMeasure = BC.UNew.Meter(10)
+    const exampleMeasureFoot = exampleMeasure.to(BC.Unit.Foot)
+    const exampleValueFoot = exampleMeasure.In(BC.Unit.Foot)
+
+    // Log the Measure object to the console
+    console.log('Example Measure in meter:', `${exampleMeasure}`)
+    console.log('Example Conversion meter to foot:', `${exampleMeasureFoot}`)
+    console.log('Example Conversion meter to number in foot:', `${exampleValueFoot}`)
+
+    // BC.calcSettings.USE_POWDER_SENSITIVITY = true
+
+    // define ammo parameter
+    const bulletWeight = BC.UNew.Grain(63)
+    const bulletDiameter = BC.UNew.Millimeter(5.56)
+    const ballisticCoefficient = 0.331
+    const dragModel = new BC.DragModel(ballisticCoefficient, BC.Table.G1, bulletWeight, bulletDiameter)
+
+    const Velocitydistance = BC.UNew.Yard(2)
+    const bulletVelocity = BC.UNew.FPS(2700)
+    const opticHeight = BC.UNew.Inch(3.5)
+    const weapon = new BC.Weapon(opticHeight)
+    const ammo = new BC.Ammo(dragModel, Velocitydistance, bulletVelocity)
+    const atmo = new BC.Atmo()
+
+    const maxRange = BC.UNew.Yard(500)
+    const rangeStep = BC.UNew.Yard(25)
+    const zeroAngle = BC.UNew.Radian(0)
+    const relativeAngle = BC.UNew.Radian(0)
+    const cantAngle = BC.UNew.Radian(0)
+
+    const shot = new BC.Shot(maxRange, zeroAngle, relativeAngle, cantAngle, atmo)
+    const calculator = new Calculator(weapon, ammo, atmo)
+    const results = calculator.fire(shot, rangeStep)
+    // const zeroAngle = new BC.UNew.
+
+    console.log(results)
   }
 }
 </script>

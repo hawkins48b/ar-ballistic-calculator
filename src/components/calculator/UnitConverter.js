@@ -15,6 +15,9 @@ const METER_PER_SECOND_TO_KILOMETER_PER_HOUR = 3.6
 const METER_PER_SECOND_TO_FEET_PER_SECOND = 3.2808399
 const METER_PER_SECOND_TO_MILE_PER_HOUR = 2.236936
 
+// Ballistic Coefficient
+const LB_PER_INCH_SQUARE_TO_KG_PER_METER_SQUARE = 703.069581
+
 // angle
 const MRAD_TO_MOA = 3.43774677
 
@@ -121,4 +124,8 @@ export function convertMRADtoMOA (value) {
 
 export function convertMStoFPS (value) {
   return Number(value) * METER_PER_SECOND_TO_FEET_PER_SECOND
+}
+
+export function convertImperialBallisticCoefficientToMetric (value) {
+  return Number(value) * LB_PER_INCH_SQUARE_TO_KG_PER_METER_SQUARE
 }

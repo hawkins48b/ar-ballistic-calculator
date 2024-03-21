@@ -14,29 +14,14 @@ export function calculateAdjustments (calcArgs) {
 
   // convert units
   const bulletWeightKG = convertWeightToGram(calcArgs.profile.bulletWeight, calcArgs.profile.bulletWeightUnit) / 1000
-  const bulletCrossSectionalAreaM2 = getCrossSectionalAreaM2(convertLengthToMeter(calcArgs.profile.bulletDiameter, calcArgs.profile.bulletDiameterUnit))
   const bulletVelocityMS = convertSpeedToMeterPerSecond(calcArgs.profile.bulletVelocity, calcArgs.profile.bulletVelocityUnit)
+  const bulletCrossSectionalAreaM2 = getCrossSectionalAreaM2(convertLengthToMeter(calcArgs.profile.bulletDiameter, calcArgs.profile.bulletDiameterUnit))
   const ballisticCoefficient = Number(calcArgs.profile.bulletBallisticCoefficient)
   const ballisticCoefficientProfile = calcArgs.profile.bulletBallisticCoefficientProfile
   const airDensityKGM3 = 1.225
   const opticHeightM = convertLengthToMeter(calcArgs.profile.opticHeight, calcArgs.profile.opticHeightUnit)
   const zeroDistanceM = convertLengthToMeter(calcArgs.zeroDistance, calcArgs.zeroDistanceUnit)
-  // get the angle in radian OpticHeightM + bulletElevationM at zeroing distance
-  const zeroBallisticResults = ballisticCalculator(
-    bulletWeightKG,
-    bulletCrossSectionalAreaM2,
-    bulletVelocityMS,
-    ballisticCoefficient,
-    ballisticCoefficientProfile,
-    getAngleInRadian(opticHeightM, zeroDistanceM),
-    airDensityKGM3,
-    -opticHeightM,
-    zeroDistanceM
-  )
-
-  console.log('opticHeight', opticHeightM, 'add elevation', zeroBallisticResults.elevationM, 'total', opticHeightM + zeroBallisticResults.elevationM * -1)
-
-  const angleRadian = getAngleInRadian(opticHeightM + zeroBallisticResults.elevationM * -1, zeroDistanceM)
+  const angleRadian = getAngleInRadian(opticHeightM, zeroDistanceM)
   const distanceMaxM = convertLengthToMeter(calcArgs.resultsRange, calcArgs.resultsUnit)
   const distanceStepM = convertLengthToMeter(calcArgs.resultsStep, calcArgs.resultsUnit)
 
@@ -44,8 +29,8 @@ export function calculateAdjustments (calcArgs) {
   while (distanceM <= distanceMaxM) {
     const ballisticResults = ballisticCalculator(
       bulletWeightKG,
-      bulletCrossSectionalAreaM2,
       bulletVelocityMS,
+      bulletCrossSectionalAreaM2,
       ballisticCoefficient,
       ballisticCoefficientProfile,
       angleRadian,
@@ -90,7 +75,7 @@ export function calculateAdjustments (calcArgs) {
     )
     distanceM += distanceStepM
   }
-
+  console.log(results)
   return results
 }
 
@@ -122,53 +107,43 @@ export function calculateMRADCorrection (
 
 function ballisticCalculator (
   bulletWeightKg, // Kilograms (kg)
-  bulletCrossSectionalAreaM2, // m2
   initialVelocityMS, // Meters per second (m/s)
-  ballisticCoefficient, // Dimensionless
-  ballisticCoefficientProfile, // G1 or G7
+  bulletCrossSectionalAreaM2,
+  ballisticCoefficient, // lb/in2
+  ballisticCoefficientProfile, // G1
   angleRadian, // Radian
   airDensityKGM3, // Kilograms per cubic meter (kg/m³)
   initialYpositionM, // Meter
   requestedDistanceM // Meter
 ) {
-  /*
-  console.log('--------------------------')
-  console.log('bulletWeightKg', bulletWeightKg)
-  console.log('bulletCrossSectionalAreaM2', bulletCrossSectionalAreaM2)
-  console.log('initialVelocityMS', initialVelocityMS)
-  console.log('ballisticCoefficient', ballisticCoefficient)
-  console.log('ballisticCoefficientProfile', ballisticCoefficientProfile)
-  console.log('angleRadian', angleRadian)
-  console.log('airDensityKGM3', airDensityKGM3)
-  console.log('initialYpositionM', initialYpositionM)
-  console.log('requestedDistanceM', requestedDistanceM)
-  */
   const gravitationalAcceleration = 9.80665 // gravitational acceleration in m/s^2
   let velocityX = initialVelocityMS * Math.cos(angleRadian) // Initial velocity in x-direction
   let velocityY = initialVelocityMS * Math.sin(angleRadian) // Initial velocity in y-direction
   let xPosition = 0 // Initial x-position
   let yPosition = initialYpositionM // Initial y-position
   let finalVelocity = 0 // Variable to store the final velocity
-  const timeStep = 0.0001
+  const timeStep = 0.001
 
   // Loop until the projectile reaches the requested distance
-  while (xPosition <= requestedDistanceM) {
-    // Calculate drag forces for both axes
+  while (xPosition < requestedDistanceM) {
+  // Calculate drag forces for both axes
     const dragForceX = calculateDragForce(
       airDensityKGM3,
       velocityX,
       ballisticCoefficient,
       ballisticCoefficientProfile,
-      bulletCrossSectionalAreaM2)
+      bulletCrossSectionalAreaM2
+    )
     const dragForceY = calculateDragForce(
       airDensityKGM3,
       velocityY,
       ballisticCoefficient,
       ballisticCoefficientProfile,
-      bulletCrossSectionalAreaM2)
+      bulletCrossSectionalAreaM2
+    )
 
     // Calculate acceleration in the y-direction including gravitational acceleration and drag force
-    const accelerationX = (-dragForceX / bulletWeightKg)
+    const accelerationX = -dragForceX / bulletWeightKg
 
     // Calculate acceleration in the y-direction including gravitational acceleration and drag force
     const accelerationY = (-dragForceY / bulletWeightKg) - gravitationalAcceleration
@@ -218,14 +193,6 @@ export function calculateDragForce (
 
   if (ballisticCoefficientProfile === 'G1') {
     dragForce = 0.5 * airDensityKGM3 * Math.pow(velocity, 2) * ballisticCoefficient * bulletCrossSectionalAreaM2
-  }
-  if (ballisticCoefficientProfile === 'G7') {
-    const g7Coef = g7Coefficient(
-      ballisticCoefficient,
-      velocity,
-      airDensityKGM3
-    )
-    dragForce = 0.5 * airDensityKGM3 * Math.pow(velocity, 2) * bulletCrossSectionalAreaM2 * g7Coef
   }
 
   return dragForce

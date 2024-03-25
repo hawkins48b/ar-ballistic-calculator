@@ -31,12 +31,7 @@
   </q-page>
 </template>
 
-<script>
+<script setup>
 import DarkModeToggle from 'components/settings/darkModeToggle.vue'
 
-export default {
-  components: {
-    DarkModeToggle
-  }
-}
 </script>

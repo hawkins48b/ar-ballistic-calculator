@@ -3,6 +3,70 @@
     :class="{'bg-grey-3':!$q.dark.isActive}"
     flat
   >
+    <div class="row justify-end">
+      <div class="col-auto">
+        <q-btn
+          color="grey-7"
+          round
+          flat
+          icon="more_vert"
+        >
+          <q-menu
+            auto-close
+            cover
+          >
+            <q-list>
+              <q-item
+                clickable
+                :to="`profiles/edit/${profile.id}`"
+              >
+                <q-item-section
+                  avatar
+                  side
+                >
+                  <q-icon
+                    name="edit"
+                  />
+                </q-item-section>
+                <q-item-section>Edit</q-item-section>
+              </q-item>
+              <q-item clickable>
+                <q-item-section
+                  avatar
+                  side
+                >
+                  <q-icon
+                    name="content_copy"
+                  />
+                </q-item-section>
+                <q-item-section @click="duplicate">
+                  Duplicate
+                </q-item-section>
+              </q-item>
+              <q-item
+                clickable
+              >
+                <q-item-section
+                  avatar
+                  side
+                >
+                  <q-icon
+                    color="red"
+                    name="delete"
+                  />
+                </q-item-section>
+                <q-item-section
+                  class="text-red"
+                  @click="removeProfile"
+                >
+                  Delete
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
+      </div>
+    </div>
     <div class="row">
       <div class="col">
         <q-list>
@@ -12,7 +76,7 @@
                 RIFLE
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ profile.rifle }}
+                {{ profile.weapon.name }}
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -22,7 +86,7 @@
                 OPTIC
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ profile.optic }}
+                {{ profile.optic.model }}
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -32,7 +96,7 @@
                 OPTIC HEIGHT
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ profile.opticHeight }} {{ profile.opticHeightUnit }}
+                {{ profile.optic.height }} {{ profile.optic.heightUnit }}
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -46,7 +110,7 @@
                 AMMO
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ profile.bulletName }} {{ profile.bulletDiameter }} {{ profile.bulletDiameterUnit }} {{ profile.bulletWeight }} {{ profile.bulletWeightUnit }}
+                {{ profile.bullet.brand }} {{ profile.bullet.diameter }} {{ profile.bullet.diameterUnit }} {{ profile.bullet.weight }} {{ profile.bullet.weightUnit }}
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -56,7 +120,7 @@
                 VELOCITY
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ profile.bulletVelocity }} {{ profile.bulletVelocityUnit }}
+                {{ profile.bullet.velocity }} {{ profile.bullet.velocityUnit }}
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -66,68 +130,56 @@
                 BALLISTIC COEFFICIENT
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ profile.bulletBallisticCoefficient }} {{ profile.bulletBallisticCoefficientProfile }}
+                {{ profile.bullet.ballisticCoefficient }} {{ profile.bullet.ballisticCoefficientProfile }}
               </q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
       </div>
     </div>
-
-    <q-btn
-      v-if="removable"
-      outline
-      class="q-ma-md"
-      @click="removeProfile(index)"
-    >
-      Remove
-    </q-btn>
   </q-card>
 </template>
 
-<script>
-import { LocalStorage } from 'quasar'
+<script setup>
+// imports
+import { useProfilesStore } from 'stores/profiles'
+import { defineProps } from 'vue'
+import { useQuasar } from 'quasar'
 
-export default {
-  props: {
-    profile: {
-      type: Object,
-      required: true
-    },
-    index: {
-      type: Number,
-      required: false,
-      default: -1
-    },
-    removable: {
-      type: Boolean,
-      required: false,
-      default: false
-    }
+const $q = useQuasar()
+
+// props
+const {
+  profile,
+  id
+} = defineProps({
+  profile: {
+    type: Object,
+    required: true
   },
-  emits: [
-    'removedProfile'
-  ],
-  methods: {
-    removeProfile (index) {
-      this.$q.dialog({
-        title: 'Confirm',
-        message: 'Are you sure you want to remove this profile ?',
-        cancel: true
-      }).onOk(() => {
-        // get the list from LocalStorage
-        const profiles = JSON.parse(LocalStorage.getItem('profiles'))
-
-        // remove profile from profiles
-        profiles.splice(index, 1)
-
-        // persist data
-        LocalStorage.set('profiles', JSON.stringify(profiles))
-
-        // notify parent
-        this.$emit('removedProfile')
-      })
-    }
+  id: {
+    type: Number,
+    required: true
   }
+})
+
+// profiles store
+const profilesStore = useProfilesStore()
+
+// remove profile feature
+const removeProfile = () => {
+  $q.dialog({
+    title: 'Confirm',
+    message: 'Are you sure you want to remove this profile ?',
+    cancel: true
+  }).onOk(() => {
+    profilesStore.removeProfile(id)
+  })
 }
+
+// duplicate profile feature
+const duplicate = () => {
+  profilesStore.duplicateProfile(id)
+}
+
 </script>

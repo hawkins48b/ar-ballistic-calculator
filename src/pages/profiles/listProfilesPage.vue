@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- content -->
     <div class="row">
       <div class="col-xs-12 col-md-4 q-pa-sm">
         <q-card
@@ -22,42 +21,28 @@
     </div>
     <div class="row">
       <div
-        v-for="(profile, index) in profiles"
-        :key="index"
+        v-for="(profile) in profiles"
+        :key="profile.id"
         class="col-xs-12 col-md-4 q-pa-sm"
       >
         <ProfileCard
+          :id="profile.id"
           :profile="profile"
-          :index="index"
           removable
-          @removed-profile="reloadProfiles"
         />
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+// imports
 import ProfileCard from 'components/profiles/view/ProfileCard.vue'
-import { LocalStorage } from 'quasar'
+import { useProfilesStore } from 'stores/profiles'
+import { storeToRefs } from 'pinia'
 
-export default {
-  components: {
-    ProfileCard
-  },
-  data: function () {
-    return {
-      profiles: []
-    }
-  },
-  mounted () {
-    // get list of profiles
-    this.profiles = JSON.parse(LocalStorage.getItem('profiles'))
-  },
-  methods: {
-    reloadProfiles () {
-      this.profiles = JSON.parse(LocalStorage.getItem('profiles'))
-    }
-  }
-}
+// list profiles
+const profilesStore = useProfilesStore()
+const { profiles } = storeToRefs(profilesStore)
+
 </script>

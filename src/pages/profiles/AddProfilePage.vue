@@ -1,103 +1,45 @@
 <template>
-  <q-page>
-    <!-- content -->
-    <div class="row justify-start">
-      <div class="q-pl-sm">
-        <q-btn
-          to="/profiles"
-          outline
-        >
-          Back
-        </q-btn>
-      </div>
-      <div class="text-h6 q-pl-md">
-        Add new profile
-      </div>
+  <div class="row justify-start">
+    <div class="q-pl-sm">
+      <q-btn
+        to="/profiles"
+        outline
+      >
+        Back
+      </q-btn>
     </div>
-    <q-form @submit="addNewProfile">
-      <div class="row q-mt-md">
-        <div class="col-xs-12 col-md-4 q-pa-sm">
-          <RifleCard
-            ref="rifle"
-            :profile="profile"
-          />
-          <OpticCard
-            :profile="profile"
-            class="q-mt-md"
-          />
-        </div>
-        <div class="col-xs-12 col-md-4 q-pa-sm">
-          <BulletCard :profile="profile" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="q-pl-sm q-mt-md">
-          <q-btn
-            color="primary"
-            icon="add"
-            type="submit"
-          >
-            Add
-          </q-btn>
-        </div>
-      </div>
-    </q-form>
-  </q-page>
+    <div class="text-h6 q-pl-md">
+      Add new profile
+    </div>
+  </div>
+  <ProfileForm
+    :profile="profile"
+    submit-text="Add"
+    @submit="addProfile"
+  />
 </template>
 
-<script>
-import RifleCard from 'components/profiles/add/RifleCard.vue'
-import OpticCard from 'components/profiles/add/OpticCard.vue'
-import BulletCard from 'components/profiles/add/BulletCard.vue'
-import { LocalStorage } from 'quasar'
+<script setup>
+// imports
+import ProfileForm from 'components/profiles/ProfileForm.vue'
+import { useProfilesStore } from 'stores/profiles'
+import { useRouter } from 'vue-router'
+import { reactive } from 'vue'
+import profileModel from 'src/models/profiles'
 
-export default {
-  components: {
-    RifleCard,
-    OpticCard,
-    BulletCard
-  },
-  data: function () {
-    return {
-      profile: this.newProfile()
-    }
-  },
-  mounted () {
+// Define router instance
+const router = useRouter()
 
-  },
-  methods: {
-    newProfile () {
-      return {
-        rifle: '',
-        optic: '',
-        opticHeight: 0.0,
-        opticHeightUnit: 'IN',
-        bulletName: '',
-        bulletDiameter: 0,
-        bulletDiameterUnit: 'IN',
-        bulletWeight: 0,
-        bulletWeightUnit: 'GR',
-        bulletVelocity: 0.0,
-        bulletVelocityUnit: 'FPS',
-        bulletBallisticCoefficient: 0,
-        bulletBallisticCoefficientProfile: 'G1'
-      }
-    },
-    addNewProfile () {
-      // persist data
-      this.persistProfiles()
+// store instance
+const profilesStore = useProfilesStore()
 
-      // back to profiles
-      this.$router.push('/profiles')
-    },
-    persistProfiles () {
-      // get profiles
-      const profiles = JSON.parse(LocalStorage.getItem('profiles')) || []
-      // add profiles to the list
-      profiles.push(this.profile)
-      // persists profiles
-      LocalStorage.set('profiles', JSON.stringify(profiles))
-    }
-  }
+// init profile
+const profile = reactive(profileModel())
+
+// add profile
+const addProfile = (newProfile) => {
+  profilesStore.addProfile(newProfile)
+  // go back to profile list
+  router.push('/profiles')
 }
 </script>

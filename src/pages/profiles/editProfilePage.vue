@@ -12,7 +12,7 @@
 
 <script setup>
 // imports
-import ProfileForm from 'components/profiles/ProfileForm.vue'
+import ProfileForm from 'components/profiles/form/ProfileForm.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useProfilesStore } from 'stores/profiles'
 import { reactive } from 'vue'

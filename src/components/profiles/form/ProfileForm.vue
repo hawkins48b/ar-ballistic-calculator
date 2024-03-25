@@ -31,9 +31,9 @@
 
 <script setup>
 // import
-import WeaponCard from 'components/profiles/add/WeaponCard.vue'
-import OpticCard from 'components/profiles/add/OpticCard.vue'
-import BulletCard from 'components/profiles/add/BulletCard.vue'
+import WeaponCard from 'components/profiles/form/WeaponCard.vue'
+import OpticCard from 'components/profiles/form/OpticCard.vue'
+import BulletCard from 'components/profiles/form/BulletCard.vue'
 import { defineEmits } from 'vue'
 
 // props
@@ -48,7 +48,8 @@ const {
   },
   submitText: {
     type: String,
-    required: true
+    required: true,
+    default: 'Add'
   },
   submitIcon: {
     type: String,

@@ -5,66 +5,10 @@
   >
     <div class="row justify-end">
       <div class="col-auto">
-        <q-btn
-          color="grey-7"
-          round
-          flat
-          icon="more_vert"
-        >
-          <q-menu
-            auto-close
-            cover
-          >
-            <q-list>
-              <q-item
-                clickable
-                :to="`profiles/edit/${profile.id}`"
-              >
-                <q-item-section
-                  avatar
-                  side
-                >
-                  <q-icon
-                    name="edit"
-                  />
-                </q-item-section>
-                <q-item-section>Edit</q-item-section>
-              </q-item>
-              <q-item clickable>
-                <q-item-section
-                  avatar
-                  side
-                >
-                  <q-icon
-                    name="content_copy"
-                  />
-                </q-item-section>
-                <q-item-section @click="duplicate">
-                  Duplicate
-                </q-item-section>
-              </q-item>
-              <q-item
-                clickable
-              >
-                <q-item-section
-                  avatar
-                  side
-                >
-                  <q-icon
-                    color="red"
-                    name="delete"
-                  />
-                </q-item-section>
-                <q-item-section
-                  class="text-red"
-                  @click="removeProfile"
-                >
-                  Delete
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-menu>
-        </q-btn>
+        <ProfileEditButton
+          :profile="profile"
+          :actions="actions"
+        />
       </div>
     </div>
     <div class="row">
@@ -142,7 +86,7 @@
 
 <script setup>
 // imports
-import { useProfilesStore } from 'stores/profiles'
+import ProfileEditButton from 'components/profiles/view/ProfileEditButton.vue'
 import { defineProps } from 'vue'
 import { useQuasar } from 'quasar'
 
@@ -151,35 +95,17 @@ const $q = useQuasar()
 // props
 const {
   profile,
-  id
+  actions
 } = defineProps({
   profile: {
     type: Object,
     required: true
   },
-  id: {
-    type: Number,
-    required: true
+  actions: {
+    type: Array,
+    required: false,
+    default: () => []
   }
 })
-
-// profiles store
-const profilesStore = useProfilesStore()
-
-// remove profile feature
-const removeProfile = () => {
-  $q.dialog({
-    title: 'Confirm',
-    message: 'Are you sure you want to remove this profile ?',
-    cancel: true
-  }).onOk(() => {
-    profilesStore.removeProfile(id)
-  })
-}
-
-// duplicate profile feature
-const duplicate = () => {
-  profilesStore.duplicateProfile(id)
-}
 
 </script>

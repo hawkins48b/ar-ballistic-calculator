@@ -1,6 +1,11 @@
 <template>
   <div>
     <div class="row">
+      <div class="col-xs-12 col-md-8 q-pa-sm">
+        <ProfileSelector />
+      </div>
+    </div>
+    <div class="row">
       <div class="col-xs-12 col-sm-6 col-md-4 q-pa-sm">
         <BallisticCalculatorCard
           flat
@@ -22,5 +27,6 @@
 <script setup>
 import MaximumPointBlankRangeCard from 'components/calculator/list-calculators/MaximumPointBlankRangeCard.vue'
 import BallisticCalculatorCard from 'components/calculator/list-calculators/BallisticCalculatorCard.vue'
+import ProfileSelector from 'components/calculator/ballistic/ProfileSelector.vue'
 
 </script>

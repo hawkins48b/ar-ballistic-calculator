@@ -13,6 +13,19 @@ export const useProfilesStore = defineStore('profiles', {
 
     profilebyId: (state) => (id) => {
       return state.profilesArray.find(profile => profile.id === id)
+    },
+
+    profileLabel: (state) => (id) => {
+      const profile = state.profilebyId(id)
+      let label = ''
+      if (profile) {
+        label = profile.weapon.name + ' with ' +
+                profile.optic.model + ' - ' +
+                profile.bullet.brand + ' ' +
+                profile.bullet.diameter
+      }
+
+      return label
     }
   },
   actions: {

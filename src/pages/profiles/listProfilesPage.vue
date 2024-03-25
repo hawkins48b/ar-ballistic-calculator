@@ -26,9 +26,9 @@
         class="col-xs-12 col-md-4 q-pa-sm"
       >
         <ProfileCard
-          :id="profile.id"
           :profile="profile"
           removable
+          :actions="['edit','duplicate','remove']"
         />
       </div>
     </div>

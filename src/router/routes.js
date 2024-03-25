@@ -10,8 +10,9 @@ const routes = [
         path: 'profiles',
         component: () => import('pages/ProfilesPage.vue'),
         children: [
-          { path: '', component: () => import('pages/profiles/IndexPage.vue') },
-          { path: 'add', component: () => import('pages/profiles/AddProfilePage.vue') }
+          { path: '', component: () => import('pages/profiles/ListProfilesPage.vue') },
+          { path: 'add', component: () => import('pages/profiles/AddProfilePage.vue') },
+          { path: 'edit', component: () => import('pages/profiles/EditProfilePage.vue') }
         ]
       },
       {

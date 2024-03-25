@@ -8,7 +8,7 @@
       Rifle
     </div>
     <q-input
-      v-model="localProfile.rifle"
+      v-model="localProfile.weapon.name"
       label="Weapon designation"
       filled
       type="text"

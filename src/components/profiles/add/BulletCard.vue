@@ -8,8 +8,8 @@
       Ammo
     </div>
     <q-input
-      v-model="localProfile.bulletName"
-      label="Bullet name"
+      v-model="localProfile.bullet.brand"
+      label="Bullet brand"
       filled
       type="text"
       lazy-rules
@@ -19,7 +19,7 @@
     />
 
     <q-input
-      v-model="localProfile.bulletDiameter"
+      v-model="localProfile.bullet.diameter"
       label="Bullet diameter"
       filled
       step="any"
@@ -27,14 +27,14 @@
       lazy-rules
       :rules="[
         val => val && val > 0 || 'Bullet diameter must be positive',
-        val => val && val < 13 || val + ' ' + localProfile.bulletDiameterUnit +' is a big bullet, are you missing a comma ?'
+        val => val && val < 13 || val + ' ' + localProfile.bullet.diameterUnit +' is a big bullet, are you missing a comma ?'
       ]"
       class="q-mt-md"
       hint="e.g .233 inch or 5.56 mm"
     >
       <template #append>
         <q-btn-toggle
-          v-model="localProfile.bulletDiameterUnit"
+          v-model="localProfile.bullet.diameterUnit"
           no-caps
           :options="[
             {label: 'IN', value: 'IN'},
@@ -45,7 +45,7 @@
     </q-input>
 
     <q-input
-      v-model="localProfile.bulletWeight"
+      v-model="localProfile.bullet.weight"
       label="Bullet weight"
       filled
       step="any"
@@ -56,7 +56,7 @@
     >
       <template #append>
         <q-btn-toggle
-          v-model="localProfile.bulletWeightUnit"
+          v-model="localProfile.bullet.weightUnit"
           no-caps
           :options="[
             {label: 'GR', value: 'GR'},
@@ -66,7 +66,7 @@
       </template>
     </q-input>
     <q-input
-      v-model="localProfile.bulletVelocity"
+      v-model="localProfile.bullet.velocity"
       label="Velocity"
       filled
       step="any"
@@ -77,7 +77,7 @@
     >
       <template #append>
         <q-btn-toggle
-          v-model="localProfile.bulletVelocityUnit"
+          v-model="localProfile.bullet.velocityUnit"
           no-caps
           :options="[
             {label: 'FPS', value: 'FPS'},
@@ -87,7 +87,7 @@
       </template>
     </q-input>
     <q-input
-      v-model="localProfile.bulletBallisticCoefficient"
+      v-model="localProfile.bullet.ballisticCoefficient"
       label="Ballistic coefficient"
       filled
       step="any"
@@ -98,7 +98,7 @@
     >
       <template #append>
         <q-btn-toggle
-          v-model="localProfile.bulletBallisticCoefficientProfile"
+          v-model="localProfile.bullet.ballisticCoefficientProfile"
           no-caps
           :options="[
             {label: 'G1', value: 'G1'},

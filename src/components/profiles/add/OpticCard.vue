@@ -8,7 +8,7 @@
       Optic
     </div>
     <q-input
-      v-model="localProfile.optic"
+      v-model="localProfile.optic.model"
       label="Optic name"
       filled
       type="text"
@@ -18,7 +18,7 @@
       hint="e.g Trijicon ACOG TA31"
     />
     <q-input
-      v-model="localProfile.opticHeight"
+      v-model="localProfile.optic.height"
       label="Optic height"
       filled
       type="number"
@@ -30,7 +30,7 @@
     >
       <template #append>
         <q-btn-toggle
-          v-model="localProfile.opticHeightUnit"
+          v-model="localProfile.optic.heightUnit"
           no-caps
           :options="[
             {label: 'IN', value: 'IN'},

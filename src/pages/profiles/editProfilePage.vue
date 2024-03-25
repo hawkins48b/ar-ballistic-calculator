@@ -1,7 +1,7 @@
 <template>
-  <q-page padding>
+  <div>
     <!-- content -->
-  </q-page>
+  </div>
 </template>
 
 <script>

@@ -3,9 +3,9 @@
 </template>
 
 <script setup>
-
+// imports
 import { watch } from 'vue'
-import { useSettingsStore } from './stores/settings'
+import { useSettingsStore } from 'stores/settings'
 import { useQuasar } from 'quasar'
 import { storeToRefs } from 'pinia'
 

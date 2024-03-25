@@ -19,7 +19,7 @@ const routes = [
         path: 'calculator',
         component: () => import('pages/CalculatorPage.vue'),
         children: [
-          { path: '', component: () => import('pages/calculator/IndexPage.vue') },
+          { path: '', component: () => import('pages/calculator/ListCalculatorsPage.vue') },
           { path: 'bc-results', component: () => import('pages/calculator/BallisticCalculatorResultsPage.vue') }
         ]
       },

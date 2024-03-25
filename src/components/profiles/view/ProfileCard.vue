@@ -17,11 +17,11 @@
           >
             <q-list>
               <q-item clickable>
-                <q-item-section>Edit Profile</q-item-section>
+                <q-item-section>Edit</q-item-section>
               </q-item>
               <q-item clickable>
                 <q-item-section @click="duplicate">
-                  Duplicate Profile
+                  Duplicate
                 </q-item-section>
               </q-item>
               <q-item clickable>

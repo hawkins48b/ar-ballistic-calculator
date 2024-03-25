@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { toRaw } from 'vue'
 
 export const useProfilesStore = defineStore('profiles', {
   state: () => ({
@@ -37,7 +38,7 @@ export const useProfilesStore = defineStore('profiles', {
     },
     duplicateProfile (index) {
       // Object to duplicate
-      const ProfileToDuplicate = this.profilesArray[index]
+      const ProfileToDuplicate = toRaw(this.profilesArray[index])
 
       // Using spread operator to duplicate the object
       const duplicatedProfile = { ...ProfileToDuplicate }

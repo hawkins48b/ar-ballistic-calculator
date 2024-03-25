@@ -3,14 +3,6 @@
     :class="{'bg-grey-3':!$q.dark.isActive}"
     flat
   >
-    <div class="row justify-end">
-      <div class="col-auto">
-        <ProfileEditButton
-          :profile="profile"
-          :actions="actions"
-        />
-      </div>
-    </div>
     <div class="row">
       <div class="col">
         <q-list>
@@ -79,6 +71,12 @@
             </q-item-section>
           </q-item>
         </q-list>
+      </div>
+      <div class="col-auto">
+        <ProfileEditButton
+          :profile="profile"
+          :actions="actions"
+        />
       </div>
     </div>
   </q-card>

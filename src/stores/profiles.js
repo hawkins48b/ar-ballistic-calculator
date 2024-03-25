@@ -1,53 +1,53 @@
 import { defineStore } from 'pinia'
-import { toRaw } from 'vue'
 
 export const useProfilesStore = defineStore('profiles', {
   state: () => ({
-    profilesArray: []
+    profilesArray: [],
+    nextId: 1
   }),
 
   getters: {
-    /*
-    name (index) {
-      const profile = this.profilesArray[index]
+    profiles: (state) => {
+      return state.profilesArray
+    },
 
-      return profile.weapon.name || ' ' ||
-             profile.optic.model || ' - ' ||
-             profile.bullet.brand || ' ' ||
-             profile.bullet.diameter || ' ' ||
-             profile.bullet.weight || ', ' ||
-             profile.bullet.weightUnit
-    },
-    */
-    profiles () {
-      return this.profilesArray
-    },
-    profile (index) {
-      return this.profilesArray[index]
+    profilebyId: (state) => (id) => {
+      return state.profilesArray.find(profile => profile.id === id)
     }
   },
   actions: {
-    insertProfile (newProfile) {
+    addProfile (newProfile) {
+      // set unique Id
+      newProfile.id = this.nextId
+      // increment next Id
+      this.nextId++
+
       this.profilesArray.push(newProfile)
     },
-    removeProfile (index) {
-      this.profilesArray.splice(index, 1)
+    removeProfile (id) {
+      const index = this.profilesArray.findIndex(profile => profile.id === id)
+      if (index !== -1) {
+        this.profilesArray.splice(index, 1)
+      }
     },
-    editProfile (index, editedProfile) {
-      this.profilesArray[index] = editedProfile
+    updateProfile (updatedProfile) {
+      const index = this.profilesArray.findIndex(profile => profile.id === updatedProfile.id)
+      if (index !== -1) {
+        this.profilesArray[index] = updatedProfile
+      }
     },
-    duplicateProfile (index) {
-      // Object to duplicate
-      const ProfileToDuplicate = toRaw(this.profilesArray[index])
+    duplicateProfile (id) {
+      const profileToDuplicate = this.profilebyId(id)
+      if (profileToDuplicate) {
+        const duplicatedProfile = JSON.parse(JSON.stringify(profileToDuplicate))
+        duplicatedProfile.id = this.nextId
+        this.nextId++
 
-      // Using spread operator to duplicate the object
-      const duplicatedProfile = { ...ProfileToDuplicate }
+        // add - Copy suffix
+        duplicatedProfile.weapon.name += ' - Copy'
 
-      // Change weapon name with - Copy suffix
-      duplicatedProfile.weapon.name += ' - Copy'
-
-      // Inserting duplicated object at specific index
-      this.profilesArray.splice(index + 1, 0, duplicatedProfile)
+        this.profilesArray.push(duplicatedProfile)
+      }
     }
   },
   persist: true

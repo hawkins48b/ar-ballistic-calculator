@@ -19,10 +19,10 @@
       <div class="q-pl-sm q-mt-md">
         <q-btn
           color="primary"
-          icon="add"
+          :icon="submitIcon"
           type="submit"
         >
-          Add
+          {{ submitText }}
         </q-btn>
       </div>
     </div>
@@ -38,11 +38,22 @@ import { defineEmits } from 'vue'
 
 // props
 const {
-  profile
+  profile,
+  submitText,
+  submitIcon
 } = defineProps({
   profile: {
     type: Object,
     required: true
+  },
+  submitText: {
+    type: String,
+    required: true
+  },
+  submitIcon: {
+    type: String,
+    required: false,
+    default: 'add'
   }
 })
 

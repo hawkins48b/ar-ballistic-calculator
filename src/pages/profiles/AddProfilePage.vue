@@ -14,6 +14,7 @@
   </div>
   <ProfileForm
     :profile="profile"
+    submit-text="Add"
     @submit="addProfile"
   />
 </template>
@@ -37,7 +38,7 @@ const profile = reactive(profileModel())
 
 // add profile
 const addProfile = (newProfile) => {
-  profilesStore.insertProfile(newProfile)
+  profilesStore.addProfile(newProfile)
   // go back to profile list
   router.push('/profiles')
 }

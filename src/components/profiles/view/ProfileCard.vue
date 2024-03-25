@@ -12,19 +12,49 @@
           icon="more_vert"
         >
           <q-menu
-            cover
             auto-close
+            cover
           >
             <q-list>
-              <q-item clickable>
+              <q-item
+                clickable
+                :to="`profiles/edit/${profile.id}`"
+              >
+                <q-item-section
+                  avatar
+                  side
+                >
+                  <q-icon
+                    name="edit"
+                  />
+                </q-item-section>
                 <q-item-section>Edit</q-item-section>
               </q-item>
               <q-item clickable>
+                <q-item-section
+                  avatar
+                  side
+                >
+                  <q-icon
+                    name="content_copy"
+                  />
+                </q-item-section>
                 <q-item-section @click="duplicate">
                   Duplicate
                 </q-item-section>
               </q-item>
-              <q-item clickable>
+              <q-item
+                clickable
+              >
+                <q-item-section
+                  avatar
+                  side
+                >
+                  <q-icon
+                    color="red"
+                    name="delete"
+                  />
+                </q-item-section>
                 <q-item-section
                   class="text-red"
                   @click="removeProfile"
@@ -121,13 +151,13 @@ const $q = useQuasar()
 // props
 const {
   profile,
-  index
+  id
 } = defineProps({
   profile: {
     type: Object,
     required: true
   },
-  index: {
+  id: {
     type: Number,
     required: true
   }
@@ -143,13 +173,13 @@ const removeProfile = () => {
     message: 'Are you sure you want to remove this profile ?',
     cancel: true
   }).onOk(() => {
-    profilesStore.removeProfile(index)
+    profilesStore.removeProfile(id)
   })
 }
 
 // duplicate profile feature
 const duplicate = () => {
-  profilesStore.duplicateProfile(index)
+  profilesStore.duplicateProfile(id)
 }
 
 </script>

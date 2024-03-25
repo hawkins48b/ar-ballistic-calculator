@@ -21,13 +21,13 @@
     </div>
     <div class="row">
       <div
-        v-for="(profile, index) in profiles"
-        :key="index"
+        v-for="(profile) in profiles"
+        :key="profile.id"
         class="col-xs-12 col-md-4 q-pa-sm"
       >
         <ProfileCard
+          :id="profile.id"
           :profile="profile"
-          :index="index"
           removable
         />
       </div>

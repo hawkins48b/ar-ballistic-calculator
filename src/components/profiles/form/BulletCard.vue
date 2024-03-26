@@ -53,6 +53,7 @@
       lazy-rules
       :rules="[ val => val && val > 0 || 'Bullet weight must be positive']"
       class="q-mt-md"
+      hint="e.g 55gr"
     >
       <template #append>
         <q-btn-toggle
@@ -74,6 +75,7 @@
       lazy-rules
       :rules="[ val => val && val > 0 || 'Velocity must be positive']"
       class="q-mt-md"
+      hint="e.g 2700 FPS"
     >
       <template #append>
         <q-btn-toggle
@@ -95,6 +97,7 @@
       lazy-rules
       :rules="[ val => val && val > 0 || 'Ballistic coefficient must be positive']"
       class="q-mt-md"
+      hint="e.g 0.290 G1"
     >
       <template #append>
         <q-btn-toggle

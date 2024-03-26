@@ -15,27 +15,8 @@ export const useCalculatorStore = defineStore('calculator', {
   }),
 
   getters: {
-    getProfileId (state) {
-      return state.profileId
-    },
-    getZero (state) {
-      return state.zero
-    },
-    getRange (state) {
-      return state.range
-    }
   },
-
   actions: {
-    setProfileId (newProfileId) {
-      this.profileId = newProfileId
-    },
-    setZero (newZero) {
-      this.zero = newZero
-    },
-    setRange (newRange) {
-      this.range = newRange
-    }
   },
   persist: true
 })

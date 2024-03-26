@@ -60,14 +60,14 @@ profiles.value.forEach(profile => {
 const calculatorStore = useCalculatorStore()
 
 // set selected option by default
-if (calculatorStore.getProfileId) {
-  profileOption.value = profileOptions.value.find(profile => profile.value === calculatorStore.getProfileId)
+if (calculatorStore.profileId) {
+  profileOption.value = profileOptions.value.find(profile => profile.value === calculatorStore.profileId)
 }
 
 // update calculator profile if option changes
 watch(profileOption, (newProfileOption) => {
   if (newProfileOption) {
-    calculatorStore.setProfileId(newProfileOption.value)
+    calculatorStore.profileId = newProfileOption.value
   }
 })
 

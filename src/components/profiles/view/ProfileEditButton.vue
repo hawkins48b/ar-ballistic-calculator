@@ -13,7 +13,7 @@
         <q-item
           v-if="actions.includes('edit')"
           clickable
-          :to="`profiles/edit/${profile.id}`"
+          :to="`/profiles/edit/${profile.id}`"
         >
           <q-item-section
             avatar
@@ -73,7 +73,6 @@ import { useQuasar } from 'quasar'
 import { useRouter } from 'vue-router'
 
 const $q = useQuasar()
-
 // props
 const {
   profile,
@@ -90,9 +89,6 @@ const {
   }
 })
 
-console.log('actions', actions)
-console.log('actions.indexOf(edit)', actions.indexOf('edit'))
-
 // profiles store
 const profilesStore = useProfilesStore()
 
@@ -107,13 +103,13 @@ const removeProfile = () => {
     cancel: true
   }).onOk(() => {
     profilesStore.removeProfile(profile.id)
-    router.push('profiles/')
+    router.push('/profiles')
   })
 }
 
 // duplicate profile feature
 const duplicateProfile = () => {
   profilesStore.duplicateProfile(profile.id)
-  router.push('profiles/')
+  router.push('/profiles')
 }
 </script>

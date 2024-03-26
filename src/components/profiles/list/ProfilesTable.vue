@@ -19,7 +19,7 @@
         to="/profiles/add"
         style="top:-15px"
       >
-        Add
+        Add new
       </q-btn>
     </template>
     <template #top-right>
@@ -128,7 +128,7 @@
               class="col-auto"
             >
               <ProfileEditButton
-                :profile="props.row"
+                :profile-id="props.row.id"
                 :actions="profileActions"
               />
             </div>

@@ -20,6 +20,7 @@
           <div>
             <q-toggle
               v-model="showAthmospheric"
+              disable
             >
               Athmospheric conditions
             </q-toggle>
@@ -27,6 +28,7 @@
           <div>
             <q-toggle
               v-model="showWindage"
+              disable
             >
               Windage
             </q-toggle>
@@ -34,6 +36,7 @@
           <div>
             <q-toggle
               v-model="showSpeedGraph"
+              disable
             >
               Speed graph
             </q-toggle>

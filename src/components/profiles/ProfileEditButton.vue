@@ -13,7 +13,7 @@
         <q-item
           v-if="actions.includes('edit')"
           clickable
-          :to="`/profiles/edit/${profile.id}`"
+          :to="`/profiles/edit/${profileId}`"
         >
           <q-item-section
             avatar
@@ -37,7 +37,7 @@
               name="content_copy"
             />
           </q-item-section>
-          <q-item-section @click="duplicateProfile">
+          <q-item-section @click="duplicateProfile(profileId)">
             Duplicate
           </q-item-section>
         </q-item>
@@ -56,7 +56,7 @@
           </q-item-section>
           <q-item-section
             class="text-red"
-            @click="removeProfile"
+            @click="removeProfile(profileId)"
           >
             Delete
           </q-item-section>
@@ -75,11 +75,11 @@ import { useRouter } from 'vue-router'
 const $q = useQuasar()
 // props
 const {
-  profile,
+  profileId,
   actions
 } = defineProps({
-  profile: {
-    type: Object,
+  profileId: {
+    type: Number,
     required: true
   },
   actions: {
@@ -96,20 +96,21 @@ const profilesStore = useProfilesStore()
 const router = useRouter()
 
 // remove profile feature
-const removeProfile = () => {
+const removeProfile = (id) => {
   $q.dialog({
     title: 'Confirm',
     message: 'Are you sure you want to remove this profile ?',
     cancel: true
   }).onOk(() => {
-    profilesStore.removeProfile(profile.id)
+    console.log('request removeProfile with ID', id)
+    profilesStore.removeProfile(id)
     router.push('/profiles')
   })
 }
 
 // duplicate profile feature
-const duplicateProfile = () => {
-  profilesStore.duplicateProfile(profile.id)
+const duplicateProfile = (id) => {
+  profilesStore.duplicateProfile(id)
   router.push('/profiles')
 }
 </script>

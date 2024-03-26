@@ -38,6 +38,7 @@ export const useProfilesStore = defineStore('profiles', {
       this.profilesArray.push(newProfile)
     },
     removeProfile (id) {
+      console.log('remove profile with id', id)
       const index = this.profilesArray.findIndex(profile => profile.id === id)
       if (index !== -1) {
         this.profilesArray.splice(index, 1)

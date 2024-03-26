@@ -9,6 +9,9 @@
           Back
         </q-btn>
       </div>
+      <div class="col-auto q-pa-sm text-h6">
+        Edit Profile
+      </div>
     </div>
     <!-- content -->
     <ProfileForm

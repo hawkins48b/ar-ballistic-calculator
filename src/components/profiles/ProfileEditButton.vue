@@ -68,7 +68,6 @@
 
 <script setup>
 import { useProfilesStore } from 'stores/profiles'
-import { defineProps } from 'vue'
 import { useQuasar } from 'quasar'
 import { useRouter } from 'vue-router'
 

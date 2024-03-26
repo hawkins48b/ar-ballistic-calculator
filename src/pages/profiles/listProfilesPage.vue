@@ -1,43 +1,21 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-xs-12 col-md-4 q-pa-sm">
-        <q-card
-          flat
-          class="q-pa-md"
-          :class="{'bg-grey-3':!$q.dark.isActive}"
-        >
-          <p>Manage your bullet profiles.</p>
-          <q-btn
-            icon="add"
-            class="q-mt-sm"
-            color="primary"
-            to="/profiles/add"
-          >
-            Add new profile
-          </q-btn>
-        </q-card>
-      </div>
+      <div class="col-auto" />
     </div>
     <div class="row">
-      <div
-        v-for="(profile) in profiles"
-        :key="profile.id"
-        class="col-xs-12 col-md-4 q-pa-sm"
-      >
-        <ProfileCard
-          :profile="profile"
-          removable
-          :actions="['edit','duplicate','remove']"
-        />
-      </div>
+      <profilesTable
+        class="col"
+        :profiles="profiles"
+        :profile-actions="['edit','duplicate','remove']"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
 // imports
-import ProfileCard from 'components/profiles/view/ProfileCard.vue'
+import ProfilesTable from 'components/profiles/list/ProfilesTable.vue'
 import { useProfilesStore } from 'stores/profiles'
 import { storeToRefs } from 'pinia'
 

@@ -18,42 +18,7 @@
       </div>
 
       <div class="col-auto q-pr-md">
-        <q-btn-dropdown
-          color="primary"
-          label="Options"
-        >
-          <q-list>
-            <q-item
-              v-close-popup
-              clickable
-            >
-              <q-item-section>
-                <q-toggle />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>Multiple trajectories</q-item-label>
-              </q-item-section>
-            </q-item>
-
-            <q-item
-              v-close-popup
-              clickable
-            >
-              <q-item-section>
-                <q-item-label>Videos</q-item-label>
-              </q-item-section>
-            </q-item>
-
-            <q-item
-              v-close-popup
-              clickable
-            >
-              <q-item-section>
-                <q-item-label>Articles</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-btn-dropdown>
+        <OptionButton />
       </div>
     </div>
     <!-- Profiles -->
@@ -80,6 +45,7 @@
 
 <script setup>
 // imports
+import OptionButton from 'components/calculator/ballistic/OptionButton.vue'
 import ProfileCard from 'components/profiles/view/ProfileCard.vue'
 import RangeCard from 'components/calculator/ballistic/RangeCard.vue'
 

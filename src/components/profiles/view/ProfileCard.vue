@@ -84,8 +84,7 @@
 
 <script setup>
 // imports
-import ProfileEditButton from 'components/profiles/view/ProfileEditButton.vue'
-import { defineProps } from 'vue'
+import ProfileEditButton from 'components/profiles/ProfileEditButton.vue'
 import { useQuasar } from 'quasar'
 
 const $q = useQuasar()

@@ -48,7 +48,7 @@ const {
   },
   submitText: {
     type: String,
-    required: true,
+    required: false,
     default: 'Add'
   },
   submitIcon: {

@@ -1,5 +1,15 @@
 <template>
   <div>
+    <div class="row">
+      <div class="col-auto q-pa-sm">
+        <q-btn
+          to="/profiles"
+          outline
+        >
+          Back
+        </q-btn>
+      </div>
+    </div>
     <!-- content -->
     <ProfileForm
       :profile="profile"

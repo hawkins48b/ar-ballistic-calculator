@@ -68,7 +68,6 @@
       color="primary"
       class="q-mt-md"
       type="submit"
-      :disable="!calculatorStore.profileId"
     >
       Calculate
     </q-btn>
@@ -80,15 +79,28 @@
 import { useCalculatorStore } from 'stores/calculator'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
+import { useQuasar } from 'quasar'
+import { computed } from 'vue'
+
+const $q = useQuasar()
 
 const router = useRouter()
 
 // set calculation profile
 const calculatorStore = useCalculatorStore()
 const { range, zero } = storeToRefs(calculatorStore)
+const profileId = computed(() => calculatorStore.profileId)
+console.log('profileId', profileId.value)
 
 // calculate event
 const calculate = () => {
-  router.push('/calculator/ballistic')
+  if (profileId.value === null) {
+    $q.dialog({
+      title: 'No profile selected',
+      message: 'You must select a profile for the ballistic calculator'
+    })
+  } else {
+    router.push('/calculator/ballistic')
+  }
 }
 </script>

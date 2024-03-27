@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 export const useProfilesStore = defineStore('profiles', {
   state: () => ({
     profilesArray: [{
-      id: 0,
+      id: 1,
       weapon: {
         name: 'Example weapon'
       },
@@ -24,7 +24,7 @@ export const useProfilesStore = defineStore('profiles', {
         velocityUnit: 'FPS'
       }
     }],
-    nextId: 1
+    nextId: 2
   }),
 
   getters: {

@@ -41,7 +41,7 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useCalculatorStore } from 'stores/calculator'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 // calculator store
 const calculatorStore = useCalculatorStore()
@@ -53,5 +53,15 @@ const {
 
 // dialog open/close
 const dialog = ref(false)
+
+// if we hide atmospheric conditions, use International Standard Atmosphere ISA
+watch(
+  () => options.value.showAtmospheric,
+  (newValue) => {
+    if (!newValue) {
+      calculatorStore.atmosphere.useISA = true
+    }
+  }
+)
 
 </script>

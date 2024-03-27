@@ -8,6 +8,7 @@
       Elevation Chart
     </p>
     <apexchart
+      ref="chart"
       type="line"
       :options="options"
       :series="series"
@@ -20,10 +21,15 @@
 // imports
 import { useCalculatorStore } from 'stores/calculator'
 import * as BC from 'js-ballistics'
-import { computed } from 'vue'
+import { ref, computed, reactive, watch } from 'vue'
 import { colors, useQuasar } from 'quasar'
 
+// the chart ref
+const chart = ref(null)
+
+// quasar $q
 const $q = useQuasar()
+
 // chart options
 const options = {
   chart: {
@@ -64,56 +70,74 @@ const options = {
 
 // calculate trajectory
 const calculatorStore = useCalculatorStore()
-const results = calculatorStore.calculateTrajectory
+const results = computed(() => calculatorStore.calculateTrajectory)
+// Chart series data
+let series = reactive([])
 
-// build serie
-const data = []
-let serieName
-let xAxisTitle
-let yAxisTitle
+const buildSeries = () => {
+  const data = []
+  let serieName
+  let xAxisTitle
+  let yAxisTitle
 
-const range = computed(() => calculatorStore.range)
+  const range = computed(() => calculatorStore.range)
 
-for (const trajectory of results._trajectory) {
-  if (range.value.unit === 'YD') {
-    let elevation = trajectory.drop.In(BC.Unit.Inch)
-    elevation = Math.round(elevation * 10) / 10
+  for (const trajectory of results.value._trajectory) {
+    if (range.value.unit === 'YD') {
+      let elevation = trajectory.drop.In(BC.Unit.Inch)
+      elevation = Math.round(elevation * 10) / 10
 
-    let distance = trajectory.distance.In(BC.Unit.Yard)
-    distance = Math.round(distance)
-    data.push({
-      x: distance,
-      y: elevation
-    })
-    // labels
-    serieName = 'Elevation (IN)'
-    xAxisTitle = 'RANGE (YD)'
-    yAxisTitle = 'ELEVATION (IN)'
+      let distance = trajectory.distance.In(BC.Unit.Yard)
+      distance = Math.round(distance)
+      data.push({
+        x: distance,
+        y: elevation
+      })
+      // labels
+      serieName = 'Elevation (IN)'
+      xAxisTitle = 'RANGE (YD)'
+      yAxisTitle = 'ELEVATION (IN)'
+    }
+    if (range.value.unit === 'M') {
+      let elevation = trajectory.drop.In(BC.Unit.Centimeter)
+      elevation = Math.round(elevation * 10) / 10
+
+      let distance = trajectory.distance.In(BC.Unit.Meter)
+      distance = Math.round(distance)
+      data.push({
+        x: distance,
+        y: elevation
+      })
+      // labels
+      serieName = 'Elevation (CM)'
+      xAxisTitle = 'RANGE (M)'
+      yAxisTitle = 'ELEVATION (CM)'
+    }
   }
-  if (range.value.unit === 'M') {
-    let elevation = trajectory.drop.In(BC.Unit.Centimeter)
-    elevation = Math.round(elevation * 10) / 10
 
-    let distance = trajectory.distance.In(BC.Unit.Meter)
-    distance = Math.round(distance)
-    data.push({
-      x: distance,
-      y: elevation
-    })
-    // labels
-    serieName = 'Elevation (CM)'
-    xAxisTitle = 'RANGE (M)'
-    yAxisTitle = 'ELEVATION (CM)'
+  // set correct legend
+  options.xaxis.title.text = xAxisTitle
+  options.yaxis.title.text = yAxisTitle
+
+  // renew the data
+  series = [{
+    name: serieName,
+    data
+  }]
+
+  if (chart.value) { // chart may be null if not mounted
+    chart.value.updateSeries(series)
   }
 }
 
-const series = [{
-  name: serieName,
-  data
-}]
-
-// set correct legend
-options.xaxis.title.text = xAxisTitle
-options.yaxis.title.text = yAxisTitle
-
+watch(
+  () => results,
+  () => {
+    buildSeries()
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
 </script>

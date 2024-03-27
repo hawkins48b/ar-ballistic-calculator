@@ -5,6 +5,15 @@ import { reactive } from 'vue'
 import * as BC from 'js-ballistics'
 import Calculator from 'js-ballistics'
 
+// International Standard Atmosphere ISA
+const ISA_ALTITUDE = 0
+const ISA_ALTITUDE_UNIT = 'FT'
+const ISA_PRESSURE = 29.92
+const ISA_PRESSURE_UNIT = 'IN/HG'
+const ISA_TEMPERATURE = 59
+const ISA_TEMPERATURE_UNIT = '°F'
+const ISA_HUMIDITY = 78
+
 export const useCalculatorStore = defineStore('calculator', {
   state: () => ({
     profileId: null,
@@ -19,13 +28,13 @@ export const useCalculatorStore = defineStore('calculator', {
     },
     atmosphere: {
       useISA: true,
-      altitude: 0,
-      altitudeUnit: 'FT',
-      pressure: 29.92,
-      pressureUnit: 'IN/HG',
-      temperature: 59,
-      temperatureUnit: '°F',
-      humidity: 79
+      altitude: ISA_ALTITUDE,
+      altitudeUnit: ISA_ALTITUDE_UNIT,
+      pressure: ISA_PRESSURE,
+      pressureUnit: ISA_PRESSURE_UNIT,
+      temperature: ISA_TEMPERATURE,
+      temperatureUnit: ISA_TEMPERATURE_UNIT,
+      humidity: ISA_HUMIDITY
     },
     options: {
       showAtmospheric: false,
@@ -113,24 +122,69 @@ export const useCalculatorStore = defineStore('calculator', {
           rangeStep = BC.UNew.Meter(parseFloat(state.range.step))
         }
 
+        // atmosphere
+        let altitude
+        if (state.atmosphere.altitudeUnit === 'FT') {
+          altitude = BC.UNew.Foot(parseFloat(state.atmosphere.altitude))
+        }
+        if (state.atmosphere.altitudeUnit === 'M') {
+          altitude = BC.UNew.Meter(parseFloat(state.atmosphere.altitude))
+        }
+
+        let pressure
+        if (state.atmosphere.pressureUnit === 'IN/HG') {
+          pressure = BC.UNew.InHg(parseFloat(state.atmosphere.pressure))
+        }
+        if (state.atmosphere.pressureUnit === 'HPA') {
+          pressure = BC.UNew.hPa(parseFloat(state.atmosphere.pressure))
+        }
+
+        let temperature
+        if (state.atmosphere.temperatureUnit === '°F') {
+          temperature = BC.UNew.Fahrenheit(parseFloat(state.atmosphere.temperature))
+        }
+        if (state.atmosphere.temperatureUnit === '°C') {
+          temperature = BC.UNew.Celsius(parseFloat(state.atmosphere.temperature))
+        }
+
+        const humidity = parseFloat(state.atmosphere.humidity) / 100
+
+        const atmo = new BC.Atmo(altitude, pressure, temperature, humidity)
         // set parameters
         const velocitydistance = BC.UNew.Inch(2) // default value
 
         const ammo = new BC.Ammo(dragModel, velocitydistance, bulletVelocity)
-        const atmo = new BC.Atmo() // default atmospheric
 
         // fire shot
-        const shot = new BC.Shot(maxRange)
+        /*
+        constructor(
+        maxRange: (number | Distance) = UNew.Yard(1000),
+        zeroAngle: (number | Angular) = UNew.Degree(0),
+        relativeAngle: (number | Angular) = UNew.Degree(0),
+        cantAngle: (number | Angular) = UNew.Degree(0),
+        atmo: Atmo = Atmo.icao(),
+        winds: Wind[] = [new Wind()]
+        )
+        */
+        const shot = new BC.Shot(maxRange, BC.UNew.Degree(0), BC.UNew.Degree(0), BC.UNew.Degree(0), atmo)
 
         // calculate
         const calculator = new Calculator(weapon, ammo, atmo)
         results = calculator.fire(shot, rangeStep)
       }
-
       return results
     }
   },
   actions: {
+    setISA () {
+      this.atmosphere.altitude = ISA_ALTITUDE
+      this.atmosphere.altitudeUnit = ISA_ALTITUDE_UNIT
+      this.atmosphere.pressure = ISA_PRESSURE
+      this.atmosphere.pressureUnit = ISA_PRESSURE_UNIT
+      this.atmosphere.temperature = ISA_TEMPERATURE
+      this.atmosphere.temperatureUnit = ISA_TEMPERATURE_UNIT
+      this.atmosphere.humidity = ISA_HUMIDITY
+    }
   },
   persist: true
 })

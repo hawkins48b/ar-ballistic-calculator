@@ -6,7 +6,7 @@
   >
     <q-table
       flat
-      :rows="rows"
+      :rows="rows._trajectory"
       :columns="columns"
       :visible-columns="visibleColumns"
       row-key="distance"
@@ -148,8 +148,7 @@ import { ref, computed } from 'vue'
 
 // calculate trajectory
 const calculatorStore = useCalculatorStore()
-const results = calculatorStore.calculateTrajectory
-const rows = results._trajectory
+const rows = computed(() => calculatorStore.calculateTrajectory)
 
 // set qtable properties
 const columns = [

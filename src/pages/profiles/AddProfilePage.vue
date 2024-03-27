@@ -14,14 +14,13 @@
   </div>
   <ProfileForm
     :profile="profile"
-    submit-text="Add"
     @submit="addProfile"
   />
 </template>
 
 <script setup>
 // imports
-import ProfileForm from 'components/profiles/ProfileForm.vue'
+import ProfileForm from 'components/profiles/form/ProfileForm.vue'
 import { useProfilesStore } from 'stores/profiles'
 import { useRouter } from 'vue-router'
 import { reactive } from 'vue'

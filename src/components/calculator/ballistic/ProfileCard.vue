@@ -1,72 +1,12 @@
 <template>
   <q-card
-    :class="{'bg-grey-3':!$q.dark.isActive}"
     flat
+    :class="{'bg-grey-3':!$q.dark.isActive}"
+    class="q-pa-md"
   >
-    <div class="row justify-end">
-      <div class="col-auto">
-        <q-btn
-          color="grey-7"
-          round
-          flat
-          icon="more_vert"
-        >
-          <q-menu
-            auto-close
-            cover
-          >
-            <q-list>
-              <q-item
-                clickable
-                :to="`profiles/edit/${profile.id}`"
-              >
-                <q-item-section
-                  avatar
-                  side
-                >
-                  <q-icon
-                    name="edit"
-                  />
-                </q-item-section>
-                <q-item-section>Edit</q-item-section>
-              </q-item>
-              <q-item clickable>
-                <q-item-section
-                  avatar
-                  side
-                >
-                  <q-icon
-                    name="content_copy"
-                  />
-                </q-item-section>
-                <q-item-section @click="duplicate">
-                  Duplicate
-                </q-item-section>
-              </q-item>
-              <q-item
-                clickable
-              >
-                <q-item-section
-                  avatar
-                  side
-                >
-                  <q-icon
-                    color="red"
-                    name="delete"
-                  />
-                </q-item-section>
-                <q-item-section
-                  class="text-red"
-                  @click="removeProfile"
-                >
-                  Delete
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-menu>
-        </q-btn>
-      </div>
-    </div>
+    <p class="text-h6">
+      Profile
+    </p>
     <div class="row">
       <div class="col">
         <q-list>
@@ -142,44 +82,15 @@
 
 <script setup>
 // imports
+import { useCalculatorStore } from 'stores/calculator'
 import { useProfilesStore } from 'stores/profiles'
-import { defineProps } from 'vue'
-import { useQuasar } from 'quasar'
+import { storeToRefs } from 'pinia'
+import { reactive } from 'vue'
 
-const $q = useQuasar()
-
-// props
-const {
-  profile,
-  id
-} = defineProps({
-  profile: {
-    type: Object,
-    required: true
-  },
-  id: {
-    type: Number,
-    required: true
-  }
-})
-
-// profiles store
+// get profile
+const calculatorStore = useCalculatorStore()
 const profilesStore = useProfilesStore()
-
-// remove profile feature
-const removeProfile = () => {
-  $q.dialog({
-    title: 'Confirm',
-    message: 'Are you sure you want to remove this profile ?',
-    cancel: true
-  }).onOk(() => {
-    profilesStore.removeProfile(id)
-  })
-}
-
-// duplicate profile feature
-const duplicate = () => {
-  profilesStore.duplicateProfile(id)
-}
+const { profileId } = storeToRefs(calculatorStore)
+const profile = reactive(profilesStore.profilebyId(profileId.value))
 
 </script>

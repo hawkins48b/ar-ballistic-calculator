@@ -1,5 +1,18 @@
 <template>
   <div>
+    <div class="row">
+      <div class="col-auto q-pa-sm">
+        <q-btn
+          to="/profiles"
+          outline
+        >
+          Back
+        </q-btn>
+      </div>
+      <div class="col-auto q-pa-sm text-h6">
+        Edit Profile
+      </div>
+    </div>
     <!-- content -->
     <ProfileForm
       :profile="profile"
@@ -12,7 +25,7 @@
 
 <script setup>
 // imports
-import ProfileForm from 'components/profiles/ProfileForm.vue'
+import ProfileForm from 'components/profiles/form/ProfileForm.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useProfilesStore } from 'stores/profiles'
 import { reactive } from 'vue'

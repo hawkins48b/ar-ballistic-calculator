@@ -2,7 +2,28 @@ import { defineStore } from 'pinia'
 
 export const useProfilesStore = defineStore('profiles', {
   state: () => ({
-    profilesArray: [],
+    profilesArray: [{
+      id: 0,
+      weapon: {
+        name: 'Example weapon'
+      },
+      optic: {
+        model: 'Chocolate scope',
+        height: '3',
+        heightUnit: 'IN'
+      },
+      bullet: {
+        brand: 'Awesome ammo',
+        weight: 55,
+        weightUnit: 'GR',
+        diameter: 0.223,
+        diameterUnit: 'IN',
+        ballisticCoefficient: 0.285,
+        ballisticCoefficientProfile: 'G1',
+        velocity: 2700,
+        velocityUnit: 'FPS'
+      }
+    }],
     nextId: 1
   }),
 

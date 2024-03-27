@@ -1,7 +1,7 @@
 <template>
   <q-form @submit="submitProfile">
     <div class="row q-mt-md">
-      <div class="col-xs-12 col-md-4 q-pa-sm">
+      <div class="col-xs-12 col-sm-6 q-pa-sm">
         <WeaponCard
           ref="rifle"
           :profile="profile"
@@ -11,7 +11,7 @@
           class="q-mt-md"
         />
       </div>
-      <div class="col-xs-12 col-md-4 q-pa-sm">
+      <div class="col-xs-12 col-sm-6 q-pa-sm">
         <BulletCard :profile="profile" />
       </div>
     </div>
@@ -34,7 +34,6 @@
 import WeaponCard from 'components/profiles/form/WeaponCard.vue'
 import OpticCard from 'components/profiles/form/OpticCard.vue'
 import BulletCard from 'components/profiles/form/BulletCard.vue'
-import { defineEmits } from 'vue'
 
 // props
 const {

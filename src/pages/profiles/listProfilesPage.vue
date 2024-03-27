@@ -5,9 +5,8 @@
     </div>
     <div class="row">
       <profilesTable
-        class="col"
-        :profiles="profiles"
         :profile-actions="['edit','duplicate','remove']"
+        class="col"
       />
     </div>
   </div>
@@ -16,11 +15,5 @@
 <script setup>
 // imports
 import ProfilesTable from 'components/profiles/list/ProfilesTable.vue'
-import { useProfilesStore } from 'stores/profiles'
-import { storeToRefs } from 'pinia'
-
-// list profiles
-const profilesStore = useProfilesStore()
-const { profiles } = storeToRefs(profilesStore)
 
 </script>

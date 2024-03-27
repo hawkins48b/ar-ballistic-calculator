@@ -1,8 +1,12 @@
 <template>
   <q-card
-    :class="{'bg-grey-3':!$q.dark.isActive}"
     flat
+    :class="{'bg-grey-3':!$q.dark.isActive}"
+    class="q-pa-md"
   >
+    <p class="text-h6">
+      Profile
+    </p>
     <div class="row">
       <div class="col">
         <q-list>
@@ -72,37 +76,21 @@
           </q-item>
         </q-list>
       </div>
-      <div class="col-auto">
-        <ProfileEditButton
-          :profile="profile"
-          :actions="actions"
-        />
-      </div>
     </div>
   </q-card>
 </template>
 
 <script setup>
 // imports
-import ProfileEditButton from 'components/profiles/ProfileEditButton.vue'
-import { useQuasar } from 'quasar'
+import { useCalculatorStore } from 'stores/calculator'
+import { useProfilesStore } from 'stores/profiles'
+import { storeToRefs } from 'pinia'
+import { reactive } from 'vue'
 
-const $q = useQuasar()
-
-// props
-const {
-  profile,
-  actions
-} = defineProps({
-  profile: {
-    type: Object,
-    required: true
-  },
-  actions: {
-    type: Array,
-    required: false,
-    default: () => []
-  }
-})
+// get profile
+const calculatorStore = useCalculatorStore()
+const profilesStore = useProfilesStore()
+const { profileId } = storeToRefs(calculatorStore)
+const profile = reactive(profilesStore.profilebyId(profileId.value))
 
 </script>

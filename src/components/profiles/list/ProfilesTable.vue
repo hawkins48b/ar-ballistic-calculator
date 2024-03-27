@@ -39,12 +39,12 @@
 
     <template #item="props">
       <div
-        class="q-pa-xs col-xs-12 col-sm-6 col-md-4 grid-style-transition"
+        class="q-pa-sm col-xs-12 col-sm-6 col-lg-4 grid-style-transition"
         :style="props.selected ? 'transform: scale(0.95);' : ''"
       >
         <q-card
           flat
-          :class="props.selected ? ($q.dark.isActive ? 'bg-grey-9' : 'bg-grey-2') : ''"
+          :class="{'bg-grey-3':!$q.dark.isActive}"
         >
           <q-card-section v-if="selection==='multiple'">
             <q-checkbox
@@ -143,20 +143,16 @@
 // imports
 import ProfileEditButton from 'components/profiles/ProfileEditButton.vue'
 import { ref, onMounted } from 'vue'
+import { useProfilesStore } from 'stores/profiles'
+import { storeToRefs } from 'pinia'
 
 // props
 const {
-  profiles,
   selection,
   selected,
   profileActions
 } =
 defineProps({
-  profiles: {
-    type: Array,
-    required: false,
-    default: () => []
-  },
   selection: {
     type: String,
     required: false,
@@ -174,12 +170,36 @@ defineProps({
   }
 })
 
+// list profiles
+const profilesStore = useProfilesStore()
+const { profiles } = storeToRefs(profilesStore)
+
 // columns
 const columns = [
-  { name: 'id', label: 'Insertion', field: row => row.id, sortable: true },
-  { name: 'weapon', label: 'Weapon', field: row => row.weapon.name, sortable: true },
-  { name: 'caliber', label: 'Caliber', field: row => row.bullet.diameter, sortable: true },
-  { name: 'optic', label: 'Optic', field: row => row.optic.model, sortable: true }
+  {
+    name: 'id',
+    label: 'Insertion',
+    field: row => row.id,
+    sortable: true
+  },
+  {
+    name: 'weapon',
+    label: 'Weapon',
+    field: row => row.weapon.name,
+    sortable: true
+  },
+  {
+    name: 'caliber',
+    label: 'Caliber',
+    field: row => row.bullet.diameter,
+    sortable: true
+  },
+  {
+    name: 'optic',
+    label: 'Optic',
+    field: row => row.optic.model,
+    sortable: true
+  }
 ]
 
 // selected

@@ -23,7 +23,7 @@
       >
         <div class="row">
           <div
-            class="col-4"
+            class="col-3"
           >
             <div class="text-bold">
               Distance
@@ -44,7 +44,7 @@
             </div>
           </div>
           <div
-            class="col-4"
+            class="col-3"
           >
             <div class="text-bold">
               Elevation
@@ -65,7 +65,7 @@
             </div>
           </div>
           <div
-            class="col-4"
+            class="col-3"
           >
             <div class="text-bold">
               Correction
@@ -82,6 +82,27 @@
                 v-model="visibleColumns"
                 val="correctionMRAD"
                 label="MRAD"
+              />
+            </div>
+          </div>
+          <div
+            class="col-3"
+          >
+            <div class="text-bold">
+              Velocity
+            </div>
+            <div>
+              <q-toggle
+                v-model="visibleColumns"
+                val="velocityFPS"
+                label="FPS"
+              />
+            </div>
+            <div>
+              <q-toggle
+                v-model="visibleColumns"
+                val="velocityMS"
+                label="MS"
               />
             </div>
           </div>
@@ -129,7 +150,6 @@ import {
 import { LocalStorage } from 'quasar'
 
 export default {
-
   setup () {
     return {}
   },
@@ -174,15 +194,29 @@ export default {
           name: 'correctionMOA',
           field: 'correctionMOA',
           label: 'Correction (MOA)',
-          format: (val, row) => `${Math.round(val * 10) / 10}`,
+          format: (val, row) => `${Math.round(val * 10) / 10 * -1}`,
           align: 'left'
         },
-
         {
           name: 'correctionMRAD',
           field: 'correctionMRAD',
           label: 'Correction (MRAD)',
-          format: (val, row) => `${Math.round(val * 10) / 10}`,
+          format: (val, row) => `${Math.round(val * 10) / 10 * -1}`,
+          align: 'left'
+        },
+        // velocity
+        {
+          name: 'velocityFPS',
+          field: 'velocityFPS',
+          label: 'Velocity (FPS)',
+          format: (val, row) => `${Math.round(val)}`,
+          align: 'left'
+        },
+        {
+          name: 'velocityMS',
+          field: 'velocityMS',
+          label: 'Velocity (MS)',
+          format: (val, row) => `${Math.round(val)}`,
           align: 'left'
         }
       ],
@@ -199,7 +233,6 @@ export default {
   },
   methods: {
     initVisibleColumns () {
-      console.log('this.calcArgs.resultUnits', this.calcArgs.resultUnits)
       if (this.calcArgs.resultsUnit === 'YD') {
         this.visibleColumns = ['distanceYD', 'elevationIN', 'correctionMOA']
       }

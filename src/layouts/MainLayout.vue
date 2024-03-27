@@ -48,33 +48,12 @@
   </q-layout>
 </template>
 
-<script>
-import { defineComponent, ref } from 'vue'
+<script setup>
+import { ref } from 'vue'
 import MenuList from 'components/layout/MenuList.vue'
-import { LocalStorage } from 'quasar'
 
-export default defineComponent({
-  name: 'MainLayout',
+const leftDrawerOpen = ref(true)
 
-  components: {
-    MenuList
-  },
-
-  setup () {
-    const leftDrawerOpen = ref(true)
-
-    return {
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
-  },
-  mounted () {
-    // set theme
-    this.$q.dark.set(JSON.parse(LocalStorage.getItem('settings.darkMode')))
-  }
-})
 </script>
 <style lang="scss">
 q-router-link--active .q-icon {

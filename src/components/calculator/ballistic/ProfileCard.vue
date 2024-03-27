@@ -1,8 +1,12 @@
 <template>
   <q-card
-    :class="{'bg-grey-3':!$q.dark.isActive}"
     flat
+    :class="{'bg-grey-3':!$q.dark.isActive}"
+    class="q-pa-md"
   >
+    <p class="text-h6">
+      Profile
+    </p>
     <div class="row">
       <div class="col">
         <q-list>
@@ -12,7 +16,7 @@
                 RIFLE
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ profile.rifle }}
+                {{ profile.weapon.name }}
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -22,7 +26,7 @@
                 OPTIC
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ profile.optic }}
+                {{ profile.optic.model }}
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -32,7 +36,7 @@
                 OPTIC HEIGHT
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ profile.opticHeight }} {{ profile.opticHeightUnit }}
+                {{ profile.optic.height }} {{ profile.optic.heightUnit }}
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -46,7 +50,7 @@
                 AMMO
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ profile.bulletName }} {{ profile.bulletDiameter }} {{ profile.bulletDiameterUnit }} {{ profile.bulletWeight }} {{ profile.bulletWeightUnit }}
+                {{ profile.bullet.brand }} {{ profile.bullet.diameter }} {{ profile.bullet.diameterUnit }} {{ profile.bullet.weight }} {{ profile.bullet.weightUnit }}
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -56,7 +60,7 @@
                 VELOCITY
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ profile.bulletVelocity }} {{ profile.bulletVelocityUnit }}
+                {{ profile.bullet.velocity }} {{ profile.bullet.velocityUnit }}
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -66,68 +70,27 @@
                 BALLISTIC COEFFICIENT
               </q-item-label>
               <q-item-label class="text-bold">
-                {{ profile.bulletBallisticCoefficient }} {{ profile.bulletBallisticCoefficientProfile }}
+                {{ profile.bullet.ballisticCoefficient }} {{ profile.bullet.ballisticCoefficientProfile }}
               </q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
       </div>
     </div>
-
-    <q-btn
-      v-if="removable"
-      outline
-      class="q-ma-md"
-      @click="removeProfile(index)"
-    >
-      Remove
-    </q-btn>
   </q-card>
 </template>
 
-<script>
-import { LocalStorage } from 'quasar'
+<script setup>
+// imports
+import { useCalculatorStore } from 'stores/calculator'
+import { useProfilesStore } from 'stores/profiles'
+import { storeToRefs } from 'pinia'
+import { reactive } from 'vue'
 
-export default {
-  props: {
-    profile: {
-      type: Object,
-      required: true
-    },
-    index: {
-      type: Number,
-      required: false,
-      default: -1
-    },
-    removable: {
-      type: Boolean,
-      required: false,
-      default: false
-    }
-  },
-  emits: [
-    'removedProfile'
-  ],
-  methods: {
-    removeProfile (index) {
-      this.$q.dialog({
-        title: 'Confirm',
-        message: 'Are you sure you want to remove this profile ?',
-        cancel: true
-      }).onOk(() => {
-        // get the list from LocalStorage
-        const profiles = JSON.parse(LocalStorage.getItem('profiles'))
+// get profile
+const calculatorStore = useCalculatorStore()
+const profilesStore = useProfilesStore()
+const { profileId } = storeToRefs(calculatorStore)
+const profile = reactive(profilesStore.profilebyId(profileId.value))
 
-        // remove profile from profiles
-        profiles.splice(index, 1)
-
-        // persist data
-        LocalStorage.set('profiles', JSON.stringify(profiles))
-
-        // notify parent
-        this.$emit('removedProfile')
-      })
-    }
-  }
-}
 </script>

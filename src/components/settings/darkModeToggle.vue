@@ -4,27 +4,15 @@
   />
 </template>
 
-<script>
-import { LocalStorage } from 'quasar'
+<script setup>
+import { useSettingsStore } from 'stores/settings'
+import { ref, watch } from 'vue'
 
-export default {
-  name: 'DarkModeToggle',
-  setup () {
-    return {}
-  },
-  data: function () {
-    return {
-      darkMode: JSON.parse(LocalStorage.getItem('settings.darkMode')) || false
-    }
-  },
-  watch: {
-    darkMode (newValue) {
-      // set darkMode
-      this.$q.dark.set(newValue)
+const settingsStore = useSettingsStore()
+const darkMode = ref(settingsStore.isDarkMode)
 
-      // store value
-      LocalStorage.set('settings.darkMode', JSON.stringify(this.$q.dark.isActive))
-    }
-  }
-}
+watch(darkMode, (newValue) => {
+  settingsStore.setDarkTheme(newValue)
+})
+
 </script>

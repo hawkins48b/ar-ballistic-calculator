@@ -19,26 +19,17 @@
         <q-form>
           <div>
             <q-toggle
-              v-model="showAthmospheric"
-              disable
+              v-model="options.showAtmospheric"
             >
-              Athmospheric conditions
+              Atmospheric conditions
             </q-toggle>
           </div>
           <div>
             <q-toggle
-              v-model="showWindage"
+              v-model="options.showVelocityGraph"
               disable
             >
-              Windage
-            </q-toggle>
-          </div>
-          <div>
-            <q-toggle
-              v-model="showSpeedGraph"
-              disable
-            >
-              Speed graph
+              Velocity graph
             </q-toggle>
           </div>
         </q-form>
@@ -48,18 +39,19 @@
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia'
+import { useCalculatorStore } from 'stores/calculator'
 import { ref } from 'vue'
+
+// calculator store
+const calculatorStore = useCalculatorStore()
+
+// options
+const {
+  options
+} = storeToRefs(calculatorStore)
 
 // dialog open/close
 const dialog = ref(false)
-
-// show conditions
-const showAthmospheric = ref(false)
-
-// show windage
-const showWindage = ref(false)
-
-// show speed graph
-const showSpeedGraph = ref(false)
 
 </script>

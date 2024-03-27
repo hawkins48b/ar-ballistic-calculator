@@ -16,6 +16,20 @@ export const useCalculatorStore = defineStore('calculator', {
       distance: 500,
       unit: 'YD',
       step: 25
+    },
+    atmosphere: {
+      useISA: true,
+      altitude: 0,
+      altitudeUnit: 'FT',
+      pressure: 29.92,
+      pressureUnit: 'IN/HG',
+      temperature: 59,
+      temperatureUnit: '°F',
+      humidity: 79
+    },
+    options: {
+      showAtmospheric: false,
+      showVelocityGraph: false
     }
   }),
 
@@ -100,7 +114,7 @@ export const useCalculatorStore = defineStore('calculator', {
         }
 
         // set parameters
-        const velocitydistance = BC.UNew.Yard(2) // default value
+        const velocitydistance = BC.UNew.Inch(2) // default value
 
         const ammo = new BC.Ammo(dragModel, velocitydistance, bulletVelocity)
         const atmo = new BC.Atmo() // default atmospheric

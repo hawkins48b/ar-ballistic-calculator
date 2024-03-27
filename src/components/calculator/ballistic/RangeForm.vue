@@ -90,7 +90,6 @@ const router = useRouter()
 const calculatorStore = useCalculatorStore()
 const { range, zero } = storeToRefs(calculatorStore)
 const profileId = computed(() => calculatorStore.profileId)
-console.log('profileId', profileId.value)
 
 // calculate event
 const calculate = () => {

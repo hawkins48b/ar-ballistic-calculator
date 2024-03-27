@@ -150,7 +150,6 @@ import { ref, computed } from 'vue'
 const calculatorStore = useCalculatorStore()
 const results = calculatorStore.calculateTrajectory
 const rows = results._trajectory
-console.log('rows', rows)
 
 // set qtable properties
 const columns = [

@@ -19,7 +19,6 @@
 
       <div class="col-auto q-pr-sm">
         <OptionButton
-          v-if="false"
           style="top:10px"
         />
       </div>
@@ -33,10 +32,15 @@
         <CalculationCard />
       </div>
     </div>
-    <!-- chart -->
-    <ElevationChart class="q-mt-md" />
-    <!-- table -->
-    <ElevationTable class="q-mt-md" />
+    <!-- Atmospheric -->
+    <AtmosphereCard
+      v-show="options.showAtmospheric"
+      class="q-mt-md"
+    />
+    <!-- Elevation chart -->
+    <ElevationChartCard class="q-mt-md" />
+    <!-- Elevation table -->
+    <ElevationTableCard class="q-mt-md" />
   </div>
 </template>
 
@@ -45,6 +49,14 @@
 import OptionButton from 'components/calculator/ballistic/OptionButton.vue'
 import ProfileCard from 'components/calculator/ballistic/ProfileCard.vue'
 import CalculationCard from 'components/calculator/ballistic/CalculationCard.vue'
-import ElevationChart from 'components/calculator/ballistic/ElevationChart.vue'
-import ElevationTable from 'components/calculator/ballistic/ElevationTable.vue'
+import ElevationChartCard from 'components/calculator/ballistic/ElevationChartCard.vue'
+import ElevationTableCard from 'components/calculator/ballistic/ElevationTableCard.vue'
+import AtmosphereCard from 'components/calculator/ballistic/AtmosphereCard.vue'
+import { useCalculatorStore } from 'stores/calculator'
+import { computed } from 'vue'
+
+// options
+// calculator store
+const calculatorStore = useCalculatorStore()
+const options = computed(() => calculatorStore.options)
 </script>

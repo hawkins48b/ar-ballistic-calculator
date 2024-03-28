@@ -121,13 +121,13 @@
 
 <script setup>
 // imports
-import { useCalculatorStore } from 'stores/calculator'
+import { useBallisticStore } from 'stores/ballistic'
 import * as BC from 'js-ballistics'
 import { ref, computed } from 'vue'
 
 // calculate trajectory
-const calculatorStore = useCalculatorStore()
-const rows = computed(() => calculatorStore.calculateTrajectory)
+const ballisticStore = useBallisticStore()
+const rows = computed(() => ballisticStore.calculateTrajectory)
 
 // set qtable properties
 const columns = [
@@ -180,7 +180,7 @@ const columns = [
 
 // visible columns
 const visibleColumns = ref([])
-const range = computed(() => calculatorStore.range)
+const range = computed(() => ballisticStore.range)
 if (range.value.unit === 'YD') {
   visibleColumns.value = ['distanceYD', 'windageIN', 'adjustmentMOA']
 }

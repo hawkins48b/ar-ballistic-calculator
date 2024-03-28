@@ -14,7 +14,7 @@
         <q-btn
           icon="restart_alt"
           flat
-          @click="calculatorStore.resetShotAngle"
+          @click="ballisticStore.resetShotAngle"
         >
           <q-tooltip>
             Reset
@@ -38,21 +38,21 @@
 <script setup>
 // imports
 import { storeToRefs } from 'pinia'
-import { useCalculatorStore } from 'stores/calculator'
+import { useBallisticStore } from 'stores/ballistic'
 import { watch } from 'vue'
 
-// calculator store
-const calculatorStore = useCalculatorStore()
+// ballistic store
+const ballisticStore = useBallisticStore()
 // wind state
 const {
   shotAngle,
   options
-} = storeToRefs(calculatorStore)
+} = storeToRefs(ballisticStore)
 
 // if we hide wind conditions, reset wind parameters
 watch(() => options.value.showShotAngle, (newValue) => {
   if (!newValue) {
-    calculatorStore.resetShotAngle()
+    ballisticStore.resetShotAngle()
   }
 }, {
   immediate: true

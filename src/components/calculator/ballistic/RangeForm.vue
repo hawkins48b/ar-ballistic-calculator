@@ -12,6 +12,7 @@
       ]"
       class="q-mt-md"
       hint="e.g 25 YD or 25 M"
+      debounce="500"
     >
       <template #append>
         <q-btn-toggle
@@ -37,6 +38,7 @@
       ]"
       class="q-mt-md"
       hint="e.g 500 YD or 500 M"
+      debounce="500"
     >
       <template #append>
         <q-btn-toggle
@@ -62,17 +64,18 @@
       ]"
       class="q-mt-md"
       hint="Recommended value is 25"
+      debounce="500"
     />
   </q-form>
 </template>
 
 <script setup>
 // imports
-import { useCalculatorStore } from 'stores/calculator'
+import { useBallisticStore } from 'stores/ballistic'
 import { storeToRefs } from 'pinia'
 
 // set calculation profile
-const calculatorStore = useCalculatorStore()
-const { range, zero } = storeToRefs(calculatorStore)
+const ballisticStore = useBallisticStore()
+const { range, zero } = storeToRefs(ballisticStore)
 
 </script>

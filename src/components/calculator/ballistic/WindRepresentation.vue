@@ -4,7 +4,7 @@
       name="near_me"
       class="arrow"
       :style="{
-        transform: `rotate(${Number(windAngle)-45}deg)`
+        transform: `rotate(${parseFloat(windAngle)-45}deg)`
       }"
       color="primary"
     />

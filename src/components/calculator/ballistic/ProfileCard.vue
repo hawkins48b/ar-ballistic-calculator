@@ -13,5 +13,5 @@
 
 <script setup>
 // imports
-import ProfileSelector from 'components/calculator/ballistic/ProfileSelector.vue'
+import ProfileSelector from 'components/profiles/ProfileSelector.vue'
 </script>

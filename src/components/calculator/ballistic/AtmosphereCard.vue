@@ -20,11 +20,11 @@
 // imports
 import AtmosphereForm from 'components/calculator/ballistic/AtmosphereForm.vue'
 import { storeToRefs } from 'pinia'
-import { useCalculatorStore } from 'stores/calculator'
+import { useBallisticStore } from 'stores/ballistic'
 
-// calculator store
-const calculatorStore = useCalculatorStore()
+// ballistic store
+const ballisticStore = useBallisticStore()
 
-const { atmosphere } = storeToRefs(calculatorStore) // International Standard Atmosphere (ISA)
+const { atmosphere } = storeToRefs(ballisticStore) // International Standard Atmosphere (ISA)
 
 </script>

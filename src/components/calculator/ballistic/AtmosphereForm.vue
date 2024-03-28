@@ -79,20 +79,20 @@
 <script setup>
 // imports
 import { storeToRefs } from 'pinia'
-import { useCalculatorStore } from 'stores/calculator'
+import { useBallisticStore } from 'stores/ballistic'
 import { watch } from 'vue'
 import * as BC from 'js-ballistics'
 
-// calculator store
-const calculatorStore = useCalculatorStore()
+// ballistic store
+const ballisticStore = useBallisticStore()
 
 // options
 const {
   atmosphere
-} = storeToRefs(calculatorStore)
+} = storeToRefs(ballisticStore)
 
 // conversion for altitude
-watch(() => calculatorStore.atmosphere.altitudeUnit, (newValue) => {
+watch(() => ballisticStore.atmosphere.altitudeUnit, (newValue) => {
   if (!atmosphere.value.useISA) {
     if (newValue === 'FT') {
       atmosphere.value.altitude = BC.UNew.Meter(atmosphere.value.altitude).In(BC.Unit.Foot)
@@ -104,7 +104,7 @@ watch(() => calculatorStore.atmosphere.altitudeUnit, (newValue) => {
   }
 })
 // conversion for pressure
-watch(() => calculatorStore.atmosphere.pressureUnit, (newValue) => {
+watch(() => ballisticStore.atmosphere.pressureUnit, (newValue) => {
   if (!atmosphere.value.useISA) {
     if (newValue === 'IN/HG') {
       atmosphere.value.pressure = BC.UNew.hPa(atmosphere.value.pressure).In(BC.Unit.InHg)
@@ -116,7 +116,7 @@ watch(() => calculatorStore.atmosphere.pressureUnit, (newValue) => {
   }
 })
 // conversion for temperature
-watch(() => calculatorStore.atmosphere.temperatureUnit, (newValue) => {
+watch(() => ballisticStore.atmosphere.temperatureUnit, (newValue) => {
   if (!atmosphere.value.useISA) {
     if (newValue === '°F') {
       atmosphere.value.temperature = BC.UNew.Celsius(atmosphere.value.temperature).In(BC.Unit.Fahrenheit)
@@ -129,9 +129,9 @@ watch(() => calculatorStore.atmosphere.temperatureUnit, (newValue) => {
 })
 
 // set ISA values if we use ISA
-watch(() => calculatorStore.atmosphere.useISA, (newValue) => {
+watch(() => ballisticStore.atmosphere.useISA, (newValue) => {
   if (newValue) {
-    calculatorStore.setISA()
+    ballisticStore.setISA()
   }
 }, {
   immediate: true

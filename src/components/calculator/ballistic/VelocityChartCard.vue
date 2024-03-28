@@ -24,7 +24,7 @@
 
 <script setup>
 // imports
-import { useCalculatorStore } from 'stores/calculator'
+import { useBallisticStore } from 'stores/ballistic'
 import * as BC from 'js-ballistics'
 import { ref, computed, reactive, watch } from 'vue'
 import { colors, useQuasar } from 'quasar'
@@ -77,8 +77,8 @@ const options = {
 }
 
 // calculate trajectory
-const calculatorStore = useCalculatorStore()
-const results = computed(() => calculatorStore.calculateTrajectory)
+const ballisticStore = useBallisticStore()
+const results = computed(() => ballisticStore.calculateTrajectory)
 const speedOfSound = results.value.shot.atmo.mach
 const machValueLabel = ref('')
 
@@ -93,7 +93,7 @@ const buildSeries = () => {
   let xAxisTitle
   let yAxisTitle
 
-  const range = computed(() => calculatorStore.range)
+  const range = computed(() => ballisticStore.range)
 
   for (const trajectory of results.value._trajectory) {
     if (range.value.unit === 'YD') {
@@ -162,14 +162,11 @@ const buildSeries = () => {
   }
 }
 
-watch(
-  () => results,
-  () => {
-    buildSeries()
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
+watch(() => results, () => {
+  buildSeries()
+},
+{
+  deep: true,
+  immediate: true
+})
 </script>

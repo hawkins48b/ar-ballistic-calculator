@@ -14,7 +14,7 @@ const ISA_TEMPERATURE = 59
 const ISA_TEMPERATURE_UNIT = '°F'
 const ISA_HUMIDITY = 78
 
-export const useCalculatorStore = defineStore('calculator', {
+export const useBallisticStore = defineStore('ballistic', {
   state: () => ({
     profileId: null,
     zero: {
@@ -55,10 +55,9 @@ export const useCalculatorStore = defineStore('calculator', {
   getters: {
     calculateTrajectory: (state) => {
       let results = null
-      if (state.profileId > -1) {
+      if (state.profileId) {
         const ProfilesStore = useProfilesStore()
         const profile = reactive(ProfilesStore.profilebyId(state.profileId))
-
         // define weapon parameters
         let opticHeight
         if (profile.optic.heightUnit === 'IN') {
@@ -157,6 +156,10 @@ export const useCalculatorStore = defineStore('calculator', {
           temperature = BC.UNew.Celsius(parseFloat(state.atmosphere.temperature))
         }
 
+        const humidity = parseFloat(state.atmosphere.humidity) / 100
+        // set atmosphere
+        const atmo = new BC.Atmo(altitude, pressure, temperature, humidity)
+
         // Wind conditions
         let windSpeed
         if (state.wind.speedUnit === 'MPH') {
@@ -167,19 +170,15 @@ export const useCalculatorStore = defineStore('calculator', {
         }
 
         const windAngle = BC.UNew.Degree(parseFloat(state.wind.angle))
-        const windArray = []
-        if (state.wind.speed > 0) {
+        const windsArray = []
+        if (windSpeed.In(BC.Unit.MPS) > 0) {
           const wind = new BC.Wind(windSpeed, windAngle)
-          windArray.push(wind)
+          windsArray.push(wind)
         }
 
         // Shot angle
         const relativeAngle = BC.UNew.Degree(parseFloat(state.shotAngle.relativeAngle))
-        const cantedAngle = BC.UNew.Degree(parseFloat(state.shotAngle.cantedAngle))
 
-        const humidity = parseFloat(state.atmosphere.humidity) / 100
-
-        const atmo = new BC.Atmo(altitude, pressure, temperature, humidity)
         // set parameters
         const velocitydistance = BC.UNew.Inch(2) // default value
 
@@ -196,7 +195,7 @@ export const useCalculatorStore = defineStore('calculator', {
         winds: Wind[] = [new Wind()]
         )
         */
-        const shot = new BC.Shot(maxRange, BC.UNew.Degree(0), relativeAngle, cantedAngle, atmo, windArray)
+        const shot = new BC.Shot(maxRange, BC.UNew.Degree(0), relativeAngle, BC.UNew.Degree(0), atmo, windsArray)
 
         // calculate
         const calculator = new Calculator(weapon, ammo, atmo)
@@ -222,6 +221,9 @@ export const useCalculatorStore = defineStore('calculator', {
     },
     resetShotAngle () {
       this.shotAngle.relativeAngle = 0
+    },
+    removeProfile () {
+      this.profileId = null
     }
   },
   persist: true

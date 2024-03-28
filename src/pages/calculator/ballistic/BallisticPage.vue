@@ -21,27 +21,32 @@
       </div>
     </div>
     <!-- Profiles -->
-    <div class="row q-mt-md q-col-gutter-md items-stretch">
+    <ProfileCard />
+    <div class="row q-mt-xs q-col-gutter-md items-stretch">
       <div class="col-xs-12 col-sm-6">
         <CalculationCard />
       </div>
       <div class="col-xs-12 col-sm-6">
-        <ProfileCard />
+        <!---->
       </div>
-    </div>
-    <div class="row q-mt-xs q-col-gutter-md items-stretch">
-      <div class="col-xs-12 col-sm-6">
-        <!-- Atmospheric -->
-        <AtmosphereCard
-          v-show="options.showAtmospheric"
-        />
+      <div
+        v-show="options.showAtmospheric"
+        class="col-xs-12 col-sm-6"
+      >
+        <AtmosphereCard />
       </div>
-      <div class="col-xs-12 col-sm-6">
-        <WindConditionsCard
-          v-show="options.showWindConditions"
-        />
+      <div
+        v-show="options.showWindConditions"
+        class="col-xs-12 col-sm-6"
+      >
+        <WindConditionsCard />
+      </div>
+      <div
+        v-show="options.showShotAngle"
+        class="col-xs-12 col-sm-6"
+      >
         <ShotAngleCard
-          v-show="options.showShotAngle"
+
           class="q-mt-md"
         />
       </div>
@@ -59,12 +64,12 @@ import ResultCalculator from 'components/calculator/ballistic/ResultCalculator.v
 import AtmosphereCard from 'components/calculator/ballistic/AtmosphereCard.vue'
 import WindConditionsCard from 'components/calculator/ballistic/WindConditionsCard.vue'
 import ShotAngleCard from 'components/calculator/ballistic/ShotAngleCard.vue'
-import { useCalculatorStore } from 'stores/calculator'
+import { useBallisticStore } from 'stores/ballistic'
 import { computed } from 'vue'
 
 // options
-// calculator store
-const calculatorStore = useCalculatorStore()
-const options = computed(() => calculatorStore.options)
-const showCalcResult = computed(() => calculatorStore.profileId > -1)
+// ballistic store
+const ballisticStore = useBallisticStore()
+const options = computed(() => ballisticStore.options)
+const showCalcResult = computed(() => ballisticStore.profileId)
 </script>

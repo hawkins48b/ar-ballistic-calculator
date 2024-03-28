@@ -27,11 +27,11 @@ import ElevationChartCard from 'components/calculator/ballistic/ElevationChartCa
 import ElevationTableCard from 'components/calculator/ballistic/ElevationTableCard.vue'
 import VelocityChartCard from 'components/calculator/ballistic/VelocityChartCard.vue'
 import WindageTableCard from 'components/calculator/ballistic/WindageTableCard.vue'
-import { useCalculatorStore } from 'stores/calculator'
+import { useBallisticStore } from 'stores/ballistic'
 import { computed } from 'vue'
 
 // options
-// calculator store
-const calculatorStore = useCalculatorStore()
-const options = computed(() => calculatorStore.options)
+// ballistic store
+const ballisticStore = useBallisticStore()
+const options = computed(() => ballisticStore.options)
 </script>

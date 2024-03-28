@@ -14,7 +14,7 @@
         <q-btn
           icon="restart_alt"
           flat
-          @click="calculatorStore.resetWind"
+          @click="ballisticStore.resetWind"
         >
           <q-tooltip>
             Reset
@@ -27,9 +27,14 @@
       v-model="wind.speed"
       label="Wind speed"
       type="number"
+      step="any"
       filled
       debounce="500"
       class="q-mt-md"
+      :rules="[
+        val => val && val >= 0 || 'Wind speed must be 0 or positive'
+      ]"
+      lazy-rules
     >
       <template #append>
         <q-btn-toggle
@@ -48,6 +53,9 @@
       type="number"
       filled
       debounce="500"
+      :rules="[
+        val => val && val >= 0 || 'Wind speed must set to minimum 0.'
+      ]"
       class="q-mt-md"
       suffix="degrees"
     >
@@ -62,21 +70,21 @@
 // imports
 import WindRepresentation from 'components/calculator/ballistic/WindRepresentation.vue'
 import { storeToRefs } from 'pinia'
-import { useCalculatorStore } from 'stores/calculator'
+import { useBallisticStore } from 'stores/ballistic'
 import { watch } from 'vue'
 
-// calculator store
-const calculatorStore = useCalculatorStore()
+// ballistic store
+const ballisticStore = useBallisticStore()
 // wind state
 const {
   wind,
   options
-} = storeToRefs(calculatorStore)
+} = storeToRefs(ballisticStore)
 
 // if we hide wind conditions, reset wind parameters
 watch(() => options.value.showWindConditions, (newValue) => {
   if (!newValue) {
-    calculatorStore.resetWind()
+    ballisticStore.resetWind()
   }
 }, {
   immediate: true

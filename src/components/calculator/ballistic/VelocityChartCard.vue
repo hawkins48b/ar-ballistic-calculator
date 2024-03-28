@@ -6,7 +6,7 @@
   >
     <div class="row justify-between">
       <div class="col-auto text-h6">
-        Velocity chart
+        Velocity Chart
       </div>
       <div class="col-auto text-h6">
         Speed of Sound: {{ machValueLabel }}

@@ -28,6 +28,7 @@
         <q-item
           v-if="actions.includes('duplicate')"
           clickable
+          @click="duplicateProfile(profileId)"
         >
           <q-item-section
             avatar
@@ -37,13 +38,14 @@
               name="content_copy"
             />
           </q-item-section>
-          <q-item-section @click="duplicateProfile(profileId)">
+          <q-item-section>
             Duplicate
           </q-item-section>
         </q-item>
         <q-item
           v-if="actions.includes('remove')"
           clickable
+          @click="removeProfile(profileId)"
         >
           <q-item-section
             avatar
@@ -56,7 +58,6 @@
           </q-item-section>
           <q-item-section
             class="text-red"
-            @click="removeProfile(profileId)"
           >
             Delete
           </q-item-section>
@@ -68,8 +69,10 @@
 
 <script setup>
 import { useProfilesStore } from 'stores/profiles'
+import { useBallisticStore } from 'stores/ballistic'
 import { useQuasar } from 'quasar'
 import { useRouter } from 'vue-router'
+import { computed } from 'vue'
 
 const $q = useQuasar()
 // props
@@ -91,6 +94,10 @@ const {
 // profiles store
 const profilesStore = useProfilesStore()
 
+// ballistic sotre
+const ballisticStore = useBallisticStore()
+const calculatorProfileId = computed(() => ballisticStore.profileId)
+
 // router
 const router = useRouter()
 
@@ -101,8 +108,11 @@ const removeProfile = (id) => {
     message: 'Are you sure you want to remove this profile ?',
     cancel: true
   }).onOk(() => {
-    console.log('request removeProfile with ID', id)
     profilesStore.removeProfile(id)
+    // make sure to remove the profile ID from ballistic store if it was set
+    if (calculatorProfileId.value === id) {
+      ballisticStore.removeProfile()
+    }
     router.push('/profiles')
   })
 }

@@ -1,6 +1,7 @@
 <template>
   <q-btn
-    color="primary"
+    flat
+    icon="more_vert"
     @click="dialog=true"
   >
     Options
@@ -13,53 +14,87 @@
         style=""
         class="q-pa-md"
       >
-        <p class="text-h3">
-          Calculator Options
-        </p>
-        <q-form>
-          <div>
-            <q-toggle
-              v-model="showAthmospheric"
-              disable
-            >
-              Athmospheric conditions
-            </q-toggle>
-          </div>
-          <div>
-            <q-toggle
-              v-model="showWindage"
-              disable
-            >
-              Windage
-            </q-toggle>
-          </div>
-          <div>
-            <q-toggle
-              v-model="showSpeedGraph"
-              disable
-            >
-              Speed graph
-            </q-toggle>
-          </div>
-        </q-form>
+        <q-card-section>
+          <p class="text-h3">
+            Calculator Options
+          </p>
+        </q-card-section>
+        <q-card-section>
+          <p class="text-h6">
+            Show more inputs
+          </p>
+          <q-form>
+            <div>
+              <q-toggle
+                v-model="options.showAtmospheric"
+              >
+                Atmospheric conditions
+              </q-toggle>
+            </div>
+            <div>
+              <q-toggle
+                v-model="options.showWindConditions"
+              >
+                Wind conditions
+              </q-toggle>
+            </div>
+            <div>
+              <q-toggle
+                v-model="options.showShotAngle"
+              >
+                Shot angle
+              </q-toggle>
+            </div>
+          </q-form>
+        </q-card-section>
+        <q-card-section>
+          <p class="text-h6">
+            Show more results
+          </p>
+          <q-form>
+            <div>
+              <q-toggle
+                v-model="options.showVelocityGraph"
+              >
+                Velocity graph
+              </q-toggle>
+            </div>
+          </q-form>
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn
+            v-close-popup
+            flat
+            label="OK"
+            color="primary"
+          />
+        </q-card-actions>
       </q-card>
     </q-dialog>
   </q-btn>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useBallisticStore } from 'stores/ballistic'
+import { ref, watch } from 'vue'
+
+// ballistic store
+const ballisticStore = useBallisticStore()
+
+// options
+const {
+  options
+} = storeToRefs(ballisticStore)
 
 // dialog open/close
 const dialog = ref(false)
 
-// show conditions
-const showAthmospheric = ref(false)
-
-// show windage
-const showWindage = ref(false)
-
-// show speed graph
-const showSpeedGraph = ref(false)
-
+// if we hide atmospheric conditions, use International Standard Atmosphere ISA
+watch(() => options.value.showAtmospheric, (newValue) => {
+  if (!newValue) {
+    ballisticStore.atmosphere.useISA = true
+  }
+})
 </script>

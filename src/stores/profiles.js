@@ -5,22 +5,22 @@ export const useProfilesStore = defineStore('profiles', {
     profilesArray: [{
       id: 1,
       weapon: {
-        name: 'Example weapon'
+        name: 'Example Colt M4'
       },
       optic: {
-        model: 'Chocolate scope',
-        height: '3',
+        model: 'Aimpoint CompM2',
+        height: '3.5',
         heightUnit: 'IN'
       },
       bullet: {
-        brand: 'Awesome ammo',
+        brand: 'M193',
         weight: 55,
         weightUnit: 'GR',
         diameter: 0.223,
         diameterUnit: 'IN',
         ballisticCoefficient: 0.285,
         ballisticCoefficientProfile: 'G1',
-        velocity: 2700,
+        velocity: 3000,
         velocityUnit: 'FPS'
       }
     }],
@@ -43,7 +43,9 @@ export const useProfilesStore = defineStore('profiles', {
         label = profile.weapon.name + ' with ' +
                 profile.optic.model + ' - ' +
                 profile.bullet.brand + ' ' +
-                profile.bullet.diameter
+                profile.bullet.diameter + ' at ' +
+                profile.bullet.velocity + ' ' +
+                profile.bullet.velocityUnit
       }
 
       return label
@@ -59,7 +61,6 @@ export const useProfilesStore = defineStore('profiles', {
       this.profilesArray.push(newProfile)
     },
     removeProfile (id) {
-      console.log('remove profile with id', id)
       const index = this.profilesArray.findIndex(profile => profile.id === id)
       if (index !== -1) {
         this.profilesArray.splice(index, 1)

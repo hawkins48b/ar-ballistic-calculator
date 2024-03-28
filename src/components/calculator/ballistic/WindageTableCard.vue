@@ -6,7 +6,7 @@
   >
     <q-table
       flat
-      :rows="rows"
+      :rows="rows._trajectory"
       :columns="columns"
       :visible-columns="visibleColumns"
       row-key="distance"
@@ -16,7 +16,7 @@
     >
       <template #top="props">
         <div class="col-2 q-table__title">
-          Elevation Table
+          Windage Table
         </div>
 
         <q-space />
@@ -27,7 +27,7 @@
         >
           <div class="row">
             <div
-              class="col-3"
+              class="col-4"
             >
               <div class="text-bold">
                 Distance
@@ -48,28 +48,28 @@
               </div>
             </div>
             <div
-              class="col-3"
+              class="col-4"
             >
               <div class="text-bold">
-                Elevation
+                Windage
               </div>
               <div>
                 <q-toggle
                   v-model="visibleColumns"
-                  val="elevationIN"
+                  val="windageIN"
                   label="Inch"
                 />
               </div>
               <div>
                 <q-toggle
                   v-model="visibleColumns"
-                  val="elevationCM"
+                  val="windageCM"
                   label="Centimeter"
                 />
               </div>
             </div>
             <div
-              class="col-3"
+              class="col-4"
             >
               <div class="text-bold">
                 Correction
@@ -86,27 +86,6 @@
                   v-model="visibleColumns"
                   val="correctionMRAD"
                   label="MRAD"
-                />
-              </div>
-            </div>
-            <div
-              class="col-3"
-            >
-              <div class="text-bold">
-                Velocity
-              </div>
-              <div>
-                <q-toggle
-                  v-model="visibleColumns"
-                  val="velocityFPS"
-                  label="FPS"
-                />
-              </div>
-              <div>
-                <q-toggle
-                  v-model="visibleColumns"
-                  val="velocityMS"
-                  label="MS"
                 />
               </div>
             </div>
@@ -142,15 +121,13 @@
 
 <script setup>
 // imports
-import { useCalculatorStore } from 'stores/calculator'
+import { useBallisticStore } from 'stores/ballistic'
 import * as BC from 'js-ballistics'
 import { ref, computed } from 'vue'
 
 // calculate trajectory
-const calculatorStore = useCalculatorStore()
-const results = calculatorStore.calculateTrajectory
-const rows = results._trajectory
-console.log('rows', rows)
+const ballisticStore = useBallisticStore()
+const rows = computed(() => ballisticStore.calculateTrajectory)
 
 // set qtable properties
 const columns = [
@@ -169,61 +146,46 @@ const columns = [
     format: (val, row) => `${Math.round(val)}`,
     align: 'left'
   },
+  // Windage
   {
-    name: 'elevationIN',
-    field: row => row.drop.In(BC.Unit.Inch),
-    label: 'Elevation (IN)',
-    format: (val, row) => `${Math.round(val * 10) / 10}`,
+    name: 'windageIN',
+    field: row => row.windage.In(BC.Unit.Inch),
+    label: 'Windage (IN)',
+    format: (val, row) => `${Math.round(val * 10) / 10 * -1}`,
     align: 'left'
   },
-  // elevation
   {
-    name: 'elevationCM',
-    field: row => row.drop.In(BC.Unit.Centimeter),
-    label: 'Elevation (CM)',
-    format: (val, row) => `${Math.round(val * 10) / 10}`,
+    name: 'windageCM',
+    field: row => row.windage.In(BC.Unit.Centimeter),
+    label: 'Windage (CM)',
+    format: (val, row) => `${Math.round(val * 10) / 10 * -1}`,
     align: 'left'
   },
-  // correction
+  // Adjustment
   {
     name: 'correctionMOA',
-    field: row => row.dropAdjustment.In(BC.Unit.MOA),
+    field: row => row.windageAdjustment.In(BC.Unit.MOA),
     label: 'Correction (MOA)',
     format: (val, row) => `${Math.round(val * 10) / 10 * -1}`,
     align: 'left'
   },
   {
     name: 'correctionMRAD',
-    field: row => row.dropAdjustment.In(BC.Unit.MIL),
+    field: row => row.windageAdjustment.In(BC.Unit.MIL),
     label: 'Correction (MRAD)',
     format: (val, row) => `${Math.round(val * 10) / 10 * -1}`,
-    align: 'left'
-  },
-  // velocity
-  {
-    name: 'velocityFPS',
-    field: row => row.velocity.In(BC.Unit.FPS),
-    label: 'Velocity (FPS)',
-    format: (val, row) => `${Math.round(val)}`,
-    align: 'left'
-  },
-  {
-    name: 'velocityMS',
-    field: row => row.velocity.In(BC.Unit.MPS),
-    label: 'Velocity (MS)',
-    format: (val, row) => `${Math.round(val)}`,
     align: 'left'
   }
 ]
 
 // visible columns
 const visibleColumns = ref([])
-const range = computed(() => calculatorStore.range)
+const range = computed(() => ballisticStore.range)
 if (range.value.unit === 'YD') {
-  visibleColumns.value = ['distanceYD', 'elevationIN', 'correctionMOA']
+  visibleColumns.value = ['distanceYD', 'windageIN', 'adjustmentMOA']
 }
 if (range.value.unit === 'M') {
-  visibleColumns.value = ['distanceM', 'elevationCM', 'correctionMRAD']
+  visibleColumns.value = ['distanceM', 'windageCM', 'adjustmentMRAD']
 }
 
 </script>

@@ -27,7 +27,6 @@
           <div>
             <q-toggle
               v-model="options.showVelocityGraph"
-              disable
             >
               Velocity graph
             </q-toggle>

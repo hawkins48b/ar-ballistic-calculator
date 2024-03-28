@@ -58,7 +58,7 @@
       lazy-rules
       :rules="[
         val => val && val > 0 || 'Step must be positive',
-        val => val && val < range.distance || 'Step must be lower than range'
+        val => val && val < parseFloat(range.distance) || 'Step must be lower than range'
       ]"
       class="q-mt-md"
       hint="Recommended value is 25"

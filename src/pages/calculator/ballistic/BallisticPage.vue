@@ -41,6 +41,11 @@
     <ElevationChartCard class="q-mt-md" />
     <!-- Elevation table -->
     <ElevationTableCard class="q-mt-md" />
+    <!-- Velocity chart -->
+    <VelocityChartCard
+      v-show="options.showVelocityGraph"
+      class="q-mt-md"
+    />
   </div>
 </template>
 
@@ -51,6 +56,7 @@ import ProfileCard from 'components/calculator/ballistic/ProfileCard.vue'
 import CalculationCard from 'components/calculator/ballistic/CalculationCard.vue'
 import ElevationChartCard from 'components/calculator/ballistic/ElevationChartCard.vue'
 import ElevationTableCard from 'components/calculator/ballistic/ElevationTableCard.vue'
+import VelocityChartCard from 'components/calculator/ballistic/VelocityChartCard.vue'
 import AtmosphereCard from 'components/calculator/ballistic/AtmosphereCard.vue'
 import { useCalculatorStore } from 'stores/calculator'
 import { computed } from 'vue'

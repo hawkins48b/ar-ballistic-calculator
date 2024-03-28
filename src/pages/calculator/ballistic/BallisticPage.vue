@@ -32,11 +32,15 @@
         <CalculationCard />
       </div>
     </div>
-    <!-- Atmospheric -->
-    <AtmosphereCard
-      v-show="options.showAtmospheric"
-      class="q-mt-md"
-    />
+    <div class="row q-col-gutter-md items-strech">
+      <div class="col-xs-12 col-sm-6">
+        <!-- Atmospheric -->
+        <AtmosphereCard
+          v-show="options.showAtmospheric"
+          class="q-mt-md"
+        />
+      </div>
+    </div>
     <!-- Elevation chart -->
     <ElevationChartCard class="q-mt-md" />
     <!-- Elevation table -->

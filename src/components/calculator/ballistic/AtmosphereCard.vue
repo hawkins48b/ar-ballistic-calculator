@@ -5,36 +5,14 @@
     class="q-pa-md"
   >
     <p class="text-h6">
-      Atmospheric conditions
+      Atmospheric Conditions
     </p>
-    <div class="row q-col-gutter-md">
-      <div class="col-xs-12 col-sm-6">
-        <q-toggle v-model="atmosphere.useISA">
-          Use standard atmosphere
-        </q-toggle>
-        <p>
-          The <a
-            href="https://en.wikipedia.org/wiki/International_Standard_Atmosphere"
-            target="_blank"
-          >International Standard Atmosphere (ISA)</a> is set at sea level.
-        </p>
-        <p class="text-h5">
-          Hints
-        </p>
-        <p>
-          <span class="text-bold">Altitude</span> has little to no impact.
-          <br>
-          <span class="text-bold text-h6">Pressure</span> has a big impact.
-          <br>
-          <span class="text-bold text-h6">Temperature</span> has a big impact.
-          <br>
-          <span class="text-bold">Humidity</span> has little to no impact.
-        </p>
-      </div>
-      <div class="col-xs-12 col-sm-6">
-        <AtmosphereForm />
-      </div>
-    </div>
+
+    <q-toggle v-model="atmosphere.useISA">
+      Use standard atmosphere
+    </q-toggle>
+
+    <AtmosphereForm class="q-mt-md" />
   </q-card>
 </template>
 

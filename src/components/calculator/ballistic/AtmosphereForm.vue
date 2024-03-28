@@ -5,6 +5,7 @@
       label="Altitude"
       type="number"
       :disable="atmosphere.useISA"
+      hint="Altitude has little to no impact."
       filled
       debounce="500"
     >
@@ -24,6 +25,7 @@
       label="Barometric pressure"
       type="number"
       :disable="atmosphere.useISA"
+      hint="Altitude has a BIG impact."
       filled
       debounce="500"
       class="q-mt-md"
@@ -44,6 +46,7 @@
       label="Temperature"
       type="number"
       :disable="atmosphere.useISA"
+      hint="Temperature has a BIG impact."
       filled
       debounce="500"
       class="q-mt-md"
@@ -64,6 +67,7 @@
       label="Humidity"
       type="number"
       :disable="atmosphere.useISA"
+      hint="Humidity has little to no impact."
       filled
       debounce="500"
       class="q-mt-md"

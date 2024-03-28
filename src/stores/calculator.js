@@ -203,7 +203,6 @@ export const useCalculatorStore = defineStore('calculator', {
         const calculator = new Calculator(weapon, ammo, atmo)
         results = calculator.fire(shot, rangeStep)
       }
-      console.log(results)
       return results
     }
   },

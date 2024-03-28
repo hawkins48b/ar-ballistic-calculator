@@ -18,16 +18,16 @@
             target="_blank"
           >International Standard Atmosphere (ISA)</a> is set at sea level.
         </p>
+        <p class="text-h5">
+          Hints
+        </p>
         <p>
           <span class="text-bold">Altitude</span> has little to no impact.
-        </p>
-        <p>
+          <br>
           <span class="text-bold text-h6">Pressure</span> has a big impact.
-        </p>
-        <p>
+          <br>
           <span class="text-bold text-h6">Temperature</span> has a big impact.
-        </p>
-        <p>
+          <br>
           <span class="text-bold">Humidity</span> has little to no impact.
         </p>
       </div>

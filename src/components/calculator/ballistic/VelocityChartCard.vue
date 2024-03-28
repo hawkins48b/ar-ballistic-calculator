@@ -60,7 +60,7 @@ const options = {
       style: {
         fontSize: '1em'
       },
-      offsetX: -20
+      offsetX: -10
     }
   },
   xaxis: {

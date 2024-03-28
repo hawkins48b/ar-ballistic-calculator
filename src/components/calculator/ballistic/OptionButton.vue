@@ -1,6 +1,7 @@
 <template>
   <q-btn
-    color="primary"
+    flat
+    icon="more_vert"
     @click="dialog=true"
   >
     Options
@@ -13,25 +14,55 @@
         style=""
         class="q-pa-md"
       >
-        <p class="text-h3">
-          Calculator Options
-        </p>
-        <q-form>
-          <div>
-            <q-toggle
-              v-model="options.showAtmospheric"
-            >
-              Atmospheric conditions
-            </q-toggle>
-          </div>
-          <div>
-            <q-toggle
-              v-model="options.showVelocityGraph"
-            >
-              Velocity graph
-            </q-toggle>
-          </div>
-        </q-form>
+        <q-card-section>
+          <p class="text-h3">
+            Calculator Options
+          </p>
+        </q-card-section>
+        <q-card-section>
+          <p class="text-h6">
+            Show more options
+          </p>
+          <q-form>
+            <div>
+              <q-toggle
+                v-model="options.showAtmospheric"
+              >
+                Atmospheric conditions
+              </q-toggle>
+            </div>
+            <div>
+              <q-toggle
+                v-model="options.showWindConditions"
+              >
+                Wind conditions
+              </q-toggle>
+            </div>
+            <div>
+              <q-toggle
+                v-model="options.showVelocityGraph"
+              >
+                Velocity graph
+              </q-toggle>
+            </div>
+            <div>
+              <q-toggle
+                v-model="options.showShotAngle"
+              >
+                Shot angle
+              </q-toggle>
+            </div>
+          </q-form>
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn
+            v-close-popup
+            flat
+            label="OK"
+            color="primary"
+          />
+        </q-card-actions>
       </q-card>
     </q-dialog>
   </q-btn>
@@ -54,13 +85,10 @@ const {
 const dialog = ref(false)
 
 // if we hide atmospheric conditions, use International Standard Atmosphere ISA
-watch(
-  () => options.value.showAtmospheric,
-  (newValue) => {
-    if (!newValue) {
-      calculatorStore.atmosphere.useISA = true
-    }
+watch(() => options.value.showAtmospheric, (newValue) => {
+  if (!newValue) {
+    calculatorStore.atmosphere.useISA = true
   }
+}
 )
-
 </script>

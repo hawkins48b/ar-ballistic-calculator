@@ -36,9 +36,20 @@ export const useCalculatorStore = defineStore('calculator', {
       temperatureUnit: ISA_TEMPERATURE_UNIT,
       humidity: ISA_HUMIDITY
     },
+    wind: {
+      speed: 0,
+      speedUnit: 'MPH',
+      angle: 90
+    },
+    shotAngle: {
+      relativeAngle: 0,
+      cantedAngle: 0
+    },
     options: {
       showAtmospheric: false,
-      showVelocityGraph: false
+      showWindConditions: false,
+      showVelocityGraph: false,
+      showShotAngle: false
     }
   }),
 
@@ -147,6 +158,26 @@ export const useCalculatorStore = defineStore('calculator', {
           temperature = BC.UNew.Celsius(parseFloat(state.atmosphere.temperature))
         }
 
+        // Wind conditions
+        let windSpeed
+        if (state.wind.speedUnit === 'MPH') {
+          windSpeed = BC.UNew.MPH(parseFloat(state.wind.speed))
+        }
+        if (state.wind.speedUnit === 'MPS') {
+          windSpeed = BC.UNew.MPS(parseFloat(state.wind.speed))
+        }
+
+        const windAngle = BC.UNew.Degree(parseFloat(state.wind.angle))
+        const windArray = []
+        if (state.wind.speed > 0) {
+          const wind = new BC.Wind(windSpeed, windAngle)
+          windArray.push(wind)
+        }
+
+        // Shot angle
+        const relativeAngle = BC.UNew.Degree(parseFloat(state.shotAngle.relativeAngle))
+        const cantedAngle = BC.UNew.Degree(parseFloat(state.shotAngle.cantedAngle))
+
         const humidity = parseFloat(state.atmosphere.humidity) / 100
 
         const atmo = new BC.Atmo(altitude, pressure, temperature, humidity)
@@ -166,12 +197,13 @@ export const useCalculatorStore = defineStore('calculator', {
         winds: Wind[] = [new Wind()]
         )
         */
-        const shot = new BC.Shot(maxRange, BC.UNew.Degree(0), BC.UNew.Degree(0), BC.UNew.Degree(0), atmo)
+        const shot = new BC.Shot(maxRange, BC.UNew.Degree(0), relativeAngle, cantedAngle, atmo, windArray)
 
         // calculate
         const calculator = new Calculator(weapon, ammo, atmo)
         results = calculator.fire(shot, rangeStep)
       }
+      console.log(results)
       return results
     }
   },
@@ -184,6 +216,15 @@ export const useCalculatorStore = defineStore('calculator', {
       this.atmosphere.temperature = ISA_TEMPERATURE
       this.atmosphere.temperatureUnit = ISA_TEMPERATURE_UNIT
       this.atmosphere.humidity = ISA_HUMIDITY
+    },
+    resetWind () {
+      this.wind.speed = 0
+      this.wind.speedUnit = 'MPH'
+      this.wind.angle = 90
+    },
+    resetShotAngle () {
+      this.shotAngle.relativeAngle = 0
+      this.shotAngle.cantedAngle = 0
     }
   },
   persist: true

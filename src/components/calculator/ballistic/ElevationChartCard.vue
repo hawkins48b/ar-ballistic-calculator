@@ -55,7 +55,7 @@ const options = {
       style: {
         fontSize: '1em'
       },
-      offsetX: -20
+      offsetX: -10
     }
   },
   xaxis: {
@@ -65,6 +65,25 @@ const options = {
       },
       offsetY: -10
     }
+  },
+  annotations: {
+    yaxis: [
+      {
+        y: -0.5,
+        y2: 0.5,
+        borderColor: 'transparent',
+        opacity: 1,
+        fillColor: colors.getPaletteColor('accent'),
+        label: {
+          text: 'LINE OF SIGHT',
+          borderColor: 'transparent',
+          style: {
+            color: '#fff',
+            background: colors.getPaletteColor('accent')
+          }
+        }
+      }
+    ]
   }
 }
 

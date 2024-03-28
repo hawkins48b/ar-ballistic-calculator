@@ -28,6 +28,7 @@
         <q-item
           v-if="actions.includes('duplicate')"
           clickable
+          @click="duplicateProfile(profileId)"
         >
           <q-item-section
             avatar
@@ -37,7 +38,7 @@
               name="content_copy"
             />
           </q-item-section>
-          <q-item-section @click="duplicateProfile(profileId)">
+          <q-item-section>
             Duplicate
           </q-item-section>
         </q-item>

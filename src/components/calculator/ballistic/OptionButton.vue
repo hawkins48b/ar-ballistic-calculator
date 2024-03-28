@@ -21,7 +21,7 @@
         </q-card-section>
         <q-card-section>
           <p class="text-h6">
-            Show more options
+            Show more inputs
           </p>
           <q-form>
             <div>
@@ -40,16 +40,23 @@
             </div>
             <div>
               <q-toggle
-                v-model="options.showVelocityGraph"
-              >
-                Velocity graph
-              </q-toggle>
-            </div>
-            <div>
-              <q-toggle
                 v-model="options.showShotAngle"
               >
                 Shot angle
+              </q-toggle>
+            </div>
+          </q-form>
+        </q-card-section>
+        <q-card-section>
+          <p class="text-h6">
+            Show more results
+          </p>
+          <q-form>
+            <div>
+              <q-toggle
+                v-model="options.showVelocityGraph"
+              >
+                Velocity graph
               </q-toggle>
             </div>
           </q-form>

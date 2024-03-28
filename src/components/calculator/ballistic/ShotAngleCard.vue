@@ -30,16 +30,7 @@
       filled
       debounce="500"
       class="q-mt-md"
-      suffix="°"
-    />
-    <q-input
-      v-model="shotAngle.cantedAngle"
-      label="Canted angle"
-      type="number"
-      filled
-      debounce="500"
-      class="q-mt-md"
-      suffix="°"
+      suffix="degrees"
     />
   </q-card>
 </template>

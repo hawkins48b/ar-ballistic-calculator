@@ -42,8 +42,7 @@ export const useCalculatorStore = defineStore('calculator', {
       angle: 90
     },
     shotAngle: {
-      relativeAngle: 0,
-      cantedAngle: 0
+      relativeAngle: 0
     },
     options: {
       showAtmospheric: false,
@@ -56,7 +55,7 @@ export const useCalculatorStore = defineStore('calculator', {
   getters: {
     calculateTrajectory: (state) => {
       let results = null
-      if (state.profileId !== null) {
+      if (state.profileId > -1) {
         const ProfilesStore = useProfilesStore()
         const profile = reactive(ProfilesStore.profilebyId(state.profileId))
 
@@ -223,7 +222,6 @@ export const useCalculatorStore = defineStore('calculator', {
     },
     resetShotAngle () {
       this.shotAngle.relativeAngle = 0
-      this.shotAngle.cantedAngle = 0
     }
   },
   persist: true

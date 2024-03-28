@@ -5,31 +5,28 @@
         <div class="row">
           <div class="col-auto">
             <q-btn
+              flat
               to="/calculator"
-              outline
-            >
-              Back
-            </q-btn>
+              icon="arrow_back"
+            />
           </div>
           <div class="col-auto text-h6 q-pl-md">
-            Results
+            Ballistic
           </div>
         </div>
       </div>
 
       <div class="col-auto q-pr-sm">
-        <OptionButton
-          style="top:10px"
-        />
+        <OptionButton />
       </div>
     </div>
     <!-- Profiles -->
     <div class="row q-mt-md q-col-gutter-md items-stretch">
       <div class="col-xs-12 col-sm-6">
-        <ProfileCard />
+        <CalculationCard />
       </div>
       <div class="col-xs-12 col-sm-6">
-        <CalculationCard />
+        <ProfileCard />
       </div>
     </div>
     <div class="row q-mt-xs q-col-gutter-md items-stretch">
@@ -49,20 +46,7 @@
         />
       </div>
     </div>
-    <!-- Elevation chart -->
-    <ElevationChartCard class="q-mt-md" />
-    <!-- Elevation table -->
-    <ElevationTableCard class="q-mt-md" />
-    <!-- Velocity chart -->
-    <VelocityChartCard
-      v-show="options.showVelocityGraph"
-      class="q-mt-md"
-    />
-    <!-- Windage table (includes canted angle effect) -->
-    <WindageTableCard
-      v-show="options.showWindConditions || options.showShotAngle"
-      class="q-mt-md"
-    />
+    <ResultCalculator v-if="showCalcResult" />
   </div>
 </template>
 
@@ -71,13 +55,10 @@
 import OptionButton from 'components/calculator/ballistic/OptionButton.vue'
 import ProfileCard from 'components/calculator/ballistic/ProfileCard.vue'
 import CalculationCard from 'components/calculator/ballistic/CalculationCard.vue'
-import ElevationChartCard from 'components/calculator/ballistic/ElevationChartCard.vue'
-import ElevationTableCard from 'components/calculator/ballistic/ElevationTableCard.vue'
-import VelocityChartCard from 'components/calculator/ballistic/VelocityChartCard.vue'
+import ResultCalculator from 'components/calculator/ballistic/ResultCalculator.vue'
 import AtmosphereCard from 'components/calculator/ballistic/AtmosphereCard.vue'
 import WindConditionsCard from 'components/calculator/ballistic/WindConditionsCard.vue'
 import ShotAngleCard from 'components/calculator/ballistic/ShotAngleCard.vue'
-import WindageTableCard from 'components/calculator/ballistic/WindageTableCard.vue'
 import { useCalculatorStore } from 'stores/calculator'
 import { computed } from 'vue'
 
@@ -85,4 +66,5 @@ import { computed } from 'vue'
 // calculator store
 const calculatorStore = useCalculatorStore()
 const options = computed(() => calculatorStore.options)
+const showCalcResult = computed(() => calculatorStore.profileId > -1)
 </script>

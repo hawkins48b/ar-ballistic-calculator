@@ -1,5 +1,5 @@
 <template>
-  <q-form @submit="calculate">
+  <q-form>
     <q-input
       v-model="zero.distance"
       label="Rifle zero distance"
@@ -63,43 +63,16 @@
       class="q-mt-md"
       hint="Recommended value is 25"
     />
-
-    <q-btn
-      color="primary"
-      class="q-mt-md"
-      type="submit"
-    >
-      Calculate
-    </q-btn>
   </q-form>
 </template>
 
 <script setup>
 // imports
 import { useCalculatorStore } from 'stores/calculator'
-import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useQuasar } from 'quasar'
-import { computed } from 'vue'
-
-const $q = useQuasar()
-
-const router = useRouter()
 
 // set calculation profile
 const calculatorStore = useCalculatorStore()
 const { range, zero } = storeToRefs(calculatorStore)
-const profileId = computed(() => calculatorStore.profileId)
 
-// calculate event
-const calculate = () => {
-  if (profileId.value === null) {
-    $q.dialog({
-      title: 'No profile selected',
-      message: 'You must select a profile for the ballistic calculator'
-    })
-  } else {
-    router.push('/calculator/ballistic')
-  }
-}
 </script>

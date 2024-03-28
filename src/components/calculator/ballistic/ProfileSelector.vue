@@ -1,37 +1,23 @@
 <template>
-  <q-card
-    :class="{'bg-grey-3':!$q.dark.isActive}"
-    flat
-    class="q-pa-md"
-  >
-    <div v-if="profiles.length > 0">
-      <p class="text-h6">
-        Select a profile
-      </p>
-      <div class="row">
-        <div class="col">
-          <q-select
-            v-model="profileOption"
-            label="Profile"
-            :options="profileOptions"
-          />
-        </div>
-      </div>
-    </div>
-    <div v-else>
-      <p class="text-h6">
-        You have no profile
-      </p>
-      <p>Please insert a profile before using the calculators.</p>
-      <q-btn
-        to="profiles/"
-        class="q-mt-md"
-        color="primary"
-      >
-        Add a profile
-      </q-btn>
-    </div>
-  </q-card>
+  <q-form>
+    <q-select
+      v-model="profileOption"
+      label="Select a profile"
+      :options="profileOptions"
+      use-input
+      input-debounce="0"
+      hint="You can type for retrieving information"
+      @filter="filterFn"
+    >
+      <template #no-option>
+        <q-item>
+          <q-item-section>
+            No results
+          </q-item-section>
+        </q-item>
+      </template>
+    </q-select>
+  </q-form>
 </template>
 
 <script setup>
@@ -70,5 +56,24 @@ watch(profileOption, (newProfileOption) => {
     calculatorStore.profileId = newProfileOption.value
   }
 })
+
+// autocomplete functions
+const filterFn = (val, update) => {
+  const options = ref(profileOption)
+  if (val === '') {
+    update(() => {
+      options.value = profileOption
+
+      // here you have access to "ref" which
+      // is the Vue reference of the QSelect
+    })
+    return
+  }
+
+  update(() => {
+    const needle = val.toLowerCase()
+    options.value = profileOption.value.filter(v => v.toLowerCase().indexOf(needle) > -1)
+  })
+}
 
 </script>

@@ -49,13 +49,18 @@
       filled
       debounce="500"
       class="q-mt-md"
-      suffix="°"
-    />
+      suffix="degrees"
+    >
+      <template #append>
+        <WindRepresentation :wind-angle="wind.angle" />
+      </template>
+    </q-input>
   </q-card>
 </template>
 
 <script setup>
 // imports
+import WindRepresentation from 'components/calculator/ballistic/WindRepresentation.vue'
 import { storeToRefs } from 'pinia'
 import { useCalculatorStore } from 'stores/calculator'
 import { watch } from 'vue'

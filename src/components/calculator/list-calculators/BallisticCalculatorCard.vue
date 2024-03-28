@@ -7,12 +7,17 @@
       Ballistic Calculator
     </p>
     <p>Calculate a bullet trajectory.</p>
-    <RangeForm />
+    <q-btn
+      to="/calculator/ballistic"
+      color="primary"
+      class="q-mt-md"
+    >
+      Ballistic calculator
+    </q-btn>
   </q-card>
 </template>
 
 <script setup>
 // imports
-import RangeForm from 'components/calculator/ballistic/RangeForm.vue'
 
 </script>

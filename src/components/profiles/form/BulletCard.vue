@@ -83,7 +83,7 @@
           no-caps
           :options="[
             {label: 'FPS', value: 'FPS'},
-            {label: 'M/S', value: 'M/S'}
+            {label: 'MPS', value: 'MPS'}
           ]"
         />
       </template>

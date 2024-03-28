@@ -88,7 +88,7 @@ export const useCalculatorStore = defineStore('calculator', {
         if (profile.bullet.velocityUnit === 'FPS') {
           bulletVelocity = BC.UNew.FPS(parseFloat(profile.bullet.velocity))
         }
-        if (profile.bullet.velocityUnit === 'MM') {
+        if (profile.bullet.velocityUnit === 'MPS') {
           bulletVelocity = BC.UNew.MPS(parseFloat(profile.bullet.velocity))
         }
 

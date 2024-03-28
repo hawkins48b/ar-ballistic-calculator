@@ -4,9 +4,14 @@
     flat
     class="q-pa-md"
   >
-    <p class="text-h6">
-      Velocity Chart
-    </p>
+    <div class="row justify-between">
+      <div class="col-auto text-h6">
+        Velocity chart
+      </div>
+      <div class="col-auto text-h6">
+        Speed of Sound: {{ machValueLabel }}
+      </div>
+    </div>
     <apexchart
       ref="chart"
       type="line"
@@ -65,12 +70,18 @@ const options = {
       },
       offsetY: -10
     }
+  },
+  tooltip: {
+    enabledOnSeries: [0]
   }
 }
 
 // calculate trajectory
 const calculatorStore = useCalculatorStore()
 const results = computed(() => calculatorStore.calculateTrajectory)
+const speedOfSound = results.value.shot.atmo.mach
+const machValueLabel = ref('')
+
 // Chart series data
 let series = reactive([])
 
@@ -83,7 +94,6 @@ const buildSeries = () => {
   let yAxisTitle
 
   const range = computed(() => calculatorStore.range)
-  const speedOfSound = results.value.shot.atmo.mach
 
   for (const trajectory of results.value._trajectory) {
     if (range.value.unit === 'YD') {
@@ -105,6 +115,7 @@ const buildSeries = () => {
       // labels
       velocitySerieName = 'Velocity (FPS)'
       speedOfSoundSerieName = 'Speed of Sound (FPS)'
+      machValueLabel.value = Math.round(speedOfSound.In(BC.Unit.FPS)) + ' FPS'
       xAxisTitle = 'RANGE (YD)'
       yAxisTitle = 'VELOCITY (FPS)'
     }
@@ -126,6 +137,7 @@ const buildSeries = () => {
       // labels
       velocitySerieName = 'Velocity (MPS)'
       speedOfSoundSerieName = 'Speed of Sound (MPS)'
+      machValueLabel.value = Math.round(speedOfSound.In(BC.Unit.MPS)) + ' MPS'
       xAxisTitle = 'RANGE (M)'
       yAxisTitle = 'VELOCITY (MPS)'
     }

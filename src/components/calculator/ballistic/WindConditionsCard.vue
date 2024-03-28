@@ -33,7 +33,7 @@
     >
       <template #append>
         <q-btn-toggle
-          v-model="wind.unit"
+          v-model="wind.speedUnit"
           no-caps
           :options="[
             {label: 'MPH', value: 'MPH'},

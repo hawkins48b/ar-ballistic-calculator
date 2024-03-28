@@ -65,25 +65,6 @@ const options = {
       },
       offsetY: -10
     }
-  },
-  annotations: {
-    yaxis: [
-      {
-        y: -0.5,
-        y2: 0.5,
-        borderColor: 'transparent',
-        opacity: 1,
-        fillColor: colors.getPaletteColor('accent'),
-        label: {
-          text: 'LINE OF SIGHT',
-          borderColor: 'transparent',
-          style: {
-            color: '#fff',
-            background: colors.getPaletteColor('accent')
-          }
-        }
-      }
-    ]
   }
 }
 
@@ -104,7 +85,11 @@ const buildSeries = () => {
   for (const trajectory of results.value._trajectory) {
     if (range.value.unit === 'YD') {
       let elevation = trajectory.drop.In(BC.Unit.Inch)
-      elevation = Math.round(elevation * 10) / 10
+      if (elevation < 100) {
+        elevation = Math.round(elevation * 10) / 10
+      } else {
+        elevation = Math.round(elevation)
+      }
 
       let distance = trajectory.distance.In(BC.Unit.Yard)
       distance = Math.round(distance)

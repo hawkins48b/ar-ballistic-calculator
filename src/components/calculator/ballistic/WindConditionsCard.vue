@@ -2,7 +2,7 @@
   <q-card
     :class="{'bg-grey-3':!$q.dark.isActive}"
     flat
-    class="q-pa-md"
+    class="q-pa-md full-height"
   >
     <div class="row justify-between">
       <div class="col-auto">

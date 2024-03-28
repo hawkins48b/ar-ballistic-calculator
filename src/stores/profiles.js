@@ -43,7 +43,9 @@ export const useProfilesStore = defineStore('profiles', {
         label = profile.weapon.name + ' with ' +
                 profile.optic.model + ' - ' +
                 profile.bullet.brand + ' ' +
-                profile.bullet.diameter
+                profile.bullet.diameter + ' at ' +
+                profile.bullet.velocity + ' ' +
+                profile.bullet.velocityUnit
       }
 
       return label

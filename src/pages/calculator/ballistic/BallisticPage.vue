@@ -26,9 +26,6 @@
       <div class="col-xs-12 col-sm-6">
         <CalculationCard />
       </div>
-      <div class="col-xs-12 col-sm-6">
-        <!---->
-      </div>
       <div
         v-show="options.showAtmospheric"
         class="col-xs-12 col-sm-6"
@@ -45,10 +42,7 @@
         v-show="options.showShotAngle"
         class="col-xs-12 col-sm-6"
       >
-        <ShotAngleCard
-
-          class="q-mt-md"
-        />
+        <ShotAngleCard />
       </div>
     </div>
     <ResultCalculator v-if="showCalcResult" />

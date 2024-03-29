@@ -4,10 +4,9 @@
       <div class="col-auto q-pa-sm">
         <q-btn
           to="/profiles"
-          outline
-        >
-          Back
-        </q-btn>
+          flat
+          icon="arrow_back"
+        />
       </div>
       <div class="col-auto q-pa-sm text-h6">
         Edit Profile

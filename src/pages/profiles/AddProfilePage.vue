@@ -3,10 +3,9 @@
     <div class="q-pl-sm">
       <q-btn
         to="/profiles"
-        outline
-      >
-        Back
-      </q-btn>
+        flat
+        icon="arrow_back"
+      />
     </div>
     <div class="text-h6 q-pl-md">
       Add new profile

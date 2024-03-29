@@ -1,11 +1,16 @@
 <template>
   <div>
-    <div class="row">
-      <profilesTable
-        :profile-actions="['edit','duplicate','remove']"
-        class="col"
-      />
-    </div>
+    <q-btn
+      to="/profiles/add"
+      color="primary"
+      icon="add"
+    >
+      Add
+    </q-btn>
+    <profilesTable
+      :profile-actions="['edit','duplicate','remove']"
+      class="q-mt-md"
+    />
   </div>
 </template>
 

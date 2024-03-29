@@ -9,6 +9,7 @@
     flat
     :rows-per-page-options="[0]"
     :class="{'bg-grey-3':!$q.dark.isActive}"
+    no-data-label="No profile found."
   >
     <template #top-right>
       <q-input
@@ -104,14 +105,16 @@ const columns = [
     field: (row) => row.bullet.diameter,
     label: 'Caliber',
     format: (val, row) => `${val} ${row.bullet.diameterUnit}`,
-    align: 'left'
+    align: 'left',
+    sortable: true
   },
   {
     name: 'velocity',
     field: (row) => row.bullet.velocity,
     label: 'Velocity',
     format: (val, row) => `${val} ${row.bullet.velocityUnit}`,
-    align: 'left'
+    align: 'left',
+    sortable: true
   }
 ]
 

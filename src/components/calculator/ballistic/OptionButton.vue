@@ -21,7 +21,7 @@
         </q-card-section>
         <q-card-section>
           <p class="text-h6">
-            Show more inputs
+            Parameters
           </p>
           <q-form>
             <div>
@@ -35,7 +35,7 @@
               <q-toggle
                 v-model="options.showWindConditions"
               >
-                Wind conditions
+                Wind
               </q-toggle>
             </div>
             <div>
@@ -49,14 +49,14 @@
         </q-card-section>
         <q-card-section>
           <p class="text-h6">
-            Show more results
+            Graphs
           </p>
           <q-form>
             <div>
               <q-toggle
                 v-model="options.showVelocityGraph"
               >
-                Velocity graph
+                Velocity
               </q-toggle>
             </div>
           </q-form>
@@ -65,7 +65,6 @@
         <q-card-actions align="right">
           <q-btn
             v-close-popup
-            flat
             label="OK"
             color="primary"
           />

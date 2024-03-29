@@ -10,5 +10,5 @@
 
 <script setup>
 // imports
-import ProfileSelector from 'components/profiles/ProfileSelector.vue'
+import ProfileSelector from 'components/profiles/selector/ProfileSelector.vue'
 </script>

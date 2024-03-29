@@ -5,11 +5,15 @@
     :rows="profiles"
     :columns="columns"
     :filter="filter"
+    :rows-per-page-options="[0]"
     row-key="id"
     selection="single"
-    title="Profile"
+    title="Profiles"
     hide-selected-banner
     :class="{'bg-grey-3':!$q.dark.isActive}"
+    :dense="$q.screen.lt.lg"
+    no-data-label="No profile found."
+    flat
   >
     <template #top-right>
       <q-input
@@ -23,6 +27,19 @@
         </template>
       </q-input>
     </template>
+
+    <template #body-selection="scope">
+      <q-checkbox
+        v-model="scope.selected"
+        color="primary"
+      />
+    </template>
+    <template #body-append="scope">
+      <q-checkbox
+        v-model="scope.selected"
+        color="primary"
+      />
+    </template>
   </q-table>
 </template>
 
@@ -32,6 +49,10 @@ import { useProfilesStore } from 'stores/profiles'
 import { useBallisticStore } from 'stores/ballistic'
 import { storeToRefs } from 'pinia'
 import { onMounted, ref, watch } from 'vue'
+import { useQuasar } from 'quasar'
+
+// quasar
+const $q = useQuasar()
 
 // list profiles
 const profilesStore = useProfilesStore()
@@ -78,23 +99,27 @@ const columns = [
     field: (row) => row.bullet.diameter,
     label: 'Caliber',
     format: (val, row) => `${val} ${row.bullet.diameterUnit}`,
-    align: 'left'
+    align: 'left',
+    sortable: true
   },
   {
     name: 'velocity',
     field: (row) => row.bullet.velocity,
     label: 'Velocity',
     format: (val, row) => `${val} ${row.bullet.velocityUnit}`,
-    align: 'left'
+    align: 'left',
+    sortable: true
   }
 ]
 
 // selection
 const selected = ref([])
 // set value if found in ballistic store
-if (profileId) {
+watch(profileId, (newValue) => {
   selected.value = [profilesStore.profilebyId(profileId.value)]
-}
+}, {
+  immediate: true
+})
 // update ballistic store when selected is updated
 watch(selected, (newValue) => {
   if (newValue.length > 0) {
@@ -105,8 +130,9 @@ watch(selected, (newValue) => {
 })
 
 // sort table after component is mounted
-const profilesTable = ref(null)
+const profilesTable = ref()
 onMounted(() => {
   profilesTable.value.sort('weapon')
 })
+
 </script>

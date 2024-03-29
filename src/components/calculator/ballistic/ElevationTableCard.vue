@@ -14,8 +14,8 @@
       :class="{'bg-grey-3':!$q.dark.isActive}"
       hide-pagination
     >
-      <template #top="props">
-        <div class="col-2 q-table__title">
+      <template #top>
+        <div class="col-3 q-table__title">
           Elevation Table
         </div>
 
@@ -128,13 +128,13 @@
         />
 
         <q-btn
-          flat
-          round
-          dense
-          :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
+          icon="archive"
           class="q-ml-md"
-          @click="props.toggleFullscreen"
-        />
+          flat
+          @click="exportCSV"
+        >
+          <q-tooltip>Export CSV</q-tooltip>
+        </q-btn>
       </template>
     </q-table>
   </q-card>
@@ -145,6 +145,10 @@
 import { useBallisticStore } from 'stores/ballistic'
 import * as BC from 'js-ballistics'
 import { ref, computed } from 'vue'
+import { exportFile, useQuasar } from 'quasar'
+
+// Quasar $q
+const $q = useQuasar()
 
 // calculate trajectory
 const ballisticStore = useBallisticStore()
@@ -222,6 +226,37 @@ if (range.value.unit === 'YD') {
 }
 if (range.value.unit === 'M') {
   visibleColumns.value = ['distanceM', 'elevationCM', 'correctionMRAD']
+}
+
+// csv export
+const exportCSV = () => {
+  let csvOutput = 'Distance (YD),Distance (M),Elevation (IN),Elevation (CM),Correction (MOA),Correction (MRAD),Velocity (FPS),Velocity (MPS)\r\n'
+
+  for (const trajectory of rows.value._trajectory) {
+    csvOutput += Math.round(trajectory.distance.In(BC.Unit.Yard)) + ','
+    csvOutput += Math.round(trajectory.distance.In(BC.Unit.Meter)) + ','
+    csvOutput += Math.round(trajectory.drop.In(BC.Unit.Inch) * 10) / 10 + ','
+    csvOutput += Math.round(trajectory.drop.In(BC.Unit.Centimeter) * 10) / 10 + ','
+    csvOutput += Math.round(trajectory.dropAdjustment.In(BC.Unit.MOA) * 10) / 10 + ','
+    csvOutput += Math.round(trajectory.dropAdjustment.In(BC.Unit.MIL) * 10) / 10 + ','
+    csvOutput += Math.round(trajectory.velocity.In(BC.Unit.FPS)) + ','
+    csvOutput += Math.round(trajectory.velocity.In(BC.Unit.MPS))
+    csvOutput += '\r\n'
+  }
+
+  const status = exportFile(
+    'windage-export.csv',
+    csvOutput,
+    'text/csv'
+  )
+
+  if (status !== true) {
+    $q.notify({
+      message: 'Browser denied file download...',
+      color: 'negative',
+      icon: 'warning'
+    })
+  }
 }
 
 </script>

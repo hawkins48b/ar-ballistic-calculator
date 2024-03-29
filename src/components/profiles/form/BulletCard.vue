@@ -53,7 +53,7 @@
       lazy-rules
       :rules="[ val => val && val > 0 || 'Bullet weight must be positive']"
       class="q-mt-md"
-      hint="e.g 55gr"
+      hint="e.g 55 GR"
     >
       <template #append>
         <q-btn-toggle

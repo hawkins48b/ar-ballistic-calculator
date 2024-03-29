@@ -31,6 +31,9 @@
       debounce="500"
       class="q-mt-md"
       suffix="degrees"
+      :rules="[
+        val => val !== '' || 'Shot angle must not be empty',
+      ]"
     />
   </q-card>
 </template>

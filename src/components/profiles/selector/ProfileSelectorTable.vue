@@ -5,7 +5,6 @@
     :rows="profiles"
     :columns="columns"
     :filter="filter"
-    :rows-per-page-options="[0]"
     row-key="id"
     selection="single"
     title="Profiles"
@@ -116,7 +115,9 @@ const columns = [
 const selected = ref([])
 // set value if found in ballistic store
 watch(profileId, (newValue) => {
-  selected.value = [profilesStore.profilebyId(profileId.value)]
+  if (newValue) {
+    selected.value = [profilesStore.profilebyId(profileId.value)]
+  }
 }, {
   immediate: true
 })

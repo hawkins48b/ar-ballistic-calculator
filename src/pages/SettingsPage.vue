@@ -6,7 +6,7 @@
     <div class="row">
       <q-card
         flat
-        class="col-xs-12 col-sm-4"
+        class="col-xs-12 col-sm-6 col-md-4"
         :class="{'bg-grey-3':!$q.dark.isActive}"
       >
         <q-card-section class="text-h6">

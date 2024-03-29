@@ -32,7 +32,7 @@
       debounce="500"
       class="q-mt-md"
       :rules="[
-        val => val && val >= 0 || 'Wind speed must be 0 or positive'
+        val => val && parseFloat(val) >= 0 || 'Wind speed must be 0 or positive'
       ]"
       lazy-rules
     >

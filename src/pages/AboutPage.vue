@@ -5,7 +5,7 @@
     <div class="row">
       <q-card
         flat
-        class="text-center col-xs-12 col-sm-4 q-ma-md q-pa-md"
+        class="text-center col-xs-12 col-sm-6 col-md4 q-pa-md"
         :class="{'bg-grey-3':!$q.dark.isActive}"
       >
         <div class="text-h3">

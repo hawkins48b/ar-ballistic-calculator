@@ -1,27 +1,29 @@
 <template>
-  <q-form>
-    <q-select
-      v-model="profileId"
-      label="Select a profile"
-      :options="profiles"
-      :option-label="optionLabel"
-      option-value="id"
-      emit-value
-      map-options
-      use-input
-      :filter="filter"
-      input-debounce="0"
-      hint="You can type for filtering profiles"
-    >
-      <template #no-option>
-        <q-item>
-          <q-item-section>
-            No results
-          </q-item-section>
-        </q-item>
-      </template>
-    </q-select>
-  </q-form>
+  <q-table
+    ref="profilesTable"
+    v-model:selected="selected"
+    :rows="profiles"
+    :columns="columns"
+    :filter="filter"
+    row-key="id"
+    selection="single"
+    title="Profile"
+    hide-selected-banner
+    :class="{'bg-grey-3':!$q.dark.isActive}"
+  >
+    <template #top-right>
+      <q-input
+        v-model="filter"
+        filled
+        debounce="300"
+        placeholder="Search"
+      >
+        <template #append>
+          <q-icon name="search" />
+        </template>
+      </q-input>
+    </template>
+  </q-table>
 </template>
 
 <script setup>
@@ -29,7 +31,7 @@
 import { useProfilesStore } from 'stores/profiles'
 import { useBallisticStore } from 'stores/ballistic'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 // list profiles
 const profilesStore = useProfilesStore()
@@ -39,27 +41,72 @@ const { profiles } = storeToRefs(profilesStore)
 const ballisticStore = useBallisticStore()
 const { profileId } = storeToRefs(ballisticStore)
 
-// option label
-const optionLabel = (item) => {
-  let label = null
-  if (item !== null) {
-    label = profilesStore.profileLabel(item.id)
+const filter = ref('')
+
+const columns = [
+  {
+    name: 'weapon',
+    field: (row) => row.weapon.name,
+    label: 'Weapon',
+    align: 'left',
+    sortable: true
+  },
+  {
+    name: 'optic',
+    field: (row) => row.optic.model,
+    label: 'Optic',
+    align: 'left',
+    sortable: true
+  },
+  {
+    name: 'opticHeight',
+    field: (row) => row.optic.height,
+    label: 'Optic Height',
+    format: (val, row) => `${val} ${row.optic.heightUnit}`,
+    align: 'left',
+    sortable: true
+  },
+  {
+    name: 'ammo',
+    field: (row) => row.bullet.brand,
+    label: 'Ammo brand',
+    align: 'left',
+    sortable: true
+  },
+  {
+    name: 'caliber',
+    field: (row) => row.bullet.diameter,
+    label: 'Caliber',
+    format: (val, row) => `${val} ${row.bullet.diameterUnit}`,
+    align: 'left'
+  },
+  {
+    name: 'velocity',
+    field: (row) => row.bullet.velocity,
+    label: 'Velocity',
+    format: (val, row) => `${val} ${row.bullet.velocityUnit}`,
+    align: 'left'
   }
-  return label
-}
+]
 
-// filter fn
-const optionsResult = ref(profiles)
-const filter = (val, update, abort) => {
-  if (val.length < 2) {
-    abort()
-    return
+// selection
+const selected = ref([])
+// set value if found in ballistic store
+if (profileId) {
+  selected.value = [profilesStore.profilebyId(profileId.value)]
+}
+// update ballistic store when selected is updated
+watch(selected, (newValue) => {
+  if (newValue.length > 0) {
+    ballisticStore.profileId = newValue[0].id
+  } else {
+    ballisticStore.profileId = null
   }
+})
 
-  update(() => {
-    const needle = val.toLowerCase()
-    optionsResult.value = profiles.filter(v => v.toLowerCase().indexOf(needle) > -1)
-  })
-}
-
+// sort table after component is mounted
+const profilesTable = ref(null)
+onMounted(() => {
+  profilesTable.value.sort('weapon')
+})
 </script>

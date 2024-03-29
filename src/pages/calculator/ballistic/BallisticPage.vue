@@ -21,7 +21,7 @@
       </div>
     </div>
     <!-- Profiles -->
-    <ProfileCard />
+    <ProfileCard class="q-mt-md" />
     <div class="row q-mt-xs q-col-gutter-md items-stretch">
       <div class="col-xs-12 col-sm-6">
         <CalculationCard />

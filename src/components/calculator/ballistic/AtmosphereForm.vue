@@ -1,5 +1,8 @@
 <template>
   <q-form>
+    <q-toggle v-model="atmosphere.useISA">
+      Use standard atmosphere
+    </q-toggle>
     <q-input
       v-model="atmosphere.altitude"
       label="Altitude"

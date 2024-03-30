@@ -5,6 +5,7 @@
     option-value="id"
     :option-label="(row) => profilesStore.profileLabel(row.id)"
     filled
+    label="Select a profile"
   />
 </template>
 

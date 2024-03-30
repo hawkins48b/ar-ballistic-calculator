@@ -1,6 +1,7 @@
 // imports
 import { defineStore } from 'pinia'
 import { useProfilesStore } from './profiles'
+// import { useStatisticsStore } from './statistics'
 import { reactive } from 'vue'
 import * as BC from 'js-ballistics'
 import Calculator from 'js-ballistics'
@@ -39,7 +40,7 @@ export const useBallisticStore = defineStore('ballistic', {
     wind: {
       speed: 0,
       speedUnit: 'MPH',
-      angle: 90
+      direction: 3
     },
     shotAngle: {
       relativeAngle: 0
@@ -169,7 +170,7 @@ export const useBallisticStore = defineStore('ballistic', {
           windSpeed = BC.UNew.MPS(parseFloat(state.wind.speed))
         }
 
-        const windAngle = BC.UNew.Degree(parseFloat(state.wind.angle))
+        const windAngle = BC.UNew.OClock(parseFloat(state.wind.direction))
         const windsArray = []
         if (windSpeed.In(BC.Unit.MPS) > 0) {
           const wind = new BC.Wind(windSpeed, windAngle)
@@ -201,6 +202,7 @@ export const useBallisticStore = defineStore('ballistic', {
         const calculator = new Calculator(weapon, ammo, atmo)
         results = calculator.fire(shot, rangeStep)
       }
+      console.log('results', results)
       return results
     }
   },
@@ -217,7 +219,7 @@ export const useBallisticStore = defineStore('ballistic', {
     resetWind () {
       this.wind.speed = 0
       this.wind.speedUnit = 'MPH'
-      this.wind.angle = 90
+      this.wind.direction = 3
     },
     resetShotAngle () {
       this.shotAngle.relativeAngle = 0

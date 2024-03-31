@@ -5,7 +5,7 @@
     class="q-pa-md"
   >
     <p class="text-h6">
-      Elevation Chart
+      MPRBR Chart
     </p>
     <apexchart
       ref="chart"
@@ -13,6 +13,11 @@
       :options="options"
       :series="series"
       height="300px"
+    />
+
+    <q-inner-loading
+      :showing="loading"
+      color="primary"
     />
   </q-card>
 </template>
@@ -71,14 +76,21 @@ const options = reactive({
   }
 })
 
+// loader
+const loading = ref(false)
+
 // calculate trajectory
 const mpbrStore = useMpbrStore()
 const mpbrShot = ref()
 
 // watch if data changes
 watch(mpbrStore, async () => {
+  loading.value = true
+  console.log('show loader', loading.value)
   mpbrShot.value = await mpbrStore.calculateMpbr()
   buildSeries()
+  loading.value = false
+  console.log('show loader', loading.value)
 },
 {
   deep: true,

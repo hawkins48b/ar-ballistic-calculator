@@ -24,7 +24,7 @@
     </div>
 
     <q-input
-      v-model="shotAngle.relativeAngle"
+      v-model="relativeAngle"
       label="Rifle elevation angle"
       type="number"
       filled
@@ -48,7 +48,7 @@ import { watch } from 'vue'
 const ballisticStore = useBallisticStore()
 // wind state
 const {
-  shotAngle,
+  relativeAngle,
   options
 } = storeToRefs(ballisticStore)
 

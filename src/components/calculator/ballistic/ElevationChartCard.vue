@@ -50,20 +50,24 @@ const options = {
   theme: {
     mode: $q.dark.isActive ? 'dark' : 'light'
   },
-  yaxis: {
+  yaxis: [{
+
     title: {
       style: {
         fontSize: '1em'
       },
-      offsetX: -10
+      offsetX: -10,
+      text: ''
     }
-  },
+  }
+  ],
   xaxis: {
     title: {
       style: {
         fontSize: '1em'
       },
-      offsetY: -10
+      offsetY: -10,
+      text: ''
     }
   }
 }
@@ -121,7 +125,7 @@ const buildSeries = () => {
 
   // set correct legend
   options.xaxis.title.text = xAxisTitle
-  options.yaxis.title.text = yAxisTitle
+  options.yaxis[0].title.text = yAxisTitle
 
   // renew the data
   series = [{
@@ -131,6 +135,7 @@ const buildSeries = () => {
 
   if (chart.value) { // chart may be null if not mounted
     chart.value.updateSeries(series)
+    chart.value.updateOptions(options)
   }
 }
 

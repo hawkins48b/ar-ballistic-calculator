@@ -45,10 +45,12 @@
 <script setup>
 // imports
 import { useProfilesStore } from 'stores/profiles'
-import { useBallisticStore } from 'stores/ballistic'
 import { storeToRefs } from 'pinia'
 import { onMounted, ref, watch } from 'vue'
 import { useQuasar } from 'quasar'
+
+// eslint-disable-next-line vue/require-prop-types
+const profileId = defineModel()
 
 // quasar
 const $q = useQuasar()
@@ -56,10 +58,6 @@ const $q = useQuasar()
 // list profiles
 const profilesStore = useProfilesStore()
 const { profiles } = storeToRefs(profilesStore)
-
-// set calculation profile
-const ballisticStore = useBallisticStore()
-const { profileId } = storeToRefs(ballisticStore)
 
 const filter = ref('')
 
@@ -113,7 +111,7 @@ const columns = [
 
 // selection
 const selected = ref([])
-// set value if found in ballistic store
+// set value if found provided by v-model
 watch(profileId, (newValue) => {
   if (newValue) {
     selected.value = [profilesStore.profilebyId(profileId.value)]
@@ -121,12 +119,12 @@ watch(profileId, (newValue) => {
 }, {
   immediate: true
 })
-// update ballistic store when selected is updated
+// update v-model when selected is updated
 watch(selected, (newValue) => {
   if (newValue.length > 0) {
-    ballisticStore.profileId = newValue[0].id
+    profileId.value = newValue[0].id
   } else {
-    ballisticStore.profileId = null
+    profileId.value = null
   }
 })
 

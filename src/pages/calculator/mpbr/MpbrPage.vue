@@ -13,27 +13,30 @@
       </div>
     </div>
     <!-- Profiles -->
-    <ProfileCard class="q-mt-md" />
+    <ProfileCard class="q-mt-sm" />
     <div class="row q-mt-xs q-col-gutter-md items-stretch">
       <div
         class="col-xs-12 col-sm-6"
       >
-        <AtmosphereCard />
+        <TargetCard />
+      </div>
+      <div
+        class="col-xs-12 col-sm-6"
+      >
+        <!---->
       </div>
     </div>
+    <ResultCard
+      class="q-mt-md"
+    />
   </div>
 </template>
 
 <script setup>
 // imports
-import ProfileCard from 'components/calculator/ballistic/ProfileCard.vue'
-import AtmosphereCard from 'components/calculator/ballistic/AtmosphereCard.vue'
-import { useBallisticStore } from 'stores/ballistic'
+import ProfileCard from 'components/calculator/mpbr/ProfileCard.vue'
+import TargetCard from 'components/calculator/mpbr/TargetCard.vue'
+import ResultCard from 'components/calculator/mpbr/ResultCard.vue'
 // import { computed } from 'vue'
 
-// options
-// ballistic store
-const ballisticStore = useBallisticStore()
-ballisticStore.$reset() // reset store
-// const showCalcResult = computed(() => ballisticStore.profileId)
 </script>

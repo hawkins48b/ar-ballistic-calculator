@@ -12,33 +12,31 @@
 <script setup>
 // imports
 import { useProfilesStore } from 'stores/profiles'
-import { useBallisticStore } from 'stores/ballistic'
 import { storeToRefs } from 'pinia'
 import { ref, watch } from 'vue'
+
+// eslint-disable-next-line vue/require-prop-types
+const profileId = defineModel()
 
 // list profiles
 const profilesStore = useProfilesStore()
 const { profiles } = storeToRefs(profilesStore)
 const options = ref(profiles.value)
 
-// set calculation profile
-const ballisticStore = useBallisticStore()
-const { profileId } = storeToRefs(ballisticStore)
-
 // selection
 const selected = ref()
-// set value if found in ballistic store
-watch(profileId, (newValue) => {
+// set value if provided by v-model
+watch(profileId, () => {
   selected.value = profilesStore.profilebyId(profileId.value)
 }, {
   immediate: true
 })
-// update ballistic store when selected is updated
+// update v-model when selected is updated
 watch(selected, (newValue) => {
   if (newValue) {
-    ballisticStore.profileId = newValue.id
+    profileId.value = newValue.id
   } else {
-    ballisticStore.profileId = null
+    profileId.value = null
   }
 })
 

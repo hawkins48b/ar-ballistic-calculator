@@ -14,96 +14,109 @@ export const useMpbrStore = defineStore('mpbr', {
     }
   }),
 
-  getters: {
-
-  },
-
   actions: {
-    calculateMpbr () {
-      let mpbr = null
-      if (this.profileId && this.target.size) {
-        // perform calculation
-        const range = {
-          distance: 500,
-          unit: 'YD',
-          step: 1
-        }
-        const zero = {
-          distance: 1,
-          unit: 'YD'
-        }
+    async calculateTrajectoriesFrom1to200Y (profileId) {
+      // perform calculation
+      const range = {
+        distance: 800,
+        unit: 'YD',
+        step: 1
+      }
+      const zero = {
+        distance: 1,
+        unit: 'YD'
+      }
 
-        const ProfilesStore = useProfilesStore()
-        const profile = reactive(ProfilesStore.profilebyId(this.profileId))
+      const ProfilesStore = useProfilesStore()
+      const profile = reactive(ProfilesStore.profilebyId(this.profileId))
 
-        let elevationMaxIN
-        if (this.target.unit === 'IN') {
-          elevationMaxIN = parseFloat(this.target.size)
-        }
-        if (this.target.unit === 'CM') {
-          elevationMaxIN = BC.UNew.Centimeter(parseFloat(this.target.size)).In(BC.Unit.Inch)
-        }
-        elevationMaxIN = elevationMaxIN / 2 // half of target size
+      const promises = []
+      // loop from 5unit to 200unit
+      for (let i = 1; i <= 200; i++) {
+        const calculation = new Promise((resolve) => {
+          // update zero
+          zero.distance = i
 
-        const promisesCalculations = []
-        // loop from 1y to 200y
-        for (let i = 1; i <= 200; i++) {
-          const calculation = new Promise((resolve) => {
-            // update zero
-            zero.distance = i
+          const params = {
+            optic: profile.optic,
+            bullet: profile.bullet,
+            range,
+            zero
+          }
+          const shot = ballisticCalculator(params)
 
-            const params = {
-              optic: profile.optic,
-              bullet: profile.bullet,
-              range,
-              zero
-            }
-            const shot = ballisticCalculator(params)
+          resolve(shot)
+        })
+        promises.push(calculation)
+      }
+      return Promise.all(promises)
+    },
+    async calculateMaxElevation (shots, targetSizeUnit) {
+      const promises = []
 
-            resolve(shot)
-          })
-          promisesCalculations.push(calculation)
-        }
+      // loop each trajectory and verify max that max elevation <= TargetElevationMax
+      shots.forEach((shot) => {
+        const promiseCalc = new Promise((resolve, reject) => {
+          const shotElevations = shot._trajectory.map(trajectory => trajectory.drop.In(targetSizeUnit))
+          const shotElevationMax = Math.max(...shotElevations)
+          shot.maxOrdinance = shotElevationMax
 
-        // process all results
-        Promise.all(promisesCalculations).then((shots) => {
-          // 1: keep the shots which don't go higher than target size / 2
-          const shotsElevationChecked = []
-          shots.forEach((shot) => {
-            // loop each trajectory and verify max elevation
-            const shotElevations = shot._trajectory.map(trajectory => trajectory.drop.In(BC.Unit.Inch))
-            const shotElevationMax = Math.max(...shotElevations)
-
-            if (shotElevationMax <= elevationMaxIN) {
-              shotsElevationChecked.push(shot)
-            }
-          })
-          // 2: keep the shot that the longest distance for target size/2
-
-          let distanceMaxYD = 0
-          shotsElevationChecked.forEach((shot) => {
-            const ElevationMinIN = -elevationMaxIN
-
-            let shotDistanceMaxFound = false
-            shot._trajectory.forEach((trajectory) => {
-              let shotDistanceMaxYD
-              if (!shotDistanceMaxFound) {
-                if (trajectory.drop.In(BC.Unit.Inch) <= ElevationMinIN) {
-                  shotDistanceMaxYD = trajectory.distance.In(BC.Unit.Yard)
-                  shotDistanceMaxFound = true
-
-                  if (shotDistanceMaxYD > distanceMaxYD) {
-                    distanceMaxYD = shotDistanceMaxYD
-                    mpbr = shot
-                  }
+          resolve(shot)
+        })
+        promises.push(promiseCalc)
+      })
+      return Promise.all(promises)
+    },
+    findLongestTrajectoryForTargetSize (shots, targetSize, targetSizeUnit, distanceUnit) {
+      let longestShotDistance = 0
+      let longestShot
+      shots.forEach((shot) => {
+        if (shot.maxOrdinance <= targetSize / 2) {
+          // find first distance where drop >= -target size / 2
+          let longestTrajectoryFound = false
+          let longestTrajectoryDistance
+          shot._trajectory.forEach((trajectory) => {
+            if (trajectory.distance.In(distanceUnit) >= 5) { // reject first 5unit distance (avoiding t=0 already outside targetsize/2)
+              if (!longestTrajectoryFound) {
+                const drop = trajectory.drop.In(targetSizeUnit)
+                if (drop <= -targetSize / 2) {
+                  longestTrajectoryFound = true
+                  longestTrajectoryDistance = trajectory.distance.In(distanceUnit)
                 }
               }
-            })
+            }
           })
-          console.log('distanceMaxYD', distanceMaxYD)
-          console.log('zeroDistanceYD', mpbr.weapon.zeroDistance.In(BC.Unit.Yard))
-          console.log('mpbr', mpbr)
-        })
+          shot.distanceMax = longestTrajectoryDistance
+          if (shot.distanceMax > longestShotDistance) {
+            longestShotDistance = shot.distanceMax
+            longestShot = shot
+          }
+        }
+      })
+      return longestShot
+    },
+    async calculateMpbr () {
+      let targetSize
+      let targetSizeUnit
+      let distanceUnit
+      if (this.target.unit === 'IN') {
+        targetSizeUnit = BC.Unit.Inch
+        distanceUnit = BC.Unit.Yard
+        targetSize = BC.UNew.Inch(parseFloat(this.target.size)).In(targetSizeUnit)
+      }
+      if (this.target.unit === 'CM') {
+        targetSizeUnit = BC.Unit.Centimeter
+        distanceUnit = BC.Unit.Meter
+        targetSize = BC.UNew.Centimeter(parseFloat(this.target.size)).In(targetSizeUnit)
+      }
+
+      let mpbr = null
+      if (this.profileId && this.target.size) {
+        const shots = await this.calculateTrajectoriesFrom1to200Y(this.profileId)
+
+        const filteredShots = await this.calculateMaxElevation(shots, targetSizeUnit)
+
+        mpbr = this.findLongestTrajectoryForTargetSize(filteredShots, targetSize, targetSizeUnit, distanceUnit)
       }
       return mpbr
     }

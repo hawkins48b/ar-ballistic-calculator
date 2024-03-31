@@ -19,7 +19,7 @@
 
 <script setup>
 // imports
-import { useBallisticStore } from 'stores/ballistic'
+import { useMpbrStore } from 'stores/mpbr'
 import * as BC from 'js-ballistics'
 import { ref, reactive, computed, watch } from 'vue'
 import { colors, useQuasar } from 'quasar'
@@ -33,7 +33,7 @@ const $q = useQuasar()
 // chart options
 const options = reactive({
   chart: {
-    id: 'elevation-chart',
+    id: 'mpbr-chart',
     toolbar: {
       show: false
     },
@@ -72,8 +72,19 @@ const options = reactive({
 })
 
 // calculate trajectory
-const ballisticStore = useBallisticStore()
-const results = computed(() => ballisticStore.calculateTrajectory)
+const mpbrStore = useMpbrStore()
+const mpbrShot = ref()
+
+// watch if data changes
+watch(mpbrStore, async () => {
+  mpbrShot.value = await mpbrStore.calculateMpbr()
+  buildSeries()
+},
+{
+  deep: true,
+  immediate: true
+})
+
 // Chart series data
 const series = ref([])
 
@@ -83,10 +94,10 @@ const buildSeries = () => {
   let xAxisTitle
   let yAxisTitle
 
-  const range = computed(() => ballisticStore.range)
+  const unit = computed(() => mpbrStore.target.unit)
 
-  for (const trajectory of results.value._trajectory) {
-    if (range.value.unit === 'YD') {
+  for (const trajectory of mpbrShot.value._trajectory) {
+    if (unit.value) {
       let elevation = trajectory.drop.In(BC.Unit.Inch)
       if (elevation < 100) {
         elevation = Math.round(elevation * 10) / 10
@@ -105,7 +116,7 @@ const buildSeries = () => {
       xAxisTitle = 'RANGE (YD)'
       yAxisTitle = 'ELEVATION (IN)'
     }
-    if (range.value.unit === 'M') {
+    if (unit.value === 'M') {
       let elevation = trajectory.drop.In(BC.Unit.Centimeter)
       elevation = Math.round(elevation * 10) / 10
 
@@ -137,12 +148,4 @@ const buildSeries = () => {
     chart.value.updateOptions(options)
   }
 }
-
-watch(() => results, () => {
-  buildSeries()
-},
-{
-  deep: true,
-  immediate: true
-})
 </script>

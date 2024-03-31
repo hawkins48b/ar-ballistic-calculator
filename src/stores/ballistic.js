@@ -2,7 +2,7 @@
 import ballisticCalculator from 'src/controller/ballistic-calculator'
 import { defineStore } from 'pinia'
 import { useProfilesStore } from './profiles'
-import { reactive } from 'vue'
+import { ref } from 'vue'
 
 // International Standard Atmosphere ISA
 const ISA_ALTITUDE = 0
@@ -40,7 +40,9 @@ export const useBallisticStore = defineStore('ballistic', {
       speedUnit: 'MPH',
       direction: 3
     },
-    relativeAngle: 0,
+    shotAngle: {
+      relativeAngle: 0
+    },
     options: {
       showAtmospheric: false,
       showWindConditions: false,
@@ -54,16 +56,16 @@ export const useBallisticStore = defineStore('ballistic', {
       let results = null
       if (state.profileId) {
         const ProfilesStore = useProfilesStore()
-        const profile = reactive(ProfilesStore.profilebyId(state.profileId))
+        const profile = ref(ProfilesStore.profilebyId(state.profileId))
 
         const params = {
-          optic: profile.optic,
-          bullet: profile.bullet,
+          optic: profile.value.optic,
+          bullet: profile.value.bullet,
           range: state.range,
           zero: state.zero,
           atmosphere: state.atmosphere,
           wind: state.wind,
-          relativeAngle: state.relativeAngle
+          shotAngle: state.shotAngle
         }
         results = ballisticCalculator(params)
       }

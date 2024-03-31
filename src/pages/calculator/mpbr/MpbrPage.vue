@@ -26,7 +26,7 @@
         <!---->
       </div>
     </div>
-    <ResultCard
+    <MpbrGraphCard
       class="q-mt-md"
     />
   </div>
@@ -36,7 +36,7 @@
 // imports
 import ProfileCard from 'components/calculator/mpbr/ProfileCard.vue'
 import TargetCard from 'components/calculator/mpbr/TargetCard.vue'
-import ResultCard from 'components/calculator/mpbr/ResultCard.vue'
+import MpbrGraphCard from 'components/calculator/mpbr/MpbrGraphCard.vue'
 // import { computed } from 'vue'
 
 </script>

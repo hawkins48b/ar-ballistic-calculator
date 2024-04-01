@@ -20,11 +20,6 @@
       >
         <TargetCard />
       </div>
-      <div
-        class="col-xs-12 col-sm-6"
-      >
-        <MpbrCard />
-      </div>
     </div>
     <MpbrGraphCard
       class="q-mt-md"
@@ -36,7 +31,6 @@
 // imports
 import ProfileCard from 'components/calculator/mpbr/ProfileCard.vue'
 import TargetCard from 'components/calculator/mpbr/TargetCard.vue'
-import MpbrCard from 'components/calculator/mpbr/MpbrCard.vue'
 import MpbrGraphCard from 'components/calculator/mpbr/MpbrGraphCard.vue'
 
 </script>

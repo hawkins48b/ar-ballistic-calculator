@@ -1,33 +1,29 @@
 <template>
   <q-card
+    v-show="mpbrShot"
     :class="{'bg-grey-3':!$q.dark.isActive}"
     flat
     class="q-pa-md"
   >
-    <q-inner-loading
-      :showing="loading"
-      color="primary"
-    />
-
     <p class="text-h6">
-      MPRBR Chart
+      MPBR Chart
     </p>
-    <div
-      v-if="!loading"
-    >
-      <apexchart
-        ref="chart"
-        type="line"
-        :options="options"
-        :series="series"
-        height="300px"
-      />
-    </div>
+    <MpbrList
+      :shot="mpbrShot"
+    />
+    <apexchart
+      ref="chart"
+      type="line"
+      :options="options"
+      :series="series"
+      height="300px"
+    />
   </q-card>
 </template>
 
 <script setup>
 // imports
+import MpbrList from 'components/calculator/mpbr/MpbrList.vue'
 import * as BC from 'js-ballistics'
 import { ref, reactive, computed, watch } from 'vue'
 import { colors, useQuasar } from 'quasar'
@@ -132,7 +128,7 @@ const buildSeries = () => {
   let yAxisTitle
 
   const unit = computed(() => mpbrStore.target.unit)
-
+  console.log('start build serie')
   for (const trajectory of mpbrShot.value._trajectory) {
     if (unit.value === 'IN') {
       let elevation = trajectory.drop.In(BC.Unit.Inch)
@@ -153,7 +149,7 @@ const buildSeries = () => {
       xAxisTitle = 'RANGE (YD)'
       yAxisTitle = 'ELEVATION (IN)'
     }
-    if (unit.value === 'M') {
+    if (unit.value === 'CM') {
       let elevation = trajectory.drop.In(BC.Unit.Centimeter)
       elevation = Math.round(elevation * 10) / 10
 
@@ -203,20 +199,19 @@ const buildSeries = () => {
 const mpbrStore = useMpbrStore()
 // load series by watching shot
 const mpbrShot = ref()
-const loading = ref(false)
 
 // watch if data changes
 watch(mpbrStore, async () => {
   if (mpbrStore.profileId && mpbrStore.target.size > 0) {
     // calculate maximum point blank range
-    console.log('calculate')
-    loading.value = true
     mpbrShot.value = await mpbrStore.calculateMpbr()
-    loading.value = false
     buildSeries()
+    console.log('new shot', mpbrShot.value)
+    console.log('new series', series.value)
   }
 },
 {
+  immediate: true,
   deep: true
 })
 

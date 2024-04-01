@@ -14,15 +14,15 @@ export const useMpbrStore = defineStore('mpbr', {
     }
   }),
 
-  getter: {
+  getters: {
     distanceUnit: (state) => {
       let unit
 
       if (state.target.unit === 'IN') {
-        unit = 'Yard'
+        unit = 'YD'
       }
       if (state.target.unit === 'CM') {
-        unit = 'Meter'
+        unit = 'M'
       }
       return unit
     }
@@ -65,15 +65,17 @@ export const useMpbrStore = defineStore('mpbr', {
       }
       return Promise.all(promises)
     },
-    async calculateMaxElevation (shots, targetSizeUnit) {
+    async calculateMaxElevation (shots, targetSizeUnit, distanceUnit) {
       const promises = []
 
       // loop each trajectory and verify max that max elevation <= TargetElevationMax
       shots.forEach((shot) => {
-        const promiseCalc = new Promise((resolve, reject) => {
+        const promiseCalc = new Promise((resolve) => {
           const shotElevations = shot._trajectory.map(trajectory => trajectory.drop.In(targetSizeUnit))
           const shotElevationMax = Math.max(...shotElevations)
+          // mark maxOrdinance
           shot.maxOrdinance = shotElevationMax
+          shot.maxOrdinanceDistance = shot._trajectory.find(trajectory => trajectory.drop.In(targetSizeUnit) === shotElevationMax).distance.In(distanceUnit)
 
           resolve(shot)
         })
@@ -85,6 +87,7 @@ export const useMpbrStore = defineStore('mpbr', {
       let longestShotDistance = 0
       let longestShot
       shots.forEach((shot) => {
+        shot.farZero = 0
         if (shot.maxOrdinance <= targetSize / 2) {
           // find first distance where drop >= -target size / 2
           let longestTrajectoryFound = false
@@ -102,7 +105,11 @@ export const useMpbrStore = defineStore('mpbr', {
 
             // mark far zero
             if (Math.round(trajectory.drop.In(targetSizeUnit)) === 0) {
-              shot.farZero = trajectory.distance.In(distanceUnit)
+              if (trajectory.distance.In(distanceUnit) > shot.maxOrdinanceDistance) { // distance must be longer than max ordiance
+                if (trajectory.drop.In(targetSizeUnit) > 0) { // drop must be positive
+                  shot.farZero = trajectory.distance.In(distanceUnit)
+                }
+              }
             }
           })
           shot.distanceMax = longestTrajectoryDistance - 1
@@ -133,7 +140,7 @@ export const useMpbrStore = defineStore('mpbr', {
       if (this.profileId && this.target.size) {
         const shots = await this.calculateTrajectoriesFrom1to200Y(this.profileId)
 
-        const filteredShots = await this.calculateMaxElevation(shots, targetSizeUnit)
+        const filteredShots = await this.calculateMaxElevation(shots, targetSizeUnit, distanceUnit)
 
         mpbr = this.findLongestTrajectoryForTargetSize(filteredShots, targetSize, targetSizeUnit, distanceUnit)
       }

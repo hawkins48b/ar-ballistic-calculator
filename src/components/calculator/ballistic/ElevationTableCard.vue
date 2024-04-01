@@ -245,7 +245,7 @@ const exportCSV = () => {
   }
 
   const status = exportFile(
-    'windage-export.csv',
+    'elevation-export.csv',
     csvOutput,
     'text/csv'
   )

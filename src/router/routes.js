@@ -20,7 +20,8 @@ const routes = [
         component: () => import('pages/CalculatorPage.vue'),
         children: [
           { path: '', component: () => import('pages/calculator/ListCalculatorsPage.vue') },
-          { path: 'ballistic', component: () => import('pages/calculator/ballistic/BallisticPage.vue') }
+          { path: 'ballistic', component: () => import('pages/calculator/ballistic/BallisticPage.vue') },
+          { path: 'maximum-point-blank-range', component: () => import('pages/calculator/mpbr/MpbrPage.vue') }
         ]
       },
       { path: 'settings', component: () => import('pages/SettingsPage.vue') },

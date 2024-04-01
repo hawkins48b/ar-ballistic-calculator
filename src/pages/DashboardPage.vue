@@ -3,36 +3,56 @@
     padding
   >
     <div class="text-h3 q-mb-md">
-      Welcome
+      Dashboard
     </div>
     <div class="row">
-      <q-card
-        flat
-        class="col-xs-12 col-sm-4"
-        :class="{'bg-grey-3':!$q.dark.isActive}"
-      >
-        <q-card-section>
-          <p>The ultimate tool for citizen. Designed with simplicity and efficiency in mind, our ballistic calculator offers a comprehensive solution to obtain accurate ballistic data for your rifles, all presented in either imperial or metric units, according to your preference.</p>
-          <p>You are welcome.</p>
-        </q-card-section>
-        <q-card-actions>
-          <q-btn
+      <div class="col">
+        <q-card
+          flat
 
-            color="primary"
-            @click="$router.push('profiles')"
-          >
-            Add Profiles
-          </q-btn>
-        </q-card-actions>
-      </q-card>
+          :class="{'bg-grey-3':!$q.dark.isActive}"
+        >
+          <q-card-section>
+            <p>The ultimate tool for citizen. Designed with simplicity and efficiency in mind, our ballistic calculator offers a comprehensive solution to obtain accurate ballistic data for your rifles, all presented in either imperial or metric units, according to your preference.</p>
+            <p>You are welcome.</p>
+          </q-card-section>
+        </q-card>
+      </div>
+    </div>
+    <div class="row q-mt-sm q-col-gutter-md items-stretch">
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <q-card
+          flat
+          class="col-xs-12 col-sm-6 col-md-4"
+          :class="{'bg-grey-3':!$q.dark.isActive}"
+        >
+          <q-card-section class="text-center">
+            <p>You have</p>
+            <p class="text-h3">
+              {{ nbProfiles }} profiles
+            </p>
+            <p>registered</p>
+          </q-card-section>
+          <q-card-actions vertical>
+            <q-btn
+              color="primary"
+              to="/profiles"
+            >
+              Manage Profiles
+            </q-btn>
+          </q-card-actions>
+        </q-card>
+      </div>
     </div>
   </q-page>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { storeToRefs } from 'pinia'
+import { useStatisticsStore } from 'stores/statistics'
 
-export default defineComponent({
-  name: 'IndexPage'
-})
+const statisticsStore = useStatisticsStore()
+const {
+  nbProfiles
+} = storeToRefs(statisticsStore)
 </script>

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="row">
-      <div class="col-xs-12 col-sm-6 col-md-4 q-pa-sm">
+    <div class="row q-col-gutter-md">
+      <div class="col-xs-12 col-sm-6 col-md-4">
         <BallisticCalculatorCard
           flat
           class="q-pa-md"
           :class="{'bg-grey-3':!$q.dark.isActive}"
         />
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-4 q-pa-sm">
+      <div class="col-xs-12 col-sm-6 col-md-4">
         <MaximumPointBlankRangeCard
           flat
           class="q-pa-md"

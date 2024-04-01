@@ -24,7 +24,7 @@
     <ProfileCard class="q-mt-md" />
     <div class="row q-mt-xs q-col-gutter-md items-stretch">
       <div class="col-xs-12 col-sm-6">
-        <CalculationCard />
+        <RangeCard />
       </div>
       <div
         v-show="options.showAtmospheric"
@@ -53,7 +53,7 @@
 // imports
 import OptionButton from 'components/calculator/ballistic/OptionButton.vue'
 import ProfileCard from 'components/calculator/ballistic/ProfileCard.vue'
-import CalculationCard from 'components/calculator/ballistic/CalculationCard.vue'
+import RangeCard from 'components/calculator/ballistic/RangeCard.vue'
 import ResultCalculator from 'components/calculator/ballistic/ResultCalculator.vue'
 import AtmosphereCard from 'components/calculator/ballistic/AtmosphereCard.vue'
 import WindConditionsCard from 'components/calculator/ballistic/WindConditionsCard.vue'

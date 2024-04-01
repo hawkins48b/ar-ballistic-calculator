@@ -11,10 +11,10 @@
 <script setup>
 // imports
 import ProfileSelector from 'components/profiles/selector/ProfileSelector.vue'
-import { useBallisticStore } from 'stores/ballistic'
+import { useMpbrStore } from 'stores/mpbr'
 import { storeToRefs } from 'pinia'
 
 // set calculation profile
-const ballisticStore = useBallisticStore()
-const { profileId } = storeToRefs(ballisticStore)
+const mpbrStore = useMpbrStore()
+const { profileId } = storeToRefs(mpbrStore)
 </script>

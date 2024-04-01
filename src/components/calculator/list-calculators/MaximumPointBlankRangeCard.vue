@@ -10,7 +10,7 @@
 
     <q-btn
       color="primary"
-      disabled
+      to="/calculator/maximum-point-blank-range"
     >
       MPBR Tool
     </q-btn>

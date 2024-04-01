@@ -47,28 +47,43 @@
         />
       </template>
     </q-input>
-    <q-input
-      v-model="wind.angle"
-      label="Wind angle"
-      type="number"
-      filled
-      debounce="500"
-      :rules="[
-        val => val && val >= 0 || 'Wind speed must set to minimum 0.'
-      ]"
-      class="q-mt-md"
-      suffix="degrees"
-    >
-      <template #append>
-        <WindRepresentation :wind-angle="wind.angle" />
-      </template>
-    </q-input>
+
+    <div class="row">
+      <div class="col">
+        <q-input
+          v-model="wind.direction"
+          label="Wind direction"
+          type="number"
+          step="any"
+          filled
+          debounce="500"
+          class="q-mt-md"
+          suffix="Clock bearing"
+          :rules="[
+            val => val && parseFloat(val) >= 0 && parseFloat(val) <= 12 || 'Wind direction must be 0 or positive'
+          ]"
+          lazy-rules
+        />
+      </div>
+      <div class="col-auto">
+        <q-knob
+          v-model="wind.direction"
+          :min="0"
+          :max="12"
+          show-value
+          size="50px"
+          :thickness="0.22"
+          color="primary"
+          track-color="grey-3"
+          class="q-ma-md no-shadow"
+        />
+      </div>
+    </div>
   </q-card>
 </template>
 
 <script setup>
 // imports
-import WindRepresentation from 'components/calculator/ballistic/WindRepresentation.vue'
 import { storeToRefs } from 'pinia'
 import { useBallisticStore } from 'stores/ballistic'
 import { watch } from 'vue'

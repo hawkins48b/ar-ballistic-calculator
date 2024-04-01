@@ -1,6 +1,10 @@
-# AR Ballistic calculator (ar-ballistic-calculator)
+# ZRO Ballistic Calculator (zro)
 
-A simple ballistic calculator for AR
+A free tool for citizen. Designed with simplicity and efficiency in mind, our ballistic calculator offers a comprehensive solution to obtain accurate ballistic data for your rifles, all presented in either imperial or metric units, according to your preference.
+
+Access it [here](https://chocolate-warfare.com/zro)
+
+Developed by [Chocolate Warfare](https://chocolate-warfare.com).
 
 ## Install the dependencies
 ```bash

@@ -4,30 +4,34 @@
     flat
     class="q-pa-md"
   >
-    <p class="text-h6">
-      MPRBR Chart
-    </p>
-    <apexchart
-      ref="chart"
-      type="line"
-      :options="options"
-      :series="series"
-      height="300px"
-    />
-
     <q-inner-loading
       :showing="loading"
       color="primary"
     />
+
+    <p class="text-h6">
+      MPRBR Chart
+    </p>
+    <div
+      v-if="!loading"
+    >
+      <apexchart
+        ref="chart"
+        type="line"
+        :options="options"
+        :series="series"
+        height="300px"
+      />
+    </div>
   </q-card>
 </template>
 
 <script setup>
 // imports
-import { useMpbrStore } from 'stores/mpbr'
 import * as BC from 'js-ballistics'
 import { ref, reactive, computed, watch } from 'vue'
 import { colors, useQuasar } from 'quasar'
+import { useMpbrStore } from 'stores/mpbr'
 
 // the chart ref
 const chart = ref(null)
@@ -49,7 +53,7 @@ const options = reactive({
     background: 'transparent'
   },
   stroke: {
-    curve: 'straight'
+    curve: 'smooth'
   },
   colors: [colors.getPaletteColor('primary')],
   theme: {
@@ -62,7 +66,8 @@ const options = reactive({
       },
       offsetX: -10,
       text: ''
-    }
+    },
+    forceNiceScale: true
   }
   ],
   xaxis: {
@@ -73,28 +78,48 @@ const options = reactive({
       offsetY: -10,
       text: ''
     }
+  },
+  annotations: {
+    yaxis: [
+      {
+        y: 0,
+        label: {
+          text: 'Sight line',
+          borderColor: 'transparent',
+          style: {
+            background: colors.getPaletteColor('grey-9'),
+            color: '#fff'
+          }
+        },
+        strokeDashArray: 0,
+        borderColor: colors.getPaletteColor('grey-9')
+      },
+      {
+        label: {
+          text: 'Target limit',
+          borderColor: 'transparent',
+          style: {
+            background: colors.getPaletteColor('accent'),
+            color: '#fff'
+          }
+        },
+        strokeDashArray: 0,
+        borderColor: colors.getPaletteColor('accent')
+      },
+      {
+        label: {
+          text: 'Target limit',
+          borderColor: 'transparent',
+          style: {
+            background: colors.getPaletteColor('accent'),
+            color: '#fff'
+          }
+        },
+        strokeDashArray: 0,
+        borderColor: colors.getPaletteColor('accent')
+      }
+    ]
   }
-})
-
-// loader
-const loading = ref(false)
-
-// calculate trajectory
-const mpbrStore = useMpbrStore()
-const mpbrShot = ref()
-
-// watch if data changes
-watch(mpbrStore, async () => {
-  loading.value = true
-  console.log('show loader', loading.value)
-  mpbrShot.value = await mpbrStore.calculateMpbr()
-  buildSeries()
-  loading.value = false
-  console.log('show loader', loading.value)
-},
-{
-  deep: true,
-  immediate: true
 })
 
 // Chart series data
@@ -109,7 +134,7 @@ const buildSeries = () => {
   const unit = computed(() => mpbrStore.target.unit)
 
   for (const trajectory of mpbrShot.value._trajectory) {
-    if (unit.value) {
+    if (unit.value === 'IN') {
       let elevation = trajectory.drop.In(BC.Unit.Inch)
       if (elevation < 100) {
         elevation = Math.round(elevation * 10) / 10
@@ -149,6 +174,19 @@ const buildSeries = () => {
   options.xaxis.title.text = xAxisTitle
   options.yaxis[0].title.text = yAxisTitle
 
+  // adjust data & axis
+  options.xaxis.max = mpbrShot.value.distanceMax - mpbrShot.value.distanceMax % 100 + 100
+  options.xaxis.tickAmount = 20
+
+  const xAxisLimit = mpbrStore.target.size / 2 - mpbrStore.target.size / 2 % 10 + 10
+  options.yaxis[0].min = -xAxisLimit
+  options.yaxis[0].max = xAxisLimit
+  options.yaxis[0].tickAmount = 5
+
+  // adjust annotations
+  options.annotations.yaxis[1].y = mpbrStore.target.size / 2
+  options.annotations.yaxis[2].y = -mpbrStore.target.size / 2
+
   // renew the data
   series.value = [{
     name: serieName,
@@ -160,4 +198,26 @@ const buildSeries = () => {
     chart.value.updateOptions(options)
   }
 }
+
+// mpbr store
+const mpbrStore = useMpbrStore()
+// load series by watching shot
+const mpbrShot = ref()
+const loading = ref(false)
+
+// watch if data changes
+watch(mpbrStore, async () => {
+  if (mpbrStore.profileId && mpbrStore.target.size > 0) {
+    // calculate maximum point blank range
+    console.log('calculate')
+    loading.value = true
+    mpbrShot.value = await mpbrStore.calculateMpbr()
+    loading.value = false
+    buildSeries()
+  }
+},
+{
+  deep: true
+})
+
 </script>

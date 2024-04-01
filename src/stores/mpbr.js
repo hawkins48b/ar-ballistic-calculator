@@ -14,6 +14,20 @@ export const useMpbrStore = defineStore('mpbr', {
     }
   }),
 
+  getter: {
+    distanceUnit: (state) => {
+      let unit
+
+      if (state.target.unit === 'IN') {
+        unit = 'Yard'
+      }
+      if (state.target.unit === 'CM') {
+        unit = 'Meter'
+      }
+      return unit
+    }
+  },
+
   actions: {
     async calculateTrajectoriesFrom1to200Y (profileId) {
       // perform calculation
@@ -85,8 +99,13 @@ export const useMpbrStore = defineStore('mpbr', {
                 }
               }
             }
+
+            // mark far zero
+            if (Math.round(trajectory.drop.In(targetSizeUnit)) === 0) {
+              shot.farZero = trajectory.distance.In(distanceUnit)
+            }
           })
-          shot.distanceMax = longestTrajectoryDistance
+          shot.distanceMax = longestTrajectoryDistance - 1
           if (shot.distanceMax > longestShotDistance) {
             longestShotDistance = shot.distanceMax
             longestShot = shot
@@ -118,6 +137,7 @@ export const useMpbrStore = defineStore('mpbr', {
 
         mpbr = this.findLongestTrajectoryForTargetSize(filteredShots, targetSize, targetSizeUnit, distanceUnit)
       }
+      // save the results as shot
       return mpbr
     }
   },

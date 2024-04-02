@@ -40,14 +40,20 @@ export const useBallisticStore = defineStore('ballistic', {
       speedUnit: 'MPH',
       direction: 3
     },
-    shotAngle: {
-      relativeAngle: 0
+    sightAdjustment: {
+      angle: 0,
+      unit: 'MOA'
     },
     options: {
       showAtmospheric: false,
       showWindConditions: false,
       showVelocityGraph: false,
-      showShotAngle: false
+      showSightAdjustment: false
+    },
+    results: {
+      table: {
+        visibleColumns: ['rangeYD', 'rangeM', 'elevationIN', 'elevationCM', 'elevationAdjustmentMOA', 'elevationAdjustmentMRAD']
+      }
     }
   }),
 
@@ -65,7 +71,7 @@ export const useBallisticStore = defineStore('ballistic', {
           zero: state.zero,
           atmosphere: state.atmosphere,
           wind: state.wind,
-          shotAngle: state.shotAngle
+          sightAdjustment: state.sightAdjustment
         }
         results = ballisticCalculator(params)
       }
@@ -87,8 +93,8 @@ export const useBallisticStore = defineStore('ballistic', {
       this.wind.speedUnit = 'MPH'
       this.wind.direction = 3
     },
-    resetShotAngle () {
-      this.shotAngle.relativeAngle = 0
+    resetSightAdjustment () {
+      this.sightAdjustment.angle = 0
     },
     removeProfile () {
       this.profileId = null

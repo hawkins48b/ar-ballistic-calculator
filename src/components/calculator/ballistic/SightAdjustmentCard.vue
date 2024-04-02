@@ -7,14 +7,14 @@
     <div class="row justify-between">
       <div class="col-auto">
         <p class="text-h6">
-          Shot Angle
+          Sight adjustment
         </p>
       </div>
       <div class="col-auto">
         <q-btn
           icon="restart_alt"
           flat
-          @click="ballisticStore.resetShotAngle"
+          @click="ballisticStore.resetSightAdjustment"
         >
           <q-tooltip>
             Reset
@@ -24,17 +24,28 @@
     </div>
 
     <q-input
-      v-model="shotAngle.relativeAngle"
-      label="Rifle elevation angle"
+      v-model="sightAdjustment.angle"
+      label="Sight elevation adjustment"
       type="number"
       filled
       debounce="500"
       class="q-mt-md"
-      suffix="degrees"
       :rules="[
-        val => val !== '' || 'Shot angle must not be empty',
+        val => val !== '' || 'Sight elevation adjustment must not be empty',
       ]"
-    />
+      hint="Elevation adjustments made after zero"
+    >
+      <template #append>
+        <q-btn-toggle
+          v-model="sightAdjustment.unit"
+          no-caps
+          :options="[
+            {label: 'MOA', value: 'MOA'},
+            {label: 'MRAD', value: 'MRAD'}
+          ]"
+        />
+      </template>
+    </q-input>
   </q-card>
 </template>
 
@@ -48,14 +59,14 @@ import { watch } from 'vue'
 const ballisticStore = useBallisticStore()
 // wind state
 const {
-  shotAngle,
+  sightAdjustment,
   options
 } = storeToRefs(ballisticStore)
 
 // if we hide wind conditions, reset wind parameters
-watch(() => options.value.showShotAngle, (newValue) => {
+watch(() => options.value.showSightAdjustment, (newValue) => {
   if (!newValue) {
-    ballisticStore.resetShotAngle()
+    ballisticStore.resetSightAdjustment()
   }
 }, {
   immediate: true

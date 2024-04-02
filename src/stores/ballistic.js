@@ -15,7 +15,7 @@ const ISA_HUMIDITY = 78
 
 export const useBallisticStore = defineStore('ballistic', {
   state: () => ({
-    profileId: null,
+    profileId: 1,
     zero: {
       distance: 25,
       unit: 'YD'
@@ -40,14 +40,15 @@ export const useBallisticStore = defineStore('ballistic', {
       speedUnit: 'MPH',
       direction: 3
     },
-    shotAngle: {
-      relativeAngle: 0
+    sightAdjustment: {
+      angle: 0,
+      unit: 'MOA'
     },
     options: {
       showAtmospheric: false,
       showWindConditions: false,
       showVelocityGraph: false,
-      showShotAngle: false
+      showSightAdjustment: false
     }
   }),
 
@@ -65,7 +66,7 @@ export const useBallisticStore = defineStore('ballistic', {
           zero: state.zero,
           atmosphere: state.atmosphere,
           wind: state.wind,
-          shotAngle: state.shotAngle
+          sightAdjustment: state.sightAdjustment
         }
         results = ballisticCalculator(params)
       }
@@ -87,8 +88,8 @@ export const useBallisticStore = defineStore('ballistic', {
       this.wind.speedUnit = 'MPH'
       this.wind.direction = 3
     },
-    resetShotAngle () {
-      this.shotAngle.relativeAngle = 0
+    resetSightAdjustment () {
+      this.sightAdjustment.angle = 0
     },
     removeProfile () {
       this.profileId = null

@@ -39,10 +39,10 @@
         <WindConditionsCard />
       </div>
       <div
-        v-show="options.showShotAngle"
+        v-show="options.showSightAdjustment"
         class="col-xs-12 col-sm-6"
       >
-        <ShotAngleCard />
+        <SightAdjustmentCard />
       </div>
     </div>
     <ResultCalculator v-if="showCalcResult" />
@@ -57,7 +57,7 @@ import RangeCard from 'components/calculator/ballistic/RangeCard.vue'
 import ResultCalculator from 'components/calculator/ballistic/ResultCalculator.vue'
 import AtmosphereCard from 'components/calculator/ballistic/AtmosphereCard.vue'
 import WindConditionsCard from 'components/calculator/ballistic/WindConditionsCard.vue'
-import ShotAngleCard from 'components/calculator/ballistic/ShotAngleCard.vue'
+import SightAdjustmentCard from 'components/calculator/ballistic/SightAdjustmentCard.vue'
 import { useBallisticStore } from 'stores/ballistic'
 import { computed } from 'vue'
 

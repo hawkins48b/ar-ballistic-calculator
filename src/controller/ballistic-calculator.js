@@ -128,10 +128,15 @@ export default function (params) {
     }
   }
 
-  // Shot angle
+  // sight Adjustment
   let relativeAngle = BC.UNew.Degree(0)
-  if (params.shotAngle) {
-    relativeAngle = BC.UNew.Degree(parseFloat(params.shotAngle.relativeAngle))
+  if (parseFloat(params.sightAdjustment.angle) !== 0) {
+    if (params.sightAdjustment.unit === 'MOA') {
+      relativeAngle = BC.UNew.MOA(parseFloat(params.sightAdjustment.angle))
+    }
+    if (params.sightAdjustment.unit === 'MRAD') {
+      relativeAngle = BC.UNew.MIL(parseFloat(params.sightAdjustment.angle))
+    }
   }
 
   // set parameters

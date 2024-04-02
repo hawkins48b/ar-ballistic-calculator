@@ -40,9 +40,9 @@
             </div>
             <div>
               <q-toggle
-                v-model="options.showShotAngle"
+                v-model="options.showSightAdjustment"
               >
-                Shot angle
+                Sight adjustment
               </q-toggle>
             </div>
           </q-form>

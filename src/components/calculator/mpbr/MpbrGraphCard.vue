@@ -25,22 +25,19 @@
       type="line"
       :options="options"
       :series="series"
-      height="300px"
+      height="400px"
     />
-    <!--
     <useMpbrButton
-      :zero="zeroDistance"
+      :shot="mpbrShot"
       :distance-unit="mpbrStore.distanceUnit"
-      :distance="xAxisMax"
     />
-    -->
   </q-card>
 </template>
 
 <script setup>
 // imports
 import MpbrList from 'components/calculator/mpbr/MpbrList.vue'
-// import UseMpbrButton from 'components/calculator/mpbr/UseMpbrButton.vue'
+import UseMpbrButton from 'components/calculator/mpbr/UseMpbrButton.vue'
 import * as BC from 'js-ballistics'
 import { ref, reactive, computed, watch } from 'vue'
 import { colors, useQuasar } from 'quasar'
@@ -57,7 +54,9 @@ const $q = useQuasar()
 const mpbrStore = useMpbrStore()
 const unit = computed(() => mpbrStore.target.unit)
 
-// chart options
+/*
+ * Chart options
+ */
 const options = reactive({
   chart: {
     id: 'mpbr-chart',
@@ -99,9 +98,10 @@ const options = reactive({
   }
 })
 
-// Chart series data
+/*
+ * Chart series (data)
+ */
 const series = ref([])
-
 const buildSeries = () => {
   const data = []
   let serieName
@@ -148,11 +148,6 @@ const buildSeries = () => {
   options.xaxis.max = mpbrShot.value.distanceMax - mpbrShot.value.distanceMax % 100 + 100
   options.xaxis.tickAmount = 20
 
-  const yAxisLimit = mpbrStore.target.size / 2 - mpbrStore.target.size / 2 % 10 + 10
-  options.yaxis[0].min = -yAxisLimit
-  options.yaxis[0].max = yAxisLimit
-  options.yaxis[0].tickAmount = 5
-
   // renew the data
   series.value = [{
     name: serieName,
@@ -164,9 +159,10 @@ const buildSeries = () => {
   }
 }
 
-// load series by watching shot
+/*
+ * Calculate shot
+ */
 const mpbrShot = ref()
-
 // watch if data changes
 watch(mpbrStore, async () => {
   if (mpbrStore.profileId && mpbrStore.target.size > 0) {

@@ -130,7 +130,7 @@ export default function (params) {
 
   // sight Adjustment
   let relativeAngle = BC.UNew.Degree(0)
-  if (parseFloat(params.sightAdjustment.angle) !== 0) {
+  if (params.sightAdjustment) {
     if (params.sightAdjustment.unit === 'MOA') {
       relativeAngle = BC.UNew.MOA(parseFloat(params.sightAdjustment.angle))
     }

@@ -6,6 +6,7 @@
     :option-label="(row) => profilesStore.profileLabel(row.id)"
     filled
     label="Select a profile"
+    :bg-color="!profileId ? 'primary' : ''"
   />
 </template>
 

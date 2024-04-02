@@ -5,7 +5,7 @@
       class="q-mt-md"
     />
     <!-- Elevation table -->
-    <ElevationTableCard
+    <TableCard
       class="q-mt-md"
     />
     <!-- Velocity chart -->
@@ -19,7 +19,7 @@
 <script setup>
 // imports
 import ElevationChartCard from 'components/calculator/ballistic/ElevationChartCard.vue'
-import ElevationTableCard from 'components/calculator/ballistic/ElevationTableCard.vue'
+import TableCard from 'components/calculator/ballistic/TableCard.vue'
 import VelocityChartCard from 'components/calculator/ballistic/VelocityChartCard.vue'
 import { useBallisticStore } from 'stores/ballistic'
 import { computed } from 'vue'

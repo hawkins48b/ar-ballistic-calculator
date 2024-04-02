@@ -25,14 +25,15 @@
 
     <q-input
       v-model="sightAdjustment.angle"
-      label="Sight adjustment"
+      label="Sight elevation adjustment"
       type="number"
       filled
       debounce="500"
       class="q-mt-md"
       :rules="[
-        val => val !== '' || 'Sight adjustment must not be empty',
+        val => val !== '' || 'Sight elevation adjustment must not be empty',
       ]"
+      hint="Elevation adjustments made after zero"
     >
       <template #append>
         <q-btn-toggle

@@ -49,6 +49,11 @@ export const useBallisticStore = defineStore('ballistic', {
       showWindConditions: false,
       showVelocityGraph: false,
       showSightAdjustment: false
+    },
+    results: {
+      table: {
+        visibleColumns: ['rangeYD', 'rangeM', 'elevationIN', 'elevationCM', 'elevationAdjustmentMOA', 'elevationAdjustmentMRAD']
+      }
     }
   }),
 

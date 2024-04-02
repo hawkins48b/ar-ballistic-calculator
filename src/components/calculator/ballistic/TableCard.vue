@@ -103,14 +103,14 @@ const columns = computed(() => {
     },
     // correction
     {
-      name: 'adjustmentMOA',
+      name: 'elevationAdjustmentMOA',
       field: row => isNaN(row.dropAdjustment.In(BC.Unit.MOA)) ? 0 : row.dropAdjustment.In(BC.Unit.MOA),
       label: 'Elevation (MOA)',
       format: (val, row) => `${Math.round(val * 10) / 10 * -1}`,
       align: 'left'
     },
     {
-      name: 'adjustmentMRAD',
+      name: 'elevationAdjustmentMRAD',
       field: row => isNaN(row.dropAdjustment.In(BC.Unit.MIL)) ? 0 : row.dropAdjustment.In(BC.Unit.MIL),
       label: 'Elevation (MRAD)',
       format: (val, row) => `${Math.round(val * 10) / 10 * -1}`,
@@ -189,7 +189,7 @@ const columns = computed(() => {
         align: 'left'
       }
     ]
-    const indexToPush = columnsArray.findIndex((column) => column.name === 'adjustmentMRAD')
+    const indexToPush = columnsArray.findIndex((column) => column.name === 'velocityFPS')
     columnsArray = [
       ...columnsArray.slice(0, indexToPush),
       ...windageColumns,
@@ -203,14 +203,7 @@ const columns = computed(() => {
 /*
  * Visible columns
  */
-const visibleColumns = ref([])
-const range = computed(() => ballisticStore.range)
-if (range.value.unit === 'YD') {
-  visibleColumns.value = ['rangeYD', 'elevationIN', 'adjustmentMOA']
-}
-if (range.value.unit === 'M') {
-  visibleColumns.value = ['rangeM', 'elevationCM', 'adjustmentMRAD']
-}
+const visibleColumns = ref(ballisticStore.results.table.visibleColumns)
 
 /*
  * CSV Export

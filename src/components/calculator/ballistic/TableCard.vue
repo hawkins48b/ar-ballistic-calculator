@@ -17,7 +17,7 @@
           flat
           @click="exportCSV"
         >
-          <q-tooltip>Export CSV</q-tooltip>
+          &nbsp;Export CSV
         </q-btn>
       </div>
     </div>

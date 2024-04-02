@@ -27,12 +27,20 @@
       :series="series"
       height="300px"
     />
+    <!--
+    <useMpbrButton
+      :zero="zeroDistance"
+      :distance-unit="mpbrStore.distanceUnit"
+      :distance="xAxisMax"
+    />
+    -->
   </q-card>
 </template>
 
 <script setup>
 // imports
 import MpbrList from 'components/calculator/mpbr/MpbrList.vue'
+// import UseMpbrButton from 'components/calculator/mpbr/UseMpbrButton.vue'
 import * as BC from 'js-ballistics'
 import { ref, reactive, computed, watch } from 'vue'
 import { colors, useQuasar } from 'quasar'
@@ -44,6 +52,10 @@ const chart = ref(null)
 
 // quasar $q
 const $q = useQuasar()
+
+// mpbr store
+const mpbrStore = useMpbrStore()
+const unit = computed(() => mpbrStore.target.unit)
 
 // chart options
 const options = reactive({
@@ -96,7 +108,6 @@ const buildSeries = () => {
   let xAxisTitle
   let yAxisTitle
 
-  const unit = computed(() => mpbrStore.target.unit)
   for (const trajectory of mpbrShot.value._trajectory) {
     if (unit.value === 'IN') {
       const elevation = Math.round(trajectory.drop.In(BC.Unit.Inch) * 10) / 10
@@ -153,8 +164,6 @@ const buildSeries = () => {
   }
 }
 
-// mpbr store
-const mpbrStore = useMpbrStore()
 // load series by watching shot
 const mpbrShot = ref()
 

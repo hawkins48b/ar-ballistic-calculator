@@ -163,3 +163,18 @@ export default function (params) {
 
   return results
 }
+
+export function addExtraData (shot) {
+  let nearZero
+  const nearZeroFound = false
+  let farZero
+
+  shot._trajectory.forEach((trajectory) => {
+    const drop = trajectory.drop.In(BC.Unit.Millimeter)
+    if (drop <= 0 && !nearZeroFound) {
+
+    }
+  })
+
+  return shot
+}

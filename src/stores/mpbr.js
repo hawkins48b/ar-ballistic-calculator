@@ -57,7 +57,7 @@ export const useMpbrStore = defineStore('mpbr', {
             range,
             zero
           }
-          const shot = ballisticCalculator(params)
+          const shot = ballisticCalculator(params, true)
 
           resolve(shot)
         })
@@ -65,30 +65,11 @@ export const useMpbrStore = defineStore('mpbr', {
       }
       return Promise.all(promises)
     },
-    async calculateMaxElevation (shots, targetSizeUnit, distanceUnit) {
-      const promises = []
-
-      // loop each trajectory and verify max that max elevation <= TargetElevationMax
-      shots.forEach((shot) => {
-        const promiseCalc = new Promise((resolve) => {
-          const shotElevations = shot._trajectory.map(trajectory => trajectory.drop.In(targetSizeUnit))
-          const shotElevationMax = Math.max(...shotElevations)
-          // mark maxOrdinance
-          shot.maxOrdinance = shotElevationMax
-          shot.maxOrdinanceDistance = shot._trajectory.find(trajectory => trajectory.drop.In(targetSizeUnit) === shotElevationMax).distance.In(distanceUnit)
-
-          resolve(shot)
-        })
-        promises.push(promiseCalc)
-      })
-      return Promise.all(promises)
-    },
     findLongestTrajectoryForTargetSize (shots, targetSize, targetSizeUnit, distanceUnit) {
       let longestShotDistance = 0
       let longestShot
       shots.forEach((shot) => {
-        shot.farZero = 0
-        if (shot.maxOrdinance <= targetSize / 2) {
+        if (shot.maxOrdinance.elevation.In(targetSizeUnit) <= targetSize / 2) {
           // find first distance where drop >= -target size / 2
           let longestTrajectoryFound = false
           let longestTrajectoryDistance
@@ -99,15 +80,6 @@ export const useMpbrStore = defineStore('mpbr', {
                 if (drop <= -targetSize / 2) {
                   longestTrajectoryFound = true
                   longestTrajectoryDistance = trajectory.distance.In(distanceUnit)
-                }
-              }
-            }
-
-            // mark far zero
-            if (Math.round(trajectory.drop.In(targetSizeUnit)) === 0) {
-              if (trajectory.distance.In(distanceUnit) > shot.maxOrdinanceDistance) { // distance must be longer than max ordiance
-                if (trajectory.drop.In(targetSizeUnit) > 0) { // drop must be positive
-                  shot.farZero = trajectory.distance.In(distanceUnit)
                 }
               }
             }

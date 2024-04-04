@@ -62,7 +62,7 @@ const nearZero = computed(() => {
 })
 const farZero = computed(() => {
   let distance = 0
-  if (props.shot) {
+  if (props.shot && props.shot.farZero) {
     distance = Math.round(props.shot.farZero.In(mpbrStore.distanceUnit))
   }
 

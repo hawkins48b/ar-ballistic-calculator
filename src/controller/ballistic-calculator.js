@@ -15,10 +15,10 @@ export default function (params, addExtra) {
 
   let zeroDistance
   if (params.zero.unit === 'YD') {
-    zeroDistance = BC.UNew.Yard(parseFloat(params.zero.distance))
+    zeroDistance = BC.UNew.Yard(Math.abs(parseFloat(params.zero.distance)))
   }
   if (params.zero.unit === 'M') {
-    zeroDistance = BC.UNew.Meter(parseFloat(params.zero.distance))
+    zeroDistance = BC.UNew.Meter(Math.abs(parseFloat(params.zero.distance)))
   }
 
   let barrelTwist = BC.UNew.Inch(0)
@@ -79,18 +79,18 @@ export default function (params, addExtra) {
   // range
   let maxRange
   if (params.range.unit === 'YD') {
-    maxRange = BC.UNew.Yard(parseFloat(params.range.distance))
+    maxRange = BC.UNew.Yard(Math.abs(parseFloat(params.range.distance)))
   }
   if (params.range.unit === 'M') {
-    maxRange = BC.UNew.Meter(parseFloat(params.range.distance))
+    maxRange = BC.UNew.Meter(Math.abs(parseFloat(params.range.distance)))
   }
 
   let rangeStep
   if (params.range.unit === 'YD') {
-    rangeStep = BC.UNew.Yard(parseFloat(params.range.step))
+    rangeStep = BC.UNew.Yard(Math.abs(parseFloat(params.range.step)))
   }
   if (params.range.unit === 'M') {
-    rangeStep = BC.UNew.Meter(parseFloat(params.range.step))
+    rangeStep = BC.UNew.Meter(Math.abs(parseFloat(params.range.step)))
   }
 
   // atmosphere
@@ -222,7 +222,7 @@ function addExtraData (shot) {
     if (drop <= 0 && distance <= shot.maxOrdinance.distance.In(BC.Unit.Millimeter)) {
       shot.nearZero = trajectory.distance
     }
-    if (drop > 0 && distance > shot.maxOrdinance.distance.In(BC.Unit.Millimeter)) {
+    if (drop >= 0 && distance > shot.maxOrdinance.distance.In(BC.Unit.Millimeter)) {
       shot.farZero = trajectory.distance
     }
   })

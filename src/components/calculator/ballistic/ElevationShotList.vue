@@ -48,7 +48,7 @@ const ballisticStore = useBallisticStore()
 
 const nearZero = computed(() => {
   let distance = 0
-  if (props.shot) {
+  if (props.shot.nearZero) {
     distance = Math.round(props.shot.nearZero.In(ballisticStore.distanceUnit))
   }
   return distance

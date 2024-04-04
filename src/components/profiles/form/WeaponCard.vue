@@ -51,24 +51,40 @@
   </q-card>
 </template>
 
-<script>
-export default {
-  props: {
-    profile: {
-      type: Object,
-      required: true
-    }
-  },
-  emits: ['update:profile'],
-  computed: {
-    localProfile: {
-      get () {
-        return this.profile
-      },
-      set (value) {
-        this.$emit('update:profile', value)
-      }
-    }
+<script setup>
+// imports
+import * as BC from 'js-ballistics'
+import { ref, watch } from 'vue'
+
+// props
+const props = defineProps({
+  profile: {
+    type: Object,
+    required: true
   }
-}
+})
+
+// event emit
+const emits = defineEmits(['update:profile'])// props
+const localProfile = ref(props.profile)
+
+watch(localProfile, (newValue) => {
+  emits('update:profile', newValue)
+})
+
+/*
+ * Unit conversion
+ */
+
+// conversion for barrel twist
+watch(() => localProfile.value.weapon.barrelTwistUnit, (newValue) => {
+  if (newValue === 'IN') {
+    localProfile.value.weapon.barrelTwist = BC.UNew.Centimeter(localProfile.value.weapon.barrelTwist).In(BC.Unit.Inch)
+    localProfile.value.weapon.barrelTwist = Math.round(localProfile.value.weapon.barrelTwist * 10) / 10
+  }
+  if (newValue === 'MM') {
+    localProfile.value.weapon.barrelTwist = BC.UNew.Inch(localProfile.value.weapon.barrelTwist).In(BC.Unit.Centimeter)
+    localProfile.value.weapon.barrelTwist = Math.round(localProfile.value.weapon.barrelTwist)
+  }
+})
 </script>

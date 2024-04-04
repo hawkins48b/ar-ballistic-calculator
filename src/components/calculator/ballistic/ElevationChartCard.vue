@@ -237,8 +237,9 @@ const annotationMaxOrdinance = computed(() => {
  */
 const ballisticStore = useBallisticStore()
 const shot = computed(() => ballisticStore.calculateShotStep1)
+const step = computed(() => ballisticStore.range.step)
 
-watch(() => shot, () => {
+watch([shot, step], () => {
   buildSeries()
   setOptions()
   // remove annotations

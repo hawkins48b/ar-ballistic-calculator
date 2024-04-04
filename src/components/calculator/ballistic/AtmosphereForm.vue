@@ -127,7 +127,7 @@ watch(() => ballisticStore.atmosphere.temperatureUnit, (newValue) => {
     if (newValue === '°C') {
       atmosphere.value.temperature = BC.UNew.Fahrenheit(atmosphere.value.temperature).In(BC.Unit.Celsius)
     }
-    atmosphere.value.temperature = Math.round(atmosphere.value.temperature)
+    atmosphere.value.temperature = Math.round(atmosphere.value.temperature * 10) / 10
   }
 })
 

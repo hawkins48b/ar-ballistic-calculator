@@ -83,7 +83,6 @@ const { range, zero } = storeToRefs(ballisticStore)
 /*
  * Unit conversion
  */
-
 // conversion zero distance
 watch(() => zero.value.unit, (newValue) => {
   if (newValue === 'YD') {

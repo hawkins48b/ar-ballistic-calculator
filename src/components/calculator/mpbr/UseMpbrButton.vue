@@ -51,6 +51,7 @@ const useMbpr = () => {
     ballisticStore.profileId = mpbrStore.profileId
     ballisticStore.zero.distance = nearZero
     ballisticStore.range.distance = range
+    ballisticStore.range.step = 25
 
     if (props.distanceUnit === BC.Unit.Yard) {
       ballisticStore.zero.unit = 'YD'

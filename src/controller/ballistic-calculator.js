@@ -36,8 +36,6 @@ export default function (params, addExtra) {
   twist: (number | Distance) = UNew.Inch(0),
   zeroLookAngle: (number | Angular) = UNew.MIL(0)
   */
-  console.log('params', params)
-  console.log('barrel twist', barrelTwist)
   const weapon = new BC.Weapon(opticHeight, zeroDistance, barrelTwist)
 
   // define ammo parameters
@@ -75,8 +73,6 @@ export default function (params, addExtra) {
   if (params.bullet.ballisticCoefficientProfile === 'G7') {
     ballisticCoefficientTable = BC.Table.G7
   }
-
-  console.log('params.bullet.ballisticCoefficientProfile ', params.bullet.ballisticCoefficientProfile)
 
   const dragModel = new BC.DragModel(ballisticCoefficient, ballisticCoefficientTable, bulletWeight, bulletDiameter)
 
@@ -177,7 +173,6 @@ export default function (params, addExtra) {
     tempModifier: number = 0,
     powderTemp: (number | Temperature) = UNew.Celsius(15))
   */
-  console.log('bullet length', bulletLength)
   const ammo = new BC.Ammo(dragModel, bulletLength, bulletVelocity)
 
   // fire shot
@@ -201,7 +196,6 @@ export default function (params, addExtra) {
     results = addExtraData(results)
   }
 
-  console.log('shot', results)
   return results
 }
 

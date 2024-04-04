@@ -9,7 +9,18 @@
     :bg-color="!profileId ? 'primary' : ''"
     :label-color="!profileId ? 'white' : ''"
     :color="!profileId ? 'white' : ''"
-  />
+  >
+    <template #append>
+      <q-btn
+        v-if="profileId"
+        round
+        dense
+        flat
+        icon="edit"
+        :to="`/profiles/edit/${profileId}`"
+      />
+    </template>
+  </q-select>
 </template>
 
 <script setup>

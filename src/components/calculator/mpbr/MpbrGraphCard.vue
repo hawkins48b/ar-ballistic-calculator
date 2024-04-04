@@ -174,14 +174,17 @@ watch(mpbrStore, async () => {
   if (mpbrStore.profileId && mpbrStore.target.size > 0) {
     // calculate maximum point blank range
     mpbrShot.value = await mpbrStore.calculateMpbr()
+
+    if (mpbrShot.value) {
     // reduce results
-    mpbrShot.value._trajectory = reduceShotTrajectories(mpbrShot.value)
-    // build series
-    buildSeries()
-    // set options
-    setOptions()
-    // remove annotations
-    showAnnotations.value = false
+      mpbrShot.value._trajectory = reduceShotTrajectories(mpbrShot.value)
+      // build series
+      buildSeries()
+      // set options
+      setOptions()
+      // remove annotations
+      showAnnotations.value = false
+    }
   }
 },
 {
@@ -190,9 +193,11 @@ watch(mpbrStore, async () => {
 })
 
 const reduceShotTrajectories = (shot) => {
-  const xAxisMax = shot.mpbr.distanceMax.In(mpbrStore.distanceUnit) - shot.mpbr.distanceMax.In(mpbrStore.distanceUnit) % 100 + 100
+  if (shot) {
+    const xAxisMax = shot.mpbr.distanceMax.In(mpbrStore.distanceUnit) - shot.mpbr.distanceMax.In(mpbrStore.distanceUnit) % 100 + 100
 
-  return shot._trajectory.filter(trajectory => trajectory.distance.In(mpbrStore.distanceUnit) <= xAxisMax)
+    return shot._trajectory.filter(trajectory => trajectory.distance.In(mpbrStore.distanceUnit) <= xAxisMax)
+  } else return null
 }
 
 /*
@@ -256,9 +261,13 @@ const annotationNearZero = computed(() => {
   }
 })
 const annotationFarZero = computed(() => {
+  let x = -100 // default outside view
+  if (mpbrShot.value.farZero) {
+    x = mpbrShot.value.farZero.In(mpbrStore.distanceUnit)
+  }
   return {
     id: 'far-zero-size',
-    x: mpbrShot.value.farZero.In(mpbrStore.distanceUnit),
+    x,
     y: 0,
     label: {
       text: 'Far zero',

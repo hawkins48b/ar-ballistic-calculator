@@ -1,7 +1,7 @@
 import * as BC from 'js-ballistics'
 import Calculator from 'js-ballistics'
 
-export default function (params) {
+export default function (params, addExtra) {
   let results = null
 
   // define weapon parameters
@@ -161,5 +161,40 @@ export default function (params) {
   const calculator = new Calculator(weapon, ammo, atmo)
   results = calculator.fire(shot, rangeStep)
 
+  if (addExtra) {
+    results = addExtraData(results)
+  }
+
   return results
+}
+
+function addExtraData (shot) {
+  // Max elevations
+  let maxOrdinance = BC.UNew.Millimeter(0)
+  let maxOrdinanceMM = 0
+  let maxOrdinanceDistance = BC.UNew.Millimeter(0)
+  shot._trajectory.forEach(trajectory => {
+    if (trajectory.drop.In(BC.Unit.Millimeter) > maxOrdinanceMM) {
+      maxOrdinanceMM = trajectory.drop.In(BC.Unit.Millimeter)
+      maxOrdinance = trajectory.drop
+      maxOrdinanceDistance = trajectory.distance
+    }
+  })
+  shot.maxOrdinance = {
+    elevation: maxOrdinance,
+    distance: maxOrdinanceDistance
+  }
+
+  shot._trajectory.forEach((trajectory) => {
+    const drop = Math.round(trajectory.drop.In(BC.Unit.Centimeter) * 10) / 10 // round to centimeter for better results
+    const distance = trajectory.distance.In(BC.Unit.Millimeter)
+    if (drop <= 0 && distance <= shot.maxOrdinance.distance.In(BC.Unit.Millimeter)) {
+      shot.nearZero = trajectory.distance
+    }
+    if (drop > 0 && distance > shot.maxOrdinance.distance.In(BC.Unit.Millimeter)) {
+      shot.farZero = trajectory.distance
+    }
+  })
+
+  return shot
 }

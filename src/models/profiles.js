@@ -1,7 +1,9 @@
 export default function () {
   return {
     weapon: {
-      name: ''
+      name: '',
+      barrelTwist: 0,
+      barrelTwistUnit: 'IN'
     },
     optic: {
       model: '',
@@ -17,7 +19,12 @@ export default function () {
       ballisticCoefficient: 0,
       ballisticCoefficientProfile: 'G1',
       velocity: 0,
-      velocityUnit: 'FPS'
+      velocityUnit: 'FPS',
+      length: 0,
+      lengthUnit: 'IN'
+    },
+    options: {
+      enableSpinDrift: false
     }
   }
 }

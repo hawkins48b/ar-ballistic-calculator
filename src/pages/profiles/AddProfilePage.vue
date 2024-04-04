@@ -1,14 +1,21 @@
 <template>
-  <div class="row justify-start">
-    <div class="q-pl-sm">
-      <q-btn
-        to="/profiles"
-        flat
-        icon="arrow_back"
-      />
+  <div class="row justify-between">
+    <div class="col-auto q-pa-sm">
+      <div class="row">
+        <div class="col-auto">
+          <q-btn
+            to="/profiles"
+            flat
+            icon="arrow_back"
+          />
+        </div>
+        <div class="col-auto text-h6">
+          Add Profile
+        </div>
+      </div>
     </div>
-    <div class="text-h6 q-pl-md">
-      Add new profile
+    <div class="col-auto self-center self-end">
+      <OptionsButton v-model="profile" />
     </div>
   </div>
   <ProfileForm
@@ -20,6 +27,7 @@
 <script setup>
 // imports
 import ProfileForm from 'components/profiles/form/ProfileForm.vue'
+import OptionsButton from 'components/profiles/form/OptionsButton.vue'
 import { useProfilesStore } from 'stores/profiles'
 import { useRouter } from 'vue-router'
 import { reactive } from 'vue'

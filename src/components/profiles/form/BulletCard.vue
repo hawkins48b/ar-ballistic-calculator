@@ -110,6 +110,32 @@
         />
       </template>
     </q-input>
+    <div v-if="localProfile.options.enableSpinDrift">
+      <q-input
+        v-model="localProfile.bullet.length"
+        label="Bullet length"
+        filled
+        step="any"
+        type="number"
+        lazy-rules
+        :rules="[
+          val => val && val > 0 && localProfile.options.enableSpinDrift|| 'bullet length must be positive'
+        ]"
+        class="q-mt-md"
+        hint="The length of the bullet, e.g 0.746 for M193"
+      >
+        <template #append>
+          <q-btn-toggle
+            v-model="localProfile.bullet.lengthUnit"
+            no-caps
+            :options="[
+              {label: 'IN', value: 'IN'},
+              {label: 'MM', value: 'MM'}
+            ]"
+          />
+        </template>
+      </q-input>
+    </div>
   </q-card>
 </template>
 

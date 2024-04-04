@@ -22,7 +22,7 @@
       </div>
     </div>
     <q-select
-      v-model="visibleColumns"
+      v-model="ballisticStore.results.table.visibleColumns"
       multiple
       filled
       options-dense
@@ -41,7 +41,7 @@
       flat
       :rows="rows._trajectory"
       :columns="columns"
-      :visible-columns="visibleColumns"
+      :visible-columns="ballisticStore.results.table.visibleColumns"
       row-key="distance"
       :rows-per-page-options="[0]"
       :class="{'bg-grey-3':!$q.dark.isActive}"
@@ -58,7 +58,7 @@
 // imports
 import { useBallisticStore } from 'stores/ballistic'
 import * as BC from 'js-ballistics'
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { exportFile, useQuasar } from 'quasar'
 
 // Quasar $q
@@ -201,11 +201,6 @@ const columns = computed(() => {
 })
 
 /*
- * Visible columns
- */
-const visibleColumns = ref(ballisticStore.results.table.visibleColumns)
-
-/*
  * CSV Export
  */
 const exportCSV = () => {
@@ -226,7 +221,7 @@ const exportCSV = () => {
     csvOutput += Math.round(trajectory.velocity.In(BC.Unit.MPS)) + ','
     csvOutput += Math.round(trajectory.energy.In(BC.Unit.FootPound)) + ','
     csvOutput += Math.round(trajectory.energy.In(BC.Unit.Joule)) + ','
-    csvOutput += Math.round(trajectory.time) + ','
+    csvOutput += Math.round(trajectory.time * 100) / 100 + ','
     csvOutput += '\r\n'
   }
 

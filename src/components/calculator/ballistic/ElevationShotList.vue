@@ -19,18 +19,10 @@
       </q-item-section>
       <q-item-section>
         <q-item-label overline>
-          MIN. POINT BLANK RANGE
+          MAX. ORDINANCE
         </q-item-label>
         <q-item-label class="text-bold">
-          {{ mpbrDistanceMin }} {{ distanceLabel }}
-        </q-item-label>
-      </q-item-section>
-      <q-item-section>
-        <q-item-label overline>
-          MAX. POINT BLANK RANGE
-        </q-item-label>
-        <q-item-label class="text-bold">
-          {{ mpbrDistanceMax }} {{ distanceLabel }}
+          {{ maxOrdinanceElevation }} {{ elevationLabel }} at {{ maxOrdinanceDistance }} {{ distanceLabel }}
         </q-item-label>
       </q-item-section>
     </q-item>
@@ -40,7 +32,8 @@
 <script setup>
 // imports
 import { computed } from 'vue'
-import { useMpbrStore } from 'stores/mpbr'
+import { useBallisticStore } from 'stores/ballistic'
+import * as BC from 'js-ballistics'
 
 // props
 const props = defineProps({
@@ -51,45 +44,54 @@ const props = defineProps({
   }
 })
 
-const mpbrStore = useMpbrStore()
+const ballisticStore = useBallisticStore()
 
 const nearZero = computed(() => {
   let distance = 0
   if (props.shot) {
-    distance = Math.round(props.shot.nearZero.In(mpbrStore.distanceUnit))
+    distance = Math.round(props.shot.nearZero.In(ballisticStore.distanceUnit))
   }
   return distance
 })
 const farZero = computed(() => {
-  let distance = 0
-  if (props.shot) {
-    distance = Math.round(props.shot.farZero.In(mpbrStore.distanceUnit))
-  }
-
-  return distance
-})
-const mpbrDistanceMin = computed(() => {
-  let distance = 0
-  if (props.shot) {
-    distance = Math.round(props.shot.mpbr.distanceMin.In(mpbrStore.distanceUnit))
+  let distance = 'unkown'
+  if (props.shot.farZero) {
+    distance = Math.round(props.shot.farZero.In(ballisticStore.distanceUnit))
   }
   return distance
 })
-const mpbrDistanceMax = computed(() => {
+const maxOrdinanceDistance = computed(() => {
   let distance = 0
   if (props.shot) {
-    distance = Math.round(props.shot.mpbr.distanceMax.In(mpbrStore.distanceUnit))
+    distance = Math.round(props.shot.maxOrdinance.distance.In(ballisticStore.distanceUnit))
   }
   return distance
+})
+const maxOrdinanceElevation = computed(() => {
+  let elevation = 0
+  if (props.shot) {
+    elevation = Math.round(props.shot.maxOrdinance.elevation.In(ballisticStore.elevationUnit) * 10) / 10
+  }
+  return elevation
 })
 
 const distanceLabel = computed(() => {
   let label
-  if (mpbrStore.target.unit === 'IN') {
+  if (ballisticStore.distanceUnit === BC.Unit.Yard) {
     label = 'yard'
   }
-  if (mpbrStore.target.unit === 'CM') {
+  if (ballisticStore.distanceUnit === BC.Unit.Meter) {
     label = 'meter'
+  }
+  return label
+})
+const elevationLabel = computed(() => {
+  let label
+  if (ballisticStore.elevationUnit === BC.Unit.Inch) {
+    label = 'inch'
+  }
+  if (ballisticStore.elevationUnit === BC.Unit.Centimeter) {
+    label = 'cm'
   }
   return label
 })

@@ -3,6 +3,7 @@ import ballisticCalculator from 'src/controller/ballistic-calculator'
 import { defineStore } from 'pinia'
 import { useProfilesStore } from './profiles'
 import { ref } from 'vue'
+import * as BC from 'js-ballistics'
 
 // International Standard Atmosphere ISA
 const ISA_ALTITUDE = 0
@@ -58,7 +59,27 @@ export const useBallisticStore = defineStore('ballistic', {
   }),
 
   getters: {
-    calculateTrajectory: (state) => {
+    distanceUnit: (state) => {
+      let unit
+      if (state.range.unit === 'YD') {
+        unit = BC.Unit.Yard
+      }
+      if (state.range.unit === 'M') {
+        unit = BC.Unit.Meter
+      }
+      return unit
+    },
+    elevationUnit: (state) => {
+      let unit
+      if (state.range.unit === 'YD') {
+        unit = BC.Unit.Inch
+      }
+      if (state.range.unit === 'M') {
+        unit = BC.Unit.Centimeter
+      }
+      return unit
+    },
+    calculateShot: (state) => {
       let results = null
       if (state.profileId) {
         const ProfilesStore = useProfilesStore()
@@ -74,6 +95,29 @@ export const useBallisticStore = defineStore('ballistic', {
           sightAdjustment: state.sightAdjustment
         }
         results = ballisticCalculator(params)
+      }
+      return results
+    },
+    calculateShotStep1: (state) => {
+      let results = null
+      if (state.profileId) {
+        const ProfilesStore = useProfilesStore()
+        const profile = ref(ProfilesStore.profilebyId(state.profileId))
+
+        const params = {
+          optic: profile.value.optic,
+          bullet: profile.value.bullet,
+          range: {
+            distance: state.range.distance,
+            unit: state.range.unit,
+            step: 1
+          },
+          zero: state.zero,
+          atmosphere: state.atmosphere,
+          wind: state.wind,
+          sightAdjustment: state.sightAdjustment
+        }
+        results = ballisticCalculator(params, true)
       }
       return results
     }

@@ -78,7 +78,7 @@ const options = {
 
 // calculate trajectory
 const ballisticStore = useBallisticStore()
-const results = computed(() => ballisticStore.calculateTrajectory)
+const results = computed(() => ballisticStore.calculateShot)
 const speedOfSound = results.value.shot.atmo.mach
 const machValueLabel = ref('')
 

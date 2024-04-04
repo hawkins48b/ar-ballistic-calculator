@@ -42,24 +42,40 @@
   </q-card>
 </template>
 
-<script>
-export default {
-  props: {
-    profile: {
-      type: Object,
-      required: true
-    }
-  },
-  emits: ['update:profile'],
-  computed: {
-    localProfile: {
-      get () {
-        return this.profile
-      },
-      set (value) {
-        this.$emit('update:profile', value)
-      }
-    }
+<script setup>
+// imports
+import * as BC from 'js-ballistics'
+import { ref, watch } from 'vue'
+
+// props
+const props = defineProps({
+  profile: {
+    type: Object,
+    required: true
   }
-}
+})
+
+// event emit
+const emits = defineEmits(['update:profile'])// props
+const localProfile = ref(props.profile)
+
+watch(localProfile, (newValue) => {
+  emits('update:profile', newValue)
+})
+
+/*
+ * Unit conversion
+ */
+
+// conversion for optic height
+watch(() => localProfile.value.optic.heightUnit, (newValue) => {
+  if (newValue === 'IN') {
+    localProfile.value.optic.height = BC.UNew.Centimeter(localProfile.value.optic.height).In(BC.Unit.Inch)
+    localProfile.value.optic.height = Math.round(localProfile.value.optic.height * 100) / 100
+  }
+  if (newValue === 'CM') {
+    localProfile.value.optic.height = BC.UNew.Inch(localProfile.value.optic.height).In(BC.Unit.Centimeter)
+    localProfile.value.optic.height = Math.round(localProfile.value.optic.height * 100) / 100
+  }
+})
 </script>

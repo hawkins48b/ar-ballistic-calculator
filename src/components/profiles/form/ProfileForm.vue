@@ -1,7 +1,7 @@
 <template>
   <q-form @submit="submitProfile">
-    <div class="row q-mt-md">
-      <div class="col-xs-12 col-sm-6 q-pa-sm">
+    <div class="row q-col-gutter-md">
+      <div class="col-xs-12 col-sm-6">
         <WeaponCard
           ref="rifle"
           :profile="profile"
@@ -11,7 +11,7 @@
           class="q-mt-md"
         />
       </div>
-      <div class="col-xs-12 col-sm-6 q-pa-sm">
+      <div class="col-xs-12 col-sm-6">
         <BulletCard :profile="profile" />
       </div>
     </div>

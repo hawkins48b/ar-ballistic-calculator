@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { reactive } from 'vue'
+import { ref } from 'vue'
 import ballisticCalculator from 'src/controller/ballistic-calculator'
 import { useProfilesStore } from './profiles'
 import * as BC from 'js-ballistics'
@@ -53,7 +53,7 @@ export const useMpbrStore = defineStore('mpbr', {
       }
 
       const ProfilesStore = useProfilesStore()
-      const profile = reactive(ProfilesStore.profilebyId(this.profileId))
+      const profile = ref(ProfilesStore.profilebyId(this.profileId))
 
       const promises = []
       // loop from 5unit to 200unit
@@ -63,8 +63,10 @@ export const useMpbrStore = defineStore('mpbr', {
           zero.distance = i
 
           const params = {
-            optic: profile.optic,
-            bullet: profile.bullet,
+            weapon: profile.value.weapon,
+            optic: profile.value.optic,
+            bullet: profile.value.bullet,
+            options: profile.value.options,
             range,
             zero
           }

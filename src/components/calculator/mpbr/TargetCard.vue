@@ -38,9 +38,26 @@
 // imports
 import { useMpbrStore } from 'stores/mpbr'
 import { storeToRefs } from 'pinia'
+import * as BC from 'js-ballistics'
+import { watch } from 'vue'
 
 // set calculation profile
 const mpbrStore = useMpbrStore()
 const { target } = storeToRefs(mpbrStore)
+
+/*
+ * Unit conversion
+ */
+// conversion target size
+watch(() => target.value.unit, (newValue) => {
+  if (newValue === 'IN') {
+    target.value.size = BC.UNew.Centimeter(parseFloat(target.value.size)).In(BC.Unit.Inch)
+    target.value.size = Math.round(target.value.size * 10) / 10
+  }
+  if (newValue === 'CM') {
+    target.value.size = BC.UNew.Inch(parseFloat(target.value.size)).In(BC.Unit.Centimeter)
+    target.value.size = Math.round(target.value.size * 10) / 10
+  }
+})
 
 </script>

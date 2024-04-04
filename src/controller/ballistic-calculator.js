@@ -20,7 +20,23 @@ export default function (params, addExtra) {
   if (params.zero.unit === 'M') {
     zeroDistance = BC.UNew.Meter(parseFloat(params.zero.distance))
   }
-  const weapon = new BC.Weapon(opticHeight, zeroDistance)
+
+  let barrelTwist = BC.UNew.Inch(0)
+  if (params.options.enableSpinDrift) {
+    if (params.weapon.barrelTwistUnit === 'IN') {
+      barrelTwist = BC.UNew.Inch(parseFloat(params.weapon.barrelTwist))
+    }
+    if (params.weapon.barrelTwistUnit === 'MM') {
+      barrelTwist = BC.UNew.Millimeter(parseFloat(params.weapon.barrelTwist))
+    }
+  }
+  /*
+  sightHeight: (number | Distance) = UNew.Inch(2),
+  zeroDistance: (number | Distance) = UNew.Yard(100),
+  twist: (number | Distance) = UNew.Inch(0),
+  zeroLookAngle: (number | Angular) = UNew.MIL(0)
+  */
+  const weapon = new BC.Weapon(opticHeight, zeroDistance, barrelTwist)
 
   // define ammo parameters
   let bulletWeight
@@ -140,9 +156,24 @@ export default function (params, addExtra) {
   }
 
   // set parameters
-  const velocitydistance = BC.UNew.Inch(2) // default value
+  let bulletLength = BC.UNew.Inch(2) // default value
+  if (params.options.enableSpinDrift) {
+    if (params.bullet.lengthUnit === 'IN') {
+      bulletLength = BC.UNew.Inch(parseFloat(params.bullet.length))
+    }
+    if (params.bullet.lengthUnit === 'MM') {
+      bulletLength = BC.UNew.Millimeter(parseFloat(params.bullet.length))
+    }
+  }
 
-  const ammo = new BC.Ammo(dragModel, velocitydistance, bulletVelocity)
+  /*
+    dm: DragModel,
+    length: (number | Distance) = UNew.Inch(2),
+    mv: (number | Velocity) = UNew.FPS(2700),
+    tempModifier: number = 0,
+    powderTemp: (number | Temperature) = UNew.Celsius(15))
+  */
+  const ammo = new BC.Ammo(dragModel, bulletLength, bulletVelocity)
 
   // fire shot
   /*

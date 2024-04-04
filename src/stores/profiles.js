@@ -5,7 +5,9 @@ export const useProfilesStore = defineStore('profiles', {
     profilesArray: [{
       id: 1,
       weapon: {
-        name: 'Example Colt M4'
+        name: 'Example Colt M4',
+        barrelTwist: 0,
+        barrelTwistUnit: 'IN'
       },
       optic: {
         model: 'Aimpoint CompM2',
@@ -21,7 +23,12 @@ export const useProfilesStore = defineStore('profiles', {
         ballisticCoefficient: 0.285,
         ballisticCoefficientProfile: 'G1',
         velocity: 3000,
-        velocityUnit: 'FPS'
+        velocityUnit: 'FPS',
+        length: 0,
+        lengthUnit: 'IN'
+      },
+      options: {
+        enableSpinDrift: false
       }
     }],
     nextId: 2

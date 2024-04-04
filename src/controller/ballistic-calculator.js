@@ -222,7 +222,7 @@ function addExtraData (shot) {
     if (drop <= 0 && distance <= shot.maxOrdinance.distance.In(BC.Unit.Millimeter)) {
       shot.nearZero = trajectory.distance
     }
-    if (drop > 0 && distance > shot.maxOrdinance.distance.In(BC.Unit.Millimeter)) {
+    if (drop >= 0 && distance > shot.maxOrdinance.distance.In(BC.Unit.Millimeter)) {
       shot.farZero = trajectory.distance
     }
   })

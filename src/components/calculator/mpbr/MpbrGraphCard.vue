@@ -52,7 +52,6 @@ const $q = useQuasar()
 
 // mpbr store
 const mpbrStore = useMpbrStore()
-const unit = computed(() => mpbrStore.target.unit)
 
 /*
  * Chart options
@@ -105,39 +104,52 @@ const series = ref([])
 const buildSeries = () => {
   const data = []
   let serieName
-  let xAxisTitle
-  let yAxisTitle
 
   for (const trajectory of mpbrShot.value._trajectory) {
-    if (unit.value === 'IN') {
-      const elevation = Math.round(trajectory.drop.In(BC.Unit.Inch) * 10) / 10
+    const elevation = Math.round(trajectory.drop.In(mpbrStore.elevationUnit) * 100) / 100
 
-      let distance = trajectory.distance.In(BC.Unit.Yard)
-      distance = Math.round(distance)
-      data.push({
-        x: distance,
-        y: elevation
-      })
-      // labels
+    if (mpbrStore.elevationUnit === BC.Unit.Inch) {
       serieName = 'Elevation (IN)'
-      xAxisTitle = 'RANGE (YD)'
-      yAxisTitle = 'ELEVATION (IN)'
     }
-    if (unit.value === 'CM') {
-      let elevation = trajectory.drop.In(BC.Unit.Centimeter)
-      elevation = Math.round(elevation * 10) / 10
-
-      let distance = trajectory.distance.In(BC.Unit.Meter)
-      distance = Math.round(distance)
-      data.push({
-        x: distance,
-        y: elevation
-      })
-      // labels
+    if (mpbrStore.elevationUnit === BC.Unit.Centimeter) {
       serieName = 'Elevation (CM)'
-      xAxisTitle = 'RANGE (M)'
-      yAxisTitle = 'ELEVATION (CM)'
     }
+
+    let distance = trajectory.distance.In(mpbrStore.distanceUnit)
+    distance = Math.round(distance)
+    data.push({
+      x: distance,
+      y: elevation
+    })
+  }
+
+  // renew the data
+  series.value = [{
+    name: serieName,
+    data
+  }]
+}
+
+/*
+ * Set options
+ */
+const setOptions = () => {
+  let xAxisTitle, yAxisTitle
+  if (mpbrStore.distanceUnit === BC.Unit.Yard) {
+    // labels
+    xAxisTitle = 'RANGE (YD)'
+  }
+  if (mpbrStore.distanceUnit === BC.Unit.Meter) {
+    // labels
+    xAxisTitle = 'RANGE (M)'
+  }
+  if (mpbrStore.elevationUnit === BC.Unit.Inch) {
+    // labels
+    yAxisTitle = 'ELEVATION (IN)'
+  }
+  if (mpbrStore.elevationUnit === BC.Unit.Centimeter) {
+    // labels
+    yAxisTitle = 'ELEVATION (CM)'
   }
 
   // set correct legend
@@ -145,14 +157,8 @@ const buildSeries = () => {
   options.yaxis[0].title.text = yAxisTitle
 
   // adjust data & axis
-  options.xaxis.max = mpbrShot.value.distanceMax - mpbrShot.value.distanceMax % 100 + 100
+  options.xaxis.max = mpbrShot.value.mpbr.distanceMax.In(mpbrStore.distanceUnit) - mpbrShot.value.mpbr.distanceMax.In(mpbrStore.distanceUnit) % 100 + 100
   options.xaxis.tickAmount = 20
-
-  // renew the data
-  series.value = [{
-    name: serieName,
-    data
-  }]
 
   if (chart.value) { // chart may be null if not mounted
     chart.value.updateOptions(options)
@@ -172,6 +178,8 @@ watch(mpbrStore, async () => {
     mpbrShot.value._trajectory = reduceShotTrajectories(mpbrShot.value)
     // build series
     buildSeries()
+    // set options
+    setOptions()
     // remove annotations
     showAnnotations.value = false
   }
@@ -182,16 +190,9 @@ watch(mpbrStore, async () => {
 })
 
 const reduceShotTrajectories = (shot) => {
-  const unit = computed(() => mpbrStore.target.unit)
-  const yAxisMax = -(mpbrStore.target.size / 2 - mpbrStore.target.size / 2 % 10 + 10)
-  let dropUnit
-  if (unit.value === 'IN') {
-    dropUnit = BC.Unit.Inch
-  }
-  if (unit.value === 'CM') {
-    dropUnit = BC.Unit.Centimeter
-  }
-  return shot._trajectory.filter(trajectory => trajectory.drop.In(dropUnit) > yAxisMax)
+  const xAxisMax = shot.mpbr.distanceMax.In(mpbrStore.distanceUnit) - shot.mpbr.distanceMax.In(mpbrStore.distanceUnit) % 100 + 100
+
+  return shot._trajectory.filter(trajectory => trajectory.distance.In(mpbrStore.distanceUnit) <= xAxisMax)
 }
 
 /*
@@ -204,27 +205,17 @@ watch(showAnnotations, (newValue) => {
 const toggleAnnotations = (show) => {
   if (chart.value) {
     if (show) {
-      chart.value.addYaxisAnnotation(annotationSightLine)
+      chart.value.addPointAnnotation(annotationNearZero.value)
+      chart.value.addPointAnnotation(annotationFarZero.value)
+      chart.value.addXaxisAnnotation(annotationMpbr.value)
       chart.value.addYaxisAnnotation(annotationTargetSize.value)
     } else {
-      chart.value.removeAnnotation(annotationSightLine.id)
+      chart.value.removeAnnotation(annotationNearZero.value.id)
+      chart.value.removeAnnotation(annotationFarZero.value.id)
+      chart.value.removeAnnotation(annotationMpbr.value.id)
       chart.value.removeAnnotation(annotationTargetSize.value.id)
     }
   }
-}
-const annotationSightLine = {
-  id: 'sight-line',
-  y: 0,
-  label: {
-    text: 'Sight line',
-    borderColor: 'transparent',
-    style: {
-      background: colors.getPaletteColor('grey-9'),
-      color: '#fff'
-    }
-  },
-  strokeDashArray: 0,
-  borderColor: colors.getPaletteColor('grey-9')
 }
 
 const { target } = storeToRefs(mpbrStore)
@@ -238,12 +229,71 @@ const annotationTargetSize = computed(() => {
       borderColor: 'transparent',
       style: {
         background: colors.getPaletteColor('accent'),
-        color: '#fff'
+        color: '#fff',
+        fontSize: '15px'
       }
     },
     borderColor: colors.getPaletteColor('accent'),
     fillColor: colors.getPaletteColor('accent')
   }
 })
-
+const annotationNearZero = computed(() => {
+  return {
+    id: 'near-zero-size',
+    x: mpbrShot.value.nearZero.In(mpbrStore.distanceUnit),
+    y: 0,
+    label: {
+      text: 'Near zero',
+      borderColor: 'transparent',
+      style: {
+        background: colors.getPaletteColor('grey-9'),
+        color: '#fff',
+        fontSize: '15px'
+      }
+    },
+    borderColor: colors.getPaletteColor('grey-9'),
+    fillColor: colors.getPaletteColor('grey-9')
+  }
+})
+const annotationFarZero = computed(() => {
+  return {
+    id: 'far-zero-size',
+    x: mpbrShot.value.farZero.In(mpbrStore.distanceUnit),
+    y: 0,
+    label: {
+      text: 'Far zero',
+      borderColor: 'transparent',
+      style: {
+        background: colors.getPaletteColor('grey-9'),
+        color: '#fff',
+        fontSize: '15px'
+      }
+    },
+    borderColor: colors.getPaletteColor('grey-9'),
+    fillColor: colors.getPaletteColor('grey-9')
+  }
+})
+const annotationMpbr = computed(() => {
+  return {
+    id: 'mpbr-min-size',
+    x: mpbrShot.value.mpbr.distanceMin.In(mpbrStore.distanceUnit),
+    x2: mpbrShot.value.mpbr.distanceMax.In(mpbrStore.distanceUnit),
+    label: {
+      text: 'Point blank range',
+      borderColor: 'transparent',
+      style: {
+        background: colors.getPaletteColor('primary'),
+        color: '#fff',
+        fontSize: '15px'
+      },
+      textAnchor: 'top',
+      position: 'end',
+      orientation: 'horizontal',
+      offsetX: 20,
+      offsetY: -20
+    },
+    borderColor: colors.getPaletteColor('primary'),
+    fillColor: colors.getPaletteColor('primary')
+  }
+})
 </script>

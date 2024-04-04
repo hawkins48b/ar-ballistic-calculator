@@ -170,18 +170,28 @@ export default function (params, addExtra) {
 
 function addExtraData (shot) {
   // Max elevations
-  const shotElevations = shot._trajectory.map(trajectory => trajectory.drop.In(BC.Unit.Millimeter))
-  const shotElevationMax = Math.max(...shotElevations)
-  shot.maxOrdinance.elevation = shotElevationMax
-  shot.maxOrdinance.distance = shot._trajectory.find(trajectory => trajectory.drop.In(BC.Unit.Millimeter) === shotElevationMax).distance
+  let maxOrdinance = BC.UNew.Millimeter(0)
+  let maxOrdinanceMM = 0
+  let maxOrdinanceDistance = BC.UNew.Millimeter(0)
+  shot._trajectory.forEach(trajectory => {
+    if (trajectory.drop.In(BC.Unit.Millimeter) > maxOrdinanceMM) {
+      maxOrdinanceMM = trajectory.drop.In(BC.Unit.Millimeter)
+      maxOrdinance = trajectory.drop
+      maxOrdinanceDistance = trajectory.distance
+    }
+  })
+  shot.maxOrdinance = {
+    elevation: maxOrdinance,
+    distance: maxOrdinanceDistance
+  }
 
   shot._trajectory.forEach((trajectory) => {
-    const drop = trajectory.drop.In(BC.Unit.Millimeter)
+    const drop = Math.round(trajectory.drop.In(BC.Unit.Centimeter) * 10) / 10 // round to centimeter for better results
     const distance = trajectory.distance.In(BC.Unit.Millimeter)
-    if (drop <= 0 && distance < shot.maxOrdinance.distance.In(BC.Unit.Millimeter)) {
+    if (drop <= 0 && distance <= shot.maxOrdinance.distance.In(BC.Unit.Millimeter)) {
       shot.nearZero = trajectory.distance
     }
-    if (drop >= 0 && distance > shot.maxOrdinance.distance.In(BC.Unit.Millimeter)) {
+    if (drop > 0 && distance > shot.maxOrdinance.distance.In(BC.Unit.Millimeter)) {
       shot.farZero = trajectory.distance
     }
   })

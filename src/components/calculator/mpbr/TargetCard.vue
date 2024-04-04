@@ -16,7 +16,7 @@
           val => val && val > 0 || 'The target size must be positive'
         ]"
         class="q-mt-md"
-        hint="Recommended value is 17.7 inch / 45 cm"
+        hint="Recommended value is 8 inch / 20 cm"
         debounce="500"
       >
         <template #append>
@@ -30,25 +30,6 @@
           />
         </template>
       </q-input>
-      <!--
-      <div class="q-mt-md">
-        <q-img
-          v-if="$q.dark.isActive"
-          src="~assets/ipsc-target-white.svg"
-          style="height:400px;color:white"
-          fit="fill"
-        />
-        <q-img
-          v-if="!$q.dark.isActive"
-          src="~assets/ipsc-target-black.svg"
-          style="height:400px;color:white"
-          fit="fill"
-        />
-      </div>
-      <div class="text-center">
-        <p>IPSC target</p>
-      </div>
-      -->
     </q-form>
   </q-card>
 </template>

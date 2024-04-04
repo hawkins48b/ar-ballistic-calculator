@@ -66,7 +66,7 @@ const $q = useQuasar()
 
 // calculate trajectory
 const ballisticStore = useBallisticStore()
-const rows = computed(() => ballisticStore.calculateTrajectory)
+const rows = computed(() => ballisticStore.calculateShot)
 
 // set qtable properties
 const columns = computed(() => {

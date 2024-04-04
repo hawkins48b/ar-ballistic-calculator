@@ -9,20 +9,31 @@ export const useMpbrStore = defineStore('mpbr', {
   state: () => ({
     profileId: null,
     target: {
-      size: 17.7,
+      size: 8,
       unit: 'IN'
     }
   }),
 
   getters: {
+    elevationUnit: (state) => {
+      let unit
+
+      if (state.target.unit === 'IN') {
+        unit = BC.Unit.Inch
+      }
+      if (state.target.unit === 'CM') {
+        unit = BC.Unit.Centimeter
+      }
+      return unit
+    },
     distanceUnit: (state) => {
       let unit
 
       if (state.target.unit === 'IN') {
-        unit = 'YD'
+        unit = BC.Unit.Yard
       }
       if (state.target.unit === 'CM') {
-        unit = 'M'
+        unit = BC.Unit.Meter
       }
       return unit
     }
@@ -65,28 +76,37 @@ export const useMpbrStore = defineStore('mpbr', {
       }
       return Promise.all(promises)
     },
-    findLongestTrajectoryForTargetSize (shots, targetSize, targetSizeUnit, distanceUnit) {
-      let longestShotDistance = 0
+    findLongestTrajectoryForTargetSize (shots, targetSize) {
       let longestShot
+      let longestShotDistanceMaxMM = 0
+
       shots.forEach((shot) => {
-        if (shot.maxOrdinance.elevation.In(targetSizeUnit) <= targetSize / 2) {
-          // find first distance where drop >= -target size / 2
-          let longestTrajectoryFound = false
-          let longestTrajectoryDistance
+        if (shot.maxOrdinance.elevation.In(BC.Unit.Millimeter) <= targetSize.In(BC.Unit.Millimeter) / 2) {
+          shot.mpbr = {
+            distanceMin: BC.UNew.Millimeter(0),
+            elevationMin: BC.UNew.Millimeter(0),
+            distanceMax: BC.UNew.Millimeter(0),
+            elevationMax: BC.UNew.Millimeter(0)
+          }
           shot._trajectory.forEach((trajectory) => {
-            if (trajectory.distance.In(distanceUnit) >= 5) { // reject first 5unit distance (avoiding t=0 already outside targetsize/2)
-              if (!longestTrajectoryFound) {
-                const drop = trajectory.drop.In(targetSizeUnit)
-                if (drop <= -targetSize / 2) {
-                  longestTrajectoryFound = true
-                  longestTrajectoryDistance = trajectory.distance.In(distanceUnit)
-                }
+            if (trajectory.distance.In(BC.Unit.Millimeter) < shot.maxOrdinance.distance.In(BC.Unit.Millimeter)) {
+              if (trajectory.drop.In(BC.Unit.Millimeter) < -targetSize.In(BC.Unit.Millimeter) / 2) {
+                shot.mpbr.distanceMin = trajectory.distance
+                shot.mpbr.elevationMin = trajectory.drop
+              }
+            }
+
+            if (trajectory.distance.In(BC.Unit.Millimeter) > shot.maxOrdinance.distance.In(BC.Unit.Millimeter)) {
+              if (trajectory.drop.In(BC.Unit.Millimeter) > -targetSize.In(BC.Unit.Millimeter) / 2) {
+                shot.mpbr.distanceMax = trajectory.distance
+                shot.mpbr.elevationMax = trajectory.drop
               }
             }
           })
-          shot.distanceMax = longestTrajectoryDistance - 1
-          if (shot.distanceMax > longestShotDistance) {
-            longestShotDistance = shot.distanceMax
+
+          // keep the shot that has maximum distance for mpbr
+          if (shot.mpbr.distanceMax.In(BC.Unit.Millimeter) > longestShotDistanceMaxMM) {
+            longestShotDistanceMaxMM = shot.mpbr.distanceMax.In(BC.Unit.Millimeter)
             longestShot = shot
           }
         }
@@ -95,26 +115,18 @@ export const useMpbrStore = defineStore('mpbr', {
     },
     async calculateMpbr () {
       let targetSize
-      let targetSizeUnit
-      let distanceUnit
       if (this.target.unit === 'IN') {
-        targetSizeUnit = BC.Unit.Inch
-        distanceUnit = BC.Unit.Yard
-        targetSize = BC.UNew.Inch(parseFloat(this.target.size)).In(targetSizeUnit)
+        targetSize = BC.UNew.Inch(parseFloat(this.target.size))
       }
       if (this.target.unit === 'CM') {
-        targetSizeUnit = BC.Unit.Centimeter
-        distanceUnit = BC.Unit.Meter
-        targetSize = BC.UNew.Centimeter(parseFloat(this.target.size)).In(targetSizeUnit)
+        targetSize = BC.UNew.Centimeter(parseFloat(this.target.size))
       }
 
       let mpbr = null
       if (this.profileId && this.target.size) {
         const shots = await this.calculateTrajectoriesFrom1to200Y(this.profileId)
 
-        const filteredShots = await this.calculateMaxElevation(shots, targetSizeUnit, distanceUnit)
-
-        mpbr = this.findLongestTrajectoryForTargetSize(filteredShots, targetSize, targetSizeUnit, distanceUnit)
+        mpbr = this.findLongestTrajectoryForTargetSize(shots, targetSize)
       }
       // save the results as shot
       return mpbr

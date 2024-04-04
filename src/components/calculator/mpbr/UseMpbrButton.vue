@@ -25,7 +25,7 @@ const props = defineProps({
     default: null
   },
   distanceUnit: {
-    type: String,
+    type: Number,
     required: true
   }
 })
@@ -44,22 +44,22 @@ const range = ref(0)
 const useMbpr = () => {
   // set nearZero and range
   if (props.shot) {
-    let unit
-    if (props.distanceUnit === 'YD') {
-      unit = BC.Unit.Yard
-    }
-    if (props.distanceUnit === 'M') {
-      unit = BC.Unit.Meter
-    }
-    nearZero.value = Math.round(props.shot.weapon.zeroDistance.In(unit))
-    range.value = props.shot.distanceMax - props.shot.distanceMax % 100 + 100
+    nearZero.value = Math.round(props.shot.nearZero.In(props.distanceUnit))
+    range.value = props.shot.mpbr.distanceMax.In(props.distanceUnit) - props.shot.mpbr.distanceMax.In(props.distanceUnit) % 100 + 100
 
     // update ballistic calculator values
     ballisticStore.profileId = mpbrStore.profileId
     ballisticStore.zero.distance = nearZero
-    ballisticStore.zero.unit = props.distanceUnit
     ballisticStore.range.distance = range
-    ballisticStore.range.unit = props.distanceUnit
+
+    if (props.distanceUnit === BC.Unit.Yard) {
+      ballisticStore.zero.unit = 'YD'
+      ballisticStore.range.unit = 'YD'
+    }
+    if (props.distanceUnit === BC.Unit.Meter) {
+      ballisticStore.zero.unit = 'M'
+      ballisticStore.range.unit = 'M'
+    }
 
     router.push('/calculator/ballistic')
   }

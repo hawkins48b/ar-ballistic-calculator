@@ -56,11 +56,11 @@ export default function (params, addExtra) {
   }
 
   let bulletVelocity
-  if (params.bullet.velocityUnit === 'FPS') {
-    bulletVelocity = BC.UNew.FPS(parseFloat(params.bullet.velocity))
+  if (params.measures.velocityUnit === 'FPS') {
+    bulletVelocity = BC.UNew.FPS(parseFloat(params.measures.velocity))
   }
   if (params.bullet.velocityUnit === 'MPS') {
-    bulletVelocity = BC.UNew.MPS(parseFloat(params.bullet.velocity))
+    bulletVelocity = BC.UNew.MPS(parseFloat(params.measures.velocity))
   }
 
   // dragModel
@@ -155,7 +155,6 @@ export default function (params, addExtra) {
     }
   }
 
-  // set parameters
   let bulletLength = BC.UNew.Inch(2) // default value
   if (params.options.enableSpinDrift) {
     if (params.bullet.lengthUnit === 'IN') {
@@ -166,17 +165,30 @@ export default function (params, addExtra) {
     }
   }
 
-  /*
+  let tempModifier = 0
+  let powderTemp = BC.UNew.Celsius(15)
+  if (params.options.enablePowderSensitivity) {
+    if (params.measures.temperatureUnit === '°F') {
+      powderTemp = BC.UNew.Fahrenheit(parseFloat(params.measures.temperature))
+    }
+    if (params.measures.temperatureUnit === '°C') {
+      powderTemp = BC.UNew.Celsius(parseFloat(params.measures.temperature))
+    }
+    tempModifier = parseFloat(params.measures.temperatureModifier) / 100
+    // enable powder sensibility
+    BC.calcSettings.USE_POWDER_SENSITIVITY = true
+  }
+
+  /* BC.Ammo
     dm: DragModel,
     length: (number | Distance) = UNew.Inch(2),
     mv: (number | Velocity) = UNew.FPS(2700),
     tempModifier: number = 0,
     powderTemp: (number | Temperature) = UNew.Celsius(15))
   */
-  const ammo = new BC.Ammo(dragModel, bulletLength, bulletVelocity)
+  const ammo = new BC.Ammo(dragModel, bulletLength, bulletVelocity, tempModifier, powderTemp)
 
-  // fire shot
-  /*
+  /* BC.Shot
   constructor(
   maxRange: (number | Distance) = UNew.Yard(1000),
   zeroAngle: (number | Angular) = UNew.Degree(0),

@@ -6,9 +6,14 @@
   >
     <div class="row justify-between">
       <div class="col-auto">
-        <p class="text-h6">
-          Elevation Chart
-        </p>
+        <div class="text-h6">
+          <q-icon
+            name="query_stats"
+            size="lg"
+            class="q-mr-sm"
+          />
+          Elevation chart
+        </div>
       </div>
       <div class="col-auto">
         <q-toggle v-model="showAnnotations">
@@ -32,7 +37,7 @@
 <script setup>
 // imports
 import { useBallisticStore } from 'stores/ballistic'
-import ElevationShotList from 'components/calculator/ballistic/ElevationShotList.vue'
+import ElevationShotList from 'components/calculators/ballistic/ElevationShotList.vue'
 import * as BC from 'js-ballistics'
 import { ref, reactive, computed, watch } from 'vue'
 import { colors, useQuasar } from 'quasar'

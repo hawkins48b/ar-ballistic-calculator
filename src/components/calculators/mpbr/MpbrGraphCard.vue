@@ -36,8 +36,8 @@
 
 <script setup>
 // imports
-import MpbrList from 'components/calculator/mpbr/MpbrList.vue'
-import UseMpbrButton from 'components/calculator/mpbr/UseMpbrButton.vue'
+import MpbrList from 'components/calculators/mpbr/MpbrList.vue'
+import UseMpbrButton from 'components/calculators/mpbr/UseMpbrButton.vue'
 import * as BC from 'js-ballistics'
 import { ref, reactive, computed, watch } from 'vue'
 import { colors, useQuasar } from 'quasar'

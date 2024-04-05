@@ -6,9 +6,14 @@
   >
     <div class="row justify-between">
       <div class="col-auto">
-        <p class="text-h6">
+        <div class="text-h6">
+          <q-icon
+            name="build_circle"
+            size="lg"
+            class="q-mr-sm"
+          />
           Sight adjustment
-        </p>
+        </div>
       </div>
       <div class="col-auto">
         <q-btn

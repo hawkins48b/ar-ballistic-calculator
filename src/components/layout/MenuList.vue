@@ -42,9 +42,9 @@ export default {
           label: 'Profiles'
         },
         {
-          path: '/calculator',
+          path: '/calculators',
           icon: 'calculate',
-          label: 'Calculator'
+          label: 'Calculators'
         },
         {
           path: '/settings',

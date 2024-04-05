@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import MaximumPointBlankRangeCard from 'components/calculator/list-calculators/MaximumPointBlankRangeCard.vue'
-import BallisticCalculatorCard from 'components/calculator/list-calculators/BallisticCalculatorCard.vue'
+import MaximumPointBlankRangeCard from 'components/calculators/list-calculators/MaximumPointBlankRangeCard.vue'
+import BallisticCalculatorCard from 'components/calculators/list-calculators/BallisticCalculatorCard.vue'
 
 </script>

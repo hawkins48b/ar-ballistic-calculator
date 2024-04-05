@@ -10,6 +10,10 @@
           :profile="profile"
           class="q-mt-md"
         />
+        <MeasuresCard
+          :profile="profile"
+          class="q-mt-md"
+        />
       </div>
       <div class="col-xs-12 col-sm-6">
         <BulletCard :profile="profile" />
@@ -34,6 +38,7 @@
 import WeaponCard from 'components/profiles/form/WeaponCard.vue'
 import OpticCard from 'components/profiles/form/OpticCard.vue'
 import BulletCard from 'components/profiles/form/BulletCard.vue'
+import MeasuresCard from 'components/profiles/form/MeasuresCard.vue'
 
 // props
 const {

@@ -51,13 +51,13 @@
 
 <script setup>
 // imports
-import OptionButton from 'components/calculator/ballistic/OptionButton.vue'
-import ProfileCard from 'components/calculator/ballistic/ProfileCard.vue'
-import RangeCard from 'components/calculator/ballistic/RangeCard.vue'
-import ResultCalculator from 'components/calculator/ballistic/ResultCalculator.vue'
-import AtmosphereCard from 'components/calculator/ballistic/AtmosphereCard.vue'
-import WindConditionsCard from 'components/calculator/ballistic/WindConditionsCard.vue'
-import SightAdjustmentCard from 'components/calculator/ballistic/SightAdjustmentCard.vue'
+import OptionButton from 'components/calculators/ballistic/OptionButton.vue'
+import ProfileCard from 'components/calculators/ballistic/ProfileCard.vue'
+import RangeCard from 'components/calculators/ballistic/RangeCard.vue'
+import ResultCalculator from 'components/calculators/ballistic/ResultCalculator.vue'
+import AtmosphereCard from 'components/calculators/ballistic/AtmosphereCard.vue'
+import WindConditionsCard from 'components/calculators/ballistic/WindConditionsCard.vue'
+import SightAdjustmentCard from 'components/calculators/ballistic/SightAdjustmentCard.vue'
 import { useBallisticStore } from 'stores/ballistic'
 import { computed } from 'vue'
 

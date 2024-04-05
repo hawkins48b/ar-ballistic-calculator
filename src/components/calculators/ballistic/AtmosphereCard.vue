@@ -4,14 +4,19 @@
     flat
     class="q-pa-md"
   >
-    <p class="text-h6">
+    <div class="text-h6">
+      <q-icon
+        name="cloud"
+        size="lg"
+        class="q-mr-sm"
+      />
       Atmospheric Conditions
-    </p>
+    </div>
     <AtmosphereForm class="q-mt-md" />
   </q-card>
 </template>
 
 <script setup>
 // imports
-import AtmosphereForm from 'components/calculator/ballistic/AtmosphereForm.vue'
+import AtmosphereForm from 'components/calculators/ballistic/AtmosphereForm.vue'
 </script>

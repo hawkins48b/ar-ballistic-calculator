@@ -6,9 +6,14 @@
   >
     <div class="row justify-between">
       <div class="col-auto">
-        <p class="text-h6">
+        <div class="text-h6">
+          <q-icon
+            name="air"
+            size="lg"
+            class="q-mr-sm"
+          />
           Wind conditions
-        </p>
+        </div>
       </div>
       <div class="col-auto">
         <q-btn

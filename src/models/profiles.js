@@ -18,13 +18,19 @@ export default function () {
       diameterUnit: 'IN',
       ballisticCoefficient: 0,
       ballisticCoefficientProfile: 'G1',
-      velocity: 0,
-      velocityUnit: 'FPS',
       length: 0,
       lengthUnit: 'IN'
     },
+    measures: {
+      velocity: 0,
+      velocityUnit: 'FPS',
+      temperatureModifier: 0,
+      temperature: 59,
+      temperatureUnit: '°F'
+    },
     options: {
-      enableSpinDrift: false
+      enableSpinDrift: false,
+      enablePowderSensitivity: false
     }
   }
 }

@@ -4,10 +4,18 @@
     :class="{'bg-grey-3':!$q.dark.isActive}"
     class="q-pa-md"
   >
+    <div class="text-h6">
+      <q-icon
+        name="photo_size_select_small"
+        size="lg"
+        class="q-mr-sm"
+      />
+      Target size
+    </div>
     <q-form>
       <q-input
         v-model="target.size"
-        label="Target size"
+        label="Size"
         filled
         step="any"
         type="number"

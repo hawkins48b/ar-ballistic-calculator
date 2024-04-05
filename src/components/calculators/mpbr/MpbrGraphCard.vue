@@ -7,9 +7,14 @@
   >
     <div class="row justify-between">
       <div class="col-auto">
-        <p class="text-h6">
-          MPBR Chart
-        </p>
+        <div class="text-h6">
+          <q-icon
+            name="query_stats"
+            size="lg"
+            class="q-mr-sm"
+          />
+          MPBR chart
+        </div>
       </div>
       <div class="col-auto">
         <q-toggle v-model="showAnnotations">

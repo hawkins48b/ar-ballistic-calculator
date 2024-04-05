@@ -136,7 +136,13 @@ export default function (params, addExtra) {
       windSpeed = BC.UNew.MPS(parseFloat(params.wind.speed))
     }
 
-    const windAngle = BC.UNew.OClock(parseFloat(params.wind.direction))
+    let windAngle
+    if (params.wind.directionUnit === 'CLOCK') {
+      windAngle = BC.UNew.OClock(parseFloat(params.wind.direction))
+    }
+    if (params.wind.directionUnit === 'DEG') {
+      windAngle = BC.UNew.Degree(parseFloat(params.wind.direction))
+    }
 
     if (windSpeed.In(BC.Unit.MPS) > 0) {
       const wind = new BC.Wind(windSpeed, windAngle)

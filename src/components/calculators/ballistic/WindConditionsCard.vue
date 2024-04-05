@@ -63,18 +63,41 @@
           filled
           debounce="500"
           class="q-mt-md"
-          suffix="Clock bearing"
           :rules="[
-            val => val && parseFloat(val) >= 0 && parseFloat(val) <= 12 || 'Wind direction must be 0 or positive'
+            val => val && parseFloat(val) >= 0 || 'Wind direction must be 0 or positive'
           ]"
           lazy-rules
-        />
+        >
+          <template #append>
+            <q-btn-toggle
+              v-model="wind.directionUnit"
+              no-caps
+              :options="[
+                {label: 'CLOCK BEARING', value: 'CLOCK'},
+                {label: 'DEG', value: 'DEG'}
+              ]"
+            />
+          </template>
+        </q-input>
       </div>
       <div class="col-auto">
         <q-knob
+          v-if="wind.directionUnit==='CLOCK'"
           v-model="wind.direction"
           :min="0"
           :max="12"
+          show-value
+          size="50px"
+          :thickness="0.22"
+          color="primary"
+          track-color="grey-3"
+          class="q-ma-md no-shadow"
+        />
+        <q-knob
+          v-if="wind.directionUnit==='DEG'"
+          v-model="wind.direction"
+          :min="0"
+          :max="360"
           show-value
           size="50px"
           :thickness="0.22"
@@ -92,6 +115,7 @@
 import { storeToRefs } from 'pinia'
 import { useBallisticStore } from 'stores/ballistic'
 import { watch } from 'vue'
+import * as BC from 'js-ballistics'
 
 // ballistic store
 const ballisticStore = useBallisticStore()
@@ -108,5 +132,31 @@ watch(() => options.value.showWindConditions, (newValue) => {
   }
 }, {
   immediate: true
+})
+
+/*
+ * Unit conversion
+ */
+// conversion wind speed
+watch(() => wind.value.speedUnit, (newValue) => {
+  if (newValue === 'MPH') {
+    wind.value.speed = BC.UNew.MPS(parseFloat(wind.value.speed)).In(BC.Unit.MPH)
+    wind.value.speed = Math.round(wind.value.speed * 100) / 100
+  }
+  if (newValue === 'MPS') {
+    wind.value.speed = BC.UNew.MPH(parseFloat(wind.value.speed)).In(BC.Unit.MPS)
+    wind.value.speed = Math.round(wind.value.speed * 100) / 100
+  }
+})
+// conversion wind direction
+watch(() => wind.value.directionUnit, (newValue) => {
+  if (newValue === 'CLOCK') {
+    wind.value.direction = BC.UNew.Degree(parseFloat(wind.value.direction)).In(BC.Unit.OClock)
+    wind.value.direction = Math.round(wind.value.direction)
+  }
+  if (newValue === 'DEG') {
+    wind.value.direction = BC.UNew.OClock(parseFloat(wind.value.direction)).In(BC.Unit.Degree)
+    wind.value.direction = Math.round(wind.value.direction)
+  }
 })
 </script>

@@ -39,7 +39,8 @@ export const useBallisticStore = defineStore('ballistic', {
     wind: {
       speed: 0,
       speedUnit: 'MPH',
-      direction: 3
+      direction: 3,
+      directionUnit: 'CLOCK'
     },
     sightAdjustment: {
       angle: 0,

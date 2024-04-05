@@ -96,7 +96,7 @@
                       VELOCITY
                     </q-item-label>
                     <q-item-label class="text-bold">
-                      {{ props.row.bullet.velocity }} {{ props.row.bullet.velocityUnit }}
+                      {{ props.row.measures.velocity }} {{ props.row.measures.velocityUnit }}
                     </q-item-label>
                   </q-item-section>
                 </q-item>

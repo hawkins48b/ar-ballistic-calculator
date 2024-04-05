@@ -110,9 +110,9 @@ const columns = [
   },
   {
     name: 'velocity',
-    field: (row) => row.bullet.velocity,
+    field: (row) => row.measures.velocity,
     label: 'Velocity',
-    format: (val, row) => `${val} ${row.bullet.velocityUnit}`,
+    format: (val, row) => `${val} ${row.measures.velocityUnit}`,
     align: 'left',
     sortable: true
   }

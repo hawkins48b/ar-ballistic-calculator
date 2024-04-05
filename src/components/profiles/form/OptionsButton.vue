@@ -28,6 +28,13 @@
                 Enable spin drift
               </q-toggle>
             </div>
+            <div>
+              <q-toggle
+                v-model="profile.options.enablePowderSensitivity"
+              >
+                Enable powder sensitivity
+              </q-toggle>
+            </div>
           </q-form>
         </q-card-section>
 

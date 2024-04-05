@@ -16,12 +16,12 @@ const routes = [
         ]
       },
       {
-        path: 'calculator',
-        component: () => import('pages/CalculatorPage.vue'),
+        path: 'calculators',
+        component: () => import('pages/CalculatorsPage.vue'),
         children: [
-          { path: '', component: () => import('pages/calculator/ListCalculatorsPage.vue') },
-          { path: 'ballistic', component: () => import('pages/calculator/ballistic/BallisticPage.vue') },
-          { path: 'maximum-point-blank-range', component: () => import('pages/calculator/mpbr/MpbrPage.vue') }
+          { path: '', component: () => import('pages/calculators/ListCalculatorsPage.vue') },
+          { path: 'ballistic', component: () => import('pages/calculators/ballistic/BallisticPage.vue') },
+          { path: 'maximum-point-blank-range', component: () => import('pages/calculators/mpbr/MpbrPage.vue') }
         ]
       },
       { path: 'settings', component: () => import('pages/SettingsPage.vue') },

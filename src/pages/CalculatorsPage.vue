@@ -2,7 +2,7 @@
   <q-page padding>
     <!-- content -->
     <div class="text-h3 q-mb-md">
-      Calculator
+      Calculators
     </div>
     <router-view />
   </q-page>

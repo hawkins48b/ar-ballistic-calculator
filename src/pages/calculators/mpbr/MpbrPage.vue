@@ -4,7 +4,7 @@
       <div class="col-auto">
         <q-btn
           flat
-          to="/calculator"
+          to="/calculators"
           icon="arrow_back"
         />
       </div>
@@ -29,8 +29,8 @@
 
 <script setup>
 // imports
-import ProfileCard from 'components/calculator/mpbr/ProfileCard.vue'
-import TargetCard from 'components/calculator/mpbr/TargetCard.vue'
-import MpbrGraphCard from 'components/calculator/mpbr/MpbrGraphCard.vue'
+import ProfileCard from 'components/calculators/mpbr/ProfileCard.vue'
+import TargetCard from 'components/calculators/mpbr/TargetCard.vue'
+import MpbrGraphCard from 'components/calculators/mpbr/MpbrGraphCard.vue'
 
 </script>

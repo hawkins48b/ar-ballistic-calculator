@@ -62,7 +62,7 @@ const useMbpr = () => {
       ballisticStore.range.unit = 'M'
     }
 
-    router.push('/calculator/ballistic')
+    router.push('/calculators/ballistic')
   }
 }
 </script>

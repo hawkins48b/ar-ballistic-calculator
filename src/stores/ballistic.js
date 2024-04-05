@@ -89,6 +89,7 @@ export const useBallisticStore = defineStore('ballistic', {
           weapon: profile.value.weapon,
           optic: profile.value.optic,
           bullet: profile.value.bullet,
+          measures: profile.value.measures,
           options: profile.value.options,
           range: state.range,
           zero: state.zero,
@@ -110,6 +111,7 @@ export const useBallisticStore = defineStore('ballistic', {
           weapon: profile.value.weapon,
           optic: profile.value.optic,
           bullet: profile.value.bullet,
+          measures: profile.value.measures,
           options: profile.value.options,
           range: {
             distance: state.range.distance,

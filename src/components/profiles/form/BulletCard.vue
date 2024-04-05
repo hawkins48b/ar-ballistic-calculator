@@ -67,28 +67,6 @@
       </template>
     </q-input>
     <q-input
-      v-model="localProfile.bullet.velocity"
-      label="Velocity"
-      filled
-      step="any"
-      type="number"
-      lazy-rules
-      :rules="[ val => val && val > 0 || 'Velocity must be positive']"
-      class="q-mt-md"
-      hint="e.g 2700 FPS"
-    >
-      <template #append>
-        <q-btn-toggle
-          v-model="localProfile.bullet.velocityUnit"
-          no-caps
-          :options="[
-            {label: 'FPS', value: 'FPS'},
-            {label: 'MPS', value: 'MPS'}
-          ]"
-        />
-      </template>
-    </q-input>
-    <q-input
       v-model="localProfile.bullet.ballisticCoefficient"
       label="Ballistic coefficient"
       filled
@@ -184,17 +162,6 @@ watch(() => localProfile.value.bullet.weightUnit, (newValue) => {
   if (newValue === 'G') {
     localProfile.value.bullet.weight = BC.UNew.Grain(localProfile.value.bullet.weight).In(BC.Unit.Gram)
     localProfile.value.bullet.weight = Math.round(localProfile.value.bullet.weight * 100) / 100
-  }
-})
-// conversion for bullet velocity
-watch(() => localProfile.value.bullet.velocityUnit, (newValue) => {
-  if (newValue === 'FPS') {
-    localProfile.value.bullet.velocity = BC.UNew.MPS(localProfile.value.bullet.velocity).In(BC.Unit.FPS)
-    localProfile.value.bullet.velocity = Math.round(localProfile.value.bullet.velocity * 10) / 10
-  }
-  if (newValue === 'MPS') {
-    localProfile.value.bullet.velocity = BC.UNew.FPS(localProfile.value.bullet.velocity).In(BC.Unit.MPS)
-    localProfile.value.bullet.velocity = Math.round(localProfile.value.bullet.velocity * 10) / 10
   }
 })
 // conversion for bullet length

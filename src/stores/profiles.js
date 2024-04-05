@@ -22,13 +22,19 @@ export const useProfilesStore = defineStore('profiles', {
         diameterUnit: 'IN',
         ballisticCoefficient: 0.285,
         ballisticCoefficientProfile: 'G1',
-        velocity: 3000,
-        velocityUnit: 'FPS',
         length: 0,
         lengthUnit: 'IN'
       },
+      measures: {
+        velocity: 3000,
+        velocityUnit: 'FPS',
+        temperatureModifier: 0.00,
+        temperature: 59,
+        temperatureUnit: '°F'
+      },
       options: {
-        enableSpinDrift: false
+        enableSpinDrift: false,
+        enablePowderSensitivity: false
       }
     }],
     nextId: 2
@@ -51,8 +57,8 @@ export const useProfilesStore = defineStore('profiles', {
                 profile.optic.model + ' - ' +
                 profile.bullet.brand + ' ' +
                 profile.bullet.diameter + ' at ' +
-                profile.bullet.velocity + ' ' +
-                profile.bullet.velocityUnit
+                profile.measures.velocity + ' ' +
+                profile.measures.velocityUnit
       }
 
       return label

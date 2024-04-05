@@ -18,9 +18,9 @@
 
 <script setup>
 // imports
-import ElevationChartCard from 'components/calculator/ballistic/ElevationChartCard.vue'
-import TableCard from 'components/calculator/ballistic/TableCard.vue'
-import VelocityChartCard from 'components/calculator/ballistic/VelocityChartCard.vue'
+import ElevationChartCard from 'components/calculators/ballistic/ElevationChartCard.vue'
+import TableCard from 'components/calculators/ballistic/TableCard.vue'
+import VelocityChartCard from 'components/calculators/ballistic/VelocityChartCard.vue'
 import { useBallisticStore } from 'stores/ballistic'
 import { computed } from 'vue'
 

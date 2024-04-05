@@ -5,8 +5,15 @@
     class="q-pa-md"
   >
     <div class="row justify-between">
-      <div class="col-auto text-h6">
-        Velocity Chart
+      <div class="col-auto">
+        <div class="text-h6">
+          <q-icon
+            name="stacked_line_chart"
+            size="lg"
+            class="q-mr-sm"
+          />
+          Velocity chart
+        </div>
       </div>
       <div class="col-auto text-h6">
         Speed of Sound: {{ machValueLabel }}

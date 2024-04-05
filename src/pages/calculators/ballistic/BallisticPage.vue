@@ -6,7 +6,7 @@
           <div class="col-auto">
             <q-btn
               flat
-              to="/calculator"
+              to="/calculators"
               icon="arrow_back"
             />
           </div>

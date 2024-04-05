@@ -2,6 +2,8 @@
   <q-card
     :class="{'bg-grey-3':!$q.dark.isActive}"
     flat
+    class="cursor-pointer"
+    @click="clickFn"
   >
     <p class="text-h4">
       MBPR Tool
@@ -22,7 +24,6 @@
     />
     <q-card-actions vertical>
       <q-btn
-        to="/calculators/maximum-point-blank-range"
         color="primary"
         class="q-mt-md"
       >
@@ -33,4 +34,11 @@
 </template>
 
 <script setup>
+// imports
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const clickFn = () => {
+  router.push('/calculators/maximum-point-blank-range')
+}
 </script>

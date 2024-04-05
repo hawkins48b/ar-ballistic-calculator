@@ -2,6 +2,8 @@
   <q-card
     :class="{'bg-grey-3':!$q.dark.isActive}"
     flat
+    class="cursor-pointer"
+    @click="clickFn"
   >
     <p class="text-h4">
       Ballistic Calculator
@@ -21,7 +23,6 @@
     />
     <q-card-actions vertical>
       <q-btn
-        to="/calculators/ballistic"
         color="primary"
         class="q-mt-md"
       >
@@ -33,5 +34,10 @@
 
 <script setup>
 // imports
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
+const clickFn = () => {
+  router.push('/calculators/ballistic')
+}
 </script>

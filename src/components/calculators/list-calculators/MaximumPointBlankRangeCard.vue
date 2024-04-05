@@ -6,9 +6,9 @@
     @click="clickFn"
   >
     <p class="text-h4">
-      MBPR Tool
+      MPBR Tool
     </p>
-    <p>Calculate your Maximum Point Blank Range (MBPR).</p>
+    <p>Calculate your Maximum Point Blank Range (MPBR).</p>
 
     <q-img
       v-if="!$q.dark.isActive"

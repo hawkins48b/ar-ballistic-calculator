@@ -20,11 +20,10 @@
 
       <MenuList class="q-mt-sm" />
 
-      <div class="row justify-center">
+      <div class="row justify-center q-mt-md">
         <div class="col-auto">
           <DarkModeToggle
             label="Dark mode"
-            class="q-mt-sm"
           />
         </div>
       </div>

@@ -9,7 +9,7 @@
 
     rounded
     toggle-color="primary"
-    color="white"
+    :color="settingsStore.isDarkMode ? 'black' : 'white'"
     text-color="grey"
   >
     <template v-slot:light>

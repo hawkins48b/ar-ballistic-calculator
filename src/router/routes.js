@@ -24,7 +24,6 @@ const routes = [
           { path: 'maximum-point-blank-range', component: () => import('pages/calculators/mpbr/MpbrPage.vue') }
         ]
       },
-      { path: 'settings', component: () => import('pages/SettingsPage.vue') },
       { path: 'about', component: () => import('pages/AboutPage.vue') }
     ]
   },

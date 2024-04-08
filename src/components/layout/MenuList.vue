@@ -47,11 +47,6 @@ export default {
           label: 'Calculators'
         },
         {
-          path: '/settings',
-          icon: 'settings',
-          label: 'Settings'
-        },
-        {
           path: '/about',
           icon: 'info',
           label: 'About'

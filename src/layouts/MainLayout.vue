@@ -19,6 +19,15 @@
       </div>
 
       <MenuList class="q-mt-sm" />
+
+      <div class="row justify-center">
+        <div class="col-auto">
+          <DarkModeToggle
+            label="Dark mode"
+            class="q-mt-sm"
+          />
+        </div>
+      </div>
       <div class="text-center q-mt-md">
         by <a
           href="https://chocolate-warfare.com"
@@ -51,6 +60,7 @@
 <script setup>
 import { ref } from 'vue'
 import MenuList from 'components/layout/MenuList.vue'
+import DarkModeToggle from 'components/settings/darkModeToggle.vue'
 
 const leftDrawerOpen = ref(true)
 

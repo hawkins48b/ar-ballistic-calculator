@@ -23,7 +23,16 @@
           </a>
         </p>
         <p>
-          This calculator is Open Source.<br>You can access the source code on <a
+          This app is <a
+            href="https://fr.wikipedia.org/wiki/Open_source"
+            target="_blank"
+          >OpenSource</a> and based on <a
+            href="https://github.com/o-murphy/js-ballistics"
+            target="_blank"
+          >3DOF JS-Ballistics</a> by o-murphy.
+        </p>
+        <p>
+          You can access this app source code on <a
             href="https://github.com/hawkins48b/cw-zro"
             target="_blank"
           >Github</a>

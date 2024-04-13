@@ -6,7 +6,7 @@
   >
     <div class="text-h6">
       <q-icon
-        name="settings"
+        name="tune"
         size="lg"
         class="q-mr-sm"
       />

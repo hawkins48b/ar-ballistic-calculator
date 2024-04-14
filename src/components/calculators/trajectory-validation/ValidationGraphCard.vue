@@ -1,6 +1,5 @@
 <template>
   <q-card
-    v-show="validShot"
     :class="{'bg-grey-3':!$q.dark.isActive}"
     flat
     class="q-pa-md"
@@ -24,19 +23,38 @@
         -->
       </div>
     </div>
-    <ValidationList
-      :new-velocity="newVelocity"
-    />
-    <apexchart
-      ref="chart"
-      type="line"
-      :options="options"
-      :series="series"
-      height="400px"
-    />
-    <validationButton
-      :new-velocity="newVelocity"
-    />
+    <div
+      v-show="!calcError"
+    >
+      <ValidationList
+        v-show="calcError"
+        :new-velocity="newVelocity"
+      />
+      <apexchart
+        v-show="!calcError"
+        ref="chart"
+        type="line"
+        :options="options"
+        :series="series"
+        height="400px"
+      />
+      <validationButton
+        v-show="!calcError"
+        :new-velocity="newVelocity"
+      />
+    </div>
+    <div
+      v-show="calcError"
+      class="q-mt-md text-center"
+    >
+      <q-icon
+        name="error"
+        size="xl"
+      />
+      <p class="text-h6">
+        The trajectory cannot be calculated.
+      </p>
+    </div>
   </q-card>
 </template>
 
@@ -57,6 +75,9 @@ const chart = ref(null)
 
 // set trajectory validation store
 const trajectoryValidationStore = useTrajectoryValidationStore()
+
+// calculation error
+const calcError = ref(false)
 
 /*
  * Chart options
@@ -170,49 +191,63 @@ const buildSeries = () => {
 
   // data for new validated trajectory
   data = []
-  for (const trajectory of validShot.value._trajectory) {
-    const elevation = Math.round(trajectory.drop.In(trajectoryValidationStore.elevationUnit) * 100) / 100
+  if (validShot.value) {
+    for (const trajectory of validShot.value._trajectory) {
+      const elevation = Math.round(trajectory.drop.In(trajectoryValidationStore.elevationUnit) * 100) / 100
 
-    if (trajectoryValidationStore.elevationUnit === BC.Unit.Inch) {
-      serieName = 'Validated Elevation (IN)'
-    }
-    if (trajectoryValidationStore.elevationUnit === BC.Unit.Centimeter) {
-      serieName = 'Validated Elevation (CM)'
+      if (trajectoryValidationStore.elevationUnit === BC.Unit.Inch) {
+        serieName = 'Validated Elevation (IN)'
+      }
+      if (trajectoryValidationStore.elevationUnit === BC.Unit.Centimeter) {
+        serieName = 'Validated Elevation (CM)'
+      }
+
+      let distance = trajectory.distance.In(trajectoryValidationStore.distanceUnit)
+      distance = Math.round(distance)
+      data.push({
+        x: distance,
+        y: elevation
+      })
     }
 
-    let distance = trajectory.distance.In(trajectoryValidationStore.distanceUnit)
-    distance = Math.round(distance)
-    data.push({
-      x: distance,
-      y: elevation
+    // add data to chart series
+    series.value.push({
+      name: serieName,
+      data
     })
   }
-
-  // add data to chart series
-  series.value.push({
-    name: serieName,
-    data
-  })
 }
 
 const validShot = ref()
 const initShot = ref()
 const newVelocity = ref()
 watch(() => trajectoryValidationStore, () => {
-  if (trajectoryValidationStore.profileId && trajectoryValidationStore.settings.range.distance > 0) {
-    const {
-      initialShot,
-      validationShot,
-      velocity
-    } = trajectoryValidationStore.calculatTrajectoryValidation()
+  const rangeDistance = parseFloat(trajectoryValidationStore.settings.range.distance)
+  const zeroDistance = parseFloat(trajectoryValidationStore.settings.zero.distance)
 
-    validShot.value = validationShot
-    initShot.value = initialShot
-    newVelocity.value = Math.round(velocity)
-    // build series
-    buildSeries()
-    // set options
-    setOptions()
+  if (trajectoryValidationStore.profileId && rangeDistance > 0) {
+    // range must be longer than zero distance
+    if (rangeDistance > zeroDistance) {
+      const {
+        initialShot,
+        validationShot,
+        velocity
+      } = trajectoryValidationStore.calculatTrajectoryValidation()
+
+      validShot.value = validationShot
+      initShot.value = initialShot
+      newVelocity.value = Math.round(velocity)
+      // build series
+      buildSeries()
+      // set options
+      setOptions()
+      // no error
+      calcError.value = false
+    } else {
+      calcError.value = true
+    }
+  } else {
+    calcError.value = true
   }
 },
 {

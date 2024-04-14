@@ -59,7 +59,7 @@ export default function (params, addExtra) {
   if (params.measures.velocityUnit === 'FPS') {
     bulletVelocity = BC.UNew.FPS(parseFloat(params.measures.velocity))
   }
-  if (params.bullet.velocityUnit === 'MPS') {
+  if (params.measures.velocityUnit === 'MPS') {
     bulletVelocity = BC.UNew.MPS(parseFloat(params.measures.velocity))
   }
 

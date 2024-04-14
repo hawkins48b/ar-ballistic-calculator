@@ -68,23 +68,26 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
       }
 
       const initialShot = ballisticCalculator(params)
-      const initialElevation = initialShot._trajectory[initialShot._trajectory.length - 1].drop
+      let initialElevation = initialShot._trajectory[initialShot._trajectory.length - 1].drop.In(this.elevationUnit)
+      initialElevation = Math.round(initialElevation * 10) / 10
 
-      let velocityStep = 1000
-      let currentVelocity = parseFloat(params.measures.velocity)
+      let velocityStep = 100
+      let currentVelocity = profile.value.measures.velocity
       const elevationGoal = Math.round(parseFloat(this.settings.measures.elevation) * 10) / 10
 
-      let newElevation = Math.round(initialElevation.In(this.elevationUnit) * 10) / 10
+      let newElevation = initialElevation
       let newShot = initialShot
-      while (newElevation !== elevationGoal && velocityStep >= 1) {
-        let addedVelocity // note if we added velocity or not
+      params.measures.velocity = currentVelocity
+
+      while (newElevation !== elevationGoal && velocityStep >= 1 && currentVelocity < 10000) {
+        let addVelocity // note if we added velocity or not
         if (newElevation > elevationGoal) {
           currentVelocity -= velocityStep
-          addedVelocity = false
+          addVelocity = false
         }
         if (newElevation < elevationGoal) {
           currentVelocity += velocityStep
-          addedVelocity = true
+          addVelocity = true
         }
 
         // set new velocity
@@ -95,19 +98,24 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
         // get new elevation
         if (newShot._trajectory.length > 0) {
           newElevation = newShot._trajectory[newShot._trajectory.length - 1].drop.In(this.elevationUnit)
-
           newElevation = Math.round(newElevation * 10) / 10
 
           // devide velocity step by two if we exceeded the elevation goal
-          if (addedVelocity && newElevation > elevationGoal) {
+          if (addVelocity && newElevation > elevationGoal) {
             velocityStep = velocityStep / 2
           }
-          if (!addedVelocity && newElevation < elevationGoal) {
+          if (!addVelocity && newElevation < elevationGoal) {
             velocityStep = velocityStep / 2
           }
         } else { // error, can't make this shot
           velocityStep = 0 // exit loop
         }
+      }
+
+      // if maximum is reach, set velocity to 0
+      if (params.measures.velocity >= 10000) {
+        params.measures.velocity = 0
+        newShot = null
       }
 
       return {

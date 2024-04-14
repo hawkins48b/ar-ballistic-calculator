@@ -27,11 +27,9 @@
       v-show="!calcError"
     >
       <ValidationList
-        v-show="calcError"
         :new-velocity="newVelocity"
       />
       <apexchart
-        v-show="!calcError"
         ref="chart"
         type="line"
         :options="options"
@@ -39,7 +37,6 @@
         height="400px"
       />
       <validationButton
-        v-show="!calcError"
         :new-velocity="newVelocity"
       />
     </div>

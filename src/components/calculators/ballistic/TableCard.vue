@@ -174,14 +174,14 @@ const columns = computed(() => {
         name: 'windageIN',
         field: row => row.windage.In(BC.Unit.Inch),
         label: 'Windage (IN)',
-        format: (val, row) => `${Math.round(val * 10) / 10 * -1}`,
+        format: (val, row) => `${Math.round(val * 10) / 10 * -1} IN`,
         align: 'left'
       },
       {
         name: 'windageCM',
         field: row => row.windage.In(BC.Unit.Centimeter),
         label: 'Windage (CM)',
-        format: (val, row) => `${Math.round(val * 10) / 10 * -1}`,
+        format: (val, row) => `${Math.round(val * 10) / 10 * -1} CM`,
         align: 'left'
       },
       // Windage Adjustment
@@ -189,14 +189,14 @@ const columns = computed(() => {
         name: 'windageAdjustmentMOA',
         field: row => isNaN(row.windageAdjustment.In(BC.Unit.MOA)) ? 0 : row.windageAdjustment.In(BC.Unit.MOA),
         label: 'Windage (MOA)',
-        format: (val, row) => `${Math.round(val * 10) / 10 * -1}`,
+        format: (val, row) => `${Math.round(val * 10) / 10 * -1} MOA`,
         align: 'left'
       },
       {
         name: 'windageAdjustmentMRAD',
         field: row => isNaN(row.windageAdjustment.In(BC.Unit.MIL)) ? 0 : row.windageAdjustment.In(BC.Unit.MIL),
         label: 'Windage (MRAD)',
-        format: (val, row) => `${Math.round(val * 10) / 10 * -1}`,
+        format: (val, row) => `${Math.round(val * 10) / 10 * -1} MRAD`,
         align: 'left'
       }
     ]

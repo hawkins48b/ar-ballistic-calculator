@@ -73,7 +73,7 @@
               v-model="wind.directionUnit"
               no-caps
               :options="[
-                {label: 'CLOCK BEARING', value: 'CLOCK'},
+                {label: 'CLOCK', value: 'CLOCK'},
                 {label: 'DEG', value: 'DEG'}
               ]"
             />

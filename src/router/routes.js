@@ -21,7 +21,8 @@ const routes = [
         children: [
           { path: '', component: () => import('pages/calculators/ListCalculatorsPage.vue') },
           { path: 'ballistic', component: () => import('pages/calculators/ballistic/BallisticPage.vue') },
-          { path: 'maximum-point-blank-range', component: () => import('pages/calculators/mpbr/MpbrPage.vue') }
+          { path: 'maximum-point-blank-range', component: () => import('pages/calculators/mpbr/MpbrPage.vue') },
+          { path: 'trajectory-validation', component: () => import('pages/calculators/trajectory-validation/TrajectoryValidationPage.vue') }
         ]
       },
       { path: 'about', component: () => import('pages/AboutPage.vue') }

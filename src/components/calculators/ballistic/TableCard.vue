@@ -53,9 +53,14 @@
       :class="{'bg-grey-3':!$q.dark.isActive}"
       hide-pagination
     >
-      <template
-        #top
-      />
+      <template #body-cell="props">
+        <q-td :props="props">
+          {{ props.value }}
+          <q-tooltip>
+            {{ props.col.label }}
+          </q-tooltip>
+        </q-td>
+      </template>
     </q-table>
   </q-card>
 </template>
@@ -81,7 +86,7 @@ const columns = computed(() => {
       name: 'rangeYD',
       field: row => row.distance.In(BC.Unit.Yard),
       label: 'Range (YD)',
-      format: (val, row) => `${Math.round(val)}`,
+      format: (val, row) => `${Math.round(val)} YD`,
       align: 'left'
     },
     // distance
@@ -89,14 +94,14 @@ const columns = computed(() => {
       name: 'rangeM',
       field: row => row.distance.In(BC.Unit.Meter),
       label: 'Range (M)',
-      format: (val, row) => `${Math.round(val)}`,
+      format: (val, row) => `${Math.round(val)} M`,
       align: 'left'
     },
     {
       name: 'elevationIN',
       field: row => row.drop.In(BC.Unit.Inch),
       label: 'Elevation (IN)',
-      format: (val, row) => `${Math.round(val * 10) / 10}`,
+      format: (val, row) => `${Math.round(val * 10) / 10} IN`,
       align: 'left'
     },
     // elevation
@@ -104,7 +109,7 @@ const columns = computed(() => {
       name: 'elevationCM',
       field: row => row.drop.In(BC.Unit.Centimeter),
       label: 'Elevation (CM)',
-      format: (val, row) => `${Math.round(val * 10) / 10}`,
+      format: (val, row) => `${Math.round(val * 10) / 10} CM`,
       align: 'left'
     },
     // correction
@@ -112,14 +117,14 @@ const columns = computed(() => {
       name: 'elevationAdjustmentMOA',
       field: row => isNaN(row.dropAdjustment.In(BC.Unit.MOA)) ? 0 : row.dropAdjustment.In(BC.Unit.MOA),
       label: 'Elevation (MOA)',
-      format: (val, row) => `${Math.round(val * 10) / 10 * -1}`,
+      format: (val, row) => `${Math.round(val * 10) / 10 * -1} MOA`,
       align: 'left'
     },
     {
       name: 'elevationAdjustmentMRAD',
       field: row => isNaN(row.dropAdjustment.In(BC.Unit.MIL)) ? 0 : row.dropAdjustment.In(BC.Unit.MIL),
       label: 'Elevation (MRAD)',
-      format: (val, row) => `${Math.round(val * 10) / 10 * -1}`,
+      format: (val, row) => `${Math.round(val * 10) / 10 * -1} MRAD`,
       align: 'left'
     },
     // velocity
@@ -127,14 +132,14 @@ const columns = computed(() => {
       name: 'velocityFPS',
       field: row => row.velocity.In(BC.Unit.FPS),
       label: 'Velocity (FPS)',
-      format: (val, row) => `${Math.round(val)}`,
+      format: (val, row) => `${Math.round(val)} FPS`,
       align: 'left'
     },
     {
       name: 'velocityMPS',
       field: row => row.velocity.In(BC.Unit.MPS),
       label: 'Velocity (MPS)',
-      format: (val, row) => `${Math.round(val)}`,
+      format: (val, row) => `${Math.round(val)} MPS`,
       align: 'left'
     },
     // velocity
@@ -142,14 +147,14 @@ const columns = computed(() => {
       name: 'energyFtLb',
       field: row => row.energy.In(BC.Unit.FootPound),
       label: 'Energy (FT/LB)',
-      format: (val, row) => `${Math.round(val)}`,
+      format: (val, row) => `${Math.round(val)} FT/LB`,
       align: 'left'
     },
     {
       name: 'energyJ',
       field: row => row.energy.In(BC.Unit.Joule),
       label: 'Energy (J)',
-      format: (val, row) => `${Math.round(val)}`,
+      format: (val, row) => `${Math.round(val)} J`,
       align: 'left'
     },
     // Flight time
@@ -157,7 +162,7 @@ const columns = computed(() => {
       name: 'flightTimeS',
       field: row => row.time,
       label: 'Flight time (S)',
-      format: (val, row) => `${Math.round(val * 100) / 100}`,
+      format: (val, row) => `${Math.round(val * 100) / 100} S`,
       align: 'left'
     }
   ]

@@ -9,6 +9,18 @@
       Trajectory Validation
     </p>
     <p>Validate your bullet velocity by observations.</p>
+    <q-img
+      v-if="!$q.dark.isActive"
+      src="~assets/trajectory-validation-preview-light.jpg"
+      style="height:200px;"
+      fit="fill"
+    />
+    <q-img
+      v-if="$q.dark.isActive"
+      src="~assets/trajectory-validation-preview-dark.jpg"
+      style="height:200px;"
+      fit="fill"
+    />
     <q-card-actions vertical>
       <q-btn
         color="primary"

@@ -70,35 +70,32 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
       const initialShot = ballisticCalculator(params)
       const initialElevation = initialShot._trajectory[initialShot._trajectory.length - 1].drop
 
-      let elevationUnit
-      if (this.settings.measures.unit === 'IN') {
-        elevationUnit = BC.Unit.Inch
-      }
-      if (this.settings.measures.unit === 'CM') {
-        elevationUnit = BC.Unit.Centimeter
-      }
-
       let velocityStep = 1000
-      const elevationGoal = Math.round(this.settings.measures.elevation * 10) / 10
+      let currentVelocity = parseFloat(params.measures.velocity)
+      const elevationGoal = Math.round(parseFloat(this.settings.measures.elevation) * 10) / 10
 
-      let newElevation = Math.round(initialElevation.In(elevationUnit) * 10) / 10
-      let newShot
+      let newElevation = Math.round(initialElevation.In(this.elevationUnit) * 10) / 10
+      let newShot = initialShot
       while (newElevation !== elevationGoal && velocityStep >= 1) {
         let addedVelocity // note if we added velocity or not
         if (newElevation > elevationGoal) {
-          params.measures.velocity -= velocityStep
+          currentVelocity -= velocityStep
           addedVelocity = false
         }
         if (newElevation < elevationGoal) {
-          params.measures.velocity += velocityStep
+          currentVelocity += velocityStep
           addedVelocity = true
         }
+
+        // set new velocity
+        params.measures.velocity = currentVelocity
 
         // fire new shot
         newShot = ballisticCalculator(params)
         // get new elevation
         if (newShot._trajectory.length > 0) {
-          newElevation = newShot._trajectory[newShot._trajectory.length - 1].drop.In(elevationUnit)
+          newElevation = newShot._trajectory[newShot._trajectory.length - 1].drop.In(this.elevationUnit)
+
           newElevation = Math.round(newElevation * 10) / 10
 
           // devide velocity step by two if we exceeded the elevation goal
@@ -113,7 +110,11 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
         }
       }
 
-      return newShot
+      return {
+        initialShot,
+        validationShot: newShot,
+        velocity: params.measures.velocity
+      }
     }
   },
   persist: true

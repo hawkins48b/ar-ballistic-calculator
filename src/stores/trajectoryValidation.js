@@ -49,6 +49,25 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
         unit = BC.Unit.Meter
       }
       return unit
+    },
+    isCalculationValid: (state) => {
+      let isValid = false
+
+      const range = parseFloat(state.settings.range.distance)
+      const zero = parseFloat(state.settings.zero.distance)
+      const elevation = parseFloat(state.settings.measures.elevation)
+
+      if (!isNaN(range) && range > 0) {
+        if (!isNaN(zero) && zero > 0) {
+          if (!isNaN(elevation)) {
+            if (range > zero) {
+              isValid = true
+            }
+          }
+        }
+      }
+
+      return isValid
     }
   },
 
@@ -72,7 +91,7 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
       initialElevation = Math.round(initialElevation * 10) / 10
 
       let velocityStep = 100
-      let currentVelocity = profile.value.measures.velocity
+      let currentVelocity = parseFloat(profile.value.measures.velocity)
       const elevationGoal = Math.round(parseFloat(this.settings.measures.elevation) * 10) / 10
 
       let newElevation = initialElevation
@@ -95,6 +114,7 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
 
         // fire new shot
         newShot = ballisticCalculator(params)
+        console.log('new shot')
         // get new elevation
         if (newShot._trajectory.length > 0) {
           newElevation = newShot._trajectory[newShot._trajectory.length - 1].drop.In(this.elevationUnit)

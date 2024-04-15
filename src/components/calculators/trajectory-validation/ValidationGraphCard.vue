@@ -219,18 +219,17 @@ const validShot = ref()
 const initShot = ref()
 const newVelocity = ref()
 watch(() => trajectoryValidationStore, () => {
-  const rangeDistance = parseFloat(trajectoryValidationStore.settings.range.distance)
-  const zeroDistance = parseFloat(trajectoryValidationStore.settings.zero.distance)
+  console.log('trajectoryValidationStore.isCalculationValid', trajectoryValidationStore.isCalculationValid)
+  if (trajectoryValidationStore.profileId && trajectoryValidationStore.isCalculationValid) {
+    const {
+      initialShot,
+      validationShot,
+      velocity
+    } = trajectoryValidationStore.calculatTrajectoryValidation()
 
-  if (trajectoryValidationStore.profileId && rangeDistance > 0) {
-    // range must be longer than zero distance
-    if (rangeDistance > zeroDistance) {
-      const {
-        initialShot,
-        validationShot,
-        velocity
-      } = trajectoryValidationStore.calculatTrajectoryValidation()
+    console.log('validationShot', validationShot)
 
+    if (validationShot) {
       validShot.value = validationShot
       initShot.value = initialShot
       newVelocity.value = Math.round(velocity)

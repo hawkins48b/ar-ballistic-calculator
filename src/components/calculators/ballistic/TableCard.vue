@@ -56,7 +56,10 @@
       <template #body-cell="props">
         <q-td :props="props">
           {{ props.value }}
-          <q-tooltip>
+          <q-tooltip
+            anchor="top left"
+            self="top middle"
+          >
             {{ props.col.label }}
           </q-tooltip>
         </q-td>

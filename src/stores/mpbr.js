@@ -71,7 +71,6 @@ export const useMpbrStore = defineStore('mpbr', {
             range,
             zero
           }
-          console.log('param check', params)
           const shot = ballisticCalculator(params, true)
 
           resolve(shot)

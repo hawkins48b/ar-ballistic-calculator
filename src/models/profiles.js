@@ -26,7 +26,9 @@ export default function () {
       velocityUnit: 'FPS',
       temperatureModifier: 0,
       temperature: 59,
-      temperatureUnit: '°F'
+      temperatureUnit: '°F',
+      accuracy: 2,
+      accuracyUnit: 'MOA'
     },
     options: {
       enableSpinDrift: false,

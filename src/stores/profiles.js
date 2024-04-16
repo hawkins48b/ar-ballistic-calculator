@@ -30,7 +30,9 @@ export const useProfilesStore = defineStore('profiles', {
         velocityUnit: 'FPS',
         temperatureModifier: 0.00,
         temperature: 59,
-        temperatureUnit: '°F'
+        temperatureUnit: '°F',
+        accuracy: 2,
+        accuracyUnit: 'MOA'
       },
       options: {
         enableSpinDrift: false,

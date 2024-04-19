@@ -1,0 +1,13 @@
+{
+  "name": "cw-zro",
+  "version": "1.6.38",
+  "description": "A simple ballistic calculator",
+  "author": "Quentin Mathey <q.mathey@gmail.com>",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "^5.0.0",
+    "@capacitor/app": "^5.0.0",
+    "@capacitor/cli": "^5.0.0",
+    "@capacitor/core": "^5.0.0"
+  }
+}

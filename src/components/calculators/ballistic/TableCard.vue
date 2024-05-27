@@ -1,5 +1,6 @@
 <template>
   <q-card
+    v-if="rows"
     flat
     :class="{'bg-grey-3':!$q.dark.isActive}"
     class="q-pa-md"
@@ -44,6 +45,7 @@
     />
 
     <q-table
+      v-if="rows"
       flat
       :rows="rows._trajectory"
       :columns="columns"

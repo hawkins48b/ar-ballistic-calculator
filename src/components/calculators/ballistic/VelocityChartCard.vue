@@ -1,5 +1,6 @@
 <template>
   <q-card
+    v-if="results"
     :class="{'bg-grey-3':!$q.dark.isActive}"
     flat
     class="q-pa-md"
@@ -86,7 +87,7 @@ const options = {
 // calculate trajectory
 const ballisticStore = useBallisticStore()
 const results = computed(() => ballisticStore.calculateShot)
-const speedOfSound = results.value.shot.atmo.mach
+let speedOfSound
 const machValueLabel = ref('')
 
 // Chart series data
@@ -170,7 +171,10 @@ const buildSeries = () => {
 }
 
 watch(() => results, () => {
-  buildSeries()
+  if (results.value) {
+    speedOfSound = results.value.shot.atmo.mach
+    buildSeries()
+  }
 },
 {
   deep: true,

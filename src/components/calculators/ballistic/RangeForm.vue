@@ -34,7 +34,8 @@
       type="number"
       lazy-rules
       :rules="[
-        val => val && val > 0 || 'Range must be positive'
+        val => val && val > 0 || 'Range must be positive',
+        val => val <= 3000 || 'Range must be inferior or equal to 3000'
       ]"
       class="q-mt-md"
       hint="e.g 500 YD or 500 M"

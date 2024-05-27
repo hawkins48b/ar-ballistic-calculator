@@ -98,7 +98,10 @@ export const useBallisticStore = defineStore('ballistic', {
           wind: state.wind,
           sightAdjustment: state.sightAdjustment
         }
-        results = ballisticCalculator(params)
+
+        if (state.isCalculationValid) {
+          results = ballisticCalculator(params)
+        }
       }
       return results
     },
@@ -124,9 +127,22 @@ export const useBallisticStore = defineStore('ballistic', {
           wind: state.wind,
           sightAdjustment: state.sightAdjustment
         }
-        results = ballisticCalculator(params, true)
+        if (state.isCalculationValid) {
+          results = ballisticCalculator(params, true)
+        }
       }
       return results
+    },
+    isCalculationValid: (state) => {
+      let isValid = false
+
+      const distance = parseFloat(state.range.distance)
+
+      if (distance <= 3000) {
+        isValid = true
+      }
+
+      return isValid
     }
   },
   actions: {

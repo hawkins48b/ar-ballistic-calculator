@@ -114,7 +114,7 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
 
         // fire new shot
         newShot = ballisticCalculator(params)
-        console.log('new shot')
+
         // get new elevation
         if (newShot._trajectory.length > 0) {
           newElevation = newShot._trajectory[newShot._trajectory.length - 1].drop.In(this.elevationUnit)

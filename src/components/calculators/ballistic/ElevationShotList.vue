@@ -48,14 +48,14 @@ const ballisticStore = useBallisticStore()
 
 const nearZero = computed(() => {
   let distance = 0
-  if (props.shot.nearZero) {
+  if (props.shot && props.shot.nearZero) {
     distance = Math.round(props.shot.nearZero.In(ballisticStore.distanceUnit))
   }
   return distance
 })
 const farZero = computed(() => {
   let distance = 'unkown'
-  if (props.shot.farZero) {
+  if (props.shot && props.shot.farZero) {
     distance = Math.round(props.shot.farZero.In(ballisticStore.distanceUnit))
   }
   return distance

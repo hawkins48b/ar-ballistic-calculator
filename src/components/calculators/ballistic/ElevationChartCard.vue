@@ -1,5 +1,6 @@
 <template>
   <q-card
+    v-if="shot"
     :class="{'bg-grey-3':!$q.dark.isActive}"
     flat
     class="q-pa-md"
@@ -245,10 +246,12 @@ const shot = computed(() => ballisticStore.calculateShotStep1)
 const step = computed(() => ballisticStore.range.step)
 
 watch([shot, step], () => {
-  buildSeries()
-  setOptions()
-  // remove annotations
-  showAnnotations.value = false
+  if (shot.value !== null && step.value !== null) {
+    buildSeries()
+    setOptions()
+    // remove annotations
+    showAnnotations.value = false
+  }
 },
 {
   deep: true,

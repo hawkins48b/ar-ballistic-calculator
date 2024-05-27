@@ -219,15 +219,12 @@ const validShot = ref()
 const initShot = ref()
 const newVelocity = ref()
 watch(() => trajectoryValidationStore, () => {
-  console.log('trajectoryValidationStore.isCalculationValid', trajectoryValidationStore.isCalculationValid)
   if (trajectoryValidationStore.profileId && trajectoryValidationStore.isCalculationValid) {
     const {
       initialShot,
       validationShot,
       velocity
     } = trajectoryValidationStore.calculatTrajectoryValidation()
-
-    console.log('validationShot', validationShot)
 
     if (validationShot) {
       validShot.value = validationShot

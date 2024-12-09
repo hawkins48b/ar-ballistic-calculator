@@ -121,6 +121,7 @@ export default function (params, addExtra) {
     }
 
     const humidity = parseFloat(params.atmosphere.humidity) / 100
+    console.log('humidity', humidity)
     // set atmosphere
     atmo = new BC.Atmo(altitude, pressure, temperature, humidity)
   }
@@ -207,6 +208,7 @@ export default function (params, addExtra) {
   const shot = new BC.Shot(maxRange, BC.UNew.Degree(0), relativeAngle, BC.UNew.Degree(0), atmo, windsArray)
 
   // calculate
+  console.log('atmo', atmo)
   const calculator = new Calculator(weapon, ammo, atmo)
   results = calculator.fire(shot, rangeStep)
 

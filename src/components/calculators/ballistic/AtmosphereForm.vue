@@ -4,31 +4,10 @@
       Use standard atmosphere
     </q-toggle>
     <q-input
-      v-model="atmosphere.altitude"
-      label="Altitude"
-      type="number"
-      :disable="atmosphere.useISA"
-      hint="Altitude has little to no impact."
-      filled
-      debounce="500"
-    >
-      <template #append>
-        <q-btn-toggle
-          v-model="atmosphere.altitudeUnit"
-          no-caps
-          :options="[
-            {label: 'FT', value: 'FT'},
-            {label: 'M', value: 'M'}
-          ]"
-        />
-      </template>
-    </q-input>
-    <q-input
       v-model="atmosphere.pressure"
       label="Barometric pressure"
       type="number"
       :disable="atmosphere.useISA"
-      hint="Altitude has a BIG impact."
       filled
       debounce="500"
       class="q-mt-md"
@@ -49,7 +28,6 @@
       label="Temperature"
       type="number"
       :disable="atmosphere.useISA"
-      hint="Temperature has a BIG impact."
       filled
       debounce="500"
       class="q-mt-md"
@@ -70,7 +48,9 @@
       label="Humidity"
       type="number"
       :disable="atmosphere.useISA"
-      hint="Humidity has little to no impact."
+      :rules="[
+        val => val && val >= 0 && val <= 100 || 'Humidity must be between 0 and 100'
+      ]"
       filled
       debounce="500"
       class="q-mt-md"
@@ -94,18 +74,6 @@ const {
   atmosphere
 } = storeToRefs(ballisticStore)
 
-// conversion for altitude
-watch(() => ballisticStore.atmosphere.altitudeUnit, (newValue) => {
-  if (!atmosphere.value.useISA) {
-    if (newValue === 'FT') {
-      atmosphere.value.altitude = BC.UNew.Meter(atmosphere.value.altitude).In(BC.Unit.Foot)
-    }
-    if (newValue === 'M') {
-      atmosphere.value.altitude = BC.UNew.Foot(atmosphere.value.altitude).In(BC.Unit.Meter)
-    }
-    atmosphere.value.altitude = Math.round(atmosphere.value.altitude * 10) / 10
-  }
-})
 // conversion for pressure
 watch(() => ballisticStore.atmosphere.pressureUnit, (newValue) => {
   if (!atmosphere.value.useISA) {

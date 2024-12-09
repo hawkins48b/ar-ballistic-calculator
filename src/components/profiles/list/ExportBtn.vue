@@ -12,9 +12,9 @@
       flat
     >
       <div
-        class="row q-gutter-md"
+        class="row"
       >
-        <div class="col">
+        <div class="col-12">
           <q-card
             class="q-pa-md"
             flat
@@ -42,7 +42,9 @@
             </q-card-actions>
           </q-card>
         </div>
-        <div class="col">
+        <div
+          class="col-12 q-mt-md"
+        >
           <q-card
             class="q-pa-md"
             flat

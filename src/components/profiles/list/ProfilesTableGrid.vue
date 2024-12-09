@@ -11,6 +11,9 @@
     grid-header
     :rows-per-page-options="[0]"
   >
+    <template #top-left>
+      <exportBtn />
+    </template>
     <template #top-right>
       <q-input
         v-model="filter"
@@ -130,6 +133,7 @@
 
 <script setup>
 // imports
+import ExportBtn from 'components/profiles/list/ExportBtn.vue'
 import ProfileEditButton from 'components/profiles/ProfileEditButton.vue'
 import { ref, onMounted } from 'vue'
 import { useProfilesStore } from 'stores/profiles'

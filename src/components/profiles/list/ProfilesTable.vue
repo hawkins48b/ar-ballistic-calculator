@@ -11,6 +11,9 @@
     :class="{'bg-grey-3':!$q.dark.isActive}"
     no-data-label="No profile found."
   >
+    <template #top-left>
+      <exportBtn />
+    </template>
     <template #top-right>
       <q-input
         v-model="filter"
@@ -59,6 +62,7 @@
 
 <script setup>
 // imports
+import ExportBtn from 'components/profiles/list/ExportBtn.vue'
 import ProfileEditButton from 'components/profiles/ProfileEditButton.vue'
 import { useProfilesStore } from 'stores/profiles'
 import { storeToRefs } from 'pinia'

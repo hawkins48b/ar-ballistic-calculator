@@ -310,4 +310,15 @@ const annotationMpbr = computed(() => {
     fillColor: colors.getPaletteColor('primary')
   }
 })
+
+/*
+ * update chart if theme changes
+ */
+watch(() => $q.dark.isActive, () => {
+  chart.value.updateOptions({
+    theme: {
+      mode: $q.dark.isActive ? 'dark' : 'light'
+    }
+  })
+})
 </script>

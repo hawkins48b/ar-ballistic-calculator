@@ -258,4 +258,15 @@ watch([shot, step], () => {
   immediate: true
 })
 
+/*
+ * update chart if theme changes
+ */
+watch(() => $q.dark.isActive, () => {
+  chart.value.updateOptions({
+    theme: {
+      mode: $q.dark.isActive ? 'dark' : 'light'
+    }
+  })
+})
+
 </script>

@@ -148,7 +148,6 @@ function fileUploaded () {
 }
 
 function insertProfilesIntoProfilesStore (uploadedProfiles) {
-  console.log(uploadedProfiles.value)
   for (const profile of uploadedProfiles.value) {
     profilesStore.addProfile(profile)
   }

@@ -89,10 +89,10 @@ const $q = useQuasar()
 
 const date = new Date()
 const formattedDate = `${date.getFullYear()}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}`
-
-const prefix = ref(`exported ${formattedDate}`)
 // format filename with year.month.day.profiles.json
 const filename = `${formattedDate}.profiles.json`
+
+const prefix = ref(`exported ${formattedDate}`)
 
 // list profiles
 const profilesStore = useProfilesStore()

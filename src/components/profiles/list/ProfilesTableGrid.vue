@@ -4,7 +4,7 @@
       <div class="col">
         <exportBtn />
       </div>
-      <q-spacer />
+      <q-space />
       <div class="col">
         <q-input
           v-model="filter"

@@ -19,6 +19,8 @@
     "postmajor": "npm version major && git push"
   },
   "dependencies": {
+    "@capacitor/filesystem": "^6.0.2",
+    "@capacitor/share": "^6.0.3",
     "@quasar/extras": "^1.16.4",
     "apexcharts": "^3.48.0",
     "axios": "^1.2.1",

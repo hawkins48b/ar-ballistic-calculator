@@ -145,8 +145,8 @@ async function shareJson (profilesArray) {
   // Share the file
   try {
     await Share.share({
-      title: 'Exported Profiles',
-      text: 'Here is the exported Profiles for another app.',
+      title: 'ZRO Ballistic app - Exported Profiles',
+      text: 'Here is the exported Profiles for another ZRO ballistic app.',
       url: result.uri, // Use the file's URI
       dialogTitle: 'Share exported Profiles'
     })

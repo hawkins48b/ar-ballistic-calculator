@@ -276,10 +276,10 @@ async function shareCSV (csvOutput) {
   // Share the file
   try {
     await Share.share({
-      title: 'Export Elevation table',
-      text: 'Here is the exported data for Excel.',
+      title: 'ZRO Ballistic app - Export dope chart',
+      text: 'Here is the exported dope chart for Excel.',
       url: result.uri, // Use the file's URI
-      dialogTitle: 'Share exported elevation data'
+      dialogTitle: 'Share dope chart'
     })
   } catch {
     // nothing

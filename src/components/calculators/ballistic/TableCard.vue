@@ -269,7 +269,7 @@ async function shareCSV (csvOutput) {
   const result = await Filesystem.writeFile({
     path: filename,
     data: csvOutput,
-    directory: Directory.Documents,
+    directory: Directory.Cache,
     encoding: Encoding.UTF8
   })
 

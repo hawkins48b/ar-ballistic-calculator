@@ -138,7 +138,7 @@ async function shareJson (profilesArray) {
   const result = await Filesystem.writeFile({
     path: filename,
     data: jsonString,
-    directory: Directory.Documents,
+    directory: Directory.Cache,
     encoding: Encoding.UTF8
   })
 

@@ -76,6 +76,8 @@ import { useBallisticStore } from 'stores/ballistic'
 import * as BC from 'js-ballistics'
 import { computed } from 'vue'
 import { exportFile, useQuasar } from 'quasar'
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem'
+import { Share } from '@capacitor/share'
 
 // Quasar $q
 const $q = useQuasar()
@@ -219,7 +221,9 @@ const columns = computed(() => {
 /*
  * CSV Export
  */
-const exportCSV = () => {
+
+const filename = 'elevation-export.csv'
+const exportCSV = async () => {
   let csvOutput = 'Range (YD),Range (M),Elevation (IN),Elevation (CM),Elevation (MOA),Elevation (MRAD),Windage (IN),Windage (CM),Windage (MOA),Windage (MRAD),Velocity (FPS),Velocity (MPS),Energy (FT/LB),Energy (J),Flight time (S)\r\n'
 
   for (const trajectory of rows.value._trajectory) {
@@ -241,18 +245,44 @@ const exportCSV = () => {
     csvOutput += '\r\n'
   }
 
-  const status = exportFile(
-    'elevation-export.csv',
-    csvOutput,
-    'text/csv'
-  )
+  if ($q.platform.is.mobile) {
+    await shareCSV(csvOutput)
+  } else {
+    const status = exportFile(
+      filename,
+      csvOutput,
+      'text/csv'
+    )
 
-  if (status !== true) {
-    $q.notify({
-      message: 'Browser denied file download...',
-      color: 'negative',
-      icon: 'warning'
+    if (status !== true) {
+      $q.notify({
+        message: 'Browser denied file download...',
+        color: 'negative',
+        icon: 'warning'
+      })
+    }
+  }
+}
+
+async function shareCSV (csvOutput) {
+  // Save the JSON file
+  const result = await Filesystem.writeFile({
+    path: filename,
+    data: csvOutput,
+    directory: Directory.Documents,
+    encoding: Encoding.UTF8
+  })
+
+  // Share the file
+  try {
+    await Share.share({
+      title: 'ZRO Ballistic app - Export dope chart',
+      text: 'Here is the exported dope chart for Excel.',
+      url: result.uri, // Use the file's URI
+      dialogTitle: 'Share dope chart'
     })
+  } catch {
+    // nothing
   }
 }
 

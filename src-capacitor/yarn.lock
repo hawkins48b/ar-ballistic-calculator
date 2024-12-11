@@ -42,6 +42,16 @@
   dependencies:
     tslib "^2.1.0"
 
+"@capacitor/filesystem@^6.0.2":
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/@capacitor/filesystem/-/filesystem-6.0.2.tgz#70bef48fbd89304c498c7d2b94f062e7787f9636"
+  integrity sha512-OUDjGPljC3/q6wFnCCBUgElfZgAaSaoKeh0ij2eoDygn5KVXta+5CiJ7H7o2/ziTW6WOyvP0++EC3DT0TzR23A==
+
+"@capacitor/share@^6.0.3":
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/@capacitor/share/-/share-6.0.3.tgz#03f613d916226e4891e6022cc89967eb1b3cd3cd"
+  integrity sha512-BkNM73Ix+yxQ7fkni8CrrGcp1kSl7u+YNoPLwWKQ1MuQ5Uav0d+CT8M67ie+3dc4jASmegnzlC6tkTmFcPTLeA==
+
 "@ionic/cli-framework-output@^2.2.5":
   version "2.2.8"
   resolved "https://registry.yarnpkg.com/@ionic/cli-framework-output/-/cli-framework-output-2.2.8.tgz#29d541acc7773a6aaceec5f3b079937fbcef5402"

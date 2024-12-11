@@ -3,6 +3,8 @@
   "appName": "ZRO - Ballistic Calculator",
   "webDir": "www",
   "server": {
-    "androidScheme": "https"
+    "androidScheme": "https",
+    "url": "http://192.168.0.27:9500",
+    "cleartext": true
   }
 }

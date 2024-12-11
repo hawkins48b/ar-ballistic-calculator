@@ -80,11 +80,17 @@
 
 import { ref } from 'vue'
 import { useProfilesStore } from 'stores/profiles'
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem'
+import { Share } from '@capacitor/share'
+import { useQuasar } from 'quasar'
 
 const dialog = ref(false)
+const $q = useQuasar()
 
 const date = new Date()
 const formattedDate = `${date.getFullYear()}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}`
+// format filename with year.month.day.profiles.json
+const filename = `${formattedDate}.profiles.json`
 
 const prefix = ref(`exported ${formattedDate}`)
 
@@ -93,13 +99,17 @@ const profilesStore = useProfilesStore()
 
 // Add prefix to each rifle name
 function prefixRifleNames (profilesArray) {
-  return profilesArray.map((item) => ({
-    ...item,
-    weapon: {
-      ...item.weapon,
-      name: `${prefix.value} ${item.weapon.name}`
-    }
-  }))
+  if (prefix.value !== '') {
+    return profilesArray.map((item) => ({
+      ...item,
+      weapon: {
+        ...item.weapon,
+        name: `${prefix.value} ${item.weapon.name}`
+      }
+    }))
+  } else {
+    return profilesArray
+  }
 }
 
 // remove id fields from profiles
@@ -115,19 +125,46 @@ function downloadJson (profilesArray) {
   const a = document.createElement('a')
   a.href = url
 
-  // format filename with year.month.day.profiles.json
-  const filename = `${formattedDate}.profiles.json`
-
   a.download = filename
   a.click()
   URL.revokeObjectURL(url)
 }
 
-function exportProfiles () {
+async function shareJson (profilesArray) {
+  // Convert the array to JSON
+  const jsonString = JSON.stringify(profilesArray, null, 2)
+
+  // Save the JSON file
+  const result = await Filesystem.writeFile({
+    path: filename,
+    data: jsonString,
+    directory: Directory.Documents,
+    encoding: Encoding.UTF8
+  })
+
+  // Share the file
+  try {
+    await Share.share({
+      title: 'ZRO Ballistic app - Exported Profiles',
+      text: 'Here is the exported Profiles for another ZRO ballistic app.',
+      url: result.uri, // Use the file's URI
+      dialogTitle: 'Share exported Profiles'
+    })
+  } catch {
+    // nothing
+  }
+}
+
+async function exportProfiles () {
   const profilesArray = ref(profilesStore.profilesArray)
   profilesArray.value = sanitizedProfiles(profilesArray.value)
   profilesArray.value = prefixRifleNames(profilesArray.value)
-  downloadJson(profilesArray.value)
+
+  if ($q.platform.is.mobile) {
+    await shareJson(profilesArray.value)
+  } else {
+    downloadJson(profilesArray.value)
+  }
 }
 
 const uploadedFile = ref(null) // Holds the selected file

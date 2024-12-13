@@ -4,8 +4,13 @@
     flat
     class="q-pa-md"
   >
-    <div class="text-h6">
-      Ammo
+    <div class="row justify-between">
+      <div class="col text-h6">
+        Ammo
+      </div>
+      <div class="col text-right">
+        <AmmoFinderBtn />
+      </div>
     </div>
     <q-input
       v-model="localProfile.bullet.brand"
@@ -119,6 +124,7 @@
 
 <script setup>
 // imports
+import AmmoFinderBtn from './AmmoFinderBtn.vue'
 import * as BC from 'js-ballistics'
 import { ref, watch } from 'vue'
 

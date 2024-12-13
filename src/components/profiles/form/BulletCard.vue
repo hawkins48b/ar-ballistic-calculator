@@ -9,7 +9,7 @@
         Ammo
       </div>
       <div class="col text-right">
-        <AmmoFinderBtn />
+        <AmmoFinderBtn v-model="localProfile.bullet" />
       </div>
     </div>
     <q-input
@@ -150,35 +150,48 @@ watch(localProfile, (newValue) => {
 
 // conversion for bullet diameter
 watch(() => localProfile.value.bullet.diameterUnit, (newValue) => {
-  if (newValue === 'IN') {
-    localProfile.value.bullet.diameter = BC.UNew.Millimeter(localProfile.value.bullet.diameter).In(BC.Unit.Inch)
-    localProfile.value.bullet.diameter = Math.round(localProfile.value.bullet.diameter * 1000) / 1000
-  }
-  if (newValue === 'MM') {
-    localProfile.value.bullet.diameter = BC.UNew.Inch(localProfile.value.bullet.diameter).In(BC.Unit.Millimeter)
-    localProfile.value.bullet.diameter = Math.round(localProfile.value.bullet.diameter * 100) / 100
+  if (localProfile.value.bullet.skipConversion !== true) {
+    if (newValue === 'IN') {
+      localProfile.value.bullet.diameter = BC.UNew.Millimeter(localProfile.value.bullet.diameter).In(BC.Unit.Inch)
+      localProfile.value.bullet.diameter = Math.round(localProfile.value.bullet.diameter * 1000) / 1000
+    }
+    if (newValue === 'MM') {
+      localProfile.value.bullet.diameter = BC.UNew.Inch(localProfile.value.bullet.diameter).In(BC.Unit.Millimeter)
+      localProfile.value.bullet.diameter = Math.round(localProfile.value.bullet.diameter * 100) / 100
+    }
   }
 })
 // conversion for bullet weight
 watch(() => localProfile.value.bullet.weightUnit, (newValue) => {
-  if (newValue === 'GR') {
-    localProfile.value.bullet.weight = BC.UNew.Gram(localProfile.value.bullet.weight).In(BC.Unit.Grain)
-    localProfile.value.bullet.weight = Math.round(localProfile.value.bullet.weight)
-  }
-  if (newValue === 'G') {
-    localProfile.value.bullet.weight = BC.UNew.Grain(localProfile.value.bullet.weight).In(BC.Unit.Gram)
-    localProfile.value.bullet.weight = Math.round(localProfile.value.bullet.weight * 100) / 100
+  if (localProfile.value.bullet.skipConversion !== true) {
+    if (newValue === 'GR') {
+      localProfile.value.bullet.weight = BC.UNew.Gram(localProfile.value.bullet.weight).In(BC.Unit.Grain)
+      localProfile.value.bullet.weight = Math.round(localProfile.value.bullet.weight)
+    }
+    if (newValue === 'G') {
+      localProfile.value.bullet.weight = BC.UNew.Grain(localProfile.value.bullet.weight).In(BC.Unit.Gram)
+      localProfile.value.bullet.weight = Math.round(localProfile.value.bullet.weight * 100) / 100
+    }
   }
 })
 // conversion for bullet length
 watch(() => localProfile.value.bullet.lengthUnit, (newValue) => {
-  if (newValue === 'IN') {
-    localProfile.value.bullet.length = BC.UNew.Millimeter(localProfile.value.bullet.length).In(BC.Unit.Inch)
-    localProfile.value.bullet.length = Math.round(localProfile.value.bullet.length * 1000) / 1000
+  if (localProfile.value.bullet.skipConversion !== true) {
+    if (newValue === 'IN') {
+      localProfile.value.bullet.length = BC.UNew.Millimeter(localProfile.value.bullet.length).In(BC.Unit.Inch)
+      localProfile.value.bullet.length = Math.round(localProfile.value.bullet.length * 1000) / 1000
+    }
+    if (newValue === 'MM') {
+      localProfile.value.bullet.length = BC.UNew.Inch(localProfile.value.bullet.length).In(BC.Unit.Millimeter)
+      localProfile.value.bullet.length = Math.round(localProfile.value.bullet.length * 100) / 100
+    }
   }
-  if (newValue === 'MM') {
-    localProfile.value.bullet.length = BC.UNew.Inch(localProfile.value.bullet.length).In(BC.Unit.Millimeter)
-    localProfile.value.bullet.length = Math.round(localProfile.value.bullet.length * 100) / 100
+})
+
+// reset skipConversion if detected
+watch(() => localProfile.value.bullet.skipConversion, (newValue) => {
+  if (newValue) {
+    localProfile.value.bullet.skipConversion = false
   }
 })
 </script>

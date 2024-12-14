@@ -15,7 +15,7 @@
       >
         <q-card-section>
           <p class="text-h3">
-            Load Data
+            Search Caliber
           </p>
           <p>
             Select predefined ammunition data.<br>
@@ -51,7 +51,7 @@
 
                 @click="selectAmmo(ammo.brand)"
               >
-                {{ ammo.brand }}
+                {{ ammo.brand }} - {{ ammo.weight }} {{ ammo.weightUnit }}
               </q-item-section>
             </q-item>
           </q-list>

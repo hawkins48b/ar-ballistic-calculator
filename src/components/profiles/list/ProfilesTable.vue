@@ -100,7 +100,7 @@ const columns = [
   {
     name: 'ammo',
     field: (row) => row.bullet.brand,
-    label: 'Ammunition brand',
+    label: 'Ammunition',
     align: 'left',
     sortable: true
   },
@@ -109,6 +109,14 @@ const columns = [
     field: (row) => row.bullet.diameter,
     label: 'Caliber',
     format: (val, row) => `${val} ${row.bullet.diameterUnit}`,
+    align: 'left',
+    sortable: true
+  },
+  {
+    name: 'weight',
+    field: (row) => row.bullet.weight,
+    label: 'Weight',
+    format: (val, row) => `${val} ${row.bullet.weightUnit}`,
     align: 'left',
     sortable: true
   },

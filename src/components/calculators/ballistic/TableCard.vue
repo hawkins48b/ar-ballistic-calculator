@@ -245,7 +245,7 @@ const exportCSV = async () => {
     csvOutput += '\r\n'
   }
 
-  if ($q.platform.is.mobile) {
+  if ($q.platform.is.capacitor) {
     await shareCSV(csvOutput)
   } else {
     const status = exportFile(

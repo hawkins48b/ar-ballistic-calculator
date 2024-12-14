@@ -100,7 +100,7 @@ const columns = [
   {
     name: 'ammo',
     field: (row) => row.bullet.brand,
-    label: 'Ammo brand',
+    label: 'Ammunition brand',
     align: 'left',
     sortable: true
   },

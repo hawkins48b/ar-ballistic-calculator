@@ -89,7 +89,7 @@
                   <q-item>
                     <q-item-section>
                       <q-item-label overline>
-                        AMMO
+                        AMMUNITION
                       </q-item-label>
                       <q-item-label class="text-bold">
                         {{ props.row.bullet.brand }} {{ props.row.bullet.diameter }} {{ props.row.bullet.diameterUnit }} {{ props.row.bullet.weight }} {{ props.row.bullet.weightUnit }}

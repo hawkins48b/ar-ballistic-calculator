@@ -160,7 +160,7 @@ async function exportProfiles () {
   profilesArray.value = sanitizedProfiles(profilesArray.value)
   profilesArray.value = prefixRifleNames(profilesArray.value)
 
-  if ($q.platform.is.mobile) {
+  if ($q.platform.is.capacitor) {
     await shareJson(profilesArray.value)
   } else {
     downloadJson(profilesArray.value)

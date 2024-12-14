@@ -5,7 +5,7 @@
       icon="zoom_in"
       @click="dialog=true"
     >
-      Ammo Finder
+      Search
     </q-btn>
     <q-dialog v-model="dialog">
       <q-card
@@ -15,10 +15,11 @@
       >
         <q-card-section>
           <p class="text-h3">
-            Ammo Finder
+            Search Caliber
           </p>
           <p>
-            Select predefined ammunition data.<br>Please update the bullet specification to the manufacturer's data.
+            Select predefined ammunition data.<br>
+            Please update the bullet specification to the manufacturer's data.
           </p>
           <q-input
             v-model="ammoSearchInput"
@@ -50,7 +51,7 @@
 
                 @click="selectAmmo(ammo.brand)"
               >
-                {{ ammo.brand }}
+                {{ ammo.brand }} - {{ ammo.weight }} {{ ammo.weightUnit }}
               </q-item-section>
             </q-item>
           </q-list>

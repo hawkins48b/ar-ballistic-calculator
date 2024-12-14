@@ -6,7 +6,7 @@
   >
     <div class="row justify-between">
       <div class="col text-h6">
-        Ammo
+        Ammuntion
       </div>
       <div class="col text-right">
         <AmmoFinderBtn v-model="localProfile.bullet" />

@@ -1,8 +1,5 @@
 {
-  "appId": "ch.chocolate-warfare.app.zro",
+  "appId": "ch.chocolatewarfare.app.zro",
   "appName": "ZRO - Ballistic Calculator",
-  "webDir": "www",
-  "server": {
-    "androidScheme": "https"
-  }
+  "webDir": "www"
 }

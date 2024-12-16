@@ -1,4 +1,4 @@
-package org.capacitor.quasar.app;
+package ch.chocolatewarfare.app.zro;
 
 import com.getcapacitor.BridgeActivity;
 

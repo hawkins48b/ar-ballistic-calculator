@@ -49,7 +49,7 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
         unit = BC.Unit.MOA
       }
       if (state.settings.measures.angleUnit === 'MRAD') {
-        unit = BC.Unit.Mrad
+        unit = BC.Unit.MRad
       }
       return unit
     },
@@ -161,7 +161,7 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
 
         let velocityStep = 100
         let currentVelocity = parseFloat(profile.value.measures.velocity)
-        const dropAdjustmentGoal = Math.round(parseFloat(this.settings.measures.distance) * 10) / 10
+        const dropAdjustmentGoal = Math.round(parseFloat(this.settings.measures.angle) * 10) / 10
 
         let newDropAdjustment = initialDropAdjustment
         params.measures.velocity = currentVelocity
@@ -206,8 +206,6 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
           newShot = null
         }
       }
-
-      console.log(initialShot)
 
       return {
         initialShot,

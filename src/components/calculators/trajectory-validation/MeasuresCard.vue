@@ -23,6 +23,7 @@
         class="q-mt-md"
       />
       <q-input
+        v-if="settings.measures.type === 'angle'"
         v-model="settings.measures.angle"
         label="Measured angle"
         filled
@@ -44,6 +45,7 @@
         </template>
       </q-input>
       <q-input
+        v-if="settings.measures.type === 'distance'"
         v-model="settings.measures.distance"
         label="Measured distance"
         filled
@@ -97,11 +99,11 @@ watch(() => settings.value.measures.distanceUnit, (newValue) => {
 // conversion elevation angular
 watch(() => settings.value.measures.angleUnit, (newValue) => {
   if (newValue === 'MOA') {
-    settings.value.measures.angle = BC.UNew.MOA(parseFloat(settings.value.measures.angle)).In(BC.Unit.MRad)
+    settings.value.measures.angle = BC.UNew.MRad(parseFloat(settings.value.measures.angle)).In(BC.Unit.MOA)
     settings.value.measures.angle = Math.round(settings.value.measures.angle * 10) / 10
   }
   if (newValue === 'MRAD') {
-    settings.value.measures.angle = BC.UNew.MRad(parseFloat(settings.value.measures.angle)).In(BC.Unit.MOA)
+    settings.value.measures.angle = BC.UNew.MOA(parseFloat(settings.value.measures.angle)).In(BC.Unit.MRad)
     settings.value.measures.angle = Math.round(settings.value.measures.angle * 10) / 10
   }
 })

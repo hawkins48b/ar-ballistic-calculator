@@ -6,26 +6,56 @@
   >
     <div class="text-h6">
       <q-icon
-        name="tune"
+        name="square_foot"
         size="lg"
         class="q-mr-sm"
       />
-      Range
+      Measure
     </div>
     <q-form>
+      <q-btn-toggle
+        v-model="settings.measures.type"
+        :options="[
+          {label: 'Angle', value:'angle'},
+          {label: 'distance', value:'distance'}
+        ]"
+
+        class="q-mt-md"
+      />
       <q-input
-        v-model="settings.measures.elevation"
-        label="Measured elevation"
+        v-model="settings.measures.angle"
+        label="Measured angle"
         filled
         step="any"
         type="number"
         class="q-mt-md"
-        hint="The measured elevation compared to point of aim."
+        hint="The measured distance compared to point of aim."
         debounce="500"
       >
         <template #append>
           <q-btn-toggle
-            v-model="settings.measures.unit"
+            v-model="settings.measures.angleUnit"
+            no-caps
+            :options="[
+              {label: 'MOA', value: 'MOA'},
+              {label: 'MRAD', value: 'MRAD'}
+            ]"
+          />
+        </template>
+      </q-input>
+      <q-input
+        v-model="settings.measures.distance"
+        label="Measured distance"
+        filled
+        step="any"
+        type="number"
+        class="q-mt-md"
+        hint="The measured distance compared to point of aim."
+        debounce="500"
+      >
+        <template #append>
+          <q-btn-toggle
+            v-model="settings.measures.distanceUnit"
             no-caps
             :options="[
               {label: 'IN', value: 'IN'},
@@ -53,28 +83,27 @@ const { settings } = storeToRefs(trajectoryValidationStore)
  * Unit conversion
  */
 // conversion elevation length
-watch(() => settings.value.elevationLength.unit, (newValue) => {
+watch(() => settings.value.measures.distanceUnit, (newValue) => {
   if (newValue === 'IN') {
-    settings.value.measures.elevation = BC.UNew.Centimeter(parseFloat(settings.value.measures.elevation)).In(BC.Unit.Inch)
-    settings.value.measures.elevation = Math.round(settings.value.measures.elevation * 10) / 10
+    settings.value.measures.distance = BC.UNew.Centimeter(parseFloat(settings.value.measures.distance)).In(BC.Unit.Inch)
+    settings.value.measures.distance = Math.round(settings.value.measures.distance * 10) / 10
   }
   if (newValue === 'CM') {
-    settings.value.measures.elevation = BC.UNew.Inch(parseFloat(settings.value.measures.elevation)).In(BC.Unit.Centimeter)
-    settings.value.measures.elevation = Math.round(settings.value.measures.elevation * 10) / 10
+    settings.value.measures.distance = BC.UNew.Inch(parseFloat(settings.value.measures.distance)).In(BC.Unit.Centimeter)
+    settings.value.measures.distance = Math.round(settings.value.measures.distance * 10) / 10
   }
 })
-/*
+
 // conversion elevation angular
-watch(() => settings.value.measure.unit, (newValue) => {
+watch(() => settings.value.measures.angleUnit, (newValue) => {
   if (newValue === 'MOA') {
-    settings.value.measures.elevation = BC.UNew.MOA(parseFloat(settings.value.measures.elevation)).In(BC.Unit.MRad)
-    settings.value.measures.elevation = Math.round(settings.value.measures.elevation * 10) / 10
+    settings.value.measures.angle = BC.UNew.MOA(parseFloat(settings.value.measures.angle)).In(BC.Unit.MRad)
+    settings.value.measures.angle = Math.round(settings.value.measures.angle * 10) / 10
   }
   if (newValue === 'MRAD') {
-    settings.value.measures.elevation = BC.UNew.MRad(parseFloat(settings.value.measures.elevation)).In(BC.Unit.MOA)
-    settings.value.measures.elevation = Math.round(settings.value.measures.elevation * 10) / 10
+    settings.value.measures.angle = BC.UNew.MRad(parseFloat(settings.value.measures.angle)).In(BC.Unit.MOA)
+    settings.value.measures.angle = Math.round(settings.value.measures.angle * 10) / 10
   }
 })
-  */
 
 </script>

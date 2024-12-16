@@ -164,16 +164,16 @@ const buildSeries = () => {
 
   // initial trajectory
   for (const trajectory of initShot.value._trajectory) {
-    const elevation = Math.round(trajectory.drop.In(trajectoryValidationStore.elevationUnit) * 100) / 100
+    const elevation = Math.round(trajectory.drop.In(trajectoryValidationStore.measuresDistanceUnit) * 100) / 100
 
-    if (trajectoryValidationStore.elevationUnit === BC.Unit.Inch) {
+    if (trajectoryValidationStore.measuresDistanceUnit === BC.Unit.Inch) {
       serieName = 'Initial Elevation (IN)'
     }
-    if (trajectoryValidationStore.elevationUnit === BC.Unit.Centimeter) {
+    if (trajectoryValidationStore.measuresDistanceUnit === BC.Unit.Centimeter) {
       serieName = 'Initial Elevation (CM)'
     }
 
-    let distance = trajectory.distance.In(trajectoryValidationStore.distanceUnit)
+    let distance = trajectory.distance.In(trajectoryValidationStore.rangeDistanceUnit)
     distance = Math.round(distance)
     data.push({
       x: distance,
@@ -190,16 +190,16 @@ const buildSeries = () => {
   data = []
   if (validShot.value) {
     for (const trajectory of validShot.value._trajectory) {
-      const elevation = Math.round(trajectory.drop.In(trajectoryValidationStore.elevationUnit) * 100) / 100
+      const elevation = Math.round(trajectory.drop.In(trajectoryValidationStore.measuresDistanceUnit) * 100) / 100
 
-      if (trajectoryValidationStore.elevationUnit === BC.Unit.Inch) {
+      if (trajectoryValidationStore.measuresDistanceUnit === BC.Unit.Inch) {
         serieName = 'Validated Elevation (IN)'
       }
-      if (trajectoryValidationStore.elevationUnit === BC.Unit.Centimeter) {
+      if (trajectoryValidationStore.measuresDistanceUnit === BC.Unit.Centimeter) {
         serieName = 'Validated Elevation (CM)'
       }
 
-      let distance = trajectory.distance.In(trajectoryValidationStore.distanceUnit)
+      let distance = trajectory.distance.In(trajectoryValidationStore.rangeDistanceUnit)
       distance = Math.round(distance)
       data.push({
         x: distance,

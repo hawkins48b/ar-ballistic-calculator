@@ -70,12 +70,15 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
       const range = parseFloat(state.settings.range.distance)
       const zero = parseFloat(state.settings.zero.distance)
       const elevation = parseFloat(state.settings.measures.distance)
+      const angle = parseFloat(state.settings.measures.angle)
 
       if (!isNaN(range) && range > 0) {
         if (!isNaN(zero) && zero > 0) {
           if (!isNaN(elevation)) {
-            if (range > zero) {
-              isValid = true
+            if (!isNaN(angle)) {
+              if (range > zero) {
+                isValid = true
+              }
             }
           }
         }

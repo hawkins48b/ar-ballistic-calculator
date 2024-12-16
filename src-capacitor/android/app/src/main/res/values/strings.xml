@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">ZRO - Ballistic Calculator</string>
     <string name="title_activity_main">ZRO - Ballistic Calculator</string>
-    <string name="package_name">org.capacitor.quasar.app</string>
-    <string name="custom_url_scheme">org.capacitor.quasar.app</string>
+    <string name="package_name">ch.chocolatewarfare.app.zro</string>
+    <string name="custom_url_scheme">ch.chocolatewarfare.app.zro</string>
 </resources>

@@ -63,27 +63,6 @@
           />
         </template>
       </q-input>
-      <q-input
-        v-model="settings.measures.elevation"
-        label="Measured elevation"
-        filled
-        step="any"
-        type="number"
-        class="q-mt-md"
-        hint="The measured elevation compared to point of aim."
-        debounce="500"
-      >
-        <template #append>
-          <q-btn-toggle
-            v-model="settings.measures.unit"
-            no-caps
-            :options="[
-              {label: 'IN', value: 'IN'},
-              {label: 'CM', value: 'CM'}
-            ]"
-          />
-        </template>
-      </q-input>
     </q-form>
   </q-card>
 </template>
@@ -124,16 +103,4 @@ watch(() => settings.value.zero.unit, (newValue) => {
     settings.value.zero.distance = Math.round(settings.value.zero.distance * 10) / 10
   }
 })
-// conversion measure
-watch(() => settings.value.measures.unit, (newValue) => {
-  if (newValue === 'IN') {
-    settings.value.measures.elevation = BC.UNew.Centimeter(parseFloat(settings.value.measures.elevation)).In(BC.Unit.Inch)
-    settings.value.measures.elevation = Math.round(settings.value.measures.elevation * 10) / 10
-  }
-  if (newValue === 'CM') {
-    settings.value.measures.elevation = BC.UNew.Inch(parseFloat(settings.value.measures.elevation)).In(BC.Unit.Centimeter)
-    settings.value.measures.elevation = Math.round(settings.value.measures.elevation * 10) / 10
-  }
-})
-
 </script>

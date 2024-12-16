@@ -20,6 +20,11 @@
       >
         <SettingsCard />
       </div>
+      <div
+        class="col-xs-12 col-sm-6"
+      >
+        <MeasuresCard />
+      </div>
     </div>
     <ValidationGraphCard
       class="q-mt-md"
@@ -32,5 +37,6 @@
 import ProfileCard from 'components/calculators/trajectory-validation/ProfileCard.vue'
 import SettingsCard from 'components/calculators/trajectory-validation/SettingsCard.vue'
 import ValidationGraphCard from 'components/calculators/trajectory-validation/ValidationGraphCard.vue'
+import MeasuresCard from 'components/calculators/trajectory-validation/MeasuresCard.vue'
 
 </script>

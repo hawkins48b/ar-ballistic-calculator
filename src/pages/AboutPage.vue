@@ -58,6 +58,42 @@
         </p>
       </q-card>
     </div>
+    <div class="row q-mt-md">
+      <q-card
+        flat
+        class="col-xs-12 col-sm-6 col-md4 q-pa-md"
+        :class="{'bg-grey-3':!$q.dark.isActive}"
+      >
+        <div class="text-h3">
+          Privacy Policy
+        </div>
+        <p class="q-mt-md">
+          Privacy is paramount. ZRO Ballistic Calculator is designed to work entirely offline. Here's how we handle your data:
+          <ul>
+            <li>
+              No Online Data Storage<br>
+              The app operates offline, and no personal or usage data is stored or transmitted online.
+            </li>
+            <br>
+            <li>
+              No Statistics or Tracking<br>
+              We do not collect, retrieve, or analyze any statistics or user data.
+            </li>
+            <br>
+            <li>
+              Your Data Stays Local<br>
+              All data entered or calculated within the app remains on your device.
+            </li>
+          </ul>
+        </p>
+        <p>
+          If you have any questions or concerns, feel free to <a
+            href="https://chocolate-warfare.com/contact"
+            target="_blank"
+          >contact us</a>.
+        </p>
+      </q-card>
+    </div>
   </q-page>
 </template>
 

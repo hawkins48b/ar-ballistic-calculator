@@ -133,13 +133,26 @@ const setOptions = () => {
     // labels
     xAxisTitle = 'RANGE (M)'
   }
-  if (trajectoryValidationStore.settings.measures.unit === 'IN') {
+  if (trajectoryValidationStore.settings.measures.type === 'angle') {
+    if (trajectoryValidationStore.settings.measures.angleUnit === 'MOA') {
     // labels
-    yAxisTitle = 'ELEVATION (IN)'
+      yAxisTitle = 'ELEVATION (MOA)'
+    }
+    if (trajectoryValidationStore.settings.measures.angleUnit === 'MRAD') {
+    // labels
+      yAxisTitle = 'ELEVATION (MRAD)'
+    }
   }
-  if (trajectoryValidationStore.settings.measures.unit === 'CM') {
-    // labels
-    yAxisTitle = 'ELEVATION (CM)'
+
+  if (trajectoryValidationStore.settings.measures.type === 'distance') {
+    if (trajectoryValidationStore.settings.measures.distanceUnit === 'IN') {
+      // labels
+      yAxisTitle = 'ELEVATION (IN)'
+    }
+    if (trajectoryValidationStore.settings.measures.distanceUnit === 'CM') {
+      // labels
+      yAxisTitle = 'ELEVATION (CM)'
+    }
   }
 
   // set correct legend
@@ -158,22 +171,92 @@ const setOptions = () => {
  */
 const series = ref([])
 const buildSeries = () => {
+  if (trajectoryValidationStore.settings.measures.type === 'angle') {
+    buildSeriesForAngle()
+  }
+  if (trajectoryValidationStore.settings.measures.type === 'distance') {
+    buildSeriesForDistance()
+  }
+}
+const buildSeriesForAngle = () => {
   series.value = []
   let data = []
   let serieName
 
   // initial trajectory
   for (const trajectory of initShot.value._trajectory) {
-    const elevation = Math.round(trajectory.drop.In(trajectoryValidationStore.elevationUnit) * 100) / 100
+    const dropAdjustment = Math.round(trajectory.dropAdjustment.In(trajectoryValidationStore.measuresAngleUnit) * 100) / 100
 
-    if (trajectoryValidationStore.elevationUnit === BC.Unit.Inch) {
+    if (trajectoryValidationStore.measuresAngleUnit === BC.Unit.MOA) {
+      serieName = 'Initial Elevation (MOA)'
+    }
+    if (trajectoryValidationStore.measuresAngleUnit === BC.Unit.MRad) {
+      serieName = 'Initial Elevation (MRAD)'
+    }
+
+    let distance = trajectory.distance.In(trajectoryValidationStore.rangeDistanceUnit)
+    if (distance >= trajectoryValidationStore.settings.zero.distance) {
+      distance = Math.round(distance)
+      data.push({
+        x: distance,
+        y: dropAdjustment
+      })
+    }
+  }
+  // add data to chart series
+  series.value.push({
+    name: serieName,
+    data
+  })
+
+  // data for new validated trajectory
+  data = []
+  if (validShot.value) {
+    for (const trajectory of validShot.value._trajectory) {
+      const dropAdjustment = Math.round(trajectory.dropAdjustment.In(trajectoryValidationStore.measuresAngleUnit) * 100) / 100
+
+      if (trajectoryValidationStore.measuresAngleUnit === BC.Unit.MOA) {
+        serieName = 'Validated Elevation (MOA)'
+      }
+      if (trajectoryValidationStore.measuresAngleUnit === BC.Unit.MRad) {
+        serieName = 'Validated Elevation (MRAD)'
+      }
+
+      let distance = trajectory.distance.In(trajectoryValidationStore.rangeDistanceUnit)
+
+      if (distance >= trajectoryValidationStore.settings.zero.distance) {
+        distance = Math.round(distance)
+        data.push({
+          x: distance,
+          y: dropAdjustment
+        })
+      }
+    }
+
+    // add data to chart series
+    series.value.push({
+      name: serieName,
+      data
+    })
+  }
+}
+const buildSeriesForDistance = () => {
+  series.value = []
+  let data = []
+  let serieName
+
+  // initial trajectory
+  for (const trajectory of initShot.value._trajectory) {
+    const elevation = Math.round(trajectory.drop.In(trajectoryValidationStore.measuresDistanceUnit) * 100) / 100
+
+    if (trajectoryValidationStore.measuresDistanceUnit === BC.Unit.Inch) {
       serieName = 'Initial Elevation (IN)'
     }
-    if (trajectoryValidationStore.elevationUnit === BC.Unit.Centimeter) {
+    if (trajectoryValidationStore.measuresDistanceUnit === BC.Unit.Centimeter) {
       serieName = 'Initial Elevation (CM)'
     }
 
-    let distance = trajectory.distance.In(trajectoryValidationStore.distanceUnit)
+    let distance = trajectory.distance.In(trajectoryValidationStore.rangeDistanceUnit)
     distance = Math.round(distance)
     data.push({
       x: distance,
@@ -190,16 +273,16 @@ const buildSeries = () => {
   data = []
   if (validShot.value) {
     for (const trajectory of validShot.value._trajectory) {
-      const elevation = Math.round(trajectory.drop.In(trajectoryValidationStore.elevationUnit) * 100) / 100
+      const elevation = Math.round(trajectory.drop.In(trajectoryValidationStore.measuresDistanceUnit) * 100) / 100
 
-      if (trajectoryValidationStore.elevationUnit === BC.Unit.Inch) {
+      if (trajectoryValidationStore.measuresDistanceUnit === BC.Unit.Inch) {
         serieName = 'Validated Elevation (IN)'
       }
-      if (trajectoryValidationStore.elevationUnit === BC.Unit.Centimeter) {
+      if (trajectoryValidationStore.measuresDistanceUnit === BC.Unit.Centimeter) {
         serieName = 'Validated Elevation (CM)'
       }
 
-      let distance = trajectory.distance.In(trajectoryValidationStore.distanceUnit)
+      let distance = trajectory.distance.In(trajectoryValidationStore.rangeDistanceUnit)
       distance = Math.round(distance)
       data.push({
         x: distance,

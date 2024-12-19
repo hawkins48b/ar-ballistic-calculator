@@ -13,6 +13,7 @@
 // imports
 import { useRouter } from 'vue-router'
 import { useBallisticStore } from 'stores/ballistic'
+import { useProfilesStore } from 'stores/profiles'
 import { useMpbrStore } from 'stores/mpbr'
 import { ref } from 'vue'
 import * as BC from 'js-ballistics'
@@ -37,6 +38,7 @@ const router = useRouter()
  *  Button click event
  */
 const ballisticStore = useBallisticStore()
+const profileStore = useProfilesStore()
 const mpbrStore = useMpbrStore()
 const nearZero = ref(0)
 const range = ref(0)
@@ -48,17 +50,17 @@ const useMbpr = () => {
     range.value = props.shot.mpbr.distanceMax.In(props.distanceUnit) - props.shot.mpbr.distanceMax.In(props.distanceUnit) % 100 + 100
 
     // update ballistic calculator values
+    const profile = ref(profileStore.profilebyId(mpbrStore.profileId))
+    profile.value.optic.zero = nearZero
     ballisticStore.profileId = mpbrStore.profileId
-    ballisticStore.zero.distance = nearZero
     ballisticStore.range.distance = range
-    ballisticStore.range.step = 25
 
     if (props.distanceUnit === BC.Unit.Yard) {
-      ballisticStore.zero.unit = 'YD'
+      profile.value.optic.zeroUnit = 'YD'
       ballisticStore.range.unit = 'YD'
     }
     if (props.distanceUnit === BC.Unit.Meter) {
-      ballisticStore.zero.unit = 'M'
+      profile.value.optic.zeroUnit = 'M'
       ballisticStore.range.unit = 'M'
     }
 

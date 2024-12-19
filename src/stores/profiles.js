@@ -12,7 +12,9 @@ export const useProfilesStore = defineStore('profiles', {
       optic: {
         model: 'Aimpoint CompM2',
         height: '3.5',
-        heightUnit: 'IN'
+        heightUnit: 'IN',
+        zero: 25,
+        zeroUnit: 'YD'
       },
       bullet: {
         brand: 'M193',
@@ -57,6 +59,7 @@ export const useProfilesStore = defineStore('profiles', {
       if (profile) {
         label = profile.weapon.name + ' with ' +
                 profile.optic.model + ' - ' +
+                'Zeroed at ' + profile.optic.zero + ' ' + profile.optic.zeroUnit + ' - ' +
                 profile.bullet.brand + ' ' +
                 profile.bullet.diameter + ' at ' +
                 profile.measures.velocity + ' ' +

@@ -17,10 +17,6 @@ const ISA_HUMIDITY = 78
 export const useBallisticStore = defineStore('ballistic', {
   state: () => ({
     profileId: null,
-    zero: {
-      distance: 25,
-      unit: 'YD'
-    },
     range: {
       distance: 500,
       unit: 'YD',
@@ -93,7 +89,6 @@ export const useBallisticStore = defineStore('ballistic', {
           measures: profile.value.measures,
           options: profile.value.options,
           range: state.range,
-          zero: state.zero,
           atmosphere: state.atmosphere,
           wind: state.wind,
           sightAdjustment: state.sightAdjustment

@@ -8,7 +8,9 @@ export default function () {
     optic: {
       model: '',
       height: '',
-      heightUnit: 'IN'
+      heightUnit: 'IN',
+      zero: 0,
+      zeroUnit: 'YD'
     },
     bullet: {
       brand: '',

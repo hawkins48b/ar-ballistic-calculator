@@ -3,7 +3,7 @@
     <q-header>
       <q-toolbar
         class="bg-grey-3"
-        :class="{'bg-grey-10':$q.dark.isActive}"
+        :class="{'bg-grey-10':$q.dark.isActive, 'text-black':!$q.dark.isActive}"
       >
         <q-btn
           class="q-ma-md"

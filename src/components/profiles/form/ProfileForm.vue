@@ -19,16 +19,15 @@
         <BulletCard :profile="profile" />
       </div>
     </div>
-    <div class="row">
-      <div class="q-pl-sm q-mt-md">
-        <q-btn
-          color="primary"
-          :icon="submitIcon"
-          type="submit"
-        >
-          {{ submitText }}
-        </q-btn>
-      </div>
+    <div class="row q-mt-md">
+      <q-btn
+        color="primary"
+        :icon="submitIcon"
+        type="submit"
+        class="col-xs-12 col-sm-6"
+      >
+        {{ submitText }}
+      </q-btn>
     </div>
   </q-form>
 </template>

@@ -161,6 +161,9 @@ const setOptions = () => {
 
   options.xaxis.tickAmount = 20
 
+  // ensure chart theme
+  options.theme.mode = $q.dark.isActive ? 'dark' : 'light'
+
   if (chart.value) { // chart may be null if not mounted
     chart.value.updateOptions(options)
   }
@@ -335,10 +338,6 @@ watch(() => trajectoryValidationStore, () => {
  * update chart if theme changes
  */
 watch(() => $q.dark.isActive, () => {
-  chart.value.updateOptions({
-    theme: {
-      mode: $q.dark.isActive ? 'dark' : 'light'
-    }
-  })
+  setOptions()
 })
 </script>

@@ -1,18 +1,11 @@
 <template>
   <div class="row justify-between">
-    <div class="col-auto q-pa-sm">
-      <div class="row">
-        <div class="col-auto">
-          <q-btn
-            to="/profiles"
-            flat
-            icon="arrow_back"
-          />
-        </div>
-        <div class="col-auto text-h6">
-          Add Profile
-        </div>
-      </div>
+    <div class="col-auto">
+      <q-btn
+        to="/profiles"
+        flat
+        icon="arrow_back"
+      />
     </div>
     <div class="col-auto self-center self-end">
       <OptionsButton v-model="profile" />
@@ -20,6 +13,7 @@
   </div>
   <ProfileForm
     :profile="profile"
+    class="q-mt-md"
     @submit="addProfile"
   />
 </template>

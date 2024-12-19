@@ -8,9 +8,6 @@
           icon="arrow_back"
         />
       </div>
-      <div class="col-auto text-h6 q-pl-md">
-        Maximum Point Blank Range
-      </div>
     </div>
     <!-- Profiles -->
     <ProfileCard class="q-mt-sm" />

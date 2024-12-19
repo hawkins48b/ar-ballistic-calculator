@@ -5,27 +5,28 @@ const routes = [
     children: [
 
       { path: '', redirect: '/dashboard' },
-      { path: 'dashboard', component: () => import('pages/DashboardPage.vue') },
+      { path: 'dashboard', component: () => import('pages/DashboardPage.vue'), name: 'Dashboard' },
       {
         path: 'profiles',
         component: () => import('pages/ProfilesPage.vue'),
+
         children: [
-          { path: '', component: () => import('pages/profiles/ListProfilesPage.vue') },
-          { path: 'add', component: () => import('pages/profiles/AddProfilePage.vue') },
-          { path: 'edit/:profileId', component: () => import('pages/profiles/EditProfilePage.vue') }
+          { path: '', component: () => import('pages/profiles/ListProfilesPage.vue'), name: 'Profiles' },
+          { path: 'add', component: () => import('pages/profiles/AddProfilePage.vue'), name: 'Add profile' },
+          { path: 'edit/:profileId', component: () => import('pages/profiles/EditProfilePage.vue'), name: 'Edit profile' }
         ]
       },
       {
         path: 'calculators',
         component: () => import('pages/CalculatorsPage.vue'),
         children: [
-          { path: '', component: () => import('pages/calculators/ListCalculatorsPage.vue') },
-          { path: 'ballistic', component: () => import('pages/calculators/ballistic/BallisticPage.vue') },
-          { path: 'maximum-point-blank-range', component: () => import('pages/calculators/mpbr/MpbrPage.vue') },
-          { path: 'trajectory-validation', component: () => import('pages/calculators/trajectory-validation/TrajectoryValidationPage.vue') }
+          { path: '', component: () => import('pages/calculators/ListCalculatorsPage.vue'), name: 'Calculators' },
+          { path: 'ballistic', component: () => import('pages/calculators/ballistic/BallisticPage.vue'), name: 'Balistic calculator' },
+          { path: 'maximum-point-blank-range', component: () => import('pages/calculators/mpbr/MpbrPage.vue'), name: 'Maximum point blank range' },
+          { path: 'trajectory-validation', component: () => import('pages/calculators/trajectory-validation/TrajectoryValidationPage.vue'), name: 'Trajectory validation' }
         ]
       },
-      { path: 'about', component: () => import('pages/AboutPage.vue') }
+      { path: 'about', component: () => import('pages/AboutPage.vue'), name: 'About' }
     ]
   },
 

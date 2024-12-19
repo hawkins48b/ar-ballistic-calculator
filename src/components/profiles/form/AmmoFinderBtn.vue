@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, defineModel } from 'vue'
+import { ref, computed, watch } from 'vue'
 import ammoSource from '../../../models/ammoFinder.json'
 
 // props

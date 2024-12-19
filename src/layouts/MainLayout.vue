@@ -1,5 +1,20 @@
 <template>
   <q-layout view="lHh lpR fFf">
+    <q-header>
+      <q-toolbar
+        class="bg-grey-3"
+        :class="{'bg-grey-10':$q.dark.isActive, 'text-black':!$q.dark.isActive}"
+      >
+        <q-btn
+          class="q-ma-md"
+          flat
+          round
+          icon="menu"
+          @click="leftDrawerOpen = !leftDrawerOpen"
+        />
+        <q-toolbar-title>{{ $route.name }}</q-toolbar-title>
+      </q-toolbar>
+    </q-header>
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
@@ -37,20 +52,6 @@
     </q-drawer>
 
     <q-page-container>
-      <div class="row justify-start lt-md ">
-        <div class="">
-          <q-btn
-            class="q-ma-md"
-            flat
-            round
-            icon="menu"
-            @click="leftDrawerOpen = true"
-          />
-        </div>
-        <div class=" text-h3 q-mt-sm">
-          ZRO
-        </div>
-      </div>
       <router-view />
     </q-page-container>
   </q-layout>

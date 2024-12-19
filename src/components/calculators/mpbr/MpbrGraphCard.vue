@@ -165,6 +165,9 @@ const setOptions = () => {
   options.xaxis.max = mpbrShot.value.mpbr.distanceMax.In(mpbrStore.distanceUnit) - mpbrShot.value.mpbr.distanceMax.In(mpbrStore.distanceUnit) % 100 + 100
   options.xaxis.tickAmount = 20
 
+  // ensure chart theme
+  options.theme.mode = $q.dark.isActive ? 'dark' : 'light'
+
   if (chart.value) { // chart may be null if not mounted
     chart.value.updateOptions(options)
   }
@@ -315,10 +318,6 @@ const annotationMpbr = computed(() => {
  * update chart if theme changes
  */
 watch(() => $q.dark.isActive, () => {
-  chart.value.updateOptions({
-    theme: {
-      mode: $q.dark.isActive ? 'dark' : 'light'
-    }
-  })
+  setOptions()
 })
 </script>

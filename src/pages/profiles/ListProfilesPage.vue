@@ -4,6 +4,7 @@
       to="/profiles/add"
       color="primary"
       icon="add"
+      class="desktop-only"
     >
       Add
     </q-btn>
@@ -15,6 +16,18 @@
       :profile-actions="['edit','duplicate','remove']"
       class="lt-lg"
     />
+    <q-page-sticky
+      position="bottom-right"
+      :offset="[18, 18]"
+    >
+      <q-btn
+        to="/profiles/add"
+        fab
+        icon="add"
+        color="primary"
+        class="mobile-only"
+      />
+    </q-page-sticky>
   </div>
 </template>
 

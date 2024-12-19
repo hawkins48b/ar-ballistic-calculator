@@ -86,7 +86,8 @@ const options = reactive({
       },
       offsetY: -10,
       text: ''
-    }
+    },
+    type: 'numeric'
   }
 })
 
@@ -150,7 +151,10 @@ const setOptions = () => {
   options.yaxis[0].title.text = yAxisTitle
 
   // adjust data & axis
-  options.xaxis.tickAmount = ballisticStore.range.distance / ballisticStore.range.step
+  options.xaxis.tickAmount = ballisticStore.range.distance / ballisticStore.range.step - 1
+
+  // ensure chart theme
+  options.theme.mode = $q.dark.isActive ? 'dark' : 'light'
 
   if (chart.value) { // chart may be null if not mounted
     chart.value.updateOptions(options)
@@ -262,11 +266,7 @@ watch([shot, step], () => {
  * update chart if theme changes
  */
 watch(() => $q.dark.isActive, () => {
-  chart.value.updateOptions({
-    theme: {
-      mode: $q.dark.isActive ? 'dark' : 'light'
-    }
-  })
+  setOptions()
 })
 
 </script>

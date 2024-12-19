@@ -170,6 +170,15 @@ const buildSeries = () => {
   }
 }
 
+const setOptions = () => {
+  // ensure chart theme
+  options.theme.mode = $q.dark.isActive ? 'dark' : 'light'
+
+  if (chart.value) {
+    chart.value.updateOptions(options)
+  }
+}
+
 watch(() => results, () => {
   if (results.value) {
     speedOfSound = results.value.shot.atmo.mach
@@ -179,5 +188,12 @@ watch(() => results, () => {
 {
   deep: true,
   immediate: true
+})
+
+/*
+ * update chart if theme changes
+ */
+watch(() => $q.dark.isActive, () => {
+  setOptions()
 })
 </script>

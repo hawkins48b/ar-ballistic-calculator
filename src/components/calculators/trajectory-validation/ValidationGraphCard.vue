@@ -161,6 +161,9 @@ const setOptions = () => {
 
   options.xaxis.tickAmount = 20
 
+  // ensure chart theme
+  options.theme.mode = $q.dark.isActive ? 'dark' : 'light'
+
   if (chart.value) { // chart may be null if not mounted
     chart.value.updateOptions(options)
   }
@@ -195,7 +198,7 @@ const buildSeriesForAngle = () => {
     }
 
     let distance = trajectory.distance.In(trajectoryValidationStore.rangeDistanceUnit)
-    if (distance >= trajectoryValidationStore.settings.zero.distance) {
+    if (distance >= trajectoryValidationStore.getZero.distance) {
       distance = Math.round(distance)
       data.push({
         x: distance,
@@ -224,7 +227,7 @@ const buildSeriesForAngle = () => {
 
       let distance = trajectory.distance.In(trajectoryValidationStore.rangeDistanceUnit)
 
-      if (distance >= trajectoryValidationStore.settings.zero.distance) {
+      if (distance >= trajectoryValidationStore.getZero.distance) {
         distance = Math.round(distance)
         data.push({
           x: distance,
@@ -335,10 +338,6 @@ watch(() => trajectoryValidationStore, () => {
  * update chart if theme changes
  */
 watch(() => $q.dark.isActive, () => {
-  chart.value.updateOptions({
-    theme: {
-      mode: $q.dark.isActive ? 'dark' : 'light'
-    }
-  })
+  setOptions()
 })
 </script>

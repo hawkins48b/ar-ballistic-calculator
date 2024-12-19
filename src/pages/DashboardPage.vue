@@ -2,9 +2,6 @@
   <q-page
     padding
   >
-    <div class="text-h3 q-mb-md">
-      Dashboard
-    </div>
     <div class="row">
       <div class="col">
         <q-card

@@ -8,9 +8,6 @@
           icon="arrow_back"
         />
       </div>
-      <div class="col-auto text-h6 q-pl-md">
-        Trajectory Validation
-      </div>
     </div>
     <!-- Profiles -->
     <ProfileCard class="q-mt-sm" />

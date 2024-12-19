@@ -2,18 +2,11 @@
   <div>
     <div class="row justify-between">
       <div class="col-auto">
-        <div class="row">
-          <div class="col-auto">
-            <q-btn
-              flat
-              to="/calculators"
-              icon="arrow_back"
-            />
-          </div>
-          <div class="col-auto text-h6 q-pl-md">
-            Ballistic
-          </div>
-        </div>
+        <q-btn
+          flat
+          to="/calculators"
+          icon="arrow_back"
+        />
       </div>
 
       <div class="col-auto q-pr-sm">

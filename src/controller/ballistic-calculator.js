@@ -14,11 +14,11 @@ export default function (params, addExtra) {
   }
 
   let zeroDistance
-  if (params.zero.unit === 'YD') {
-    zeroDistance = BC.UNew.Yard(Math.abs(parseFloat(params.zero.distance)))
+  if (params.optic.zeroUnit === 'YD') {
+    zeroDistance = BC.UNew.Yard(Math.abs(parseFloat(params.optic.zero)))
   }
-  if (params.zero.unit === 'M') {
-    zeroDistance = BC.UNew.Meter(Math.abs(parseFloat(params.zero.distance)))
+  if (params.optic.zeroUnit === 'M') {
+    zeroDistance = BC.UNew.Meter(Math.abs(parseFloat(params.optic.zero)))
   }
 
   let barrelTwist = BC.UNew.Inch(0)

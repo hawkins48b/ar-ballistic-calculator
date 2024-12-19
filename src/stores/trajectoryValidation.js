@@ -15,10 +15,6 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
         unit: 'YD',
         step: 1
       },
-      zero: {
-        distance: 25,
-        unit: 'YD'
-      },
       measures: {
         type: 'angle', // [angle|distance]
         distance: 0,
@@ -31,6 +27,22 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
   }),
 
   getters: {
+    getZero (state) {
+      let distance
+      let unit
+      if (state.profileId) {
+        const ProfilesStore = useProfilesStore()
+        const profile = ref(ProfilesStore.profilebyId(state.profileId))
+
+        distance = profile.value.optic.zero
+        unit = profile.value.optic.zeroUnit
+      }
+
+      return {
+        distance,
+        unit
+      }
+    },
     measuresDistanceUnit: (state) => {
       let unit
 
@@ -64,18 +76,21 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
       }
       return unit
     },
-    isCalculationValid: (state) => {
+    isCalculationValid (state) {
       let isValid = false
 
       const range = parseFloat(state.settings.range.distance)
-      const zero = parseFloat(state.settings.zero.distance)
+      const zero = this.getZero.distance
       const elevation = parseFloat(state.settings.measures.distance)
+      const angle = parseFloat(state.settings.measures.angle)
 
       if (!isNaN(range) && range > 0) {
         if (!isNaN(zero) && zero > 0) {
           if (!isNaN(elevation)) {
-            if (range > zero) {
-              isValid = true
+            if (!isNaN(angle)) {
+              if (range > zero) {
+                isValid = true
+              }
             }
           }
         }
@@ -96,8 +111,7 @@ export const useTrajectoryValidationStore = defineStore('trajectoryValidation', 
         bullet: profile.value.bullet,
         measures: { ...profile.value.measures },
         options: profile.value.options,
-        range: this.settings.range,
-        zero: this.settings.zero
+        range: this.settings.range
       }
 
       const initialShot = ballisticCalculator(params)

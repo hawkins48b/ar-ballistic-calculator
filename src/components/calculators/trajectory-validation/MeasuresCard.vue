@@ -34,6 +34,13 @@
         debounce="500"
       >
         <template #append>
+          <q-btn
+            round
+            class="q-mr-sm mobile-only"
+            @click="settings.measures.angle *= -1"
+          >
+            neg
+          </q-btn>
           <q-btn-toggle
             v-model="settings.measures.angleUnit"
             no-caps
@@ -56,6 +63,13 @@
         debounce="500"
       >
         <template #append>
+          <q-btn
+            round
+            class="q-mr-sm mobile-only"
+            @click="settings.distance.angle *= -1"
+          >
+            neg
+          </q-btn>
           <q-btn-toggle
             v-model="settings.measures.distanceUnit"
             no-caps

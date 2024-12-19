@@ -39,6 +39,28 @@
         />
       </template>
     </q-input>
+    <q-input
+      v-model="localProfile.optic.zero"
+      label="Optic zero distance"
+      filled
+      type="number"
+      step="any"
+      lazy-rules
+      :rules="[ val => val && val > 0 || 'Zero distance must be positive']"
+      class="q-mt-md"
+      hint="Distance from the muzzle to the zeroing target"
+    >
+      <template #append>
+        <q-btn-toggle
+          v-model="localProfile.optic.zeroUnit"
+          no-caps
+          :options="[
+            {label: 'YD', value: 'YD'},
+            {label: 'M', value: 'M'}
+          ]"
+        />
+      </template>
+    </q-input>
   </q-card>
 </template>
 
@@ -76,6 +98,17 @@ watch(() => localProfile.value.optic.heightUnit, (newValue) => {
   if (newValue === 'CM') {
     localProfile.value.optic.height = BC.UNew.Inch(localProfile.value.optic.height).In(BC.Unit.Centimeter)
     localProfile.value.optic.height = Math.round(localProfile.value.optic.height * 100) / 100
+  }
+})
+// converion for optic zero
+watch(() => localProfile.value.optic.zeroUnit, (newValue) => {
+  if (newValue === 'YD') {
+    localProfile.value.optic.zero = BC.UNew.Meter(localProfile.value.optic.zero).In(BC.Unit.Yard)
+    localProfile.value.optic.zero = Math.round(localProfile.value.optic.zero * 100) / 100
+  }
+  if (newValue === 'M') {
+    localProfile.value.optic.zero = BC.UNew.Yard(localProfile.value.optic.zero).In(BC.Unit.Meter)
+    localProfile.value.optic.zero = Math.round(localProfile.value.optic.zero * 100) / 100
   }
 })
 </script>

@@ -75,10 +75,10 @@
                   <q-item>
                     <q-item-section>
                       <q-item-label overline>
-                        OPTIC HEIGHT
+                        ZERO DISTANCE
                       </q-item-label>
                       <q-item-label class="text-bold">
-                        {{ props.row.optic.height }} {{ props.row.optic.heightUnit }}
+                        {{ props.row.optic.zero }} {{ props.row.optic.zeroUnit }}
                       </q-item-label>
                     </q-item-section>
                   </q-item>

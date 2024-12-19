@@ -68,9 +68,14 @@ export const useMpbrStore = defineStore('mpbr', {
             bullet: profile.value.bullet,
             measures: profile.value.measures,
             options: profile.value.options,
-            range,
-            zero
+            range
           }
+
+          // replace zero distance by our own
+          params.optic.zero = zero.distance
+          params.optic.zeroUnit = zero.unit
+
+          // perform shot
           const shot = ballisticCalculator(params, true)
 
           resolve(shot)

@@ -198,7 +198,7 @@ const buildSeriesForAngle = () => {
     }
 
     let distance = trajectory.distance.In(trajectoryValidationStore.rangeDistanceUnit)
-    if (distance >= trajectoryValidationStore.settings.zero.distance) {
+    if (distance >= trajectoryValidationStore.getZero.distance) {
       distance = Math.round(distance)
       data.push({
         x: distance,
@@ -227,7 +227,7 @@ const buildSeriesForAngle = () => {
 
       let distance = trajectory.distance.In(trajectoryValidationStore.rangeDistanceUnit)
 
-      if (distance >= trajectoryValidationStore.settings.zero.distance) {
+      if (distance >= trajectoryValidationStore.getZero.distance) {
         distance = Math.round(distance)
         data.push({
           x: distance,

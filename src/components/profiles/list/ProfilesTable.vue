@@ -90,10 +90,10 @@ const columns = [
     sortable: true
   },
   {
-    name: 'opticHeight',
-    field: (row) => row.optic.height,
-    label: 'Optic Height',
-    format: (val, row) => `${val} ${row.optic.heightUnit}`,
+    name: 'opticZero',
+    field: (row) => row.optic.zero,
+    label: 'Zero distance',
+    format: (val, row) => `${val} ${row.optic.zeroUnit}`,
     align: 'left',
     sortable: true
   },

@@ -1,20 +1,12 @@
 <template>
   <div>
     <div class="row justify-between">
-      <div class="col-auto q-pa-sm">
-        <div class="row">
-          <div class="col-auto">
-            <q-btn
-              to="/profiles"
-              flat
-              icon="arrow_back"
-            />
-          </div>
-          <div class="col-auto text-h6">
-            Edit Profile
-          </div>
-        </div>
-      </div>
+      <q-btn
+        to="/profiles"
+        flat
+        icon="arrow_back"
+        class="col-auto"
+      />
       <div class="col-auto self-center self-end">
         <OptionsButton v-model="profile" />
       </div>
@@ -24,6 +16,7 @@
       :profile="profile"
       submit-text="Edit"
       submit-icon="edit"
+      class="q-mt-md"
       @submit="editProfile"
     />
   </div>

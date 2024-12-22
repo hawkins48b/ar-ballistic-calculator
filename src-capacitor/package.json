@@ -1,6 +1,6 @@
 {
   "name": "cw-zro",
-  "version": "1.8.12",
+  "version": "1.8.13",
   "description": "A simple ballistic calculator",
   "author": "Quentin Mathey <q.mathey@gmail.com>",
   "private": true,

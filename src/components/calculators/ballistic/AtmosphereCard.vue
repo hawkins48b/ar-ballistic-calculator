@@ -1,9 +1,5 @@
 <template>
-  <q-card
-    :class="{'bg-grey-3':!$q.dark.isActive}"
-    flat
-    class="q-pa-md"
-  >
+  <zroCard>
     <div class="text-h6">
       <q-icon
         name="cloud"
@@ -13,10 +9,11 @@
       Atmospheric Conditions
     </div>
     <AtmosphereForm class="q-mt-md" />
-  </q-card>
+  </zroCard>
 </template>
 
 <script setup>
 // imports
 import AtmosphereForm from 'components/calculators/ballistic/AtmosphereForm.vue'
+import zroCard from 'components/zroCard.vue'
 </script>

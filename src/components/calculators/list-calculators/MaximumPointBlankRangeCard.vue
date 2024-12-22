@@ -1,7 +1,5 @@
 <template>
-  <q-card
-    :class="{'bg-grey-3':!$q.dark.isActive}"
-    flat
+  <zroCard
     class="cursor-pointer"
     @click="clickFn"
   >
@@ -30,11 +28,12 @@
         MPBR Tool
       </q-btn>
     </q-card-actions>
-  </q-card>
+  </zroCard>
 </template>
 
 <script setup>
 // imports
+import zroCard from 'components/zroCard.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

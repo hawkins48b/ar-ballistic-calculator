@@ -1,5 +1,5 @@
 <template>
-  <div>My component</div>
+  <div>List Trajectories</div>
 </template>
 
 <script>

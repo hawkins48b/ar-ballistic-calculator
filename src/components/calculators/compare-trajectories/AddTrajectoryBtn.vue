@@ -8,12 +8,13 @@
       Add trajectory
     </q-btn>
     <q-dialog v-model="dialog">
-      <q-card>hello</q-card>
+      <zroCard>hello</zroCard>
     </q-dialog>
   </div>
 </template>
 
 <script setup>
+import zroCard from 'components/zroCard.vue'
 import { ref } from 'vue'
 
 const dialog = ref(false)

@@ -1,15 +1,12 @@
 <template>
-  <q-card
-    flat
-    :class="{'bg-grey-3':!$q.dark.isActive}"
-    class="q-pa-md"
-  >
+  <zroCard>
     <ProfileSelector v-model="profileId" />
-  </q-card>
+  </zroCard>
 </template>
 
 <script setup>
 // imports
+import zroCard from 'components/zroCard.vue'
 import ProfileSelector from 'components/profiles/selector/ProfileSelector.vue'
 import { useTrajectoryValidationStore } from 'stores/trajectoryValidation'
 import { storeToRefs } from 'pinia'

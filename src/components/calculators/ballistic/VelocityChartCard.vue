@@ -1,9 +1,6 @@
 <template>
-  <q-card
+  <zroCard
     v-if="results"
-    :class="{'bg-grey-3':!$q.dark.isActive}"
-    flat
-    class="q-pa-md"
   >
     <div class="row justify-between">
       <div class="col-auto">
@@ -27,11 +24,12 @@
       :series="series"
       height="300px"
     />
-  </q-card>
+  </zroCard>
 </template>
 
 <script setup>
 // imports
+import zroCard from 'components/zroCard.vue'
 import { useBallisticStore } from 'stores/ballistic'
 import * as BC from 'js-ballistics'
 import { ref, computed, reactive, watch } from 'vue'

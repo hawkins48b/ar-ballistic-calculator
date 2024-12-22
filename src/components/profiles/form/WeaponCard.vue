@@ -1,9 +1,5 @@
 <template>
-  <q-card
-    :class="{'bg-grey-3':!$q.dark.isActive}"
-    flat
-    class="q-pa-md"
-  >
+  <zroCard>
     <div class="text-h6">
       Rifle
     </div>
@@ -48,11 +44,12 @@
         </template>
       </q-input>
     </div>
-  </q-card>
+  </zroCard>
 </template>
 
 <script setup>
 // imports
+import zroCard from 'components/zroCard.vue'
 import * as BC from 'js-ballistics'
 import { ref, watch } from 'vue'
 

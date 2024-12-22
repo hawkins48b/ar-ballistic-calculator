@@ -1,8 +1,6 @@
 <template>
-  <q-card
-    flat
-    :class="{'bg-grey-3':!$q.dark.isActive}"
-    class="q-pa-md full-height"
+  <zroCard
+    class="full-height"
   >
     <div class="text-h6">
       <q-icon
@@ -13,10 +11,11 @@
       Range
     </div>
     <RangeForm />
-  </q-card>
+  </zroCard>
 </template>
 
 <script setup>
+import zroCard from 'components/zroCard.vue'
 import RangeForm from 'components/calculators/ballistic/RangeForm.vue'
 
 </script>

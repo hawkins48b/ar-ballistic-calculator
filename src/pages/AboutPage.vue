@@ -3,10 +3,8 @@
     padding
   >
     <div class="row">
-      <q-card
-        flat
-        class="text-center col-xs-12 col-sm-6 col-md4 q-pa-md"
-        :class="{'bg-grey-3':!$q.dark.isActive}"
+      <zroCard
+        class="text-center col-xs-12 col-sm-6 col-md4"
       >
         <div class="text-h3">
           ZRO
@@ -56,13 +54,11 @@
             />
           </a>
         </p>
-      </q-card>
+      </zroCard>
     </div>
     <div class="row q-mt-md">
-      <q-card
-        flat
-        class="col-xs-12 col-sm-6 col-md4 q-pa-md"
-        :class="{'bg-grey-3':!$q.dark.isActive}"
+      <zroCard
+        class="col-xs-12 col-sm-6 col-md4"
       >
         <div class="text-h3">
           Privacy Policy
@@ -92,21 +88,14 @@
             target="_blank"
           >contact us</a>.
         </p>
-      </q-card>
+      </zroCard>
     </div>
   </q-page>
 </template>
 
-<script>
-
+<script setup>
+import zroCard from 'components/zroCard.vue'
 import { version } from '../../package.json'
 
-export default {
-  // name: 'PageName',
-  data: function () {
-    return {
-      appVersion: version
-    }
-  }
-}
+const appVersion = version
 </script>

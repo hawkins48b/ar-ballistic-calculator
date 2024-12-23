@@ -5,13 +5,13 @@
         <BackBtn />
       </div>
     </div>
-    <div class="row">
+    <div class="row q-mt-md">
       <div class="col-auto">
         <AddTrajectoryBtn />
       </div>
     </div>
-    <TrajectoriesList />
-    <TrajectoriesChart />
+    <TrajectoriesList class="q-mt-md" />
+    <TrajectoriesChart class="q-mt-md" />
   </div>
 </template>
 

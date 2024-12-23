@@ -1,66 +1,71 @@
 <template>
   <zroCard>
-    <div class="text-h6">
-      Measures
-    </div>
-    <q-input
-      v-model="localProfile.measures.velocity"
-      label="Velocity"
-      filled
-      step="any"
-      type="number"
-      lazy-rules
-      :rules="[ val => val && val > 0 || 'Velocity must be positive']"
-      class="q-mt-md"
-      hint="e.g 3000 FPS"
-    >
-      <template #append>
-        <q-btn-toggle
-          v-model="localProfile.measures.velocityUnit"
-          no-caps
-          :options="[
-            {label: 'FPS', value: 'FPS'},
-            {label: 'MPS', value: 'MPS'}
-          ]"
-        />
-      </template>
-    </q-input>
-    <div v-if="localProfile.options.enablePowderSensitivity">
+    <q-card-section>
+      <div class="text-h6">
+        Measures
+      </div>
+    </q-card-section>
+    <q-separator />
+    <q-card-section>
       <q-input
-        v-model="localProfile.measures.temperature"
-        label="Measured temperature"
+        v-model="localProfile.measures.velocity"
+        label="Velocity"
         filled
         step="any"
         type="number"
         lazy-rules
-        :rules="[ val => val && val > 0 || 'Temperature must be positive']"
+        :rules="[ val => val && val > 0 || 'Velocity must be positive']"
         class="q-mt-md"
-        hint="e.g 59 °F / 15 °C"
+        hint="e.g 3000 FPS"
       >
         <template #append>
           <q-btn-toggle
-            v-model="localProfile.measures.temperatureUnit"
+            v-model="localProfile.measures.velocityUnit"
             no-caps
             :options="[
-              {label: '°F', value: '°F'},
-              {label: '°C', value: '°C'}
+              {label: 'FPS', value: 'FPS'},
+              {label: 'MPS', value: 'MPS'}
             ]"
           />
         </template>
       </q-input>
-      <q-input
-        v-model="localProfile.measures.temperatureModifier"
-        label="Temperature modifier"
-        filled
-        step="any"
-        type="number"
-        suffix="FPS / °F"
-        lazy-rules
-        :rules="[ val => val && val >= 0 || 'Temperature modifier must be positive or equal to 0']"
-        class="q-mt-md"
-        hint="e.g 1.00"
-      />
-    </div>
+      <div v-if="localProfile.options.enablePowderSensitivity">
+        <q-input
+          v-model="localProfile.measures.temperature"
+          label="Measured temperature"
+          filled
+          step="any"
+          type="number"
+          lazy-rules
+          :rules="[ val => val && val > 0 || 'Temperature must be positive']"
+          class="q-mt-md"
+          hint="e.g 59 °F / 15 °C"
+        >
+          <template #append>
+            <q-btn-toggle
+              v-model="localProfile.measures.temperatureUnit"
+              no-caps
+              :options="[
+                {label: '°F', value: '°F'},
+                {label: '°C', value: '°C'}
+              ]"
+            />
+          </template>
+        </q-input>
+        <q-input
+          v-model="localProfile.measures.temperatureModifier"
+          label="Temperature modifier"
+          filled
+          step="any"
+          type="number"
+          suffix="FPS / °F"
+          lazy-rules
+          :rules="[ val => val && val >= 0 || 'Temperature modifier must be positive or equal to 0']"
+          class="q-mt-md"
+          hint="e.g 1.00"
+        />
+      </div>
+    </q-card-section>
   </zroCard>
 </template>
 

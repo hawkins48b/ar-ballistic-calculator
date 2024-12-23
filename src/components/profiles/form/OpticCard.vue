@@ -1,62 +1,67 @@
 <template>
   <zroCard>
-    <div class="text-h6">
-      Optic
-    </div>
-    <q-input
-      v-model="localProfile.optic.model"
-      label="Optic name"
-      filled
-      type="text"
-      lazy-rules
-      :rules="[ val => val && val.length > 0 || 'Please name your optic']"
-      class="q-mt-md"
-      hint="e.g Trijicon ACOG TA31"
-    />
-    <q-input
-      v-model="localProfile.optic.height"
-      label="Optic height"
-      filled
-      type="number"
-      step="any"
-      lazy-rules
-      :rules="[ val => val && val > 0 || 'Optic height must be positive']"
-      class="q-mt-md"
-      hint="Distance between the center of the optic and the bore axis"
-    >
-      <template #append>
-        <q-btn-toggle
-          v-model="localProfile.optic.heightUnit"
-          no-caps
-          :options="[
-            {label: 'IN', value: 'IN'},
-            {label: 'CM', value: 'CM'}
-          ]"
-        />
-      </template>
-    </q-input>
-    <q-input
-      v-model="localProfile.optic.zero"
-      label="Optic zero distance"
-      filled
-      type="number"
-      step="any"
-      lazy-rules
-      :rules="[ val => val && val > 0 || 'Zero distance must be positive']"
-      class="q-mt-md"
-      hint="Distance from the muzzle to the zeroing target"
-    >
-      <template #append>
-        <q-btn-toggle
-          v-model="localProfile.optic.zeroUnit"
-          no-caps
-          :options="[
-            {label: 'YD', value: 'YD'},
-            {label: 'M', value: 'M'}
-          ]"
-        />
-      </template>
-    </q-input>
+    <q-card-section>
+      <div class="text-h6">
+        Optic
+      </div>
+    </q-card-section>
+    <q-separator />
+    <q-card-section>
+      <q-input
+        v-model="localProfile.optic.model"
+        label="Optic name"
+        filled
+        type="text"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Please name your optic']"
+        class="q-mt-md"
+        hint="e.g Trijicon ACOG TA31"
+      />
+      <q-input
+        v-model="localProfile.optic.height"
+        label="Optic height"
+        filled
+        type="number"
+        step="any"
+        lazy-rules
+        :rules="[ val => val && val > 0 || 'Optic height must be positive']"
+        class="q-mt-md"
+        hint="Distance between the center of the optic and the bore axis"
+      >
+        <template #append>
+          <q-btn-toggle
+            v-model="localProfile.optic.heightUnit"
+            no-caps
+            :options="[
+              {label: 'IN', value: 'IN'},
+              {label: 'CM', value: 'CM'}
+            ]"
+          />
+        </template>
+      </q-input>
+      <q-input
+        v-model="localProfile.optic.zero"
+        label="Optic zero distance"
+        filled
+        type="number"
+        step="any"
+        lazy-rules
+        :rules="[ val => val && val > 0 || 'Zero distance must be positive']"
+        class="q-mt-md"
+        hint="Distance from the muzzle to the zeroing target"
+      >
+        <template #append>
+          <q-btn-toggle
+            v-model="localProfile.optic.zeroUnit"
+            no-caps
+            :options="[
+              {label: 'YD', value: 'YD'},
+              {label: 'M', value: 'M'}
+            ]"
+          />
+        </template>
+      </q-input>
+    </q-card-section>
   </zroCard>
 </template>
 

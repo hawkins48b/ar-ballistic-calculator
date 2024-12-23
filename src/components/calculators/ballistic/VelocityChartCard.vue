@@ -2,28 +2,33 @@
   <zroCard
     v-if="results"
   >
-    <div class="row justify-between">
-      <div class="col-auto">
-        <div class="text-h6">
-          <q-icon
-            name="stacked_line_chart"
-            size="lg"
-            class="q-mr-sm"
-          />
-          Velocity chart
+    <q-card-section>
+      <div class="row justify-between">
+        <div class="col-auto">
+          <div class="text-h6">
+            <q-icon
+              name="stacked_line_chart"
+              size="lg"
+              class="q-mr-sm"
+            />
+            Velocity chart
+          </div>
+        </div>
+        <div class="col-auto text-h6">
+          Speed of Sound: {{ machValueLabel }}
         </div>
       </div>
-      <div class="col-auto text-h6">
-        Speed of Sound: {{ machValueLabel }}
-      </div>
-    </div>
-    <apexchart
-      ref="chart"
-      type="line"
-      :options="options"
-      :series="series"
-      height="300px"
-    />
+    </q-card-section>
+    <q-separator />
+    <q-card-section>
+      <apexchart
+        ref="chart"
+        type="line"
+        :options="options"
+        :series="series"
+        height="300px"
+      />
+    </q-card-section>
   </zroCard>
 </template>
 

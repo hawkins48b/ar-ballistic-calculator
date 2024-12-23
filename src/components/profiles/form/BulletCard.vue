@@ -1,111 +1,45 @@
 <template>
   <zroCard>
-    <div class="row justify-between">
-      <div class="col text-h6">
-        Ammuntion
+    <q-card-section>
+      <div class="row justify-between">
+        <div class="col text-h6">
+          Ammuntion
+        </div>
+        <div class="col text-right">
+          <AmmoFinderBtn v-model="localProfile.bullet" />
+        </div>
       </div>
-      <div class="col text-right">
-        <AmmoFinderBtn v-model="localProfile.bullet" />
-      </div>
-    </div>
-    <q-input
-      v-model="localProfile.bullet.brand"
-      label="Bullet brand"
-      filled
-      type="text"
-      lazy-rules
-      :rules="[ val => val && val.length > 0 || 'Please name your ammo']"
-      class="q-mt-md"
-      hint="Manufacturer and type"
-    />
-
-    <q-input
-      v-model="localProfile.bullet.diameter"
-      label="Bullet diameter"
-      filled
-      step="any"
-      type="number"
-      lazy-rules
-      :rules="[
-        val => val && val > 0 || 'Bullet diameter must be positive',
-        val => val && val < 13 || val + ' ' + localProfile.bullet.diameterUnit +' is a big bullet, are you missing a comma ?'
-      ]"
-      class="q-mt-md"
-      hint="e.g .223 inch or 5.56 mm"
-    >
-      <template #append>
-        <q-btn-toggle
-          v-model="localProfile.bullet.diameterUnit"
-          no-caps
-          :options="[
-            {label: 'IN', value: 'IN'},
-            {label: 'MM', value: 'MM'}
-          ]"
-        />
-      </template>
-    </q-input>
-
-    <q-input
-      v-model="localProfile.bullet.weight"
-      label="Bullet weight"
-      filled
-      step="any"
-      type="number"
-      lazy-rules
-      :rules="[ val => val && val > 0 || 'Bullet weight must be positive']"
-      class="q-mt-md"
-      hint="e.g 55 GR"
-    >
-      <template #append>
-        <q-btn-toggle
-          v-model="localProfile.bullet.weightUnit"
-          no-caps
-          :options="[
-            {label: 'GR', value: 'GR'},
-            {label: 'G', value: 'G'}
-          ]"
-        />
-      </template>
-    </q-input>
-    <q-input
-      v-model="localProfile.bullet.ballisticCoefficient"
-      label="Ballistic coefficient"
-      filled
-      step="any"
-      type="number"
-      lazy-rules
-      :rules="[ val => val && val > 0 || 'Ballistic coefficient must be positive']"
-      class="q-mt-md"
-      hint="e.g 0.290 G1"
-    >
-      <template #append>
-        <q-btn-toggle
-          v-model="localProfile.bullet.ballisticCoefficientProfile"
-          no-caps
-          :options="[
-            {label: 'G1', value: 'G1'},
-            {label: 'G7', value: 'G7'}
-          ]"
-        />
-      </template>
-    </q-input>
-    <div v-if="localProfile.options.enableSpinDrift">
+    </q-card-section>
+    <q-separator />
+    <q-card-section>
       <q-input
-        v-model="localProfile.bullet.length"
-        label="Bullet length"
+        v-model="localProfile.bullet.brand"
+        label="Bullet brand"
+        filled
+        type="text"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Please name your ammo']"
+        class="q-mt-md"
+        hint="Manufacturer and type"
+      />
+
+      <q-input
+        v-model="localProfile.bullet.diameter"
+        label="Bullet diameter"
         filled
         step="any"
         type="number"
         lazy-rules
         :rules="[
-          val => val && val > 0 && localProfile.options.enableSpinDrift|| 'bullet length must be positive'
+          val => val && val > 0 || 'Bullet diameter must be positive',
+          val => val && val < 13 || val + ' ' + localProfile.bullet.diameterUnit +' is a big bullet, are you missing a comma ?'
         ]"
         class="q-mt-md"
-        hint="The length of the bullet, e.g 0.746 for M193"
+        hint="e.g .223 inch or 5.56 mm"
       >
         <template #append>
           <q-btn-toggle
-            v-model="localProfile.bullet.lengthUnit"
+            v-model="localProfile.bullet.diameterUnit"
             no-caps
             :options="[
               {label: 'IN', value: 'IN'},
@@ -114,7 +48,78 @@
           />
         </template>
       </q-input>
-    </div>
+
+      <q-input
+        v-model="localProfile.bullet.weight"
+        label="Bullet weight"
+        filled
+        step="any"
+        type="number"
+        lazy-rules
+        :rules="[ val => val && val > 0 || 'Bullet weight must be positive']"
+        class="q-mt-md"
+        hint="e.g 55 GR"
+      >
+        <template #append>
+          <q-btn-toggle
+            v-model="localProfile.bullet.weightUnit"
+            no-caps
+            :options="[
+              {label: 'GR', value: 'GR'},
+              {label: 'G', value: 'G'}
+            ]"
+          />
+        </template>
+      </q-input>
+      <q-input
+        v-model="localProfile.bullet.ballisticCoefficient"
+        label="Ballistic coefficient"
+        filled
+        step="any"
+        type="number"
+        lazy-rules
+        :rules="[ val => val && val > 0 || 'Ballistic coefficient must be positive']"
+        class="q-mt-md"
+        hint="e.g 0.290 G1"
+      >
+        <template #append>
+          <q-btn-toggle
+            v-model="localProfile.bullet.ballisticCoefficientProfile"
+            no-caps
+            :options="[
+              {label: 'G1', value: 'G1'},
+              {label: 'G7', value: 'G7'}
+            ]"
+          />
+        </template>
+      </q-input>
+      <div v-if="localProfile.options.enableSpinDrift">
+        <q-input
+          v-model="localProfile.bullet.length"
+          label="Bullet length"
+          filled
+          step="any"
+          type="number"
+          lazy-rules
+          :rules="[
+            val => val && val > 0 && localProfile.options.enableSpinDrift|| 'bullet length must be positive'
+          ]"
+          class="q-mt-md"
+          hint="The length of the bullet, e.g 0.746 for M193"
+        >
+          <template #append>
+            <q-btn-toggle
+              v-model="localProfile.bullet.lengthUnit"
+              no-caps
+              :options="[
+                {label: 'IN', value: 'IN'},
+                {label: 'MM', value: 'MM'}
+              ]"
+            />
+          </template>
+        </q-input>
+      </div>
+    </q-card-section>
   </zroCard>
 </template>
 

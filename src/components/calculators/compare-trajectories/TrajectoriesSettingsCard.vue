@@ -1,7 +1,5 @@
 <template>
-  <zroCard
-    class="full-height"
-  >
+  <ZroCard>
     <q-card-section>
       <div class="text-h6">
         <q-icon
@@ -12,20 +10,20 @@
         Range
       </div>
     </q-card-section>
-    <q-separator />
     <q-card-section>
       <RangeForm v-model="range" />
     </q-card-section>
-  </zroCard>
+  </ZroCard>
 </template>
 
 <script setup>
-import { useBallisticStore } from 'stores/ballistic'
-import { storeToRefs } from 'pinia'
-import zroCard from 'components/zroCard.vue'
-import RangeForm from 'components/calculators/ballistic/RangeForm.vue'// set calculation profile
+import ZroCard from 'src/components/zroCard.vue'
+import RangeForm from '../ballistic/RangeForm.vue'
 
-const ballisticStore = useBallisticStore()
-const { range } = storeToRefs(ballisticStore)
+import { useTrajectoriesStore } from 'stores/trajectories'
+import { storeToRefs } from 'pinia'
+
+const trajectoriesStore = useTrajectoriesStore()
+const { range } = storeToRefs(trajectoriesStore)
 
 </script>

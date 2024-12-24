@@ -1,8 +1,16 @@
 import { defineStore } from 'pinia'
+import ballisticCalculator from 'src/controller/ballistic-calculator'
+import { useProfilesStore } from './profiles'
+import { ref } from 'vue'
 
 export const useTrajectoriesStore = defineStore('trajectories', {
   state: () => ({
-    trajectories: []
+    trajectories: [],
+    range: {
+      distance: 300,
+      unit: 'YD',
+      step: 25
+    }
   }),
 
   getters: {
@@ -11,6 +19,17 @@ export const useTrajectoriesStore = defineStore('trajectories', {
       return state.counter * 2
     }
     */
+    isCalculationValid: (state) => {
+      let isValid = false
+
+      const distance = parseFloat(state.range.distance)
+
+      if (distance <= 3000) {
+        isValid = true
+      }
+
+      return isValid
+    }
   },
 
   actions: {
@@ -37,7 +56,38 @@ export const useTrajectoriesStore = defineStore('trajectories', {
       const trajectory = JSON.parse(JSON.stringify(this.trajectories[index]))
       trajectory.name = 'Copy ' + trajectory.name
       this.trajectories.push(trajectory)
+    },
+    calculateShot (index, step) {
+      let results = null
+      const trajectory = this.trajectories[index]
+      if (trajectory) {
+        if (trajectory.profileId) {
+          const ProfilesStore = useProfilesStore()
+          const profile = ref(ProfilesStore.profilebyId(trajectory.profileId))
+
+          const params = {
+            weapon: profile.value.weapon,
+            optic: profile.value.optic,
+            bullet: profile.value.bullet,
+            measures: profile.value.measures,
+            options: profile.value.options,
+            range: {
+              distance: this.range.distance,
+              unit: this.range.unit,
+              step
+            },
+            atmosphere: trajectory.atmosphere
+          }
+
+          if (this.isCalculationValid) {
+            results = ballisticCalculator(params)
+          }
+        }
+      }
+
+      return results
     }
+
   },
   persist: true
 })

@@ -64,7 +64,6 @@ const modelTrajectory = {
 const trajectory = ref({ ...modelTrajectory })
 
 const add = function () {
-  console.log('add trajectory')
   if (trajectoriesStore.add(trajectory.value)) {
     dialog.value = false
     modelTrajectory.value = { ...modelTrajectory }

@@ -139,8 +139,6 @@ const changeTemperatureUnit = function () {
 }
 
 const changeISA = function () {
-  console.log('atmosphere.useISA', atmosphere.value.useISA)
-
   if (atmosphere.value.useISA) {
     atmosphere.value = ballisticStore.getISA
   }

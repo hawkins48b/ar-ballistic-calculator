@@ -23,6 +23,7 @@
             {label: 'YD', value: 'YD'},
             {label: 'M', value: 'M'}
           ]"
+          @update:model-value="changeRangeUnit()"
         />
       </template>
     </q-input>
@@ -46,28 +47,27 @@
 
 <script setup>
 // imports
-import { useBallisticStore } from 'stores/ballistic'
-import { storeToRefs } from 'pinia'
 import * as BC from 'js-ballistics'
-import { watch } from 'vue'
+import { defineModel } from 'vue'
 
-// set calculation profile
-const ballisticStore = useBallisticStore()
-const { range } = storeToRefs(ballisticStore)
+const range = defineModel({
+  type: Object,
+  required: true
+})
 
 /*
  * Unit conversion
  */
 // conversion range distance
-watch(() => range.value.unit, (newValue) => {
-  if (newValue === 'YD') {
+const changeRangeUnit = function () {
+  if (range.value.unit === 'YD') {
     range.value.distance = BC.UNew.Meter(parseFloat(range.value.distance)).In(BC.Unit.Yard)
     range.value.distance = Math.round(range.value.distance * 10) / 10
   }
-  if (newValue === 'M') {
+  if (range.value.unit === 'M') {
     range.value.distance = BC.UNew.Yard(parseFloat(range.value.distance)).In(BC.Unit.Meter)
     range.value.distance = Math.round(range.value.distance * 10) / 10
   }
-})
+}
 
 </script>

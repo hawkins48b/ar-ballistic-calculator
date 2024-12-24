@@ -3,22 +3,28 @@
     class="cursor-pointer"
     @click="clickFn"
   >
-    <p class="text-h4">
-      Trajectory Validation
-    </p>
-    <p>Validate your bullet velocity by observations.</p>
-    <q-img
-      v-if="!$q.dark.isActive"
-      src="~assets/trajectory-validation-preview-light.jpg"
-      style="height:200px;"
-      fit="fill"
-    />
-    <q-img
-      v-if="$q.dark.isActive"
-      src="~assets/trajectory-validation-preview-dark.jpg"
-      style="height:200px;"
-      fit="fill"
-    />
+    <q-card-section>
+      <div class="text-h6">
+        Trajectory Validation
+      </div>
+    </q-card-section>
+    <q-separator />
+    <q-card-section>
+      <p>Validate your bullet velocity by observations.</p>
+      <q-img
+        v-if="!$q.dark.isActive"
+        src="~assets/trajectory-validation-preview-light.jpg"
+        style="height:200px;"
+        fit="fill"
+      />
+      <q-img
+        v-if="$q.dark.isActive"
+        src="~assets/trajectory-validation-preview-dark.jpg"
+        style="height:200px;"
+        fit="fill"
+      />
+    </q-card-section>
+
     <q-card-actions vertical>
       <q-btn
         color="primary"

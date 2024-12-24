@@ -1,9 +1,5 @@
 <template>
-  <q-card
-    flat
-    :class="{'bg-grey-3':!$q.dark.isActive}"
-    class="q-pa-md"
-  >
+  <zroCard>
     <div class="text-h6">
       <q-icon
         name="photo_size_select_small"
@@ -39,11 +35,12 @@
         </template>
       </q-input>
     </q-form>
-  </q-card>
+  </zroCard>
 </template>
 
 <script setup>
 // imports
+import zroCard from 'components/zroCard.vue'
 import { useMpbrStore } from 'stores/mpbr'
 import { storeToRefs } from 'pinia'
 import * as BC from 'js-ballistics'

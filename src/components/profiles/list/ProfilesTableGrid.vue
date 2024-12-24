@@ -37,10 +37,7 @@
           class="q-pa-sm col-xs-12 col-sm-6 col-lg-4 grid-style-transition"
           :style="props.selected ? 'transform: scale(0.95);' : ''"
         >
-          <q-card
-            flat
-            :class="{'bg-grey-3':!$q.dark.isActive}"
-          >
+          <zroCard>
             <q-card-section v-if="selection==='multiple'">
               <q-checkbox
                 v-model="props.selected"
@@ -128,7 +125,7 @@
                 />
               </div>
             </div>
-          </q-card>
+          </zroCard>
         </div>
       </template>
     </q-table>
@@ -137,6 +134,7 @@
 
 <script setup>
 // imports
+import zroCard from 'components/zroCard.vue'
 import ExportBtn from 'components/profiles/list/ExportBtn.vue'
 import ProfileEditButton from 'components/profiles/ProfileEditButton.vue'
 import { ref, onMounted } from 'vue'

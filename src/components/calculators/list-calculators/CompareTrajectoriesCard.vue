@@ -5,21 +5,21 @@
   >
     <q-card-section>
       <div class="text-h6">
-        Ballistic Calculator
+        Compare trajectories
       </div>
     </q-card-section>
     <q-separator />
     <q-card-section>
-      <p>Calculate a bullet trajectory.</p>
+      <p>Compare multiple trajectories.</p>
       <q-img
         v-if="!$q.dark.isActive"
-        src="~assets/ballistic-preview-light.jpg"
+        src="~assets/compare-trajectories-preview-light.jpg"
         style="height:200px;"
         fit="fill"
       />
       <q-img
         v-if="$q.dark.isActive"
-        src="~assets/ballistic-preview-dark.jpg"
+        src="~assets/compare-trajectories-preview-dark.jpg"
         style="height:200px;"
         fit="fill"
       />
@@ -30,7 +30,7 @@
         color="primary"
         class="q-mt-md"
       >
-        Ballistic calculator
+        Compare trajectories
       </q-btn>
     </q-card-actions>
   </zroCard>
@@ -43,6 +43,6 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const clickFn = () => {
-  router.push('/calculators/ballistic')
+  router.push('/calculators/compare-trajectories')
 }
 </script>

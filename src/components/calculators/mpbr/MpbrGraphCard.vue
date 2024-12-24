@@ -1,9 +1,6 @@
 <template>
-  <q-card
+  <zroCard
     v-show="mpbrShot"
-    :class="{'bg-grey-3':!$q.dark.isActive}"
-    flat
-    class="q-pa-md"
   >
     <div class="row justify-between">
       <div class="col-auto">
@@ -36,11 +33,12 @@
       :shot="mpbrShot"
       :distance-unit="mpbrStore.distanceUnit"
     />
-  </q-card>
+  </zroCard>
 </template>
 
 <script setup>
 // imports
+import zroCard from 'components/zroCard.vue'
 import MpbrList from 'components/calculators/mpbr/MpbrList.vue'
 import UseMpbrButton from 'components/calculators/mpbr/UseMpbrButton.vue'
 import * as BC from 'js-ballistics'

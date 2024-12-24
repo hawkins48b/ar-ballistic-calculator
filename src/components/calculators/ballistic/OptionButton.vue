@@ -8,12 +8,7 @@
     <q-dialog
       v-model="dialog"
     >
-      <q-card
-        :class="{'bg-grey-3':!$q.dark.isActive}"
-        flat
-        style=""
-        class="q-pa-md"
-      >
+      <zroCard>
         <q-card-section>
           <p class="text-h3">
             Calculator Options
@@ -69,12 +64,13 @@
             color="primary"
           />
         </q-card-actions>
-      </q-card>
+      </zroCard>
     </q-dialog>
   </q-btn>
 </template>
 
 <script setup>
+import zroCard from 'components/zroCard.vue'
 import { storeToRefs } from 'pinia'
 import { useBallisticStore } from 'stores/ballistic'
 import { ref, watch } from 'vue'

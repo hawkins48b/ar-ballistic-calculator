@@ -25,11 +25,15 @@
         class="text-center q-mt-md cursor-pointer"
         @click="$router.push('/')"
       >
-        <div class="text-h3">
-          ZRO
-        </div>
-        <div class="text-h6 text-italic ">
-          Ballistic calculator
+        <div class="row items-center no-wrap">
+          <div class="col-auto" />
+          <div class="col text-h6">
+            <q-img
+              src="~/assets/zro-logo.svg"
+              style="height: 40px"
+              fit="fill"
+            />Ballistic calculator
+          </div>
         </div>
       </div>
 

@@ -8,12 +8,7 @@
     <q-dialog
       v-model="dialog"
     >
-      <q-card
-        :class="{'bg-grey-3':!$q.dark.isActive}"
-        flat
-        style=""
-        class="q-pa-md"
-      >
+      <zroCard>
         <q-card-section>
           <p class="text-h3">
             Profile Options
@@ -45,12 +40,13 @@
             color="primary"
           />
         </q-card-actions>
-      </q-card>
+      </zroCard>
     </q-dialog>
   </q-btn>
 </template>
 
 <script setup>
+import zroCard from 'components/zroCard.vue'
 import { ref } from 'vue'
 
 // eslint-disable-next-line vue/require-prop-types

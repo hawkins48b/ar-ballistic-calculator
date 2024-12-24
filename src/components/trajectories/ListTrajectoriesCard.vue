@@ -1,11 +1,7 @@
 <template>
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-4">
-      <q-card
-        :class="{'bg-grey-3':!$q.dark.isActive}"
-        flat
-        class="q-pa-md"
-      >
+      <zroCard>
         <q-markup-table flat>
           <thead>
             <tr>
@@ -35,13 +31,14 @@
             </tr>
           </tbody>
         </q-markup-table>
-      </q-card>
+      </zroCard>
     </div>
   </div>
 </template>
 
 <script setup>
 // imports
+import zroCard from 'components/zroCard.vue'
 import { storeToRefs } from 'pinia'
 import { useQuasar } from 'quasar'
 import { useShotsStore } from 'stores/shots'

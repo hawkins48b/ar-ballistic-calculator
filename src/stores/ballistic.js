@@ -138,18 +138,22 @@ export const useBallisticStore = defineStore('ballistic', {
       }
 
       return isValid
+    },
+    getISA: () => {
+      const atmosphere = {}
+      atmosphere.altitude = ISA_ALTITUDE
+      atmosphere.altitudeUnit = ISA_ALTITUDE_UNIT
+      atmosphere.pressure = ISA_PRESSURE
+      atmosphere.pressureUnit = ISA_PRESSURE_UNIT
+      atmosphere.temperature = ISA_TEMPERATURE
+      atmosphere.temperatureUnit = ISA_TEMPERATURE_UNIT
+      atmosphere.humidity = ISA_HUMIDITY
+      atmosphere.useISA = true
+
+      return atmosphere
     }
   },
   actions: {
-    setISA () {
-      this.atmosphere.altitude = ISA_ALTITUDE
-      this.atmosphere.altitudeUnit = ISA_ALTITUDE_UNIT
-      this.atmosphere.pressure = ISA_PRESSURE
-      this.atmosphere.pressureUnit = ISA_PRESSURE_UNIT
-      this.atmosphere.temperature = ISA_TEMPERATURE
-      this.atmosphere.temperatureUnit = ISA_TEMPERATURE_UNIT
-      this.atmosphere.humidity = ISA_HUMIDITY
-    },
     resetWind () {
       this.wind.speed = 0
       this.wind.speedUnit = 'MPH'

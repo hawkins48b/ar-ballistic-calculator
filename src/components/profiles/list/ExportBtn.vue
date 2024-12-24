@@ -15,10 +15,7 @@
         class="row"
       >
         <div class="col-12">
-          <q-card
-            class="q-pa-md"
-            flat
-          >
+          <zroCard>
             <q-card-section>
               <div class="text-h2">
                 Export
@@ -40,15 +37,12 @@
                 Export
               </q-btn>
             </q-card-actions>
-          </q-card>
+          </zroCard>
         </div>
         <div
           class="col-12 q-mt-md"
         >
-          <q-card
-            class="q-pa-md"
-            flat
-          >
+          <zroCard>
             <q-card-section>
               <div class="text-h2">
                 Import
@@ -70,14 +64,14 @@
                 </template>
               </q-file>
             </q-card-actions>
-          </q-card>
+          </zroCard>
         </div>
       </div>
     </q-dialog>
   </div>
 </template>
 <script setup>
-
+import zroCard from 'components/zroCard.vue'
 import { ref } from 'vue'
 import { useProfilesStore } from 'stores/profiles'
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem'

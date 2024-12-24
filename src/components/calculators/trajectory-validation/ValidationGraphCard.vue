@@ -1,9 +1,5 @@
 <template>
-  <q-card
-    :class="{'bg-grey-3':!$q.dark.isActive}"
-    flat
-    class="q-pa-md"
-  >
+  <zroCard>
     <div class="row justify-between">
       <div class="col-auto">
         <div class="text-h6">
@@ -52,11 +48,12 @@
         The trajectory cannot be calculated.
       </p>
     </div>
-  </q-card>
+  </zroCard>
 </template>
 
 <script setup>
 // imports
+import zroCard from 'components/zroCard.vue'
 import ValidationList from 'components/calculators/trajectory-validation/ValidationList.vue'
 import ValidationButton from 'components/calculators/trajectory-validation/ValidationButton.vue'
 import { useTrajectoryValidationStore } from 'stores/trajectoryValidation'

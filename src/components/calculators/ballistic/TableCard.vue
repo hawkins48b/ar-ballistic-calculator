@@ -1,77 +1,80 @@
 <template>
-  <q-card
+  <zroCard
     v-if="rows"
-    flat
-    :class="{'bg-grey-3':!$q.dark.isActive}"
-    class="q-pa-md"
   >
-    <div class="row justify-between">
-      <div class="col-auto">
-        <div class="text-h6">
-          <q-icon
-            name="text_snippet"
-            size="lg"
-            class="q-mr-sm"
-          />
-          Table
+    <q-card-section>
+      <div class="row justify-between">
+        <div class="col-auto">
+          <div class="text-h6">
+            <q-icon
+              name="text_snippet"
+              size="lg"
+              class="q-mr-sm"
+            />
+            Table
+          </div>
+        </div>
+        <div class="col-auto">
+          <q-btn
+            icon="archive"
+            class="q-ml-md"
+            flat
+            @click="exportCSV"
+          >
+            &nbsp;Export CSV
+          </q-btn>
         </div>
       </div>
-      <div class="col-auto">
-        <q-btn
-          icon="archive"
-          class="q-ml-md"
-          flat
-          @click="exportCSV"
-        >
-          &nbsp;Export CSV
-        </q-btn>
-      </div>
-    </div>
-    <q-select
-      v-model="ballisticStore.results.table.visibleColumns"
-      multiple
-      filled
-      options-dense
-      emit-value
-      map-options
-      use-chips
-      :options="columns"
-      option-value="name"
-      option-label="label"
-      display-value="Columns"
-      label="Columns"
-      style="min-width: 150px"
-      class="q-mt-sm"
-    />
+    </q-card-section>
+    <q-separator />
+    <q-card-section>
+      <q-select
+        v-model="ballisticStore.results.table.visibleColumns"
+        multiple
+        filled
+        options-dense
+        emit-value
+        map-options
+        use-chips
+        :options="columns"
+        option-value="name"
+        option-label="label"
+        display-value="Columns"
+        label="Columns"
+        style="min-width: 150px"
+        class="q-mt-sm"
+      />
 
-    <q-table
-      v-if="rows"
-      flat
-      :rows="rows._trajectory"
-      :columns="columns"
-      :visible-columns="ballisticStore.results.table.visibleColumns"
-      row-key="distance"
-      :rows-per-page-options="[0]"
-      :class="{'bg-grey-3':!$q.dark.isActive}"
-      hide-pagination
-    >
-      <template #body-cell="props">
-        <q-td :props="props">
-          {{ props.value }}
-          <q-tooltip
-            anchor="top left"
-            self="top middle"
-          >
-            {{ props.col.label }}
-          </q-tooltip>
-        </q-td>
-      </template>
-    </q-table>
-  </q-card>
+      <q-table
+        v-if="rows"
+        flat
+        :rows="rows._trajectory"
+        :columns="columns"
+        :visible-columns="ballisticStore.results.table.visibleColumns"
+        row-key="distance"
+        :rows-per-page-options="[0]"
+        :class="{'bg-grey-3':!$q.dark.isActive}"
+        hide-pagination
+      >
+        <template #body-cell="props">
+          <q-td :props="props">
+            {{ props.value }}
+            <q-tooltip
+              anchor="top left"
+              self="top middle"
+            >
+              {{ props.col.label }}
+            </q-tooltip>
+          </q-td>
+        </template>
+      </q-table>
+    </q-card-section>
+  </zroCard>
 </template>
 
 <script setup>
 // imports
+import zroCard from 'components/zroCard.vue'
 import { useBallisticStore } from 'stores/ballistic'
 import * as BC from 'js-ballistics'
 import { computed } from 'vue'

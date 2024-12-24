@@ -1,58 +1,59 @@
 <template>
-  <q-card
-    :class="{'bg-grey-3':!$q.dark.isActive}"
-    flat
-    class="q-pa-md"
-  >
-    <div class="text-h6">
-      Rifle
-    </div>
-    <q-input
-      v-model="localProfile.weapon.name"
-      label="Weapon designation"
-      filled
-      type="text"
-      class="q-mt-md"
-      lazy-rules
-      :rules="[ val => val && val.length > 0 || 'Please name your weapon']"
-      hint="e.g LMT AR 14.5''"
-    />
-    <div
-      v-if="localProfile.options.enableSpinDrift"
-      class="q-mt-md"
-    >
+  <zroCard>
+    <q-card-section>
+      <div class="text-h6">
+        Rifle
+      </div>
+    </q-card-section>
+    <q-separator />
+    <q-card-section>
       <q-input
-
-        v-model="localProfile.weapon.barrelTwist"
-        label=" Barrel twist"
+        v-model="localProfile.weapon.name"
+        label="Weapon designation"
         filled
-        type="number"
-        step="any"
-        lazy-rules
-        prefix="1 / "
-        :rules="[
-          val => val && val > 0 && localProfile.options.enableSpinDrift || 'Barrel Twist must be positive'
-        ]"
+        type="text"
         class="q-mt-md"
-        hint="Length of the groove for one rotation of the bullet."
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Please name your weapon']"
+        hint="e.g LMT AR 14.5''"
+      />
+      <div
+        v-if="localProfile.options.enableSpinDrift"
+        class="q-mt-md"
       >
-        <template #append>
-          <q-btn-toggle
-            v-model="localProfile.weapon.barrelTwistUnit"
-            no-caps
-            :options="[
-              {label: 'IN', value: 'IN'},
-              {label: 'MM', value: 'MM'}
-            ]"
-          />
-        </template>
-      </q-input>
-    </div>
-  </q-card>
+        <q-input
+          v-model="localProfile.weapon.barrelTwist"
+          label=" Barrel twist"
+          filled
+          type="number"
+          step="any"
+          lazy-rules
+          prefix="1 / "
+          :rules="[
+            val => val && val > 0 && localProfile.options.enableSpinDrift || 'Barrel Twist must be positive'
+          ]"
+          class="q-mt-md"
+          hint="Length of the groove for one rotation of the bullet."
+        >
+          <template #append>
+            <q-btn-toggle
+              v-model="localProfile.weapon.barrelTwistUnit"
+              no-caps
+              :options="[
+                {label: 'IN', value: 'IN'},
+                {label: 'MM', value: 'MM'}
+              ]"
+            />
+          </template>
+        </q-input>
+      </div>
+    </q-card-section>
+  </zroCard>
 </template>
 
 <script setup>
 // imports
+import zroCard from 'components/zroCard.vue'
 import * as BC from 'js-ballistics'
 import { ref, watch } from 'vue'
 

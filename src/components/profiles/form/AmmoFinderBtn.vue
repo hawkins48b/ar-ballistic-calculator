@@ -8,11 +8,7 @@
       Search
     </q-btn>
     <q-dialog v-model="dialog">
-      <q-card
-        :class="{'bg-grey-3':!$q.dark.isActive}"
-        flat
-        class="q-pa-md"
-      >
+      <zroCard>
         <q-card-section>
           <p class="text-h3">
             Search Caliber
@@ -69,12 +65,13 @@
             Select
           </q-btn>
         </q-card-actions>
-      </q-card>
+      </zroCard>
     </q-dialog>
   </div>
 </template>
 
 <script setup>
+import zroCard from 'components/zroCard.vue'
 import { ref, computed, watch } from 'vue'
 import ammoSource from '../../../models/ammoFinder.json'
 

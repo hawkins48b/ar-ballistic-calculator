@@ -17,15 +17,24 @@
         <div class="col-12">
           <zroCard>
             <q-card-section>
-              <div class="text-h2">
+              <div class="text-h6">
+                <q-icon
+                  name="download"
+                  size="lg"
+                  class="q-mr-sm"
+                />
                 Export
               </div>
+            </q-card-section>
+            <q-separator />
+            <q-card-section>
               <p class="q-mt-md">
                 Export your profiles for another app or device.
               </p>
               <q-input
                 v-model="prefix"
                 label="Rifle name prefix"
+                filled
               />
             </q-card-section>
             <q-card-actions>
@@ -44,9 +53,17 @@
         >
           <zroCard>
             <q-card-section>
-              <div class="text-h2">
+              <div class="text-h6">
+                <q-icon
+                  name="upload_file"
+                  size="lg"
+                  class="q-mr-sm"
+                />
                 Import
               </div>
+            </q-card-section>
+            <q-separator />
+            <q-card-section>
               <p class="q-mt-md">
                 Insert new profiles within the app.
               </p>

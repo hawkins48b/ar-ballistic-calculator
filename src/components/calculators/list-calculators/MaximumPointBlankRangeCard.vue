@@ -10,7 +10,7 @@
     </q-card-section>
     <q-separator />
     <q-card-section>
-      <p>Calculate your Maximum Point Blank Range (MPBR).</p>
+      <p>Calculate your Maximum Point Blank Range.</p>
 
       <q-img
         v-if="!$q.dark.isActive"

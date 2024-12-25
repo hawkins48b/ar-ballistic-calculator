@@ -66,7 +66,7 @@ const trajectory = ref({ ...modelTrajectory })
 const add = function () {
   if (trajectoriesStore.add(trajectory.value)) {
     dialog.value = false
-    modelTrajectory.value = { ...modelTrajectory }
+    trajectory.value = { ...modelTrajectory }
   }
 }
 

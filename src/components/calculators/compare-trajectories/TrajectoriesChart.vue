@@ -1,5 +1,7 @@
 <template>
-  <zroCard>
+  <zroCard
+    v-if="series.length > 0"
+  >
     <q-card-section>
       <div class="row justify-between">
         <div class="col-auto">

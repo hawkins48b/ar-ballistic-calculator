@@ -96,7 +96,7 @@
 
 <script setup>
 import { useTrajectoriesStore } from 'stores/trajectories'
-import { defineProps, ref } from 'vue'
+import { ref } from 'vue'
 import TrajectoryForm from './TrajectoryForm.vue'
 import ZroCard from 'src/components/zroCard.vue'
 

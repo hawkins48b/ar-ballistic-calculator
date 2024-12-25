@@ -11,10 +11,16 @@
       v-model="trajectory.profileId"
       class="q-mt-md"
     />
-    <AtmosphereForm
-      v-model="trajectory.atmosphere"
+    <q-expansion-item
+      icon="cloud"
+      label="Atmospheric Conditions "
       class="q-mt-md"
-    />
+    >
+      <AtmosphereForm
+        v-model="trajectory.atmosphere"
+        class="q-mt-md"
+      />
+    </q-expansion-item>
   </q-form>
 </template>
 

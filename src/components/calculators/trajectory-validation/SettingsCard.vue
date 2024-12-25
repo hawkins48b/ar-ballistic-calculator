@@ -1,40 +1,45 @@
 <template>
   <zroCard>
-    <div class="text-h6">
-      <q-icon
-        name="tune"
-        size="lg"
-        class="q-mr-sm"
-      />
-      Range
-    </div>
-    <q-form>
-      <q-input
-        v-model="settings.range.distance"
-        label="Range"
-        filled
-        step="any"
-        type="number"
-        lazy-rules
-        :rules="[
-          val => val && val > 0 || 'The range must be positive'
-        ]"
-        class="q-mt-md"
-        hint="Recommended value is at least 100 YD / M"
-        debounce="500"
-      >
-        <template #append>
-          <q-btn-toggle
-            v-model="settings.range.unit"
-            no-caps
-            :options="[
-              {label: 'YD', value: 'YD'},
-              {label: 'M', value: 'M'}
-            ]"
-          />
-        </template>
-      </q-input>
-    </q-form>
+    <q-card-section>
+      <div class="text-h6">
+        <q-icon
+          name="tune"
+          size="lg"
+          class="q-mr-sm"
+        />
+        Range
+      </div>
+    </q-card-section>
+    <q-separator />
+    <q-card-separator>
+      <q-form>
+        <q-input
+          v-model="settings.range.distance"
+          label="Range"
+          filled
+          step="any"
+          type="number"
+          lazy-rules
+          :rules="[
+            val => val && val > 0 || 'The range must be positive'
+          ]"
+          class="q-mt-md"
+          hint="Recommended value is at least 100 YD / M"
+          debounce="500"
+        >
+          <template #append>
+            <q-btn-toggle
+              v-model="settings.range.unit"
+              no-caps
+              :options="[
+                {label: 'YD', value: 'YD'},
+                {label: 'M', value: 'M'}
+              ]"
+            />
+          </template>
+        </q-input>
+      </q-form>
+    </q-card-separator>
   </zroCard>
 </template>
 

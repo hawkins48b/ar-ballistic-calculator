@@ -6,11 +6,12 @@
       <zroCard
         class="text-center col-xs-12 col-sm-6 col-md4"
       >
-        <div class="text-h3">
-          ZRO
-        </div>
-        <div class="text-h6 text-italic">
-          Ballistic Calculator
+        <div class="text-h6 q-mt-md">
+          <q-img
+            src="~/assets/zro-logo.svg"
+            style="height: 40px"
+            fit="fill"
+          />Ballistic calculator
         </div>
         <p>Version {{ appVersion }}</p>
         <p>
@@ -60,34 +61,39 @@
       <zroCard
         class="col-xs-12 col-sm-6 col-md4"
       >
-        <div class="text-h3">
-          Privacy Policy
-        </div>
-        <p class="q-mt-md">
-          Privacy is paramount. ZRO Ballistic Calculator is designed to work entirely offline. Here's how we handle your data:
-        </p>
-        <ul>
-          <li>
-            No Online Data Storage<br>
-            The app operates offline, and no personal or usage data is stored or transmitted online.
-          </li>
-          <br>
-          <li>
-            No Statistics or Tracking<br>
-            We do not collect, retrieve, or analyze any statistics or user data.
-          </li>
-          <br>
-          <li>
-            Your Data Stays Local<br>
-            All data entered or calculated within the app remains on your device.
-          </li>
-        </ul>
-        <p>
-          If you have any questions or concerns, feel free to <a
-            href="https://chocolate-warfare.com/contact"
-            target="_blank"
-          >contact us</a>.
-        </p>
+        <q-card-section>
+          <div class="text-h6">
+            Privacy Policy
+          </div>
+        </q-card-section>
+        <q-separator />
+        <q-card-section>
+          <p class="q-mt-md">
+            Privacy is paramount. ZRO Ballistic Calculator is designed to work entirely offline. Here's how we handle your data:
+          </p>
+          <ul>
+            <li>
+              No Online Data Storage<br>
+              The app operates offline, and no personal or usage data is stored or transmitted online.
+            </li>
+            <br>
+            <li>
+              No Statistics or Tracking<br>
+              We do not collect, retrieve, or analyze any statistics or user data.
+            </li>
+            <br>
+            <li>
+              Your Data Stays Local<br>
+              All data entered or calculated within the app remains on your device.
+            </li>
+          </ul>
+          <p>
+            If you have any questions or concerns, feel free to <a
+              href="https://chocolate-warfare.com/contact"
+              target="_blank"
+            >contact us</a>.
+          </p>
+        </q-card-section>
       </zroCard>
     </div>
   </q-page>

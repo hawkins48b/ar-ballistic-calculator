@@ -10,6 +10,10 @@ body {
   padding-top: env(safe-area-inset-top); // for iOS 11.2 +
 }
 
+body .q-dark {
+  box-shadow: none !important;
+}
+
 //
 // Hide arrows on input type number
 //

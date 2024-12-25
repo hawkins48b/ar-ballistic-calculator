@@ -16,14 +16,14 @@
           </div>
         </th>
       </tr>
-      <tr>
+      <tr v-show="trajectories.length > 0">
+        <th />
         <th class="text-left">
           Name
         </th>
         <th class="text-left gt-sm">
           Profile
         </th>
-        <th />
       </tr>
     </thead>
     <tbody>
@@ -31,24 +31,12 @@
         v-for="(trajectory, index) in trajectories"
         :key="index"
       >
+        <td style="width:60px">
+          <ActionTrajectoryBtn :index="index" />
+        </td>
         <td>{{ trajectory.name }}</td>
         <td class="gt-sm">
           {{ profileStore.profileLabel(trajectory.profileId) }}
-        </td>
-        <td class="text-right">
-          <q-btn
-            icon="content_copy"
-            flat
-            round
-            @click="trajectoriesStore.duplicate(index)"
-          />
-          <EditTrajectoryBtn v-model="trajectories[index]" />
-          <q-btn
-            icon="delete"
-            round
-            flat
-            @click="trajectoriesStore.remove(index)"
-          />
         </td>
       </tr>
       <tr v-show="trajectories.length === 0">
@@ -67,7 +55,7 @@
 import { useTrajectoriesStore } from 'stores/trajectories'
 import { useProfilesStore } from 'src/stores/profiles'
 import { storeToRefs } from 'pinia'
-import EditTrajectoryBtn from './EditTrajectoryBtn.vue'
+import ActionTrajectoryBtn from './ActionTrajectoryBtn.vue'
 
 const trajectoriesStore = useTrajectoriesStore()
 const { trajectories } = storeToRefs(trajectoriesStore)

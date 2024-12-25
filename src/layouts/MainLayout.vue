@@ -26,7 +26,6 @@
         @click="$router.push('/')"
       >
         <div class="row items-center no-wrap">
-          <div class="col-auto" />
           <div class="col text-h6">
             <q-img
               src="~/assets/zro-logo.svg"

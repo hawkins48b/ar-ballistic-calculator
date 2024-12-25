@@ -27,6 +27,7 @@ const routes = [
           { path: 'compare-trajectories', component: () => import('pages/calculators/compare-trajectories/CompareTrajectoriesPage.vue'), name: 'Compare trajectories' }
         ]
       },
+      { path: 'scopeview', component: () => import('pages/ScopeViewPage.vue'), name: 'Scope View' },
       { path: 'about', component: () => import('pages/AboutPage.vue'), name: 'About' }
     ]
   },

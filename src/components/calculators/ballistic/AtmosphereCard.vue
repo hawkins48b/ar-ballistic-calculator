@@ -24,8 +24,6 @@
 // imports
 import AtmosphereForm from 'components/calculators/ballistic/AtmosphereForm.vue'
 import zroCard from 'components/zroCard.vue'
-
-// imports
 import { storeToRefs } from 'pinia'
 import { useBallisticStore } from 'stores/ballistic'
 

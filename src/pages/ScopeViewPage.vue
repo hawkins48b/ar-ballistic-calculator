@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <ProfileSelectorCard />
-    <div class="row q-mt-md q-gutter-md">
+    <div class="row q-mt-xs q-gutter-md">
       <div class="col-4">
         <ConditionsCard />
       </div>

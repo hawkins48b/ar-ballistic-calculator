@@ -1,40 +1,45 @@
 <template>
   <zroCard>
-    <div class="text-h6">
-      <q-icon
-        name="photo_size_select_small"
-        size="lg"
-        class="q-mr-sm"
-      />
-      Target size
-    </div>
-    <q-form>
-      <q-input
-        v-model="target.size"
-        label="Size"
-        filled
-        step="any"
-        type="number"
-        lazy-rules
-        :rules="[
-          val => val && val > 0 || 'The target size must be positive'
-        ]"
-        class="q-mt-md"
-        hint="Recommended value is 8 inch / 20 cm"
-        debounce="500"
-      >
-        <template #append>
-          <q-btn-toggle
-            v-model="target.unit"
-            no-caps
-            :options="[
-              {label: 'IN', value: 'IN'},
-              {label: 'CM', value: 'CM'}
-            ]"
-          />
-        </template>
-      </q-input>
-    </q-form>
+    <q-card-section>
+      <div class="text-h6">
+        <q-icon
+          name="photo_size_select_small"
+          size="lg"
+          class="q-mr-sm"
+        />
+        Target size
+      </div>
+    </q-card-section>
+    <q-separator />
+    <q-card-section>
+      <q-form>
+        <q-input
+          v-model="target.size"
+          label="Size"
+          filled
+          step="any"
+          type="number"
+          lazy-rules
+          :rules="[
+            val => val && val > 0 || 'The target size must be positive'
+          ]"
+          class="q-mt-md"
+          hint="Recommended value is 8 inch / 20 cm"
+          debounce="500"
+        >
+          <template #append>
+            <q-btn-toggle
+              v-model="target.unit"
+              no-caps
+              :options="[
+                {label: 'IN', value: 'IN'},
+                {label: 'CM', value: 'CM'}
+              ]"
+            />
+          </template>
+        </q-input>
+      </q-form>
+    </q-card-section>
   </zroCard>
 </template>
 

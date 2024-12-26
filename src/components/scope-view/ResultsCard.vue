@@ -1,5 +1,5 @@
 <template>
-  <ZroCard>
+  <ZroCard v-if="scopeViewStore.getTrajectory">
     <q-card-section>
       <div class="text-h6">
         <q-icon
@@ -11,21 +11,19 @@
       </div>
     </q-card-section>
     <q-card-section>
-      <div v-if="scopeViewStore.getTrajectory">
-        <div class="row items-center">
-          <div class="col">
-            <AdjustmentsElevation />
-          </div>
-          <div class="col">
-            <AdjustmentsWindage />
-          </div>
+      <div class="row items-center">
+        <div class="col">
+          <AdjustmentsElevation />
         </div>
-        <q-separator class="q-mt-md" />
-        <TrajectoryInfo />
-
-        <q-separator class="q-mt-md" />
-        <AdjustmentsForm class="q-mt-md" />
+        <div class="col">
+          <AdjustmentsWindage />
+        </div>
       </div>
+      <q-separator class="q-mt-md" />
+      <TrajectoryInfo />
+
+      <q-separator class="q-mt-md" />
+      <AdjustmentsForm class="q-mt-md" />
     </q-card-section>
   </ZroCard>
 </template>

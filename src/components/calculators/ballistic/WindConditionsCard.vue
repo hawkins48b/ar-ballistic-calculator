@@ -41,6 +41,7 @@
           val => val && parseFloat(val) >= 0 || 'Wind speed must be 0 or positive'
         ]"
         lazy-rules
+        hint="Wind speed estimation."
       >
         <template #append>
           <q-btn-toggle
@@ -68,6 +69,7 @@
               val => val && parseFloat(val) >= 0 || 'Wind direction must be 0 or positive'
             ]"
             lazy-rules
+            hint="Direction where the wind is going to."
           >
             <template #append>
               <q-btn-toggle
@@ -88,24 +90,32 @@
             :min="0"
             :max="12"
             show-value
-            size="50px"
+            size="60px"
             :thickness="0.22"
             color="primary"
             track-color="grey-3"
             class="q-ma-md no-shadow"
-          />
+          >
+            <q-icon
+              name="air"
+            />
+          </q-knob>
           <q-knob
             v-if="wind.directionUnit==='DEG'"
             v-model="wind.direction"
             :min="0"
             :max="360"
             show-value
-            size="50px"
+            size="60px"
             :thickness="0.22"
             color="primary"
             track-color="grey-3"
             class="q-ma-md no-shadow"
-          />
+          >
+            <q-icon
+              name="air"
+            />
+          </q-knob>
         </div>
       </div>
     </q-card-section>

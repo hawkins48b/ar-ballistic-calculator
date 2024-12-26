@@ -1,11 +1,11 @@
 <template>
   <q-page padding>
     <ProfileSelectorCard />
-    <div class="row q-mt-xs q-gutter-md">
-      <div class="col-4">
+    <div class="row q-mt-xs q-col-gutter-md">
+      <div class="col-xs-12 col-sm-6 col-lg-4">
         <ConditionsCard />
       </div>
-      <div class="col-4">
+      <div class="col-xs-12 col-sm">
         <ResultsCard />
       </div>
     </div>

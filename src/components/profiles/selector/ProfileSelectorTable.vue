@@ -114,7 +114,10 @@ const selected = ref([])
 // set value if found provided by v-model
 watch(profileId, (newValue) => {
   if (newValue) {
-    selected.value = [profilesStore.profilebyId(profileId.value)]
+    const profile = profilesStore.profilebyId(profileId.value)
+    if (profile) {
+      selected.value = [profile]
+    }
   }
 }, {
   immediate: true

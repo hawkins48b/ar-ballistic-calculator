@@ -9,12 +9,13 @@
     <q-input
       v-model="atmosphere.altitude"
       label="Altitude"
-      type="number"
+      type="text"
       :disable="atmosphere.useISA"
       hint="Altitude has little to no impact."
       filled
       debounce="500"
       class="q-mt-md"
+      inputmode="numeric"
     >
       <template #append>
         <q-btn-toggle
@@ -53,12 +54,13 @@
     <q-input
       v-model="atmosphere.temperature"
       label="Temperature"
-      type="number"
+      type="text"
       :disable="atmosphere.useISA"
       hint="Temperature has a BIG impact."
       filled
       debounce="500"
       class="q-mt-md"
+      inputmode="numeric"
     >
       <template #append>
         <q-btn-toggle

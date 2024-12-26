@@ -47,6 +47,11 @@ export default {
           label: 'Calculators'
         },
         {
+          path: '/scopeview',
+          icon: 'visibility',
+          label: 'Scope view'
+        },
+        {
           path: '/about',
           icon: 'info',
           label: 'About'

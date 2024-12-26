@@ -56,32 +56,36 @@ export const useMpbrStore = defineStore('mpbr', {
       const profile = ref(ProfilesStore.profilebyId(this.profileId))
 
       const promises = []
-      // loop from 5unit to 200unit
-      for (let i = 1; i <= 200; i++) {
-        const calculation = new Promise((resolve) => {
+
+      if (profile.value) {
+        // loop from 5unit to 200unit
+        for (let i = 1; i <= 200; i++) {
+          const calculation = new Promise((resolve) => {
           // update zero
-          zero.distance = i
+            zero.distance = i
 
-          const params = {
-            weapon: profile.value.weapon,
-            optic: profile.value.optic,
-            bullet: profile.value.bullet,
-            measures: profile.value.measures,
-            options: profile.value.options,
-            range
-          }
+            const params = {
+              weapon: profile.value.weapon,
+              optic: profile.value.optic,
+              bullet: profile.value.bullet,
+              measures: profile.value.measures,
+              options: profile.value.options,
+              range
+            }
 
-          // replace zero distance by our own
-          params.optic.zero = zero.distance
-          params.optic.zeroUnit = zero.unit
+            // replace zero distance by our own
+            params.optic.zero = zero.distance
+            params.optic.zeroUnit = zero.unit
 
-          // perform shot
-          const shot = ballisticCalculator(params, true)
+            // perform shot
+            const shot = ballisticCalculator(params, true)
 
-          resolve(shot)
-        })
-        promises.push(calculation)
+            resolve(shot)
+          })
+          promises.push(calculation)
+        }
       }
+
       return Promise.all(promises)
     },
     findLongestTrajectoryForTargetSize (shots, targetSize) {

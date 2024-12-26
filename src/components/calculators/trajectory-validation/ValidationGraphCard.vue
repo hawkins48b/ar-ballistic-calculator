@@ -1,53 +1,47 @@
 <template>
   <zroCard>
-    <div class="row justify-between">
-      <div class="col-auto">
-        <div class="text-h6">
-          <q-icon
-            name="query_stats"
-            size="lg"
-            class="q-mr-sm"
-          />
-          Comparison
-        </div>
+    <q-card-section>
+      <div class="text-h6">
+        <q-icon
+          name="query_stats"
+          size="lg"
+          class="q-mr-sm"
+        />
+        Comparison
       </div>
-      <div class="col-auto">
-        <!--
-        <q-toggle v-model="showAnnotations">
-          Show Annotations
-        </q-toggle>
-        -->
+    </q-card-section>
+    <q-separator />
+    <q-card-section>
+      <div
+        v-show="!calcError"
+      >
+        <ValidationList
+          :new-velocity="newVelocity"
+        />
+        <apexchart
+          ref="chart"
+          type="line"
+          :options="options"
+          :series="series"
+          height="400px"
+        />
+        <validationButton
+          :new-velocity="newVelocity"
+        />
       </div>
-    </div>
-    <div
-      v-show="!calcError"
-    >
-      <ValidationList
-        :new-velocity="newVelocity"
-      />
-      <apexchart
-        ref="chart"
-        type="line"
-        :options="options"
-        :series="series"
-        height="400px"
-      />
-      <validationButton
-        :new-velocity="newVelocity"
-      />
-    </div>
-    <div
-      v-show="calcError"
-      class="q-mt-md text-center"
-    >
-      <q-icon
-        name="error"
-        size="xl"
-      />
-      <p class="text-h6">
-        The trajectory cannot be calculated.
-      </p>
-    </div>
+      <div
+        v-show="calcError"
+        class="q-mt-md text-center"
+      >
+        <q-icon
+          name="error"
+          size="xl"
+        />
+        <p class="text-h6">
+          The trajectory cannot be calculated.
+        </p>
+      </div>
+    </q-card-section>
   </zroCard>
 </template>
 
@@ -156,7 +150,7 @@ const setOptions = () => {
   options.xaxis.title.text = xAxisTitle
   options.yaxis[0].title.text = yAxisTitle
 
-  options.xaxis.tickAmount = 20
+  options.xaxis.tickAmount = 20 - 1
 
   // ensure chart theme
   options.theme.mode = $q.dark.isActive ? 'dark' : 'light'

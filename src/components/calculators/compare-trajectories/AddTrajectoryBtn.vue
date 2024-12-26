@@ -55,18 +55,19 @@ const dialog = ref(false)
 const trajectoriesStore = useTrajectoriesStore()
 const ballisticStore = useBallisticStore()
 
-const modelTrajectory = {
+const modelTrajectory = () => ({
   name: '',
   profileId: null,
   atmosphere: ballisticStore.getISA
-}
 
-const trajectory = ref({ ...modelTrajectory })
+})
+
+const trajectory = ref(modelTrajectory())
 
 const add = function () {
   if (trajectoriesStore.add(trajectory.value)) {
     dialog.value = false
-    trajectory.value = { ...modelTrajectory }
+    trajectory.value = modelTrajectory()
   }
 }
 

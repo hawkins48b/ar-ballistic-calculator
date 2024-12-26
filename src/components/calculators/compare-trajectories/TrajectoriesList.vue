@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th
-          colspan="3"
+          colspan="4"
           class="text-left"
         >
           <div class="text-h6">
@@ -21,6 +21,9 @@
         <th class="text-left">
           Name
         </th>
+        <th class="text-left">
+          Atmosphere
+        </th>
         <th class="text-left gt-sm">
           Profile
         </th>
@@ -35,6 +38,9 @@
           <ActionTrajectoryBtn :index="index" />
         </td>
         <td>{{ trajectory.name }}</td>
+        <td>
+          {{ trajectory.atmosphere.useISA ? 'ISA' : 'Custom' }}
+        </td>
         <td class="gt-sm">
           {{ profileStore.profileLabel(trajectory.profileId) }}
         </td>
@@ -42,7 +48,7 @@
       <tr v-show="trajectories.length === 0">
         <td
           class="text-italic"
-          colspan="3"
+          colspan="4"
         >
           No trajectory
         </td>

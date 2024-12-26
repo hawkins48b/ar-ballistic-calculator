@@ -57,7 +57,7 @@
         Terminal velocity
       </div>
       <div class="text-h5">
-        {{ Math.round(scopeViewStore.getTrajectory.velocity.In(BC.Unit.MPH)) }} MPH
+        {{ Math.round(scopeViewStore.getTrajectory.velocity.In(BC.Unit.FPS)) }} FPS
       </div>
     </div>
     <div
@@ -72,7 +72,7 @@
         Terminal velocity
       </div>
       <div class="text-h5">
-        {{ Math.round(scopeViewStore.getTrajectory.velocity.In(BC.Unit.MPS)) }} M/S
+        {{ Math.round(scopeViewStore.getTrajectory.velocity.In(BC.Unit.MPS)) }} MPS
       </div>
     </div>
   </div>

@@ -12,6 +12,7 @@
         val => val && parseFloat(val) >= 0 || 'Wind speed must be 0 or positive'
       ]"
       lazy-rules
+      hint="Wind speed estimation."
     >
       <template #append>
         <q-btn-toggle
@@ -25,59 +26,62 @@
       </template>
     </q-input>
 
-    <div class="row">
-      <div class="col">
-        <q-input
-          v-model="wind.direction"
-          label="Wind direction"
-          type="number"
-          step="any"
-          filled
-          debounce="500"
-          class="q-mt-md"
-          :rules="[
-            val => val && parseFloat(val) >= 0 || 'Wind direction must be 0 or positive'
+    <q-input
+      v-model="wind.direction"
+      label="Wind direction"
+      type="number"
+      step="any"
+      filled
+      debounce="500"
+      class="q-mt-md"
+      :rules="[
+        val => val && parseFloat(val) >= 0 || 'Wind direction must be 0 or positive'
+      ]"
+      hint="Direction where the wind is going to."
+      lazy-rules
+    >
+      <template #append>
+        <q-btn-toggle
+          v-model="wind.directionUnit"
+          no-caps
+          :options="[
+            {label: 'CLOCK', value: 'CLOCK'},
+            {label: 'DEG', value: 'DEG'}
           ]"
-          lazy-rules
-        >
-          <template #append>
-            <q-btn-toggle
-              v-model="wind.directionUnit"
-              no-caps
-              :options="[
-                {label: 'CLOCK', value: 'CLOCK'},
-                {label: 'DEG', value: 'DEG'}
-              ]"
-            />
-          </template>
-        </q-input>
-      </div>
-      <div class="col-auto">
-        <q-knob
-          v-if="wind.directionUnit==='CLOCK'"
-          v-model="wind.direction"
-          :min="0"
-          :max="12"
-          show-value
-          size="50px"
-          :thickness="0.22"
-          color="primary"
-          track-color="grey-3"
-          class="q-ma-md no-shadow"
         />
-        <q-knob
-          v-if="wind.directionUnit==='DEG'"
-          v-model="wind.direction"
-          :min="0"
-          :max="360"
-          show-value
-          size="50px"
-          :thickness="0.22"
-          color="primary"
-          track-color="grey-3"
-          class="q-ma-md no-shadow"
+      </template>
+    </q-input>
+    <div class="text-center q-mt-md">
+      <q-knob
+        v-if="wind.directionUnit==='CLOCK'"
+        v-model="wind.direction"
+        :min="0"
+        :max="12"
+        show-value
+        size="100px"
+        :thickness="0.22"
+        color="primary"
+        track-color="grey-5"
+      >
+        <q-icon
+          name="air"
         />
-      </div>
+      </q-knob>
+      <q-knob
+        v-if="wind.directionUnit==='DEG'"
+        v-model="wind.direction"
+        :min="0"
+        :max="360"
+        show-value
+        size="100px"
+        :thickness="0.22"
+        color="primary"
+        track-color="grey-5"
+      >
+        <q-icon
+          name="air"
+        />
+      </q-knob>
     </div>
   </div>
 </template>

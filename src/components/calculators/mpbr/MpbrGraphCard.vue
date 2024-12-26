@@ -2,37 +2,42 @@
   <zroCard
     v-show="mpbrShot"
   >
-    <div class="row justify-between">
-      <div class="col-auto">
-        <div class="text-h6">
-          <q-icon
-            name="query_stats"
-            size="lg"
-            class="q-mr-sm"
-          />
-          MPBR chart
+    <q-card-section>
+      <div class="row justify-between">
+        <div class="col-auto">
+          <div class="text-h6">
+            <q-icon
+              name="query_stats"
+              size="lg"
+              class="q-mr-sm"
+            />
+            MPBR chart
+          </div>
+        </div>
+        <div class="col-auto">
+          <q-toggle v-model="showAnnotations">
+            Show Annotations
+          </q-toggle>
         </div>
       </div>
-      <div class="col-auto">
-        <q-toggle v-model="showAnnotations">
-          Show Annotations
-        </q-toggle>
-      </div>
-    </div>
-    <MpbrList
-      :shot="mpbrShot"
-    />
-    <apexchart
-      ref="chart"
-      type="line"
-      :options="options"
-      :series="series"
-      height="400px"
-    />
-    <useMpbrButton
-      :shot="mpbrShot"
-      :distance-unit="mpbrStore.distanceUnit"
-    />
+    </q-card-section>
+    <q-separator />
+    <q-card-section>
+      <MpbrList
+        :shot="mpbrShot"
+      />
+      <apexchart
+        ref="chart"
+        type="line"
+        :options="options"
+        :series="series"
+        height="400px"
+      />
+      <useMpbrButton
+        :shot="mpbrShot"
+        :distance-unit="mpbrStore.distanceUnit"
+      />
+    </q-card-section>
   </zroCard>
 </template>
 

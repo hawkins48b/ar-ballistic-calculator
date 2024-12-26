@@ -11,7 +11,7 @@
       </div>
     </q-card-section>
     <q-separator />
-    <q-card-separator>
+    <q-card-section>
       <q-form>
         <q-input
           v-model="settings.range.distance"
@@ -39,7 +39,7 @@
           </template>
         </q-input>
       </q-form>
-    </q-card-separator>
+    </q-card-section>
   </zroCard>
 </template>
 

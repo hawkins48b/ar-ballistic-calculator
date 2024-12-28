@@ -48,7 +48,6 @@
 <script setup>
 // imports
 import * as BC from 'js-ballistics'
-import { defineModel } from 'vue'
 
 const range = defineModel({
   type: Object,

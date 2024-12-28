@@ -91,7 +91,6 @@
 <script setup>
 // imports
 import { useBallisticStore } from 'stores/ballistic'
-import { defineModel } from 'vue'
 import * as BC from 'js-ballistics'
 
 // ballistic store

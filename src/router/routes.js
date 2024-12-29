@@ -16,6 +16,7 @@ const routes = [
           { path: 'edit/:profileId', component: () => import('pages/profiles/EditProfilePage.vue'), name: 'Edit profile' }
         ]
       },
+      { path: 'profilesv2', component: () => import('pages/ProfilesV2Page.vue'), name: 'ProfilesV2' },
       {
         path: 'calculators',
         component: () => import('pages/CalculatorsPage.vue'),

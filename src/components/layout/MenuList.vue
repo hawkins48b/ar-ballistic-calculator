@@ -42,6 +42,11 @@ export default {
           label: 'Profiles'
         },
         {
+          path: '/profilesv2',
+          icon: 'list',
+          label: 'Profiles v2'
+        },
+        {
           path: '/calculators',
           icon: 'calculate',
           label: 'Calculators'

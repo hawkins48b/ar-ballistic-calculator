@@ -39,7 +39,7 @@ async function exportPdf (pdfDoc, filename) {
   if (Platform.is.capacitor) {
     await sharePDF(pdfDoc, filename)
   } else {
-    downloadPDF(pdfDoc, filename)
+    await downloadPDF(pdfDoc, filename)
   }
 }
 
@@ -66,8 +66,10 @@ async function sharePDF (pdfDoc, filename) {
   }
 }
 
-function downloadPDF (pdfDoc, filename) {
-  const pdfBlob = pdfDoc.save()
+async function downloadPDF (pdfDoc, filename) {
+  const pdfSerialized = await pdfDoc.save()
+  const pdfBlob = new Blob([pdfSerialized], { type: 'application/pdf' })
+
   const url = URL.createObjectURL(pdfBlob)
 
   const a = document.createElement('a')

@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 import ballisticCalculator from 'src/controller/ballistic-calculator'
 import { useProfilesStore } from './profiles'
 import * as BC from 'js-ballistics'
@@ -53,11 +52,11 @@ export const useMpbrStore = defineStore('mpbr', {
       }
 
       const ProfilesStore = useProfilesStore()
-      const profile = ref(ProfilesStore.profilebyId(this.profileId))
+      const profile = ProfilesStore.profilebyId(this.profileId)
 
       const promises = []
 
-      if (profile.value) {
+      if (profile) {
         // loop from 5unit to 200unit
         for (let i = 1; i <= 200; i++) {
           const calculation = new Promise((resolve) => {
@@ -65,11 +64,11 @@ export const useMpbrStore = defineStore('mpbr', {
             zero.distance = i
 
             const params = {
-              weapon: profile.value.weapon,
-              optic: profile.value.optic,
-              bullet: profile.value.bullet,
-              measures: profile.value.measures,
-              options: profile.value.options,
+              weapon: { ...profile.weapon },
+              optic: { ...profile.optic },
+              bullet: { ...profile.bullet },
+              measures: { ...profile.measures },
+              options: { ...profile.options },
               range
             }
 

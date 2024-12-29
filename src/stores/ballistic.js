@@ -66,6 +66,26 @@ export const useBallisticStore = defineStore('ballistic', {
       }
       return unit
     },
+    VelocityUnit: (state) => {
+      let unit
+      if (state.range.unit === 'YD') {
+        unit = BC.Unit.FPS
+      }
+      if (state.range.unit === 'M') {
+        unit = BC.Unit.MPS
+      }
+      return unit
+    },
+    VelocityLabel: (state) => {
+      let label
+      if (state.range.unit === 'YD') {
+        label = 'FPS'
+      }
+      if (state.range.unit === 'M') {
+        label = 'MPS'
+      }
+      return label
+    },
     elevationUnit: (state) => {
       let unit
       if (state.range.unit === 'YD') {

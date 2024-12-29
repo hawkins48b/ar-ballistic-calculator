@@ -16,7 +16,7 @@
         >
           <q-card>
             <q-card-section>
-              The mid-range dope chart is designed for red dot rifle from 0 to 500y or 500m.
+              The mid-range dope chart is designed for red dot rifles from 0 to 500y or 500m.
             </q-card-section>
             <q-card-actions>
               <q-btn

@@ -51,7 +51,7 @@ const useMbpr = () => {
 
     // update ballistic calculator values
     const profile = ref(profileStore.profilebyId(mpbrStore.profileId))
-    profile.value.optic.zero = nearZero
+    profile.value.optic.zero = nearZero.value
     ballisticStore.profileId = mpbrStore.profileId
     ballisticStore.range.distance = range
 

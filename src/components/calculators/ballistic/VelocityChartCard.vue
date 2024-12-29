@@ -94,7 +94,7 @@ const options = computed(() => {
 const speedOfSound = computed(() => {
   const results = ballisticStore.calculateShot
 
-  const label = Math.round(results.shot.atmo.mach.In(ballisticStore.VelocityUnit)) + ballisticStore.VelocityLabel
+  const label = Math.round(results.shot.atmo.mach.In(ballisticStore.VelocityUnit)) + ' ' + ballisticStore.VelocityLabel
 
   return label
 })

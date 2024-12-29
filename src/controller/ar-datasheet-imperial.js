@@ -62,9 +62,7 @@ export default async function (profileId) {
     fillPointsOfAim()
   }
 
-  const pdfBytes = await pdfDoc.save()
-
-  return pdfBytes
+  return pdfDoc
 
   function fillHeader () {
     // weapon name

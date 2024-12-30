@@ -38,13 +38,6 @@
 
       <MenuList class="q-mt-sm" />
 
-      <div class="row justify-center q-mt-md">
-        <div class="col-auto">
-          <DarkModeToggle
-            label="Dark mode"
-          />
-        </div>
-      </div>
       <div class="text-center q-mt-md">
         by <a
           href="https://chocolate-warfare.com"
@@ -57,18 +50,8 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <q-footer
-      class="bg-grey-3"
-      :class="{'bg-grey-10':$q.dark.isActive}"
-    >
-      <q-toolbar>
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-          </q-avatar>
-          <div>Title</div>
-        </q-toolbar-title>
-      </q-toolbar>
+    <q-footer style="background-color: transparent">
+      <FooterMenu />
     </q-footer>
   </q-layout>
 </template>
@@ -76,7 +59,7 @@
 <script setup>
 import { ref } from 'vue'
 import MenuList from 'components/layout/MenuList.vue'
-import DarkModeToggle from 'components/settings/darkModeToggle.vue'
+import FooterMenu from 'src/components/settings/FooterMenu.vue'
 
 const leftDrawerOpen = ref(true)
 

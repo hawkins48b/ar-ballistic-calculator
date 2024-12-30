@@ -16,7 +16,7 @@
               />
             </div>
             <div class="col text-h6">
-              {{ title }}
+              {{ label }}
             </div>
             <div class="col-auto">
               <q-icon
@@ -35,7 +35,7 @@
 import ZroCard from 'src/components/zroCard.vue'
 
 defineProps({
-  title: {
+  label: {
     type: String,
     required: true
   },

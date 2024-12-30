@@ -2,13 +2,12 @@ import { defineStore } from 'pinia'
 
 export const useSettingsStore = defineStore('settings', {
   state: () => ({
-    darkMode: false
+    general: {
+      darkMode: 'auto'
+    }
   }),
 
   getters: {
-    isDarkMode () {
-      return this.darkMode
-    }
   },
 
   actions: {

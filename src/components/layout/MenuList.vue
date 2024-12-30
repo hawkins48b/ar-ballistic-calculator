@@ -32,16 +32,6 @@ export default {
     return {
       menuList: [
         {
-          path: '/dashboard',
-          icon: 'apps',
-          label: 'Dashboard'
-        },
-        {
-          path: '/profiles',
-          icon: 'list',
-          label: 'Profiles'
-        },
-        {
           path: '/profilesv2',
           icon: 'list',
           label: 'Profiles v2'
@@ -57,9 +47,9 @@ export default {
           label: 'Scope view'
         },
         {
-          path: '/about',
-          icon: 'info',
-          label: 'About'
+          path: '/settings',
+          icon: 'settings',
+          label: 'Settings'
         }
       ]
     }

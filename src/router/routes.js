@@ -4,8 +4,7 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
 
-      { path: '', redirect: '/dashboard' },
-      { path: 'dashboard', component: () => import('pages/DashboardPage.vue'), name: 'Dashboard' },
+      { path: '', redirect: '/profilesv2' },
       {
         path: 'profiles',
         component: () => import('pages/ProfilesPage.vue'),
@@ -30,7 +29,15 @@ const routes = [
         ]
       },
       { path: 'scopeview', component: () => import('pages/ScopeViewPage.vue'), name: 'Scope View' },
-      { path: 'about', component: () => import('pages/AboutPage.vue'), name: 'About' }
+      {
+        path: 'settings',
+        component: () => import('pages/SettingsPage.vue'),
+        children: [
+          { path: '', component: () => import('pages/settings/AppSettingsPage.vue'), name: 'Settings' },
+          { path: 'about', component: () => import('pages/settings/AboutPage.vue'), name: 'About' },
+          { path: 'privacy-policy', component: () => import('pages/settings/PrivacyPolicyPage.vue'), name: 'Privacy policy' }
+        ]
+      }
     ]
   },
 

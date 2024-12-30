@@ -1,25 +1,25 @@
 <template>
   <q-page class="q-pa-md">
     <NavCard
-      title="Profiles"
+      label="Profiles"
       to="nowhere"
       icon="list"
     />
     <NavCard
       class="q-mt-md"
-      title="Firearms"
+      label="Firearms"
       to="nowhere"
       icon="start"
     />
     <NavCard
       class="q-mt-md"
-      title="Optics"
+      label="Optics"
       to="nowhere"
       icon="fiber_smart_record"
     />
     <NavCard
       class="q-mt-md"
-      title="Ammunition"
+      label="Ammunition"
       to="nowhere"
       icon="align_vertical_bottom"
     />

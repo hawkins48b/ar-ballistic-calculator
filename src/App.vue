@@ -11,9 +11,10 @@ import { storeToRefs } from 'pinia'
 
 // theme mode
 const settingsStore = useSettingsStore()
-const { isDarkMode } = storeToRefs(settingsStore)
+const { general } = storeToRefs(settingsStore)
 const $q = useQuasar()
-watch(isDarkMode, (newValue) => {
+
+watch(() => general.value.darkMode, (newValue) => {
   $q.dark.set(newValue)
 }, {
   immediate: true

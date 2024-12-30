@@ -59,7 +59,7 @@
       </q-list>
     </q-menu>
     <q-dialog v-model="dialog">
-      <ZroCard>
+      <q-card>
         <q-card-section>
           <div class="row items-center no-wrap">
             <div class="col">
@@ -89,7 +89,7 @@
             Edit
           </q-btn>
         </q-card-actions>
-      </ZroCard>
+      </q-card>
     </q-dialog>
   </q-btn>
 </template>
@@ -98,7 +98,6 @@
 import { useTrajectoriesStore } from 'stores/trajectories'
 import { ref } from 'vue'
 import TrajectoryForm from './TrajectoryForm.vue'
-import ZroCard from 'src/components/zroCard.vue'
 
 const trajectoriesStore = useTrajectoriesStore()
 

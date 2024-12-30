@@ -15,7 +15,12 @@ const routes = [
           { path: 'edit/:profileId', component: () => import('pages/profiles/EditProfilePage.vue'), name: 'Edit profile' }
         ]
       },
-      { path: 'profilesv2', component: () => import('pages/ProfilesV2Page.vue'), name: 'ProfilesV2' },
+      {
+        path: 'profilesv2',
+        children: [
+          { path: '', component: () => import('pages/profiles/ProfilesV2Page.vue'), name: 'ProfilesV2' }
+        ]
+      },
       {
         path: 'calculators',
         component: () => import('pages/CalculatorsPage.vue'),
@@ -31,9 +36,8 @@ const routes = [
       { path: 'scopeview', component: () => import('pages/ScopeViewPage.vue'), name: 'Scope View' },
       {
         path: 'settings',
-        component: () => import('pages/SettingsPage.vue'),
         children: [
-          { path: '', component: () => import('pages/settings/AppSettingsPage.vue'), name: 'Settings' },
+          { path: '', component: () => import('pages/settings/SettingsPage.vue'), name: 'Settings' },
           { path: 'about', component: () => import('pages/settings/AboutPage.vue'), name: 'About' },
           { path: 'privacy-policy', component: () => import('pages/settings/PrivacyPolicyPage.vue'), name: 'Privacy policy' }
         ]

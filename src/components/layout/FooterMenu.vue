@@ -1,11 +1,9 @@
 <template>
   <div class="q-pl-md q-pr-md q-pb-md">
-    <ZroCard>
+    <q-card>
       <q-tabs
         active-color="primary"
-        indicator-color="transparent"
         no-caps
-        :class="{'text-black':!$q.dark.isActive}"
         class="nav-card"
       >
         <q-route-tab
@@ -30,17 +28,19 @@
           icon="settings"
         />
       </q-tabs>
-    </ZroCard>
+    </q-card>
   </div>
 </template>
 
 <script setup>
-import ZroCard from 'components/zroCard.vue'
 
 </script>
 
 <style lang="scss">
-.nav-card {
-  background-color: $grey-9;
+.dark-menu {
+  background-color: $dark-menu;
+}
+.light-menu {
+  background-color: $light-menu;
 }
 </style>

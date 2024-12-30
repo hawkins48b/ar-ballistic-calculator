@@ -1,5 +1,5 @@
 <template>
-  <zroCard>
+  <q-card>
     <q-card-section>
       <div class="text-h6">
         <q-icon
@@ -76,12 +76,11 @@
         </q-input>
       </q-form>
     </q-card-section>
-  </zroCard>
+  </q-card>
 </template>
 
 <script setup>
 // imports
-import zroCard from 'components/zroCard.vue'
 import { useTrajectoryValidationStore } from 'stores/trajectoryValidation'
 import { storeToRefs } from 'pinia'
 import * as BC from 'js-ballistics'

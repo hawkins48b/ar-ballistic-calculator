@@ -1,5 +1,5 @@
 <template>
-  <ZroCard v-if="scopeViewStore.getTrajectory">
+  <q-card v-if="scopeViewStore.getTrajectory">
     <q-card-section>
       <div class="text-h6">
         <q-icon
@@ -25,11 +25,10 @@
       <q-separator class="q-mt-md" />
       <AdjustmentsForm class="q-mt-md" />
     </q-card-section>
-  </ZroCard>
+  </q-card>
 </template>
 
 <script setup>
-import ZroCard from '../zroCard.vue'
 import AdjustmentsForm from './AdjustmentsForm.vue'
 import AdjustmentsElevation from './AdjustmentsElevation.vue'
 import AdjustmentsWindage from './AdjustmentsWindage.vue'

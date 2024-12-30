@@ -16,13 +16,22 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Mallanna&display=swap');
 
+// typography
 $typography-font-family : "Mallanna", sans-serif !default;
+$body-font-size   : 18px !default;
+$body-line-height : 1.5 !default;
 
 $primary   : #097a34;
 $secondary : #3498db;
 $accent    : #a55eea;
 
+// light mode
+$light      : #ecf0f1;
+$light-menu : darken($light,10%);
+$light-page : #bdc3c7;
+// dark mode
 $dark      : #1d1d1d;
+$dark-menu : lighten($dark,10%);
 $dark-page : #121212;
 
 $positive  : #21BA45;

@@ -1,5 +1,5 @@
 <template>
-  <zroCard>
+  <q-card>
     <q-card-section>
       <div class="text-h6">
         <q-icon
@@ -17,13 +17,12 @@
         class="q-mt-md"
       />
     </q-card-section>
-  </zroCard>
+  </q-card>
 </template>
 
 <script setup>
 // imports
 import AtmosphereForm from 'components/calculators/ballistic/AtmosphereForm.vue'
-import zroCard from 'components/zroCard.vue'
 import { storeToRefs } from 'pinia'
 import { useBallisticStore } from 'stores/ballistic'
 

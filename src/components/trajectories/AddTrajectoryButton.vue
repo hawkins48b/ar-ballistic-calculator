@@ -6,7 +6,7 @@
   >
     &nbsp;Save trajectory
     <q-dialog v-model="showDialog">
-      <zroCard
+      <q-card
         style="min-width: 350px"
       >
         <q-card-section>
@@ -40,14 +40,13 @@
             @click="addTrajectory"
           />
         </q-card-actions>
-      </zroCard>
+      </q-card>
     </q-dialog>
   </q-btn>
 </template>
 
 <script setup>
 // imports
-import zroCard from 'components/zroCard.vue'
 import { useShotsStore } from 'stores/shots'
 import { ref } from 'vue'
 

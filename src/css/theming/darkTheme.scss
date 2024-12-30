@@ -1,0 +1,16 @@
+body.body--dark {
+  .q-header {
+    .q-card {
+      background-color: $dark-menu;
+    }
+  }
+  .q-footer {
+    .q-card {
+      background-color: $dark-menu;
+    }
+  }
+
+  .q-card {
+    background-color: $dark;
+  }
+}

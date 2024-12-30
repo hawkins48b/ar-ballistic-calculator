@@ -8,7 +8,7 @@
       Add trajectory
     </q-btn>
     <q-dialog v-model="dialog">
-      <zroCard style="min-width: 300px;">
+      <q-card style="min-width: 300px;">
         <q-card-section>
           <div class="row items-center no-wrap">
             <div class="col">
@@ -39,13 +39,12 @@
             Add
           </q-btn>
         </q-card-actions>
-      </zroCard>
+      </q-card>
     </q-dialog>
   </div>
 </template>
 
 <script setup>
-import zroCard from 'components/zroCard.vue'
 import { ref } from 'vue'
 import { useTrajectoriesStore } from 'stores/trajectories'
 import TrajectoryForm from './TrajectoryForm.vue'

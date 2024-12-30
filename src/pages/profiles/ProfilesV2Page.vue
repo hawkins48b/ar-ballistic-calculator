@@ -1,5 +1,6 @@
 <template>
-  <q-page class="q-pa-md">
+  <PageHeader />
+  <q-page class="q-pl-md q-pr-md">
     <NavCard
       label="Profiles"
       to="nowhere"
@@ -27,6 +28,7 @@
 </template>
 
 <script setup>
+import PageHeader from 'src/components/layout/PageHeader.vue'
 import NavCard from 'src/components/NavCard.vue'
 
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <zroCard>
+  <q-card>
     <q-card-section>
       <div class="row justify-between">
         <div class="col-auto">
@@ -27,12 +27,11 @@
         height="300px"
       />
     </q-card-section>
-  </zroCard>
+  </q-card>
 </template>
 
 <script setup>
 // imports
-import zroCard from 'components/zroCard.vue'
 import { useBallisticStore } from 'stores/ballistic'
 import { ref, computed } from 'vue'
 import { colors, useQuasar } from 'quasar'

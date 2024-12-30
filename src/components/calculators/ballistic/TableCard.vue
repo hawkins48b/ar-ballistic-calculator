@@ -1,5 +1,5 @@
 <template>
-  <zroCard
+  <q-card
     v-if="rows"
   >
     <q-card-section>
@@ -69,12 +69,11 @@
         </template>
       </q-table>
     </q-card-section>
-  </zroCard>
+  </q-card>
 </template>
 
 <script setup>
 // imports
-import zroCard from 'components/zroCard.vue'
 import { useBallisticStore } from 'stores/ballistic'
 import * as BC from 'js-ballistics'
 import { computed } from 'vue'

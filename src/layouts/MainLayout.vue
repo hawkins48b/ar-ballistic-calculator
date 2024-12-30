@@ -1,24 +1,8 @@
 <template>
   <q-layout view="lHh lpR fFf">
-    <q-header>
-      <q-toolbar
-        class="bg-grey-3"
-        :class="{'bg-grey-10':$q.dark.isActive, 'text-black':!$q.dark.isActive}"
-      >
-        <q-btn
-          class="q-ma-md"
-          flat
-          round
-          icon="menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-        <q-toolbar-title>{{ $route.name }}</q-toolbar-title>
-      </q-toolbar>
-    </q-header>
     <q-drawer
-      v-model="leftDrawerOpen"
       show-if-above
-      class="bg-grey-3"
+      class="desktop-only bg-grey-3"
       :class="{'bg-grey-10':$q.dark.isActive}"
     >
       <div
@@ -50,18 +34,17 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <q-footer style="background-color: transparent">
+    <q-footer
+      class="mobile-only"
+    >
       <FooterMenu />
     </q-footer>
   </q-layout>
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import MenuList from 'components/layout/MenuList.vue'
-import FooterMenu from 'src/components/settings/FooterMenu.vue'
-
-const leftDrawerOpen = ref(true)
+import FooterMenu from 'src/components/layout/FooterMenu.vue'
 
 </script>
 <style lang="scss">

@@ -1,5 +1,5 @@
 <template>
-  <zroCard
+  <q-card
     class="full-height"
   >
     <q-card-section>
@@ -119,12 +119,11 @@
         </div>
       </div>
     </q-card-section>
-  </zroCard>
+  </q-card>
 </template>
 
 <script setup>
 // imports
-import zroCard from 'components/zroCard.vue'
 import { storeToRefs } from 'pinia'
 import { useBallisticStore } from 'stores/ballistic'
 import { watch } from 'vue'

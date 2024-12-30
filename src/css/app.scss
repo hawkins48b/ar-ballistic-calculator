@@ -1,32 +1,12 @@
 // app global css in SCSS form
-a {
-  color: $primary;
-  text-decoration: none;
-}
 
-body {
-  font-size: 1rem;
-}
+@import './theming/typography.scss';
+@import './theming/lightTheme.scss';
+@import './theming/darkTheme.scss';
+@import './theming/noShadow.scss';
+@import './theming/hideArrowsInputNumber.scss';
 
-body .q-dark {
-  box-shadow: none !important;
-}
-.q-card {
-  border-radius: 25px;
-}
-//
-// Hide arrows on input type number
-//
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-// for your app's header
+// quasar component custom styles
+@import './theming/components/header.scss';
+@import './theming/components/footer.scss';
+@import './theming/components/card.scss';

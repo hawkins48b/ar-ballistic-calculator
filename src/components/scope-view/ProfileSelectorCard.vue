@@ -1,14 +1,13 @@
 <template>
-  <ZroCard>
+  <q-card>
     <ProfileSelector
       v-model="profileId"
     />
-  </ZroCard>
+  </q-card>
 </template>
 
 <script setup>
 import { storeToRefs } from 'pinia'
-import ZroCard from '../zroCard.vue'
 import { useScopeViewStore } from 'src/stores/scopeview'
 import ProfileSelector from '../profiles/selector/ProfileSelector.vue'
 

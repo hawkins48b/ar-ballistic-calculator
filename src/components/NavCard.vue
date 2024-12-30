@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link :to="to">
-      <ZroCard
+      <q-card
         class="cursor-pointer"
       >
         <q-card-section>
@@ -26,13 +26,12 @@
             </div>
           </div>
         </q-card-section>
-      </ZroCard>
+      </q-card>
     </router-link>
   </div>
 </template>
 
 <script setup>
-import ZroCard from 'src/components/zroCard.vue'
 
 defineProps({
   label: {

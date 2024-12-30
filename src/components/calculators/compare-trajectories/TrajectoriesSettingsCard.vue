@@ -1,5 +1,5 @@
 <template>
-  <ZroCard>
+  <q-card>
     <q-card-section>
       <div class="text-h6">
         <q-icon
@@ -13,11 +13,10 @@
     <q-card-section>
       <RangeForm v-model="range" />
     </q-card-section>
-  </ZroCard>
+  </q-card>
 </template>
 
 <script setup>
-import ZroCard from 'src/components/zroCard.vue'
 import RangeForm from '../ballistic/RangeForm.vue'
 
 import { useTrajectoriesStore } from 'stores/trajectories'

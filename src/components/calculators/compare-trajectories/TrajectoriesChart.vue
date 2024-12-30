@@ -1,5 +1,5 @@
 <template>
-  <zroCard
+  <q-card
     v-if="series.length > 0"
   >
     <q-card-section>
@@ -26,11 +26,10 @@
         height="300px"
       />
     </q-card-section>
-  </zroCard>
+  </q-card>
 </template>
 
 <script setup>
-import zroCard from 'components/zroCard.vue'
 import { useTrajectoriesStore } from 'stores/trajectories'
 import { computed } from 'vue'
 import { colors, useQuasar } from 'quasar'

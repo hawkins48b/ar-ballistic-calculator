@@ -1,5 +1,5 @@
 <template>
-  <zroCard>
+  <q-card>
     <q-card-section>
       <div class="row justify-between">
         <div class="col text-h6">
@@ -120,12 +120,11 @@
         </q-input>
       </div>
     </q-card-section>
-  </zroCard>
+  </q-card>
 </template>
 
 <script setup>
 // imports
-import zroCard from 'components/zroCard.vue'
 import AmmoFinderBtn from './AmmoFinderBtn.vue'
 import * as BC from 'js-ballistics'
 import { ref, watch } from 'vue'

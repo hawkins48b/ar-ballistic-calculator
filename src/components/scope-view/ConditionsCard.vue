@@ -1,5 +1,5 @@
 <template>
-  <zroCard>
+  <q-card>
     <q-card-section>
       <div class="text-h6">
         <q-icon
@@ -45,12 +45,10 @@
         </q-expansion-item>
       </q-list>
     </q-card-section>
-  </zroCard>
+  </q-card>
 </template>
 
 <script setup>
-
-import zroCard from 'components/zroCard.vue'
 import RangeForm from 'components/scope-view/RangeForm.vue'
 import AtmosphereForm from 'components/scope-view/AtmosphereForm.vue'
 import WindForm from 'components/scope-view/WindForm.vue'

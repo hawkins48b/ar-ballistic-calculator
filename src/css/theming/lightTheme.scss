@@ -1,0 +1,23 @@
+body.body--light {
+  background-color: $light-page;
+  color: black;
+
+  .q-header {
+    .q-card {
+      background-color: $light-menu;
+    }
+  }
+  .q-footer {
+    .q-card {
+      background-color: $light-menu;
+    }
+  }
+
+  .q-card {
+    background-color: $light;
+  }
+
+  a {
+    color: black
+  }
+}

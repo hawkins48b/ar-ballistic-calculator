@@ -15,7 +15,7 @@
         class="row"
       >
         <div class="col-12">
-          <zroCard>
+          <q-card>
             <q-card-section>
               <div class="text-h6">
                 <q-icon
@@ -46,12 +46,12 @@
                 Export
               </q-btn>
             </q-card-actions>
-          </zroCard>
+          </q-card>
         </div>
         <div
           class="col-12 q-mt-md"
         >
-          <zroCard>
+          <q-card>
             <q-card-section>
               <div class="text-h6">
                 <q-icon
@@ -81,14 +81,13 @@
                 </template>
               </q-file>
             </q-card-actions>
-          </zroCard>
+          </q-card>
         </div>
       </div>
     </q-dialog>
   </div>
 </template>
 <script setup>
-import zroCard from 'components/zroCard.vue'
 import { ref } from 'vue'
 import { useProfilesStore } from 'stores/profiles'
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem'

@@ -1,5 +1,5 @@
 <template>
-  <zroCard>
+  <q-card>
     <q-card-section>
       <div class="text-h6">
         <q-icon
@@ -42,12 +42,11 @@
         </p>
       </div>
     </q-card-section>
-  </zroCard>
+  </q-card>
 </template>
 
 <script setup>
 // imports
-import zroCard from 'components/zroCard.vue'
 import ValidationList from 'components/calculators/trajectory-validation/ValidationList.vue'
 import ValidationButton from 'components/calculators/trajectory-validation/ValidationButton.vue'
 import { useTrajectoryValidationStore } from 'stores/trajectoryValidation'

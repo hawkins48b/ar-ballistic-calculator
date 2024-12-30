@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <PageHeader />
+  <q-page class="q-pl-md q-pr-md">
     <GeneralCard />
     <NavCard
       label="About"
@@ -13,11 +14,12 @@
       to="/settings/privacy-policy"
       icon="privacy_tip"
     />
-  </div>
+  </q-page>
 </template>
 
 <script setup>
 import GeneralCard from 'components/settings/GeneralCard.vue'
 import NavCard from 'components/NavCard.vue'
+import PageHeader from 'components/layout/PageHeader.vue'
 
 </script>

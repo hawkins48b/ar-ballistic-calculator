@@ -1,5 +1,5 @@
 <template>
-  <zroCard
+  <q-card
     v-if="shot"
   >
     <q-card-section>
@@ -34,12 +34,11 @@
         height="300px"
       />
     </q-card-section>
-  </zroCard>
+  </q-card>
 </template>
 
 <script setup>
 // imports
-import zroCard from 'components/zroCard.vue'
 import { useBallisticStore } from 'stores/ballistic'
 import ElevationShotList from 'components/calculators/ballistic/ElevationShotList.vue'
 import * as BC from 'js-ballistics'

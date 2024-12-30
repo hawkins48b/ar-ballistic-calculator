@@ -1,5 +1,5 @@
 <template>
-  <ZroCard>
+  <q-card>
     <q-card-section>
       <div class="text-h6">
         Dope cards
@@ -36,11 +36,10 @@
         </q-expansion-item>
       </q-list>
     </q-card-section>
-  </ZroCard>
+  </q-card>
 </template>
 
 <script setup>
-import ZroCard from 'src/components/zroCard.vue'
 import { useDopeCardsStore } from 'stores/dopecards'
 
 // set calculation profile

@@ -1,29 +1,26 @@
 <template>
-  <div class="q-pl-md q-pr-md q-pb-md">
+  <div class="q-pl-sm q-pr-sm q-pb-sm">
     <q-card>
       <q-tabs
         active-color="primary"
         no-caps
         class="nav-card"
+        indicator-color="transparent"
       >
         <q-route-tab
-          label="Profiles"
           to="/profilesv2"
           icon="list"
           class="text-h5"
         />
         <q-route-tab
-          label="Calculators"
           to="/calculators"
           icon="calculate"
         />
         <q-route-tab
-          label="Scope view"
           to="/scopeview"
           icon="visibility"
         />
         <q-route-tab
-          label="Settings"
           to="/settings"
           icon="settings"
         />

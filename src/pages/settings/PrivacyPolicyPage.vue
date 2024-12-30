@@ -1,11 +1,11 @@
 <template>
   <PageHeader back-to="/settings" />
-  <q-page class="q-pl-md q-pr-md">
+  <q-page class="q-pa-md">
     <q-card
       class="col-xs-12 col-sm-6 col-md4"
     >
-      <q-card-section class="body-text">
-        <p class="q-mt-md text-italic text-center text-h4">
+      <q-card-section class="text-body1">
+        <p class="q-mt-md text-italic text-h4">
           Privacy is paramount
         </p>
         <p>

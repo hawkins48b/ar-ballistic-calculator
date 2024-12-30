@@ -17,6 +17,13 @@ body.body--light {
     background-color: $light;
   }
 
+  .q-input {
+    .q-field__control {
+        background-color: $light;
+      }
+
+  }
+
   a {
     color: black
   }

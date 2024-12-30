@@ -1,10 +1,10 @@
 <template>
   <PageHeader back-to="/settings" />
-  <q-page class="q-pl-md q-pr-md">
+  <q-page class="q-pa-md">
     <q-card
       class="text-center"
     >
-      <q-card-section class="body-text">
+      <q-card-section class="text-body1">
         <div class="text-h4 q-mt-md">
           <q-img
             src="~/assets/zro-logo.svg"

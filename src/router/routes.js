@@ -18,7 +18,8 @@ const routes = [
       {
         path: 'profilesv2',
         children: [
-          { path: '', component: () => import('pages/profiles/ProfilesV2Page.vue'), name: 'ProfilesV2' }
+          { path: '', component: () => import('pages/profiles/ProfilesV2Page.vue'), name: 'ProfilesV2' },
+          { path: 'ammunition', component: () => import('pages/profiles/AmmunitionPage.vue'), name: 'Ammunition' }
         ]
       },
       {

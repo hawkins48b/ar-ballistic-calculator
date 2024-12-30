@@ -7,6 +7,8 @@
 @import './theming/hideArrowsInputNumber.scss';
 
 // quasar component custom styles
+@import './theming/components/page.scss';
+@import './theming/components/input.scss';
 @import './theming/components/header.scss';
 @import './theming/components/footer.scss';
 @import './theming/components/card.scss';

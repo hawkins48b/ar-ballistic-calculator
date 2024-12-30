@@ -1,6 +1,6 @@
 <template>
   <PageHeader />
-  <q-page class="q-pl-md q-pr-md">
+  <q-page class="q-pa-md">
     <NavCard
       label="Profiles"
       to="nowhere"
@@ -21,7 +21,7 @@
     <NavCard
       class="q-mt-md"
       label="Ammunition"
-      to="nowhere"
+      to="/profilesv2/ammunition"
       icon="align_vertical_bottom"
     />
   </q-page>

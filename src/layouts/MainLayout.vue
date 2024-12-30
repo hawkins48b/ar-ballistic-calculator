@@ -1,9 +1,14 @@
 <template>
   <q-layout view="lHh lpR fFf">
     <q-drawer
-      show-if-above
-      class="desktop-only bg-grey-3"
+      v-if="$q.platform.is.desktop"
+      v-model="drawer"
+      class="bg-grey-3"
       :class="{'bg-grey-10':$q.dark.isActive}"
+      no-swipe-close
+      persistent
+      no-swipe-open
+      behavior="desktop"
     >
       <div
         class="text-center q-mt-md cursor-pointer"
@@ -22,7 +27,7 @@
 
       <MenuList class="q-mt-sm" />
 
-      <div class="text-center q-mt-md">
+      <div class="text-center text-body1 q-mt-md">
         by <a
           href="https://chocolate-warfare.com"
           target="_blank"
@@ -45,6 +50,11 @@
 <script setup>
 import MenuList from 'components/layout/MenuList.vue'
 import FooterMenu from 'src/components/layout/FooterMenu.vue'
+import { useQuasar } from 'quasar'
+
+const $q = useQuasar()
+
+const drawer = true
 
 </script>
 <style lang="scss">

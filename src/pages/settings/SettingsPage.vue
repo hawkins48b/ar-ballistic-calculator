@@ -1,6 +1,6 @@
 <template>
   <PageHeader />
-  <q-page class="q-pl-md q-pr-md">
+  <q-page class="q-pa-md">
     <GeneralCard />
     <NavCard
       label="About"

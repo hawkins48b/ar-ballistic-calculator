@@ -28,15 +28,15 @@ export const useAmmunitionStore = defineStore('ammunition', () => {
   }
 
   function getAmmunitionModel () {
-    return {
-      ...ammunitionModel
-    }
+    return ammunitionModel()
   }
 
   function addAmmunition (newAmmunition) {
     newAmmunition.id = nextId.value
     nextId.value++
     ammunitionList.value.push({ ...newAmmunition })
+
+    console.log()
   }
 
   function duplicateAmmunition (id) {

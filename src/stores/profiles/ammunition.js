@@ -14,7 +14,7 @@ export const useAmmunitionStore = defineStore('ammunition', () => {
       diameterUnit: 'IN',
       ballisticCoefficient: 0.285,
       ballisticCoefficientProfile: 'G1',
-      length: 0,
+      length: 0.746,
       lengthUnit: 'IN'
     }
   ])
@@ -48,8 +48,8 @@ export const useAmmunitionStore = defineStore('ammunition', () => {
   }
 
   function editAmmunition (editedAmmunition) {
-    const ammunition = ref(ammunitionList.value.find(editedAmmunition.id))
-    ammunition.value = { ...editedAmmunition }
+    const index = ammunitionList.value.findIndex(ammunition => ammunition.id === editedAmmunition.id)
+    ammunitionList.value[index] = { ...editedAmmunition }
   }
 
   function removeAmmunition (id) {

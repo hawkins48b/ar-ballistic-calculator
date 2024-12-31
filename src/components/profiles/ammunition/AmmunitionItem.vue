@@ -1,8 +1,6 @@
 <template>
   <div>
     <q-card
-      v-touch-hold.mouse="touchHold"
-      v-ripple="$q.platform.is.mobile"
       class="q-mt-md"
     >
       <q-card-section>
@@ -10,7 +8,7 @@
           <div class="col text-h5">
             {{ ammunition.name }}
           </div>
-          <div class="col-auto desktop-only">
+          <div class="col-auto">
             <q-btn
               round
               icon="more_vert"
@@ -20,29 +18,55 @@
           </div>
         </div>
         <div class="row q-mt-sm">
-          <div class="col text-body1">
-            <div class="row items-center q-gutter-md">
+          <div class="col-xs-6 text-body1 q-pa-sm">
+            <div class="row items-center">
               <div class="col-auto">
                 <q-icon
-                  name="hide_source"
+                  name="360"
                   size="md"
                 />
               </div>
-              <div class="col">
+              <div class="col q-pl-sm">
                 {{ ammunition.diameter }} {{ ammunition.diameterUnit }}
               </div>
             </div>
           </div>
-          <div class="col text-body1">
-            <div class="row items-center q-gutter-md">
+          <div class="col-xs-6 text-body1 q-pa-sm">
+            <div class="row items-center">
+              <div class="col-auto">
+                <q-icon
+                  name="height"
+                  size="md"
+                />
+              </div>
+              <div class="col q-pl-sm">
+                {{ ammunition.length }} {{ ammunition.lengthUnit }}
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 text-body1 q-pa-sm">
+            <div class="row items-center">
               <div class="col-auto">
                 <q-icon
                   name="scale"
                   size="md"
                 />
               </div>
-              <div class="col">
+              <div class="col q-pl-sm">
                 {{ ammunition.weight }} {{ ammunition.weightUnit }}
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 text-body1 q-pa-sm">
+            <div class="row items-center">
+              <div class="col-auto">
+                <q-icon
+                  name="moving"
+                  size="md"
+                />
+              </div>
+              <div class="col q-pl-sm">
+                {{ ammunition.ballisticCoefficient }} {{ ammunition.ballisticCoefficientProfile }}
               </div>
             </div>
           </div>
@@ -56,6 +80,7 @@
             <q-item
               v-ripple
               clickable
+              :to="`/profilesv2/ammunition/edit/${ammunition.id}`"
             >
               <q-item-section avatar>
                 <q-icon name="edit" />
@@ -92,7 +117,6 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useQuasar } from 'quasar'
 import { useAmmunitionStore } from 'src/stores/profiles/ammunition'
 
 const props = defineProps({
@@ -102,13 +126,7 @@ const props = defineProps({
   }
 })
 
-const $q = useQuasar()
-
 const dialog = ref(false)
-
-const touchHold = () => {
-  dialog.value = true
-}
 
 const ammunitionStore = useAmmunitionStore()
 

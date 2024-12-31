@@ -20,7 +20,8 @@ const routes = [
         children: [
           { path: '', component: () => import('pages/profiles/ProfilesV2Page.vue'), name: 'ProfilesV2' },
           { path: 'ammunition', component: () => import('pages/profiles/ammunitions/AmmunitionPage.vue'), name: 'Ammunition' },
-          { path: 'ammunition/add', component: () => import('pages/profiles/ammunitions/AddAmmunitionPage.vue'), name: 'New Ammunition' }
+          { path: 'ammunition/add', component: () => import('pages/profiles/ammunitions/AddAmmunitionPage.vue'), name: 'New Ammunition' },
+          { path: 'ammunition/edit/:ammunitionId', component: () => import('pages/profiles/ammunitions/EditAmmunitionPage.vue'), name: 'Edit Ammunition' }
         ]
       },
       {

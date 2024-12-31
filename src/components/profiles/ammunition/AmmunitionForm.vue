@@ -1,110 +1,29 @@
 <template>
   <q-form @submit="submit">
-    <q-input
+    <AmmunitionNameInput
       v-model="ammunition.name"
-      label="Ammunition name"
-      filled
-      type="text"
-      lazy-rules
-      :rules="[ val => val && val.length > 0 || 'Please name your ammunition']"
       class="q-mt-md"
-      hint="Manufacturer and type"
     />
-
-    <q-input
-      v-model="ammunition.diameter"
-      label="Bullet diameter"
-      filled
-      step="any"
-      type="number"
-      lazy-rules
-      :rules="[
-        val => val && val > 0 || 'Bullet diameter must be positive',
-        val => val && val < 13 || val + ' ' + ammunition.diameterUnit +' is a big bullet, are you missing a comma ?'
-      ]"
+    <AmmunitionDiameterInput
+      v-model:diameter="ammunition.diameter"
+      v-model:unit="ammunition.diameterUnit"
       class="q-mt-md"
-      hint="e.g .223 inch or 5.56 mm"
-    >
-      <template #append>
-        <q-btn-toggle
-          v-model="ammunition.diameterUnit"
-          no-caps
-          :options="[
-            {label: 'IN', value: 'IN'},
-            {label: 'MM', value: 'MM'}
-          ]"
-        />
-      </template>
-    </q-input>
-    <q-input
-      v-model="ammunition.length"
-      label="Bullet length"
-      filled
-      step="any"
-      type="number"
-      lazy-rules
-      :rules="[
-        val => val && val > 0 || 'bullet length must be positive'
-      ]"
+    />
+    <AmmunitionLengthInput
+      v-model:length="ammunition.length"
+      v-model:unit="ammunition.lengthUnit"
       class="q-mt-md"
-      hint="The length of the bullet, e.g 0.746 for M193"
-    >
-      <template #append>
-        <q-btn-toggle
-          v-model="ammunition.lengthUnit"
-          no-caps
-          :options="[
-            {label: 'IN', value: 'IN'},
-            {label: 'MM', value: 'MM'}
-          ]"
-        />
-      </template>
-    </q-input>
-
-    <q-input
-      v-model="ammunition.weight"
-      label="Bullet weight"
-      filled
-      step="any"
-      type="number"
-      lazy-rules
-      :rules="[ val => val && val > 0 || 'Bullet weight must be positive']"
+    />
+    <AmmunitionWeightInput
+      v-model:weight="ammunition.weight"
+      v-model:unit="ammunition.weightUnit"
       class="q-mt-md"
-      hint="e.g 55 GR"
-    >
-      <template #append>
-        <q-btn-toggle
-          v-model="ammunition.weightUnit"
-          no-caps
-          :options="[
-            {label: 'GR', value: 'GR'},
-            {label: 'G', value: 'G'}
-          ]"
-        />
-      </template>
-    </q-input>
-    <q-input
-      v-model="ammunition.ballisticCoefficient"
-      label="Ballistic coefficient"
-      filled
-      step="any"
-      type="number"
-      lazy-rules
-      :rules="[ val => val && val > 0 || 'Ballistic coefficient must be positive']"
+    />
+    <AmmunitionBallisticCoefficientInput
+      v-model:coefficient="ammunition.ballisticCoefficient"
+      v-model:profile="ammunition.ballisticCoefficientProfile"
       class="q-mt-md"
-      hint="e.g 0.290 G1"
-    >
-      <template #append>
-        <q-btn-toggle
-          v-model="ammunition.ballisticCoefficientProfile"
-          no-caps
-          :options="[
-            {label: 'G1', value: 'G1'},
-            {label: 'G7', value: 'G7'}
-          ]"
-        />
-      </template>
-    </q-input>
+    />
     <div class="q-mt-md">
       <q-btn
         v-if="context === 'new'"
@@ -129,8 +48,14 @@
 </template>
 
 <script setup>
+import AmmunitionNameInput from './AmmunitionNameInput.vue'
+import AmmunitionDiameterInput from './AmmunitionDiameterInput.vue'
+import AmmunitionLengthInput from './AmmunitionLengthInput.vue'
+import AmmunitionWeightInput from './AmmunitionWeightInput.vue'
+import AmmunitionBallisticCoefficientInput from './AmmunitionBallisticCoefficientInput.vue'
 import { ref, computed } from 'vue'
 import { useAmmunitionStore } from 'src/stores/profiles/ammunition'
+
 const emit = defineEmits(['submited'])
 
 const props = defineProps({
@@ -154,11 +79,12 @@ const context = computed(() => {
   return context
 })
 
-if (props.id === -1) {
+if (context.value === 'new') {
   ammunition.value = {
     ...ammunitionStore.getAmmunitionModel()
   }
-} else {
+}
+if (context.value === 'edit') {
   ammunition.value = {
     ...ammunitionStore.getAmmunition(props.id)
   }

@@ -19,7 +19,7 @@ const routes = [
         path: 'profilesv2',
         children: [
           { path: '', component: () => import('pages/profiles/ProfilesV2Page.vue'), name: 'ProfilesV2' },
-          { path: 'ammunition', component: () => import('pages/profiles/AmmunitionPage.vue'), name: 'Ammunition' }
+          { path: 'ammunition', component: () => import('src/pages/profiles/ammunitions/AmmunitionPage.vue'), name: 'Ammunition' }
         ]
       },
       {

@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md row items-center">
-    <div class="col-auto">
+    <div class="col">
       <q-btn
         v-if="backTo"
         icon="arrow_back"
@@ -18,10 +18,10 @@
         @click="router.back()"
       />
     </div>
-    <div class="col text-h4 text-bold">
+    <div class="col-auto text-h6 text-bold">
       {{ $route.name }}
     </div>
-    <div class="col-auto">
+    <div class="col text-right">
       <slot />
     </div>
   </div>

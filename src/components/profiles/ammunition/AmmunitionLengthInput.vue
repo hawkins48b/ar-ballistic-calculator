@@ -7,7 +7,7 @@
     type="number"
     lazy-rules
     :rules="[
-      val => val && val > 0 && localProfile.options.enableSpinDrift|| 'bullet length must be positive'
+      val => val && val > 0 || 'bullet length must be positive'
     ]"
     hint="The length of the bullet, e.g 0.746 for M193"
   >

@@ -2,7 +2,6 @@
   <q-form @submit="submit">
     <AmmunitionNameInput
       v-model="ammunition.name"
-      class="q-mt-md"
     />
     <AmmunitionDiameterInput
       v-model:diameter="ammunition.diameter"
@@ -53,42 +52,27 @@ import AmmunitionDiameterInput from './AmmunitionDiameterInput.vue'
 import AmmunitionLengthInput from './AmmunitionLengthInput.vue'
 import AmmunitionWeightInput from './AmmunitionWeightInput.vue'
 import AmmunitionBallisticCoefficientInput from './AmmunitionBallisticCoefficientInput.vue'
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useAmmunitionStore } from 'src/stores/profiles/ammunition'
 
 const emit = defineEmits(['submited'])
 
-const props = defineProps({
-  id: {
-    type: Number,
-    required: false,
-    default: -1
-  }
+const ammunition = defineModel({
+  type: Object
 })
 
 const ammunitionStore = useAmmunitionStore()
-const ammunition = ref({})
 
 const context = computed(() => {
   let context = ''
-  if (props.id === -1) {
+  console.log('ammunition.value.id', ammunition.value.id)
+  if (ammunition.value.id === undefined) {
     context = 'new'
   } else {
     context = 'edit'
   }
   return context
 })
-
-if (context.value === 'new') {
-  ammunition.value = {
-    ...ammunitionStore.getAmmunitionModel()
-  }
-}
-if (context.value === 'edit') {
-  ammunition.value = {
-    ...ammunitionStore.getAmmunition(props.id)
-  }
-}
 
 const submit = function () {
   if (context.value === 'new') {

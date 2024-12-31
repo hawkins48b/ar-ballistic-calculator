@@ -7,7 +7,7 @@ export const useAmmunitionStore = defineStore('ammunition', () => {
   const ammunitionList = ref([
     {
       id: 1,
-      name: 'M193',
+      name: 'M193 5.56x45',
       weight: 55,
       weightUnit: 'GR',
       diameter: 0.223,

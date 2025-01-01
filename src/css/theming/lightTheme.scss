@@ -15,6 +15,13 @@ body.body--light {
 
   .q-card {
     background-color: $light;
+    .q-card {
+      background-color:$light-page;
+    }
+    &.active {
+      background-color: $primary;
+      color: white
+    }
   }
 
   .q-input {

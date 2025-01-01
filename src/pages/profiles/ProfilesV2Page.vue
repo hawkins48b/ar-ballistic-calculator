@@ -15,7 +15,7 @@
     <NavCard
       class="q-mt-md"
       label="Optics"
-      to="nowhere"
+      to="/profilesv2/optics"
       icon="fiber_smart_record"
     />
     <NavCard

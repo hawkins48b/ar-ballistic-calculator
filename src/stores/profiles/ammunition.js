@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import ammunitionModel from 'src/models/ammunition'
+import predefinedAmmunitionList from 'src/models/predefinedAmmunitionList.json'
 
 export const useAmmunitionStore = defineStore('ammunition', () => {
   // state
@@ -35,8 +36,6 @@ export const useAmmunitionStore = defineStore('ammunition', () => {
     newAmmunition.id = nextId.value
     nextId.value++
     ammunitionList.value.push({ ...newAmmunition })
-
-    console.log()
   }
 
   function duplicateAmmunition (id) {
@@ -64,7 +63,17 @@ export const useAmmunitionStore = defineStore('ammunition', () => {
   }
 
   // available
-  return { ammunitionList, getAmmunition, getAmmunitionModel, addAmmunition, duplicateAmmunition, editAmmunition, removeAmmunition, filterAmmunition }
+  return {
+    ammunitionList,
+    getAmmunition,
+    getAmmunitionModel,
+    addAmmunition,
+    duplicateAmmunition,
+    editAmmunition,
+    removeAmmunition,
+    filterAmmunition,
+    predefinedAmmunitionList
+  }
 },
 { persist: true }
 )

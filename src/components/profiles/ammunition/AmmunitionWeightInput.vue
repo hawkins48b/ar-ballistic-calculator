@@ -37,18 +37,16 @@ const unit = defineModel('unit', {
  */
 
 // conversion for bullet diameter
-watch(unit, (newUnit, oldUnit) => {
-  if (newUnit !== oldUnit) {
-    if (newUnit === 'GR') {
-      const mass = BC.UNew.Gram(weight.value)
-      const grain = mass.In(BC.Unit.Grain)
-      weight.value = Math.round(grain * 100) / 100
-    }
-    if (newUnit === 'G') {
-      const mass = BC.UNew.Grain(weight.value)
-      const gram = mass.In(BC.Unit.Gram)
-      weight.value = Math.round(gram * 1000) / 1000
-    }
+watch(unit, (newUnit) => {
+  if (newUnit === 'GR') {
+    const mass = BC.UNew.Gram(weight.value)
+    const grain = mass.In(BC.Unit.Grain)
+    weight.value = Math.round(grain * 100) / 100
+  }
+  if (newUnit === 'G') {
+    const mass = BC.UNew.Grain(weight.value)
+    const gram = mass.In(BC.Unit.Gram)
+    weight.value = Math.round(gram * 1000) / 1000
   }
 })
 </script>

@@ -40,18 +40,16 @@ const unit = defineModel('unit', {
  */
 
 // conversion for bullet diameter
-watch(unit, (newUnit, oldUnit) => {
-  if (newUnit !== oldUnit) {
-    if (newUnit === 'IN') {
-      const distance = BC.UNew.Millimeter(diameter.value)
-      const inch = distance.In(BC.Unit.Inch)
-      diameter.value = Math.round(inch * 1000) / 1000
-    }
-    if (newUnit === 'MM') {
-      const distance = BC.UNew.Inch(diameter.value)
-      const milimeter = distance.In(BC.Unit.Millimeter)
-      diameter.value = Math.round(milimeter * 1000) / 1000
-    }
+watch(unit, (newUnit) => {
+  if (newUnit === 'IN') {
+    const distance = BC.UNew.Millimeter(diameter.value)
+    const inch = distance.In(BC.Unit.Inch)
+    diameter.value = Math.round(inch * 1000) / 1000
+  }
+  if (newUnit === 'MM') {
+    const distance = BC.UNew.Inch(diameter.value)
+    const milimeter = distance.In(BC.Unit.Millimeter)
+    diameter.value = Math.round(milimeter * 1000) / 1000
   }
 })
 </script>

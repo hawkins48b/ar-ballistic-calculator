@@ -65,7 +65,6 @@ const ammunitionStore = useAmmunitionStore()
 
 const context = computed(() => {
   let context = ''
-  console.log('ammunition.value.id', ammunition.value.id)
   if (ammunition.value.id === undefined) {
     context = 'new'
   } else {

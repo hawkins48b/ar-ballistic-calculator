@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="row q-mt-sm">
-          <div class="col-xs-6 text-body1 q-pa-sm">
+          <div class="col-xs-6 q-pa-sm">
             <div class="row items-center">
               <div class="col-auto">
                 <q-icon
@@ -31,7 +31,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xs-6 text-body1 q-pa-sm">
+          <div class="col-xs-6 q-pa-sm">
             <div class="row items-center">
               <div class="col-auto">
                 <q-icon
@@ -44,7 +44,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xs-6 text-body1 q-pa-sm">
+          <div class="col-xs-6 q-pa-sm">
             <div class="row items-center">
               <div class="col-auto">
                 <q-icon
@@ -57,7 +57,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xs-6 text-body1 q-pa-sm">
+          <div class="col-xs-6 q-pa-sm">
             <div class="row items-center">
               <div class="col-auto">
                 <q-icon

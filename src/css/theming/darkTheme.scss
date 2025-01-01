@@ -12,5 +12,11 @@ body.body--dark {
 
   .q-card {
     background-color: $dark;
+    .q-card {
+      background-color:$dark-page;
+    }
+    &.active {
+      background-color: $primary;
+    }
   }
 }

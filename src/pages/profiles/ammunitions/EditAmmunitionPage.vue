@@ -1,5 +1,7 @@
 <template>
-  <PageHeader back />
+  <PageHeader back>
+    <AmmunitionFinderBtn v-model="ammunition" />
+  </PageHeader>
   <q-page class="q-pa-md">
     <AmmunitionForm
       v-model="ammunition"
@@ -11,6 +13,7 @@
 <script setup>
 import PageHeader from 'src/components/layout/PageHeader.vue'
 import AmmunitionForm from 'src/components/profiles/ammunition/AmmunitionForm.vue'
+import AmmunitionFinderBtn from 'src/components/profiles/ammunition/AmmunitionFinderBtn.vue'
 import { useAmmunitionStore } from 'src/stores/profiles/ammunition'
 import { useRouter, useRoute } from 'vue-router'
 import { ref } from 'vue'

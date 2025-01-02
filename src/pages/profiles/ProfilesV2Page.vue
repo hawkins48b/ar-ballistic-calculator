@@ -20,7 +20,7 @@
     />
     <NavCard
       class="q-mt-md"
-      label="Ammunition"
+      label="Ammunitions"
       to="/profilesv2/ammunition"
       icon="align_vertical_bottom"
     />

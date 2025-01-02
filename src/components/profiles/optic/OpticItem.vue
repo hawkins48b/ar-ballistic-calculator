@@ -28,7 +28,7 @@
             />
           </div>
         </div>
-        <div class="row q-mt-sm">
+        <div class="row items-center q-mt-sm">
           <div class="col-xs-6 q-pa-sm">
             <div class="row items-center">
               <div class="col-auto">
@@ -56,6 +56,21 @@
                 class="col q-pl-sm"
               >
                 {{ optic.dotSize }} MOA
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 q-pa-sm">
+            <div class="row items-center">
+              <div class="col-auto">
+                <q-icon
+                  name="build_circle"
+                  size="md"
+                />
+              </div>
+              <div
+                class="col q-pl-sm"
+              >
+                {{ optic.clickValue }} {{ optic.clickUnit }}
               </div>
             </div>
           </div>

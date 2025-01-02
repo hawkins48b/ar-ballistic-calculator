@@ -2,10 +2,20 @@
   <q-form @submit="submit">
     <OpticTypeSelect
       v-model="optic.type"
-      class="q-mt-md"
+      @change="opticChange"
     />
     <OpticNameInput
-      v-model.name="optic.name"
+      v-model="optic.name"
+      class="q-mt-md"
+    />
+    <OpticClickInput
+      v-model:click="optic.clickValue"
+      v-model:unit="optic.clickUnit"
+      class="q-mt-md"
+    />
+    <OpticDotSizeInput
+      v-if="optic.type === 'red dot'"
+      v-model="optic.dotSize"
       class="q-mt-md"
     />
     <div class="q-mt-md">
@@ -33,9 +43,12 @@
 
 <script setup>
 import { useOpticStore } from 'src/stores/profiles/optic'
-import { computed } from 'vue'
+import { computed, nextTick } from 'vue'
 import OpticNameInput from './OpticNameInput.vue'
 import OpticTypeSelect from './OpticTypeSelect.vue'
+import OpticClickInput from './OpticClickInput.vue'
+import OpticDotSizeInput from './OpticDotSizeInput.vue'
+
 const emit = defineEmits(['submited'])
 
 const optic = defineModel({
@@ -62,5 +75,14 @@ const submit = function () {
     opticStore.editOptic(optic.value)
   }
   emit('submited')
+}
+
+const opticChange = function () {
+  if (optic.value.type === 'red dot') {
+    optic.value.clickUnit = 'MOA'
+    nextTick(() => {
+      optic.value.clickValue = 0.5
+    })
+  }
 }
 </script>

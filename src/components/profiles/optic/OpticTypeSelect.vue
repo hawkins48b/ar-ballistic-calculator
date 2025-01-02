@@ -1,11 +1,11 @@
 <template>
-  <div class="row">
+  <div class="row q-gutter-md">
     <div class="col">
       <OpticTypeCard
         icon="adjust"
         name="Red dot"
         :class="{active: type === 'red dot'}"
-        @click="type = 'red dot'"
+        @click="changeType('red dot')"
       />
     </div>
     <div class="col">
@@ -13,7 +13,7 @@
         icon="center_focus_weak"
         name="Prism"
         :class="{active: type === 'prism'}"
-        @click="type = 'prism'"
+        @click="changeType('prism')"
       />
     </div>
     <div class="col">
@@ -21,7 +21,7 @@
         icon="fiber_smart_record"
         name="Scope"
         :class="{active: type === 'scope'}"
-        @click="type = 'scope'"
+        @click="changeType('scope')"
       />
     </div>
   </div>
@@ -33,5 +33,12 @@ import OpticTypeCard from './OpticTypeCard.vue'
 const type = defineModel({
   type: String
 })
+
+const emit = defineEmits(['change'])
+
+const changeType = function (newType) {
+  type.value = newType
+  emit('change')
+}
 
 </script>

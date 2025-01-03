@@ -24,7 +24,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "M193 5.56x45/.223",
+    "name": "M193 ",
+    "notes": "5.56x45/.223",
     "weight": 55,
     "weightUnit": "GR",
     "diameter": 5.56,
@@ -35,7 +36,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "M855 5.56x45/.223",
+    "name": "M855",
+    "notes": "5.56x45/.223",
     "weight": 62,
     "weightUnit": "GR",
     "diameter": 5.56,
@@ -46,7 +48,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "MK262 Mod 1 5.56x45/.223",
+    "name": "MK262 Mod 1",
+    "notes": "5.56x45/.223 Open Tip Match",
     "weight": 77,
     "weightUnit": "GR",
     "diameter": 5.56,
@@ -57,7 +60,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "MK318 Mod 0 5.56x45/.223",
+    "name": "MK318 Mod 0",
+    "notes": "5.56x45/.223",
     "weight": 62,
     "weightUnit": "GR",
     "diameter": 5.56,
@@ -68,7 +72,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "MK318 Mod 1 5.56x45/.223",
+    "name": "MK318 Mod 1",
+    "notes:": "5.56x45/.223",
     "weight": 62,
     "weightUnit": "GR",
     "diameter": 5.56,
@@ -79,7 +84,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "MK311 Mod 0 5.56x45/.223",
+    "name": "MK311 Mod 0",
+    "notes": "5.56x45/.223",
     "weight": 55,
     "weightUnit": "GR",
     "diameter": 5.56,
@@ -90,7 +96,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "MK319 Mod 0 5.56x45/.223",
+    "name": "MK319 Mod 0",
+    "notes": "5.56x45/.223",
     "weight": 62,
     "weightUnit": "GR",
     "diameter": 5.56,
@@ -101,12 +108,25 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "308 Winchester 7.62x51",
+    "name": "308 Winchester",
+    "notes" : "7.62x51/.308",
     "weight": 150,
     "weightUnit": "GR",
     "diameter": 7.62,
     "diameterUnit": "MM",
     "ballisticCoefficient": 0.435,
+    "ballisticCoefficientProfile": "G1",
+    "length": 28.96,
+    "lengthUnit": "MM"
+  },
+  {
+    "name": "m80 ball",
+    "notes": "7.62x51/.308",
+    "weight": 147,
+    "weightUnit": "GR",
+    "diameter": 7.62,
+    "diameterUnit": "MM",
+    "ballisticCoefficient": 0.405,
     "ballisticCoefficientProfile": "G1",
     "length": 28.96,
     "lengthUnit": "MM"
@@ -124,6 +144,7 @@
   },
   {
     "name": "6.5 Creedmoor",
+    "notes": "6.5x48",
     "weight": 140,
     "weightUnit": "GR",
     "diameter": 6.5,
@@ -134,7 +155,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "300 Win Mag 7.62x67",
+    "name": "300 Win Mag",
+    "notes": "7.62x67",
     "weight": 190,
     "weightUnit": "GR",
     "diameter": 7.62,
@@ -145,7 +167,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "30-06 Springfield 7.62x63",
+    "name": "30-06 Springfield",
+    "notes": "7.62x63",
     "weight": 150,
     "weightUnit": "GR",
     "diameter": 7.62,
@@ -157,6 +180,7 @@
   },
   {
     "name": "7mm Rem Mag 7x64",
+    "notes": "7.62x64",
     "weight": 162,
     "weightUnit": "GR",
     "diameter": 7,
@@ -178,7 +202,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "270 Winchester 6.8x65",
+    "name": "270 Winchester",
+    "notes": "6.8x65",
     "weight": 130,
     "weightUnit": "GR",
     "diameter": 6.8,
@@ -189,7 +214,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "243 Winchester 6.2x52",
+    "name": "243 Winchester",
+    "notes": "6.2x52",
     "weight": 100,
     "weightUnit": "GR",
     "diameter": 6.2,
@@ -200,7 +226,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "22-250 Remington 5.7x48",
+    "name": "22-250 Remington",
+    "notes": "5.7x48",
     "weight": 55,
     "weightUnit": "GR",
     "diameter": 5.7,
@@ -211,7 +238,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "300 AAC Blackout 7.62x35",
+    "name": "300 AAC Blackout",
+    "notes": "7.62x35",
     "weight": 125,
     "weightUnit": "GR",
     "diameter": 7.62,
@@ -222,7 +250,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "338 Lapua Magnum 8.6x70",
+    "name": "338 Lapua Magnum",
+    "notes": "8.6x70",
     "weight": 250,
     "weightUnit": "GR",
     "diameter": 8.6,
@@ -234,6 +263,7 @@
   },
   {
     "name": "50 BMG 12.7x99",
+    "notes": "12.7x99/.50",
     "weight": 661,
     "weightUnit": "GR",
     "diameter": 12.7,
@@ -244,7 +274,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "45 ACP 11.43x23",
+    "name": "45 ACP",
+    "notes": "11.43x23/.45",
     "weight": 230,
     "weightUnit": "GR",
     "diameter": 11.43,
@@ -255,7 +286,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "9mm Parabellum 9x19",
+    "name": "9mm Parabellum",
+    "notes": "9x19",
     "weight": 115,
     "weightUnit": "GR",
     "diameter": 9,
@@ -266,7 +298,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "40 S&W 10x22",
+    "name": ".40 S&W",
+    "notes": "10x22/.40",
     "weight": 180,
     "weightUnit": "GR",
     "diameter": 10,
@@ -277,7 +310,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "357 Magnum 9.1x33",
+    "name": "357 Magnum",
+    "notes": "9.1x33/.357",
     "weight": 158,
     "weightUnit": "GR",
     "diameter": 9.1,
@@ -288,7 +322,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "338 Win Mag 8.6x64",
+    "name": "338 Win Mag",
+    "notes": "8.6x64",
     "weight": 225,
     "weightUnit": "GR",
     "diameter": 8.6,
@@ -299,7 +334,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "10mm Auto 10x25",
+    "name": "10mm Auto",
+    "notes": "10x25",
     "weight": 180,
     "weightUnit": "GR",
     "diameter": 10,
@@ -310,7 +346,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "338 Federal 8.6x51",
+    "name": "338 Federal",
+    "notes": "8.6x51",
     "weight": 210,
     "weightUnit": "GR",
     "diameter": 8.6,
@@ -321,7 +358,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "6.8 SPC 6.8x43",
+    "name": "6.8 SPC",
+    "notes" : "6.8x43",
     "weight": 115,
     "weightUnit": "GR",
     "diameter": 6.8,
@@ -332,7 +370,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "224 Valkyrie 5.7x41",
+    "name": "224 Valkyrie",
+    "notes": "5.7x41",
     "weight": 90,
     "weightUnit": "GR",
     "diameter": 5.7,
@@ -343,7 +382,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "6.5 PRC 6.5x65",
+    "name": "6.5 PRC",
+    "notes": "6.5x65",
     "weight": 147,
     "weightUnit": "GR",
     "diameter": 6.5,
@@ -354,7 +394,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "5.7x28 FN",
+    "name": "5.7 FN",
+    "notes": "5.7x28",
     "weight": 40,
     "weightUnit": "GR",
     "diameter": 5.7,
@@ -365,7 +406,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "6.5x52 Carcano",
+    "name": "6.5 Carcano",
+    "notes" : "6.5x52",
     "weight": 160,
     "weightUnit": "GR",
     "diameter": 6.5,
@@ -376,7 +418,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "7.62x25 Tokarev",
+    "name": "7.62 Tokarev",
+    "notes": "7.62x25",
     "weight": 85,
     "weightUnit": "GR",
     "diameter": 7.62,
@@ -387,7 +430,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "8x50R Lebel",
+    "name": "8 Lebel",
+    "notes": "8x50",
     "weight": 198,
     "weightUnit": "GR",
     "diameter": 8,
@@ -398,7 +442,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "8mm Mauser 7.92x57",
+    "name": "8mm Mauser",
+    "notes": "7.92x57",
     "weight": 198,
     "weightUnit": "GR",
     "diameter": 7.92,
@@ -409,7 +454,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "303 British 7.7x56",
+    "name": "303 British",
+    "notes": "7.7x56/.303",
     "weight": 174,
     "weightUnit": "GR",
     "diameter": 7.7,
@@ -421,6 +467,7 @@
   },
   {
     "name": "7.7 Japanese Arisaka",
+    "notes": "7.7x58",
     "weight": 175,
     "weightUnit": "GR",
     "diameter": 7.7,
@@ -431,7 +478,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "7.5x54 French MAS",
+    "name": "7.5 French MAS",
+    "notes": "7.5x54",
     "weight": 139,
     "weightUnit": "GR",
     "diameter": 7.5,
@@ -443,6 +491,7 @@
   },
   {
     "name": ".277 Fury 6.8x51",
+    "notes": "6.8x51",
     "weight": 135,
     "weightUnit": "GR",
     "diameter": 6.8,
@@ -450,6 +499,30 @@
     "ballisticCoefficient": 0.488,
     "ballisticCoefficientProfile": "G7",
     "length": 33.0,
+    "lengthUnit": "MM"
+  },
+  {
+    "name": ".357 Sig",
+    "notes": "9.1x22",
+    "weight": 125,
+    "weightUnit": "GR",
+    "diameter": 9.1,
+    "diameterUnit": "MM",
+    "ballisticCoefficient": 0.140,
+    "ballisticCoefficientProfile": "G1",
+    "length": 20.4,
+    "lengthUnit": "MM"
+  },
+  {
+    "name": ".44 Magnum",
+    "notes": "10.9x32",
+    "weight": 240,
+    "weightUnit": "GR",
+    "diameter": 10.9,
+    "diameterUnit": "MM",
+    "ballisticCoefficient": 0.175,
+    "ballisticCoefficientProfile": "G1",
+    "length": 32.0,
     "lengthUnit": "MM"
   }
 ]

@@ -5,7 +5,7 @@
   <q-page class="q-pa-md">
     <AmmunitionForm
       v-model="ammunition"
-      @submited="redirect"
+      @submited="router.back()"
     />
   </q-page>
 </template>
@@ -26,9 +26,5 @@ const ammunition = ref({})
 
 ammunition.value = {
   ...ammunitionStore.getAmmunitionModel()
-}
-
-const redirect = function () {
-  router.push('/profilesv2/ammunition')
 }
 </script>

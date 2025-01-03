@@ -10,8 +10,10 @@ export const useOpticStore = defineStore('optic', () => {
       name: 'Aimpoint CompM2',
       type: 'red dot',
       zoom: '1',
-      clickValue: 0.5,
-      clickUnit: 'MOA',
+      elevationClickValue: 0.5,
+      elevationClickUnit: 'MOA',
+      windageClickValue: 0.5,
+      windageClickUnit: 'MOA',
       reticle: 'MOA',
       dotSize: 2
     }

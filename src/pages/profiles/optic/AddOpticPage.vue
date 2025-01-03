@@ -1,9 +1,9 @@
 <template>
-  <PageHeader back-to="/profilesv2/optics" />
+  <PageHeader back />
   <q-page class="q-pa-md">
     <OpticForm
       v-model="optic"
-      @submited="redirect"
+      @submited="router.back()"
     />
   </q-page>
 </template>
@@ -23,9 +23,5 @@ const optic = ref({})
 
 optic.value = {
   ...opticStore.getOpticModel()
-}
-
-const redirect = function () {
-  router.push('/profilesv2/optics')
 }
 </script>

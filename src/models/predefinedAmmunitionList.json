@@ -1,6 +1,7 @@
 [
   {
-    "name": "GP 90 5.56x45/.223",
+    "name": "GP 90",
+    "notes": "5.56x45/.223",
     "weight": 63,
     "weightUnit": "GR",
     "diameter": 5.56,
@@ -11,7 +12,8 @@
     "lengthUnit": "MM"
   },
   {
-    "name": "GP 11 7.5x55",
+    "name": "GP 11",
+    "notes": "7.5x55",
     "weight": 174,
     "weightUnit": "GR",
     "diameter": 7.5,

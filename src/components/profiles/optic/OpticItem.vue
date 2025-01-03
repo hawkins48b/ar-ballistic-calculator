@@ -13,6 +13,16 @@
                   name="adjust"
                   size="md"
                 />
+                <q-icon
+                  v-if="optic.type === 'prism'"
+                  name="center_focus_weak"
+                  size="md"
+                />
+                <q-icon
+                  v-if="optic.type === 'scope'"
+                  name="fiber_smart_record"
+                  size="md"
+                />
               </div>
               <div class="col q-pl-sm">
                 {{ optic.name }}
@@ -40,22 +50,12 @@
               <div
                 class="col q-pl-sm"
               >
-                {{ optic.zoom }}x
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-6 q-pa-sm">
-            <div class="row items-center">
-              <div class="col-auto">
-                <q-icon
-                  name="hdr_weak"
-                  size="md"
-                />
-              </div>
-              <div
-                class="col q-pl-sm"
-              >
-                {{ optic.dotSize }} MOA
+                <div v-if="Array.isArray(optic.zoom)">
+                  {{ optic.zoom[0] }}-{{ optic.zoom[1] }}x
+                </div>
+                <div v-else>
+                  {{ optic.zoom }}x
+                </div>
               </div>
             </div>
           </div>
@@ -68,9 +68,56 @@
                 />
               </div>
               <div
+                v-if="optic.windageClickUnit === optic.elevationClickUnit && optic.windageClickValue === optic.elevationClickValue"
                 class="col q-pl-sm"
               >
-                {{ optic.clickValue }} {{ optic.clickUnit }}
+                {{ optic.elevationClickValue }} {{ optic.elevationClickUnit }}
+              </div>
+              <div
+                v-else
+                class="col q-pl-sm"
+              >
+                <q-icon name="north" />
+                {{ optic.elevationClickValue }} {{ optic.elevationClickUnit }}
+                <br>
+
+                <q-icon name="west" /> {{ optic.windageClickValue }} {{ optic.windageClickUnit }}
+              </div>
+            </div>
+          </div>
+          <div
+            v-if="optic.type === 'scope'"
+            class="col-xs-6 q-pa-sm"
+          >
+            <div class="row items-center">
+              <div class="col-auto">
+                <q-icon
+                  name="add_circle_outline"
+                  size="md"
+                />
+              </div>
+              <div
+                class="col q-pl-sm"
+              >
+                {{ optic.focalPlane === 'first' ? '1st focal plane' : '2nd focal plane' }} {{ optic.reticle }}
+              </div>
+            </div>
+          </div>
+          <div
+            v-if="optic.type === 'red dot'"
+            class="col-xs-6 q-pa-sm"
+          >
+            <div class="row items-center">
+              <div class="col-auto">
+                <q-icon
+                  name="hdr_weak"
+                  size="md"
+                />
+              </div>
+              <div
+                class="col q-pl-sm"
+              >
+                {{ optic.dotSize }} MOA
               </div>
             </div>
           </div>

@@ -9,6 +9,7 @@ export const useAmmunitionStore = defineStore('ammunition', () => {
     {
       id: 1,
       name: 'M193 5.56x45',
+      notes: 'Example 5.56x45 bullet',
       weight: 55,
       weightUnit: 'GR',
       diameter: 0.223,

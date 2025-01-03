@@ -17,6 +17,9 @@
             />
           </div>
         </div>
+        <div class="text-caption">
+          {{ ammunition.notes }}
+        </div>
         <div class="row q-mt-sm">
           <div class="col-xs-6 q-pa-sm">
             <div class="row items-center">

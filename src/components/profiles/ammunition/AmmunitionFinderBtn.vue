@@ -41,6 +41,9 @@
               <div class="text-h6">
                 {{ predefinedAmmunition.name }}
               </div>
+              <div class="text-caption">
+                {{ predefinedAmmunition.notes }}
+              </div>
 
               <div>
                 {{ predefinedAmmunition.weight }} {{ predefinedAmmunition.weightUnit }}
@@ -79,7 +82,7 @@ const predefinedAmmunitionList = computed(() => {
   const ammunitionList = ammuntionStore.predefinedAmmunitionList
   const needle = search.value.toLowerCase().replaceAll(',', '').replaceAll('.', '').replaceAll(' ', '')
 
-  return ammunitionList.filter((bullet) => bullet.name.toLowerCase().replaceAll(' ', '').replaceAll('.', '').indexOf(needle) > -1)
+  return ammunitionList.filter((bullet) => (bullet.name + bullet.notes).toLowerCase().replaceAll(' ', '').replaceAll('.', '').indexOf(needle) > -1)
 })
 
 const selectedAmmunition = ref({})

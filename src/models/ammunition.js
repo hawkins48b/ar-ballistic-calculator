@@ -1,6 +1,7 @@
 export default function () {
   return {
     name: '',
+    notes: '',
     weight: 0,
     weightUnit: 'GR',
     diameter: 0,

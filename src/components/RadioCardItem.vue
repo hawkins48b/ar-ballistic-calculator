@@ -5,11 +5,12 @@
   >
     <q-card-section class="text-center">
       <q-icon
+        v-if="icon"
         :name="icon"
-        size="lg"
+        :size="iconSize"
       />
-      <div class="text-h7">
-        {{ name }}
+      <div :class="labelClass">
+        {{ label }}
       </div>
     </q-card-section>
   </q-card>
@@ -19,11 +20,22 @@
 defineProps({
   icon: {
     type: String,
-    required: true
+    required: false,
+    default: ''
   },
-  name: {
+  iconSize: {
+    type: String,
+    default: 'lg',
+    required: false
+  },
+  label: {
     type: String,
     required: true
+  },
+  labelClass: {
+    type: String,
+    default: 'text-h7',
+    required: false
   }
 })
 </script>

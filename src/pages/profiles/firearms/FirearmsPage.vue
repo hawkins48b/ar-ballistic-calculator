@@ -4,7 +4,7 @@
       icon="add"
       class="desktop-only"
       color="primary"
-      to="/profilesv2/ammunitions/add"
+      to="/profilesv2/firearms/add"
     >
       Add
     </q-btn>
@@ -20,13 +20,13 @@
         <q-icon name="search" />
       </template>
     </q-input>
-    <AmmunitionItem
-      v-for="ammunition in ammunitionList"
-      :key="ammunition.id"
-      :ammunition="ammunition"
+    <FirearmItem
+      v-for="firearm in firearmList"
+      :key="firearm.id"
+      :firearm="firearm"
     />
     <div
-      v-if="ammunitionList.length === 0"
+      v-if="firearmList.length === 0"
       class="q-mt-md"
     >
       No result found.
@@ -36,7 +36,7 @@
       :offset="[18, 18]"
     >
       <q-btn
-        to="/profilesv2/ammunitions/add"
+        to="/profilesv2/firearms/add"
         fab
         icon="add"
         color="primary"
@@ -48,15 +48,15 @@
 
 <script setup>
 import PageHeader from 'src/components/layout/PageHeader.vue'
-import AmmunitionItem from 'components/profiles/ammunition/AmmunitionItem.vue'
-import { useAmmunitionStore } from 'src/stores/profiles/ammunition'
+import FirearmItem from 'components/profiles/firearm/FirearmItem.vue'
+import { useFirearmStore } from 'src/stores/profiles/firearm'
 import { ref, computed } from 'vue'
 
-const ammunitionStore = useAmmunitionStore()
+const firearmStore = useFirearmStore()
 
 const search = ref('')
-const ammunitionList = computed(() => {
-  return ammunitionStore.filterAmmunition(search.value)
+const firearmList = computed(() => {
+  return firearmStore.filterFirearm(search.value)
 })
 
 </script>

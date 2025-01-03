@@ -1,5 +1,5 @@
 <template>
-  <PageHeader back-to="/profilesv2/ammunition">
+  <PageHeader back>
     <AmmunitionFinderBtn v-model="ammunition" />
   </PageHeader>
   <q-page class="q-pa-md">

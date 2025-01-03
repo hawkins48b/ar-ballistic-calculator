@@ -6,7 +6,7 @@
       <q-card-section>
         <div class="row">
           <div class="col text-h5">
-            {{ ammunition.name }}
+            {{ firearm.name }}
           </div>
           <div class="col-auto">
             <q-btn
@@ -18,19 +18,19 @@
           </div>
         </div>
         <div class="text-caption">
-          {{ ammunition.notes }}
+          {{ firearm.notes }}
         </div>
         <div class="row q-mt-sm">
           <div class="col-xs-6 q-pa-sm">
             <div class="row items-center">
               <div class="col-auto">
                 <q-icon
-                  name="360"
+                  name="start"
                   size="md"
                 />
               </div>
               <div class="col q-pl-sm">
-                {{ ammunition.diameter }} {{ ammunition.diameterUnit }}
+                {{ firearm.barrelLength }} {{ firearm.barrelLengthUnit }}
               </div>
             </div>
           </div>
@@ -38,38 +38,12 @@
             <div class="row items-center">
               <div class="col-auto">
                 <q-icon
-                  name="height"
+                  name="storm"
                   size="md"
                 />
               </div>
               <div class="col q-pl-sm">
-                {{ ammunition.length }} {{ ammunition.lengthUnit }}
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-6 q-pa-sm">
-            <div class="row items-center">
-              <div class="col-auto">
-                <q-icon
-                  name="scale"
-                  size="md"
-                />
-              </div>
-              <div class="col q-pl-sm">
-                {{ ammunition.weight }} {{ ammunition.weightUnit }}
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-6 q-pa-sm">
-            <div class="row items-center">
-              <div class="col-auto">
-                <q-icon
-                  name="moving"
-                  size="md"
-                />
-              </div>
-              <div class="col q-pl-sm">
-                {{ ammunition.ballisticCoefficient }} {{ ammunition.ballisticCoefficientProfile }}
+                1/{{ firearm.barrelTwist }} {{ firearm.barrelTwistUnit }}
               </div>
             </div>
           </div>
@@ -83,7 +57,7 @@
             <q-item
               v-ripple
               clickable
-              :to="`/profilesv2/ammunitions/edit/${ammunition.id}`"
+              :to="`/profilesv2/firearms/edit/${firearm.id}`"
             >
               <q-item-section avatar>
                 <q-icon name="edit" />
@@ -120,10 +94,10 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useAmmunitionStore } from 'src/stores/profiles/ammunition'
+import { useFirearmStore } from 'src/stores/profiles/firearm'
 
 const props = defineProps({
-  ammunition: {
+  firearm: {
     type: Object,
     required: true
   }
@@ -131,14 +105,14 @@ const props = defineProps({
 
 const dialog = ref(false)
 
-const ammunitionStore = useAmmunitionStore()
+const firearmStore = useFirearmStore()
 
 const duplicate = function () {
-  ammunitionStore.duplicateAmmunition(props.ammunition.id)
+  firearmStore.duplicateFirearm(props.firearm.id)
   dialog.value = false
 }
 
 const remove = function () {
-  ammunitionStore.removeAmmunition(props.ammunition.id)
+  firearmStore.removeFirearm(props.firearm.id)
 }
 </script>

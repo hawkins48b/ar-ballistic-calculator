@@ -9,7 +9,7 @@
     <NavCard
       class="q-mt-md"
       label="Firearms"
-      to="nowhere"
+      to="/profilesV2/firearms"
       icon="start"
     />
     <NavCard
@@ -21,7 +21,7 @@
     <NavCard
       class="q-mt-md"
       label="Ammunitions"
-      to="/profilesv2/ammunition"
+      to="/profilesv2/ammunitions"
       icon="align_vertical_bottom"
     />
   </q-page>

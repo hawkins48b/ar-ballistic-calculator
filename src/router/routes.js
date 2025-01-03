@@ -19,12 +19,15 @@ const routes = [
         path: 'profilesv2',
         children: [
           { path: '', component: () => import('pages/profiles/ProfilesV2Page.vue'), name: 'ProfilesV2' },
-          { path: 'ammunition', component: () => import('pages/profiles/ammunitions/AmmunitionPage.vue'), name: 'Ammunitions' },
-          { path: 'ammunition/add', component: () => import('pages/profiles/ammunitions/AddAmmunitionPage.vue'), name: 'New Ammunition' },
-          { path: 'ammunition/edit/:ammunitionId', component: () => import('pages/profiles/ammunitions/EditAmmunitionPage.vue'), name: 'Edit Ammunition' },
-          { path: 'optics', component: () => import('pages/profiles/optic/OpticsPage.vue'), name: 'Optics' },
-          { path: 'optics/add', component: () => import('pages/profiles/optic/AddOpticPage.vue'), name: 'Add Optic' },
-          { path: 'optics/edit/:opticId', component: () => import('pages/profiles/optic/EditOpticPage.vue'), name: 'Edit Optic' }
+          { path: 'ammunitions', component: () => import('pages/profiles/ammunitions/AmmunitionPage.vue'), name: 'Ammunitions' },
+          { path: 'ammunitions/add', component: () => import('pages/profiles/ammunitions/AddAmmunitionPage.vue'), name: 'New Ammunition' },
+          { path: 'ammunitions/edit/:ammunitionId', component: () => import('pages/profiles/ammunitions/EditAmmunitionPage.vue'), name: 'Edit Ammunition' },
+          { path: 'optics', component: () => import('pages/profiles/optics/OpticsPage.vue'), name: 'Optics' },
+          { path: 'optics/add', component: () => import('pages/profiles/optics/AddOpticPage.vue'), name: 'Add Optic' },
+          { path: 'optics/edit/:opticId', component: () => import('pages/profiles/optics/EditOpticPage.vue'), name: 'Edit Optic' },
+          { path: 'firearms', component: () => import('pages/profiles/firearms/FirearmsPage.vue'), name: 'Firearms' },
+          { path: 'firearms/add', component: () => import('pages/profiles/firearms/AddFirearmPage.vue'), name: 'Add Firearm' },
+          { path: 'firearms/edit/:firearmId', component: () => import('pages/profiles/firearms/EditFirearmPage.vue'), name: 'Edit Firearm' }
         ]
       },
       {

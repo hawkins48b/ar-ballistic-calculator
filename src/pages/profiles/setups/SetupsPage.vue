@@ -20,20 +20,20 @@
         <q-icon name="search" />
       </template>
     </q-input>
-    <ProfileItemCard
-      v-for="(profile, index) in profileList"
+    <SetupItemCard
+      v-for="(setup, index) in setupList"
       :key="index"
-      :profile="profile"
+      :setup="setup"
     >
       <ItemEditBtn
         ref="itemEditBtnRefs"
-        @edit="edit(profile)"
-        @duplicate="duplicate(profile, index)"
-        @remove="remove(profile)"
+        @edit="edit(setup)"
+        @duplicate="duplicate(setup, index)"
+        @remove="remove(setup)"
       />
-    </ProfileItemCard>
+    </SetupItemCard>
     <div
-      v-if="profileList.length === 0"
+      v-if="setupList.length === 0"
       class="q-mt-md"
     >
       No result found.
@@ -55,34 +55,34 @@
 
 <script setup>
 import PageHeader from 'src/components/layout/PageHeader.vue'
-import ProfileItemCard from 'src/components/profiles/setups/SetupItemCard.vue'
-import { useProfileStore } from 'src/stores/profiles/setup'
+import SetupItemCard from 'src/components/profiles/setup/SetupItemCard.vue'
+import { useSetupStore } from 'src/stores/profiles/setup'
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import ItemEditBtn from 'src/components/setup/itemEditBtn.vue'
+import ItemEditBtn from 'src/components/profiles/itemEditBtn.vue'
 
-const profileStore = useProfileStore()
+const setupStore = useSetupStore()
 
 const search = ref('')
-const profileList = computed(() => {
-  return profileStore.filterProfile(search.value)
+const setupList = computed(() => {
+  return setupStore.filterSetup(search.value)
 })
 
 const router = useRouter()
-const edit = function (profile) {
-  router.push(`/setup/profiles/edit/${profile.id}`)
+const edit = function (setup) {
+  router.push(`/profiles/setups/edit/${setup.id}`)
 }
 
 const itemEditBtnRefs = ref([])
-const duplicate = function (profile, index) {
-  profileStore.duplicateProfile(profile.id)
+const duplicate = function (setup, index) {
+  setupStore.duplicateSetup(setup.id)
 
   const itemEditBtn = itemEditBtnRefs.value[index]
   itemEditBtn.dialogClose()
 }
 
-const remove = function (profile) {
-  profileStore.removeProfile(profile.id)
+const remove = function (setup) {
+  setupStore.removeSetup(setup.id)
 }
 
 </script>

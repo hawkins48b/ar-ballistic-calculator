@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import opticModel from 'src/models/optic'
 
 export const useOpticStore = defineStore('optic', () => {
@@ -21,6 +21,19 @@ export const useOpticStore = defineStore('optic', () => {
   const nextId = ref(2)
 
   // getters
+  const opticIcon = computed(() => {
+    return (type) => {
+      switch (type) {
+        case 'red dot':
+          return 'adjust'
+        case 'prism':
+          return 'center_focus_weak'
+        case 'scope':
+          return 'fiber_smart_record'
+        default: return ''
+      }
+    }
+  })
 
   // actions
   function getOptic (id) {
@@ -64,6 +77,7 @@ export const useOpticStore = defineStore('optic', () => {
   // available
   return {
     opticList,
+    opticIcon,
     getOptic,
     getOpticModel,
     addOptic,

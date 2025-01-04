@@ -8,18 +8,7 @@
           <div class="row items-center">
             <div class="col-auto">
               <q-icon
-                v-if="optic.type === 'red dot'"
-                name="adjust"
-                size="md"
-              />
-              <q-icon
-                v-if="optic.type === 'prism'"
-                name="center_focus_weak"
-                size="md"
-              />
-              <q-icon
-                v-if="optic.type === 'scope'"
-                name="fiber_smart_record"
+                :name="opticStore.opticIcon(optic.type)"
                 size="md"
               />
             </div>
@@ -121,6 +110,11 @@
 </template>
 
 <script setup>
+import { useOpticStore } from 'src/stores/profiles/optic'
+
+const opticStore = useOpticStore()
+
+console.log('icon', opticStore.opticIcon('red dot'))
 
 defineProps({
   optic: {

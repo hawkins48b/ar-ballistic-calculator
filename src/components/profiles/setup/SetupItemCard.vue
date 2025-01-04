@@ -3,69 +3,58 @@
     class="q-mt-md"
   >
     <q-card-section>
-      <div class="row">
-        <div class="col text-h5">
-          {{ profile }}
-        </div>
-        <div class="col-auto">
-          <slot />
-        </div>
-      </div>
-      <div class="row items-center q-mt-sm">
-        <div class="col-xs-6 q-pa-sm">
-          <div class="row items-center">
-            <div class="col-auto">
-              <q-icon
-                name="zoom_out_map"
-                size="md"
-              />
-            </div>
-            <div
-              class="col q-pl-sm"
-            >
-              {{ profile.firearm.name }}
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6 q-pa-sm">
-          <div class="row items-center">
-            <div class="col-auto">
-              <q-icon
-                name="zoom_out_map"
-                size="md"
-              />
-            </div>
-            <div
-              class="col q-pl-sm"
-            >
-              {{ profile.optic.name }}
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6 q-pa-sm">
-          <div class="row items-center">
-            <div class="col-auto">
-              <q-icon
-                name="zoom_out_map"
-                size="md"
-              />
-            </div>
-            <div
-              class="col q-pl-sm"
-            >
-              {{ profile.ammunition.name }}
-            </div>
-          </div>
-        </div>
-      </div>
+      <q-list dense>
+        <q-item class="text-h6">
+          {{ setup.name }}
+        </q-item>
+        <q-item>
+          <q-item-section
+            avatar
+            class="q-pr-sm"
+          >
+            <q-avatar
+              :icon="opticStore.opticIcon(setup.optic.type)"
+              class="q-mr-sm"
+            />
+          </q-item-section>
+          <q-item-section>
+            {{ setup.firearm.name }}
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section avatar>
+            <q-avatar
+              rounded
+              icon="fiber_smart_record"
+            />
+          </q-item-section>
+          <q-item-section>
+            {{ setup.optic.name }}
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section avatar>
+            <q-avatar
+              rounded
+              icon="align_vertical_bottom"
+            />
+          </q-item-section>
+          <q-item-section>
+            {{ setup.ammunition.name }}
+          </q-item-section>
+        </q-item>
+      </q-list>
     </q-card-section>
   </q-card>
 </template>
 
 <script setup>
+import { useOpticStore } from 'src/stores/profiles/optic'
+
+const opticStore = useOpticStore()
 
 defineProps({
-  profile: {
+  setup: {
     type: Object,
     required: true
   }

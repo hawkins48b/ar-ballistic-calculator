@@ -37,7 +37,7 @@ export const useOpticStore = defineStore('optic', () => {
 
   // actions
   function getOptic (id) {
-    return opticList.value.find(ammunition => ammunition.id === id)
+    return opticList.value.find(optic => optic.id === id)
   }
 
   function getOpticModel () {
@@ -68,7 +68,7 @@ export const useOpticStore = defineStore('optic', () => {
     opticList.value.splice(index, 1)
   }
 
-  function filterOptic (search) {
+  function filterOpticList (search) {
     if (search !== '') {
       return opticList.value.filter(optic => optic.name.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1)
     } else return opticList.value
@@ -84,7 +84,7 @@ export const useOpticStore = defineStore('optic', () => {
     duplicateOptic,
     editOptic,
     removeOptic,
-    filterOptic
+    filterOpticList
   }
 },
 { persist: true }

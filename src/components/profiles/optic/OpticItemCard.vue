@@ -114,8 +114,6 @@ import { useOpticStore } from 'src/stores/profiles/optic'
 
 const opticStore = useOpticStore()
 
-console.log('icon', opticStore.opticIcon('red dot'))
-
 defineProps({
   optic: {
     type: Object,

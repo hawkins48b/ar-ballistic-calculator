@@ -52,7 +52,7 @@ export const useFirearmStore = defineStore('firearm', () => {
     firearmList.value.splice(index, 1)
   }
 
-  function filterFirearm (search) {
+  function filterFirearmList (search) {
     if (search !== '') {
       return firearmList.value.filter(firearm => firearm.name.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1)
     } else return firearmList.value
@@ -67,7 +67,7 @@ export const useFirearmStore = defineStore('firearm', () => {
     duplicateFirearm,
     editFirearm,
     removeFirearm,
-    filterFirearm
+    filterFirearmList
   }
 },
 { persist: true }

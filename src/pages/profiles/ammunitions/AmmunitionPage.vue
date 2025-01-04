@@ -65,7 +65,7 @@ const ammunitionStore = useAmmunitionStore()
 
 const search = ref('')
 const ammunitionList = computed(() => {
-  return ammunitionStore.filterAmmunition(search.value)
+  return ammunitionStore.filterAmmunitionList(search.value)
 })
 
 const router = useRouter()

@@ -56,15 +56,17 @@ export const useSetupStore = defineStore('setup', () => {
   }
 
   function filterSetup (search) {
-    const populatedList = setupList.value.map(setup => {
+    const populateSetupList = setupList.value.map(setup => {
       return populateSetup(setup)
     })
     if (search !== '') {
-      return populatedList.value.filter(setup => {
-        const searchIn = (setup.name + ' ' + setup.ammunition.name + ' ' + setup.firearm.name + ' ' + setup.optic.name).toLowerCase()
+      return populateSetupList.filter(setup => {
+        const searchIn = (setup.name + ' ' + setup.firearm.name + ' ' + setup.optic.name + ' ' + setup.ammunition.name).toLowerCase()
         return searchIn.indexOf(search.toLocaleLowerCase()) > -1
       })
-    } else return populatedList
+    } else {
+      return populateSetupList
+    }
   }
 
   function populateSetup (setup) {
@@ -83,6 +85,24 @@ export const useSetupStore = defineStore('setup', () => {
     return setup
   }
 
+  function setupStatus (setup) {
+    let status = 'completed'
+
+    if (!setup.firearm) {
+      status = 'draft'
+    }
+    if (!setup.optic) {
+      status = 'draft'
+    }
+    if (!setup.ammunition) {
+      status = 'draft'
+    }
+
+    console.log('status', setup)
+
+    return status
+  }
+
   // available
   return {
     setupList,
@@ -92,7 +112,8 @@ export const useSetupStore = defineStore('setup', () => {
     duplicateSetup,
     editSetup,
     removeSetup,
-    filterSetup
+    filterSetup,
+    setupStatus
   }
 },
 { persist: true }

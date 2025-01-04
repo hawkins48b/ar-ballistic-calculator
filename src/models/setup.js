@@ -2,7 +2,10 @@ export default function () {
   return {
     name: '',
     ammunitionId: null,
+    ammunition: null,
     firearmId: null,
-    opticId: null
+    firearm: null,
+    opticId: null,
+    optic: null
   }
 }

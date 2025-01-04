@@ -65,7 +65,7 @@ const opticStore = useOpticStore()
 
 const search = ref('')
 const opticList = computed(() => {
-  return opticStore.filterOptic(search.value)
+  return opticStore.filterOpticList(search.value)
 })
 
 const router = useRouter()

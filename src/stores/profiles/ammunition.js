@@ -57,7 +57,7 @@ export const useAmmunitionStore = defineStore('ammunition', () => {
     ammunitionList.value.splice(index, 1)
   }
 
-  function filterAmmunition (search) {
+  function filterAmmunitionList (search) {
     if (search !== '') {
       return ammunitionList.value.filter(ammunition => ammunition.name.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1)
     } else return ammunitionList.value
@@ -72,7 +72,7 @@ export const useAmmunitionStore = defineStore('ammunition', () => {
     duplicateAmmunition,
     editAmmunition,
     removeAmmunition,
-    filterAmmunition,
+    filterAmmunitionList,
     predefinedAmmunitionList
   }
 },

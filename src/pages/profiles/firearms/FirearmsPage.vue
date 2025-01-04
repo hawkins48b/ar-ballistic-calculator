@@ -43,7 +43,7 @@
       :offset="[18, 18]"
     >
       <q-btn
-        to="/profilesv2/firearms/add"
+        to="/profiles/firearms/add"
         fab
         icon="add"
         color="primary"
@@ -65,7 +65,7 @@ const firearmStore = useFirearmStore()
 
 const search = ref('')
 const firearmList = computed(() => {
-  return firearmStore.filterFirearm(search.value)
+  return firearmStore.filterFirearmList(search.value)
 })
 
 const router = useRouter()

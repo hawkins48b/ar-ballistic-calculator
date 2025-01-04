@@ -18,7 +18,7 @@
           dense
           flat
           icon="note_add"
-          @click="router.push('/profiles/ammunitions/add')"
+          to="/profiles/ammunitions/add"
         />
       </template>
     </q-select>
@@ -26,7 +26,16 @@
       v-if="selectedAmmunition"
       :ammunition="selectedAmmunition"
       class="q-mt-md"
-    />
+    >
+      <q-btn
+        round
+        dense
+        flat
+        icon="edit"
+        size="sm"
+        :to="`/profiles/ammunitions/edit/${selectedAmmunition.id}`"
+      />
+    </AmmunitionItemCard>
   </div>
 </template>
 

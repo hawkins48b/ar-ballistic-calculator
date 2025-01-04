@@ -6,15 +6,35 @@
         <div class="text-h6">
           Components
         </div>
-      </q-card-section>
-      <q-card-section>
-        <SetupFirearm v-model="setup.firearmId" />
+        <SetupFirearm
+          v-model="setup.firearmId"
+          class="q-mt-md"
+        />
         <SetupOptic
           v-model="setup.opticId"
           class="q-mt-md"
         />
         <SetupAmmunition
           v-model="setup.ammunitionId"
+          class="q-mt-md"
+        />
+      </q-card-section>
+    </q-card>
+    <q-card class="q-mt-md">
+      <q-card-section>
+        <div class="text-h6">
+          Measurements
+        </div>
+        <SetupOpticHeightInput
+          v-model:height="setup.measureOpticHeight"
+          v-model:unit="setup.measureOpticHeightUnit"
+          class="q-mt-md"
+        />
+        <SetupVelocityInput
+          v-model:velocity="setup.measureVelocity"
+          v-model:velocity-unit="setup.measureVelocityUnit"
+          v-model:temperature="setup.measureVelocityTemperature"
+          v-model:temperature-unit="setup.measureVelocityTemperatureUnit"
           class="q-mt-md"
         />
       </q-card-section>
@@ -49,6 +69,8 @@ import SetupNameInput from './SetupNameInput.vue'
 import SetupFirearm from './SetupFirearm.vue'
 import SetupOptic from './SetupOptic.vue'
 import SetupAmmunition from './SetupAmmunition.vue'
+import SetupOpticHeightInput from './SetupOpticHeightInput.vue'
+import SetupVelocityInput from './SetupVelocityInput.vue'
 
 const setup = defineModel({
   type: Object

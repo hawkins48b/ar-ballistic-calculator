@@ -18,7 +18,7 @@
           dense
           flat
           icon="note_add"
-          @click="router.push('/profiles/firearms/add')"
+          to="/profiles/firearms/add"
         >
           <template #loading />
         </q-btn>
@@ -28,7 +28,16 @@
       v-if="selectedFirearm"
       :firearm="selectedFirearm"
       class="q-mt-md"
-    />
+    >
+      <q-btn
+        round
+        dense
+        flat
+        icon="edit"
+        size="sm"
+        :to="`/profiles/firearms/edit/${selectedFirearm.id}`"
+      />
+    </firearmitemcard>
   </div>
 </template>
 
@@ -36,13 +45,10 @@
 import { ref, onMounted } from 'vue'
 import { useFirearmStore } from 'src/stores/profiles/firearm'
 import FirearmItemCard from '../firearm/FirearmItemCard.vue'
-import { useRouter } from 'vue-router'
 
 const firearmId = defineModel({
   type: [Number, String]
 })
-
-const router = useRouter()
 
 const selectedFirearm = ref(null)
 

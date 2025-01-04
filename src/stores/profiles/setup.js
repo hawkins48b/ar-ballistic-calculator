@@ -13,10 +13,18 @@ export const useSetupStore = defineStore('setup', () => {
       id: 1,
       ammunitionId: 1,
       opticId: 1,
-      firearmId: 1
+      firearmId: 1,
+      measureOpticHeight: 1.5,
+      measureOpticHeightUnit: 'IN',
+      measureVelocity: 3000,
+      measureVelocityUnit: 'FPS',
+      measureVelocityTemperature: 59.3,
+      measureVelocityTemperatureUnit: '°F'
     }
   ])
   const nextId = ref(2)
+
+  const newSetup = ref(setupModel())
 
   // getters
 
@@ -31,10 +39,13 @@ export const useSetupStore = defineStore('setup', () => {
     return setupModel()
   }
 
-  function addSetup (newSetup) {
-    newSetup.id = nextId.value
+  function addSetup (setup) {
+    setup.id = nextId.value
     nextId.value++
-    setupList.value.push({ ...newSetup })
+    setupList.value.push({ ...setup })
+
+    // clear new setup
+    newSetup.value = { ...getSetupModel() }
   }
 
   function duplicateSetup (id) {
@@ -106,6 +117,7 @@ export const useSetupStore = defineStore('setup', () => {
   // available
   return {
     setupList,
+    newSetup,
     getSetup,
     getSetupModel,
     addSetup,

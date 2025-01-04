@@ -2,7 +2,7 @@
   <PageHeader back />
   <q-page class="q-pa-md">
     <SetupForm
-      v-model="setup"
+      v-model="newSetup"
       @submited="router.back()"
     />
   </q-page>
@@ -13,15 +13,12 @@ import PageHeader from 'src/components/layout/PageHeader.vue'
 import SetupForm from 'src/components/profiles/setup/SetupForm.vue'
 import { useSetupStore } from 'src/stores/profiles/setup'
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
 
 const setupStore = useSetupStore()
 
 const router = useRouter()
 
-const setup = ref({})
+const { newSetup } = storeToRefs(setupStore)
 
-setup.value = {
-  ...setupStore.getSetupModel()
-}
 </script>

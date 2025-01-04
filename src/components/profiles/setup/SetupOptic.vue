@@ -18,7 +18,7 @@
           dense
           flat
           icon="note_add"
-          @click="router.push('/profiles/optics/add')"
+          to="/profiles/optics/add"
         />
       </template>
     </q-select>
@@ -26,7 +26,16 @@
       v-if="selectedOptic"
       :optic="selectedOptic"
       class="q-mt-md"
-    />
+    >
+      <q-btn
+        round
+        dense
+        flat
+        icon="edit"
+        size="sm"
+        :to="`/profiles/optics/edit/${selectedOptic.id}`"
+      />
+    </OpticItemCard>
   </div>
 </template>
 

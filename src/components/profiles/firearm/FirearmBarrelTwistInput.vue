@@ -9,7 +9,7 @@
     prefix="1/"
     :rules="[
       val => val && val > 0 || 'Barrel twist must be positive' ]"
-    hint="1/7' means the barrel spin the bullet once over every 7-inches of rifling"
+    :hint="`The bullet spins once over every ${twist} ${unit} of rifling`"
   >
     <template #append>
       <q-btn-toggle

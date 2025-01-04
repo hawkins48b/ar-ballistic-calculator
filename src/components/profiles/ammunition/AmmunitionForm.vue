@@ -12,11 +12,10 @@
         <div class="text-h6">
           Bullet
         </div>
-      </q-card-section>
-      <q-card-section>
         <AmmunitionDiameterInput
           v-model:diameter="ammunition.diameter"
           v-model:unit="ammunition.diameterUnit"
+          class="q-mt-md"
         />
         <AmmunitionLengthInput
           v-model:length="ammunition.length"

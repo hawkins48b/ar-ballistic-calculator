@@ -12,11 +12,10 @@
         <div class="text-h6">
           Barrel
         </div>
-      </q-card-section>
-      <q-card-section>
         <FirearmBarrelLengthInput
           v-model:length="firearm.barrelLength"
           v-model:unit="firearm.barrelLengthUnit"
+          class="q-mt-md"
         />
         <FirearmBarrelTwistInput
           v-model:twist="firearm.barrelTwist"

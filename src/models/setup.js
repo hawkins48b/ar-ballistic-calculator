@@ -6,6 +6,12 @@ export default function () {
     firearmId: null,
     firearm: null,
     opticId: null,
-    optic: null
+    optic: null,
+    measureOpticHeight: null,
+    measureOpticHeightUnit: 'IN',
+    measureVelocity: null,
+    measureVelocityUnit: 'FPS',
+    measureVelocityTemperature: 59.3,
+    measureVelocityTemperatureUnit: '°F'
   }
 }

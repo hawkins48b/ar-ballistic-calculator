@@ -30,8 +30,6 @@
         <div class="text-h6">
           Reticle
         </div>
-      </q-card-section>
-      <q-card-section>
         <RadioCard
           v-if="optic.type === 'prism' || optic.type === 'scope'"
           v-model="optic.reticle"
@@ -45,7 +43,7 @@
               value: 'MRAD'
             }
           ]"
-          class="q-mb-md"
+          class="q-mt-md"
         />
         <RadioCard
           v-if="optic.type === 'scope'"
@@ -60,11 +58,12 @@
               value: 'second'
             }
           ]"
-          class="q-mb-md"
+          class="q-mt-md"
         />
         <OpticDotSizeInput
           v-if="optic.type === 'red dot'"
           v-model="optic.dotSize"
+          class="q-mt-md"
         />
       </q-card-section>
     </q-card>
@@ -73,13 +72,12 @@
         <div class="text-h6">
           Adjustments
         </div>
-      </q-card-section>
-      <q-card-section>
         <OpticClickInput
           v-model:elevation-click="optic.elevationClickValue"
           v-model:elevation-unit="optic.elevationClickUnit"
           v-model:windage-click="optic.windageClickValue"
           v-model:windage-unit="optic.windageClickUnit"
+          class="q-mt-md"
         />
       </q-card-section>
     </q-card>
@@ -91,10 +89,9 @@
         <div class="text-h6">
           Magnification
         </div>
-      </q-card-section>
-      <q-card-section>
         <OpticZoomInput
           v-model="optic.zoom"
+          class="q-mt-md"
         />
       </q-card-section>
     </q-card>

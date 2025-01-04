@@ -1,10 +1,10 @@
 <template>
-  <PageHeader back-to="/profilesv2">
+  <PageHeader back>
     <q-btn
       icon="add"
       class="desktop-only"
       color="primary"
-      to="/profilesv2/ammunitions/add"
+      to="/profiles/ammunitions/add"
     >
       Add
     </q-btn>
@@ -20,11 +20,18 @@
         <q-icon name="search" />
       </template>
     </q-input>
-    <AmmunitionItem
-      v-for="ammunition in ammunitionList"
-      :key="ammunition.id"
+    <AmmunitionItemCard
+      v-for="(ammunition, index) in ammunitionList"
+      :key="index"
       :ammunition="ammunition"
-    />
+    >
+      <ItemEditBtn
+        ref="itemEditBtnRefs"
+        @edit="edit(ammunition)"
+        @duplicate="duplicate(ammunition, index)"
+        @remove="remove(ammunition)"
+      />
+    </AmmunitionItemCard>
     <div
       v-if="ammunitionList.length === 0"
       class="q-mt-md"
@@ -36,7 +43,7 @@
       :offset="[18, 18]"
     >
       <q-btn
-        to="/profilesv2/ammunitions/add"
+        to="/profiles/ammunitions/add"
         fab
         icon="add"
         color="primary"
@@ -48,9 +55,11 @@
 
 <script setup>
 import PageHeader from 'src/components/layout/PageHeader.vue'
-import AmmunitionItem from 'components/profiles/ammunition/AmmunitionItem.vue'
+import AmmunitionItemCard from 'components/profiles/ammunition/AmmunitionItemCard.vue'
 import { useAmmunitionStore } from 'src/stores/profiles/ammunition'
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import ItemEditBtn from 'src/components/profiles/itemEditBtn.vue'
 
 const ammunitionStore = useAmmunitionStore()
 
@@ -58,5 +67,22 @@ const search = ref('')
 const ammunitionList = computed(() => {
   return ammunitionStore.filterAmmunition(search.value)
 })
+
+const router = useRouter()
+const edit = function (ammunition) {
+  router.push(`/profiles/ammunitions/edit/${ammunition.id}`)
+}
+
+const itemEditBtnRefs = ref([])
+const duplicate = function (ammunition, index) {
+  ammunitionStore.duplicateAmmunition(ammunition.id)
+
+  const itemEditBtn = itemEditBtnRefs.value[index]
+  itemEditBtn.dialogClose()
+}
+
+const remove = function (ammunition) {
+  ammunitionStore.removeAmmunition(ammunition.id)
+}
 
 </script>

@@ -24,7 +24,7 @@ export const useOpticStore = defineStore('optic', () => {
 
   // actions
   function getOptic (id) {
-    return opticList.value.find(optic => optic.id === id)
+    return opticList.value.find(ammunition => ammunition.id === id)
   }
 
   function getOpticModel () {

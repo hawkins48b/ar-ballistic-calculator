@@ -32,9 +32,9 @@ export default {
     return {
       menuList: [
         {
-          path: '/profilesv2',
+          path: '/profiles',
           icon: 'list',
-          label: 'Profiles v2'
+          label: 'Profiles'
         },
         {
           path: '/calculators',

@@ -4,7 +4,7 @@
       icon="add"
       class="desktop-only"
       color="primary"
-      to="/profiles/firearms/add"
+      to="/profiles/setups/add"
     >
       Add
     </q-btn>
@@ -20,20 +20,20 @@
         <q-icon name="search" />
       </template>
     </q-input>
-    <FirearmItemCard
-      v-for="(firearm, index) in firearmList"
+    <ProfileItemCard
+      v-for="(profile, index) in profileList"
       :key="index"
-      :firearm="firearm"
+      :profile="profile"
     >
       <ItemEditBtn
         ref="itemEditBtnRefs"
-        @edit="edit(firearm)"
-        @duplicate="duplicate(firearm, index)"
-        @remove="remove(firearm)"
+        @edit="edit(profile)"
+        @duplicate="duplicate(profile, index)"
+        @remove="remove(profile)"
       />
-    </FirearmItemCard>
+    </ProfileItemCard>
     <div
-      v-if="firearmList.length === 0"
+      v-if="profileList.length === 0"
       class="q-mt-md"
     >
       No result found.
@@ -43,7 +43,7 @@
       :offset="[18, 18]"
     >
       <q-btn
-        to="/profilesv2/firearms/add"
+        to="/profiles/setups/add"
         fab
         icon="add"
         color="primary"
@@ -55,34 +55,34 @@
 
 <script setup>
 import PageHeader from 'src/components/layout/PageHeader.vue'
-import FirearmItemCard from 'components/profiles/firearm/FirearmItemCard.vue'
-import { useFirearmStore } from 'src/stores/profiles/firearm'
+import ProfileItemCard from 'src/components/profiles/setups/SetupItemCard.vue'
+import { useProfileStore } from 'src/stores/profiles/setup'
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import ItemEditBtn from 'src/components/profiles/itemEditBtn.vue'
+import ItemEditBtn from 'src/components/setup/itemEditBtn.vue'
 
-const firearmStore = useFirearmStore()
+const profileStore = useProfileStore()
 
 const search = ref('')
-const firearmList = computed(() => {
-  return firearmStore.filterFirearm(search.value)
+const profileList = computed(() => {
+  return profileStore.filterProfile(search.value)
 })
 
 const router = useRouter()
-const edit = function (firearm) {
-  router.push(`/profiles/firearms/edit/${firearm.id}`)
+const edit = function (profile) {
+  router.push(`/setup/profiles/edit/${profile.id}`)
 }
 
 const itemEditBtnRefs = ref([])
-const duplicate = function (firearm, index) {
-  firearmStore.duplicateFirearm(firearm.id)
+const duplicate = function (profile, index) {
+  profileStore.duplicateProfile(profile.id)
 
   const itemEditBtn = itemEditBtnRefs.value[index]
   itemEditBtn.dialogClose()
 }
 
-const remove = function (firearm) {
-  firearmStore.removeFirearm(firearm.id)
+const remove = function (profile) {
+  profileStore.removeProfile(profile.id)
 }
 
 </script>

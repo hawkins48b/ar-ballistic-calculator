@@ -2,26 +2,26 @@
   <PageHeader />
   <q-page class="q-pa-md">
     <NavCard
-      label="Profiles"
-      to="nowhere"
-      icon="list"
+      label="Setups"
+      to="/profiles/setups"
+      icon="category"
     />
     <NavCard
       class="q-mt-md"
       label="Firearms"
-      to="/profilesV2/firearms"
+      to="/profiles/firearms"
       icon="start"
     />
     <NavCard
       class="q-mt-md"
       label="Optics"
-      to="/profilesv2/optics"
+      to="/profiles/optics"
       icon="fiber_smart_record"
     />
     <NavCard
       class="q-mt-md"
       label="Ammunitions"
-      to="/profilesv2/ammunitions"
+      to="/profiles/ammunitions"
       icon="align_vertical_bottom"
     />
   </q-page>

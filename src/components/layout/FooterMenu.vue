@@ -8,7 +8,7 @@
         indicator-color="transparent"
       >
         <q-route-tab
-          to="/profilesv2"
+          to="/profiles"
           icon="list"
           class="text-h5"
         />

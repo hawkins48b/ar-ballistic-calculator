@@ -1,10 +1,10 @@
 <template>
-  <PageHeader back-to="/profilesv2">
+  <PageHeader back>
     <q-btn
       icon="add"
       class="desktop-only"
       color="primary"
-      to="/profilesv2/optics/add"
+      to="/profiles/optics/add"
     >
       Add
     </q-btn>
@@ -20,14 +20,18 @@
         <q-icon name="search" />
       </template>
     </q-input>
-    <div
-      v-for="optic in opticList"
-      :key="optic.id"
+    <OpticItemCard
+      v-for="(optic, index) in opticList"
+      :key="index"
+      :optic="optic"
     >
-      <OpticItem
-        :optic="optic"
+      <ItemEditBtn
+        ref="itemEditBtnRefs"
+        @edit="edit(optic)"
+        @duplicate="duplicate(optic, index)"
+        @remove="remove(optic)"
       />
-    </div>
+    </OpticItemCard>
     <div
       v-if="opticList.length === 0"
       class="q-mt-md"
@@ -39,7 +43,7 @@
       :offset="[18, 18]"
     >
       <q-btn
-        to="/profilesv2/optics/add"
+        to="/profiles/optics/add"
         fab
         icon="add"
         color="primary"
@@ -51,9 +55,11 @@
 
 <script setup>
 import PageHeader from 'src/components/layout/PageHeader.vue'
-import OpticItem from 'src/components/profiles/optic/OpticItem.vue'
+import OpticItemCard from 'src/components/profiles/optic/OpticItemCard.vue'
 import { useOpticStore } from 'src/stores/profiles/optic'
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import ItemEditBtn from 'src/components/profiles/itemEditBtn.vue'
 
 const opticStore = useOpticStore()
 
@@ -61,5 +67,22 @@ const search = ref('')
 const opticList = computed(() => {
   return opticStore.filterOptic(search.value)
 })
+
+const router = useRouter()
+const edit = function (optic) {
+  router.push(`/profiles/optics/edit/${optic.id}`)
+}
+
+const itemEditBtnRefs = ref([])
+const duplicate = function (optic, index) {
+  opticStore.duplicateOptic(optic.id)
+
+  const itemEditBtn = itemEditBtnRefs.value[index]
+  itemEditBtn.dialogClose()
+}
+
+const remove = function (optic) {
+  opticStore.removeOptic(optic.id)
+}
 
 </script>

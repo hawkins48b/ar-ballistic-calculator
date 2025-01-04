@@ -19,7 +19,7 @@
         class="col"
       >
         <q-input
-          v-model.number="zoom"
+          v-model.number="zoomFixed"
           filled
           type="number"
           label="Magnification"
@@ -75,6 +75,7 @@ const zoom = defineModel({
 })
 
 const isZoomVariable = ref(false)
+const zoomFixed = ref(1)
 const zoomMin = ref(1)
 const zoomMax = ref(1)
 
@@ -83,7 +84,13 @@ onMounted(() => {
     isZoomVariable.value = true
     zoomMin.value = zoom.value[0]
     zoomMax.value = zoom.value[1]
+  } else {
+    zoomFixed.value = zoom.value
   }
+})
+
+watch(zoomFixed, () => {
+  zoom.value = zoomFixed.value
 })
 
 watch(zoomMin, () => {

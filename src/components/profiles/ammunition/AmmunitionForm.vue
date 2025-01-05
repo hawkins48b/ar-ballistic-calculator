@@ -35,6 +35,20 @@
       </q-card-section>
     </q-card>
 
+    <q-card class="q-mt-md">
+      <q-card-section>
+        <div class="text-h6">
+          Powder
+        </div>
+        <AmmunitionPowderModifierInput
+          v-model:use-powder-sensitivity="ammunition.usePowderSensitivity"
+          v-model:powder-modifier="ammunition.powderModifier"
+          v-model:powder-modifier-unit="ammunition.powderModifierUnit"
+          class="q-mt-md"
+        />
+      </q-card-section>
+    </q-card>
+
     <div class="q-mt-md">
       <q-btn
         v-if="context === 'new'"
@@ -67,6 +81,7 @@ import AmmunitionBallisticCoefficientInput from './AmmunitionBallisticCoefficien
 import { computed } from 'vue'
 import { useAmmunitionStore } from 'src/stores/profiles/ammunition'
 import AmmunitionNotesInput from './AmmunitionNotesInput.vue'
+import AmmunitionPowderModifierInput from './AmmunitionPowderModifierInput.vue'
 
 const emit = defineEmits(['submited'])
 

@@ -9,6 +9,9 @@ export default function () {
     ballisticCoefficient: 0,
     ballisticCoefficientProfile: 'G1',
     length: 0,
-    lengthUnit: 'IN'
+    lengthUnit: 'IN',
+    usePowderSensitivity: false,
+    powderModifier: 0,
+    powderModifieryUnit: 'FPS/°F'
   }
 }

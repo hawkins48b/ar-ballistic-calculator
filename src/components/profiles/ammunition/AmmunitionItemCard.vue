@@ -67,18 +67,59 @@
             </div>
           </div>
         </div>
+        <div class="col-xs-6 q-pa-sm">
+          <div class="row items-center">
+            <div class="col-auto">
+              <q-icon
+                name="local_fire_department"
+                size="md"
+              />
+            </div>
+            <div
+              v-if="ammunition.usePowderSensitivity"
+              class="col q-pl-sm"
+            >
+              {{ powderModifierLabel }}
+            </div>
+            <div
+              v-if="!ammunition.usePowderSensitivity"
+              class="col q-pl-sm"
+            >
+              Not sensitive
+            </div>
+          </div>
+        </div>
       </div>
     </q-card-section>
   </q-card>
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { useAmmunitionStore } from 'src/stores/profiles/ammunition'
 
-defineProps({
+const props = defineProps({
   ammunition: {
     type: Object,
     required: true
   }
+})
+const ammunitionStore = useAmmunitionStore()
+
+const powderModifierLabel = computed(() => {
+  let label = ''
+  let modifier = 0
+  console.log('props.ammunition.value', props.ammunition)
+  if (props.ammunition.powderModifierUnit === 'FPS/°F') {
+    modifier = ammunitionStore.convertMPSbyCtoFPSbyF(props.ammunition.powderModifier)
+  }
+  if (props.ammunition.powderModifierUnit === 'MPS/°C') {
+    modifier = props.ammunition.powderModifier
+  }
+
+  label = `${modifier} ${props.ammunition.powderModifierUnit}`
+
+  return label
 })
 
 </script>

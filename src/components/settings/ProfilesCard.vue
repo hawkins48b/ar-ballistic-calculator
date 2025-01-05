@@ -2,14 +2,15 @@
   <q-card>
     <q-card-section>
       <div class="text-h6">
-        General
+        Profiles
       </div>
-      <DarkModeToggle class="q-mt-md" />
+      <ExportProfilesBtn
+        class="q-mt-md"
+      />
     </q-card-section>
   </q-card>
 </template>
 
 <script setup>
-import DarkModeToggle from 'src/components/settings/darkModeRadio.vue'
-
+import ExportProfilesBtn from './ExportProfilesBtn.vue'
 </script>

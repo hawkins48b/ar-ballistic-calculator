@@ -1,15 +1,15 @@
 <template>
-  <PageHeader back>
-    <q-btn
-      icon="add"
-      class="desktop-only"
-      color="primary"
-      to="/profiles/ammunitions/add"
-    >
-      Add
-    </q-btn>
-  </PageHeader>
   <q-page class="q-pa-md">
+    <PageHeader back>
+      <q-btn
+        icon="add"
+        class="desktop-only"
+        color="primary"
+        to="/profiles/ammunitions/add"
+      >
+        Add
+      </q-btn>
+    </PageHeader>
     <q-input
       v-model="search"
       label="Search"

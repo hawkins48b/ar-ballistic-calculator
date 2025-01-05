@@ -50,4 +50,5 @@ watch(unit, (newUnit) => {
     const milimeter = distance.In(BC.Unit.Millimeter)
     length.value = Math.round(milimeter * 1000) / 1000
   }
-})</script>
+})
+</script>

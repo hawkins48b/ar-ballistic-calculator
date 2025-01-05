@@ -1,6 +1,6 @@
 <template>
-  <PageHeader back />
   <q-page class="q-pa-md">
+    <PageHeader back />
     <FirearmForm
       v-model="firearm"
       @submited="router.back()"

@@ -1,8 +1,8 @@
 <template>
-  <PageHeader back>
-    <AmmunitionFinderBtn v-model="ammunition" />
-  </PageHeader>
   <q-page class="q-pa-md">
+    <PageHeader back>
+      <AmmunitionFinderBtn v-model="ammunition" />
+    </PageHeader>
     <AmmunitionForm
       v-model="ammunition"
       @submited="router.back()"

@@ -17,7 +17,10 @@ export const useAmmunitionStore = defineStore('ammunition', () => {
       ballisticCoefficient: 0.285,
       ballisticCoefficientProfile: 'G1',
       length: 0.746,
-      lengthUnit: 'IN'
+      lengthUnit: 'IN',
+      usePowderSensitivity: false,
+      powderModifier: 0,
+      powderModifierUnit: 'FPS/°F'
     }
   ])
   const nextId = ref(2)
@@ -63,6 +66,16 @@ export const useAmmunitionStore = defineStore('ammunition', () => {
     } else return ammunitionList.value
   }
 
+  function convertFPSbyFtoMPSbyC (value) {
+    const mps = parseFloat(value) * 0.3048 * 5 / 9
+    return Math.round(mps * 100) / 100
+  }
+
+  function convertMPSbyCtoFPSbyF (value) {
+    const fps = parseFloat(value) * 1 / 0.3048 * 9 / 5
+    return Math.round(fps * 100) / 100
+  }
+
   // available
   return {
     ammunitionList,
@@ -73,6 +86,8 @@ export const useAmmunitionStore = defineStore('ammunition', () => {
     editAmmunition,
     removeAmmunition,
     filterAmmunitionList,
+    convertFPSbyFtoMPSbyC,
+    convertMPSbyCtoFPSbyF,
     predefinedAmmunitionList
   }
 },

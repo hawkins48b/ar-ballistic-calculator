@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@capacitor-community/file-opener@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@capacitor-community/file-opener/-/file-opener-6.0.1.tgz#de48f93c325c669b2536e3838094ce8777b9d452"
+  integrity sha512-6DMcCVZPWnx1ewlCcciDGQ9n+hZt7ixLuSMv5U2epyZJ44vdLXEKjZvwU+Wpdpmsq5p0pT9jExDODFdc+DNCsw==
+
 "@capacitor/android@^6.0.0":
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-6.2.0.tgz#4cbb29e45457839dfd391ff0744b437ef4d4034b"

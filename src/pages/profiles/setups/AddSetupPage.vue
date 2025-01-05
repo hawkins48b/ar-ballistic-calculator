@@ -1,6 +1,6 @@
 <template>
-  <PageHeader back />
   <q-page class="q-pa-md">
+    <PageHeader back />
     <SetupForm
       v-model="newSetup"
       @submited="router.back()"

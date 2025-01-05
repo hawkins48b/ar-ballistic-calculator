@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md row items-center">
+  <div class="q-py-md row items-center">
     <div class="col">
       <q-btn
         v-if="backTo"

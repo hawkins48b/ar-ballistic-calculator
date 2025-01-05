@@ -1,6 +1,6 @@
 <template>
-  <PageHeader />
   <q-page class="q-pa-md">
+    <PageHeader />
     <NavCard
       label="Setups"
       to="/profiles/setups"

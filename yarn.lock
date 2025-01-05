@@ -792,6 +792,11 @@
     "@babel/helper-string-parser" "^7.25.9"
     "@babel/helper-validator-identifier" "^7.25.9"
 
+"@capacitor-community/file-opener@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@capacitor-community/file-opener/-/file-opener-6.0.1.tgz#de48f93c325c669b2536e3838094ce8777b9d452"
+  integrity sha512-6DMcCVZPWnx1ewlCcciDGQ9n+hZt7ixLuSMv5U2epyZJ44vdLXEKjZvwU+Wpdpmsq5p0pT9jExDODFdc+DNCsw==
+
 "@capacitor/core@^6.2.0":
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-6.2.0.tgz#b12b4e451b221972e2a41aa6fd1b7678e611e74d"

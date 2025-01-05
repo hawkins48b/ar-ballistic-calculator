@@ -68,12 +68,10 @@ const opticStore = useOpticStore()
 
 const setupStore = useSetupStore()
 
-const props = defineProps({
+defineProps({
   setup: {
     type: Object,
     required: true
   }
 })
-
-console.log('setup', props.setup)
 </script>

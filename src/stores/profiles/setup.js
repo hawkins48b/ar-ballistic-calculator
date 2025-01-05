@@ -109,8 +109,6 @@ export const useSetupStore = defineStore('setup', () => {
       status = 'draft'
     }
 
-    console.log('status', setup)
-
     return status
   }
 

@@ -1,6 +1,6 @@
 <template>
-  <PageHeader back-to="/settings" />
   <q-page class="q-pa-md">
+    <PageHeader back-to="/settings" />
     <q-card
       class="text-center"
     >

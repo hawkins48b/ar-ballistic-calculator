@@ -1,7 +1,8 @@
 <template>
-  <PageHeader />
   <q-page class="q-pa-md">
+    <PageHeader />
     <GeneralCard />
+    <ProfilesCard class="q-mt-md" />
     <NavCard
       label="About"
       class="q-mt-md"
@@ -19,6 +20,7 @@
 
 <script setup>
 import GeneralCard from 'components/settings/GeneralCard.vue'
+import ProfilesCard from 'components/settings/ProfilesCard.vue'
 import NavCard from 'components/NavCard.vue'
 import PageHeader from 'components/layout/PageHeader.vue'
 

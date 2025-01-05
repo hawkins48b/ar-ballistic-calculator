@@ -16,6 +16,8 @@ export const useSetupStore = defineStore('setup', () => {
       firearmId: 1,
       measureOpticHeight: 1.5,
       measureOpticHeightUnit: 'IN',
+      measureZeroDistance: 25,
+      measureZeroDistanceUnit: 'YD',
       measureVelocity: 3000,
       measureVelocityUnit: 'FPS',
       measureVelocityTemperature: 59.3,

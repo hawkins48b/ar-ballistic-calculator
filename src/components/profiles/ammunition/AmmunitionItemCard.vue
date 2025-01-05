@@ -109,7 +109,7 @@ const ammunitionStore = useAmmunitionStore()
 const powderModifierLabel = computed(() => {
   let label = ''
   let modifier = 0
-  console.log('props.ammunition.value', props.ammunition)
+
   if (props.ammunition.powderModifierUnit === 'FPS/°F') {
     modifier = ammunitionStore.convertMPSbyCtoFPSbyF(props.ammunition.powderModifier)
   }

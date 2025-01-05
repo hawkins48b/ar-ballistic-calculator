@@ -4,18 +4,10 @@
     <q-card class="q-mt-md">
       <q-card-section>
         <div class="text-h6">
-          Components
+          Firearm
         </div>
         <SetupFirearm
           v-model="setup.firearmId"
-          class="q-mt-md"
-        />
-        <SetupOptic
-          v-model="setup.opticId"
-          class="q-mt-md"
-        />
-        <SetupAmmunition
-          v-model="setup.ammunitionId"
           class="q-mt-md"
         />
       </q-card-section>
@@ -23,14 +15,34 @@
     <q-card class="q-mt-md">
       <q-card-section>
         <div class="text-h6">
-          Measurements
+          Optic
         </div>
-        <SetupOpticHeightInput
+        <SetupOptic
+          v-model="setup.opticId"
+          class="q-mt-md"
+        />
+        <SetupMeasureOpticHeightInput
           v-model:height="setup.measureOpticHeight"
           v-model:unit="setup.measureOpticHeightUnit"
           class="q-mt-md"
         />
-        <SetupVelocityInput
+        <SetupMeasureZeroInput
+          v-model:distance="setup.measureZeroDistance"
+          v-model:unit="setup.measureZeroDistanceUnit"
+          class="q-mt-md"
+        />
+      </q-card-section>
+    </q-card>
+    <q-card class="q-mt-md">
+      <q-card-section>
+        <div class="text-h6">
+          Ammunition
+        </div>
+        <SetupAmmunition
+          v-model="setup.ammunitionId"
+          class="q-mt-md"
+        />
+        <SetupMeasureVelocityInput
           v-model:velocity="setup.measureVelocity"
           v-model:velocity-unit="setup.measureVelocityUnit"
           v-model:temperature="setup.measureVelocityTemperature"
@@ -69,8 +81,9 @@ import SetupNameInput from './SetupNameInput.vue'
 import SetupFirearm from './SetupFirearm.vue'
 import SetupOptic from './SetupOptic.vue'
 import SetupAmmunition from './SetupAmmunition.vue'
-import SetupOpticHeightInput from './SetupOpticHeightInput.vue'
-import SetupVelocityInput from './SetupVelocityInput.vue'
+import SetupMeasureOpticHeightInput from './SetupMeasureOpticHeightInput.vue'
+import SetupMeasureVelocityInput from './SetupMeasureVelocityInput.vue'
+import SetupMeasureZeroInput from './SetupMeasureZeroInput.vue'
 
 const setup = defineModel({
   type: Object

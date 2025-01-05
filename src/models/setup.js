@@ -9,6 +9,8 @@ export default function () {
     optic: null,
     measureOpticHeight: null,
     measureOpticHeightUnit: 'IN',
+    measureZeroDistance: 0,
+    measureZeroDistanceUnit: 'YD',
     measureVelocity: null,
     measureVelocityUnit: 'FPS',
     measureVelocityTemperature: 59.3,

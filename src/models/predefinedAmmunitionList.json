@@ -9,7 +9,10 @@
     "ballisticCoefficient": 0.304,
     "ballisticCoefficientProfile": "G1",
     "length": 19.81,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "GP 11",
@@ -21,7 +24,10 @@
     "ballisticCoefficient": 0.505,
     "ballisticCoefficientProfile": "G1",
     "length": 31.75,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "M193 ",
@@ -33,7 +39,10 @@
     "ballisticCoefficient": 0.243,
     "ballisticCoefficientProfile": "G1",
     "length": 18.03,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "M855",
@@ -45,7 +54,10 @@
     "ballisticCoefficient": 0.304,
     "ballisticCoefficientProfile": "G1",
     "length": 19.81,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "MK262 Mod 1",
@@ -57,7 +69,10 @@
     "ballisticCoefficient": 0.372,
     "ballisticCoefficientProfile": "G7",
     "length": 23.12,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "MK318 Mod 0",
@@ -69,7 +84,10 @@
     "ballisticCoefficient": 0.33,
     "ballisticCoefficientProfile": "G1",
     "length": 19.81,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "MK318 Mod 1",
@@ -81,7 +99,10 @@
     "ballisticCoefficient": 0.337,
     "ballisticCoefficientProfile": "G7",
     "length": 19.81,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "MK311 Mod 0",
@@ -93,7 +114,10 @@
     "ballisticCoefficient": 0.243,
     "ballisticCoefficientProfile": "G1",
     "length": 18.03,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "MK319 Mod 0",
@@ -105,7 +129,10 @@
     "ballisticCoefficient": 0.33,
     "ballisticCoefficientProfile": "G1",
     "length": 19.81,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "308 Winchester",
@@ -117,7 +144,10 @@
     "ballisticCoefficient": 0.435,
     "ballisticCoefficientProfile": "G1",
     "length": 28.96,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "m80 ball",
@@ -129,7 +159,10 @@
     "ballisticCoefficient": 0.405,
     "ballisticCoefficientProfile": "G1",
     "length": 28.96,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "7.62x54R",
@@ -140,7 +173,10 @@
     "ballisticCoefficient": 0.411,
     "ballisticCoefficientProfile": "G1",
     "length": 28.5,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "6.5 Creedmoor",
@@ -152,7 +188,10 @@
     "ballisticCoefficient": 0.624,
     "ballisticCoefficientProfile": "G1",
     "length": 35.5,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "300 Win Mag",
@@ -164,7 +203,10 @@
     "ballisticCoefficient": 0.533,
     "ballisticCoefficientProfile": "G7",
     "length": 35.9,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "30-06 Springfield",
@@ -176,7 +218,10 @@
     "ballisticCoefficient": 0.435,
     "ballisticCoefficientProfile": "G1",
     "length": 31.5,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "7mm Rem Mag 7x64",
@@ -188,7 +233,10 @@
     "ballisticCoefficient": 0.563,
     "ballisticCoefficientProfile": "G1",
     "length": 33.0,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "5.45x39",
@@ -199,7 +247,10 @@
     "ballisticCoefficient": 0.252,
     "ballisticCoefficientProfile": "G1",
     "length": 22.1,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "270 Winchester",
@@ -211,7 +262,10 @@
     "ballisticCoefficient": 0.433,
     "ballisticCoefficientProfile": "G1",
     "length": 31.0,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "243 Winchester",
@@ -223,7 +277,10 @@
     "ballisticCoefficient": 0.4,
     "ballisticCoefficientProfile": "G1",
     "length": 29.5,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "22-250 Remington",
@@ -235,7 +292,10 @@
     "ballisticCoefficient": 0.255,
     "ballisticCoefficientProfile": "G1",
     "length": 18.0,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "300 AAC Blackout",
@@ -247,7 +307,10 @@
     "ballisticCoefficient": 0.3,
     "ballisticCoefficientProfile": "G1",
     "length": 27.5,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "338 Lapua Magnum",
@@ -259,7 +322,10 @@
     "ballisticCoefficient": 0.675,
     "ballisticCoefficientProfile": "G1",
     "length": 38.7,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "50 BMG 12.7x99",
@@ -271,7 +337,10 @@
     "ballisticCoefficient": 1.050,
     "ballisticCoefficientProfile": "G1",
     "length": 57.4,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "45 ACP",
@@ -283,7 +352,10 @@
     "ballisticCoefficient": 0.153,
     "ballisticCoefficientProfile": "G1",
     "length": 19.8,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "9mm Parabellum",
@@ -295,7 +367,10 @@
     "ballisticCoefficient": 0.130,
     "ballisticCoefficientProfile": "G1",
     "length": 15.5,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": ".40 S&W",
@@ -307,7 +382,10 @@
     "ballisticCoefficient": 0.165,
     "ballisticCoefficientProfile": "G1",
     "length": 20.6,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "357 Magnum",
@@ -319,7 +397,10 @@
     "ballisticCoefficient": 0.210,
     "ballisticCoefficientProfile": "G1",
     "length": 20.4,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "338 Win Mag",
@@ -331,7 +412,10 @@
     "ballisticCoefficient": 0.431,
     "ballisticCoefficientProfile": "G1",
     "length": 33.2,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "10mm Auto",
@@ -343,7 +427,10 @@
     "ballisticCoefficient": 0.170,
     "ballisticCoefficientProfile": "G1",
     "length": 22.7,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "338 Federal",
@@ -355,7 +442,10 @@
     "ballisticCoefficient": 0.460,
     "ballisticCoefficientProfile": "G1",
     "length": 33.5,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "6.8 SPC",
@@ -367,7 +457,10 @@
     "ballisticCoefficient": 0.325,
     "ballisticCoefficientProfile": "G1",
     "length": 26.5,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "224 Valkyrie",
@@ -379,7 +472,10 @@
     "ballisticCoefficient": 0.500,
     "ballisticCoefficientProfile": "G1",
     "length": 27.7,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "6.5 PRC",
@@ -391,7 +487,10 @@
     "ballisticCoefficient": 0.697,
     "ballisticCoefficientProfile": "G1",
     "length": 35.8,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "5.7 FN",
@@ -403,7 +502,10 @@
     "ballisticCoefficient": 0.130,
     "ballisticCoefficientProfile": "G1",
     "length": 21.0,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "6.5 Carcano",
@@ -415,7 +517,10 @@
     "ballisticCoefficient": 0.435,
     "ballisticCoefficientProfile": "G1",
     "length": 33.0,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "7.62 Tokarev",
@@ -427,7 +532,10 @@
     "ballisticCoefficient": 0.142,
     "ballisticCoefficientProfile": "G1",
     "length": 17.5,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "8 Lebel",
@@ -439,7 +547,10 @@
     "ballisticCoefficient": 0.485,
     "ballisticCoefficientProfile": "G1",
     "length": 36.0,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "8mm Mauser",
@@ -451,7 +562,10 @@
     "ballisticCoefficient": 0.593,
     "ballisticCoefficientProfile": "G1",
     "length": 35.3,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "303 British",
@@ -463,7 +577,10 @@
     "ballisticCoefficient": 0.499,
     "ballisticCoefficientProfile": "G1",
     "length": 31.5,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "7.7 Japanese Arisaka",
@@ -475,7 +592,10 @@
     "ballisticCoefficient": 0.478,
     "ballisticCoefficientProfile": "G1",
     "length": 32.0,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": "7.5 French MAS",
@@ -487,7 +607,10 @@
     "ballisticCoefficient": 0.411,
     "ballisticCoefficientProfile": "G1",
     "length": 28.0,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": ".277 Fury 6.8x51",
@@ -499,7 +622,10 @@
     "ballisticCoefficient": 0.488,
     "ballisticCoefficientProfile": "G7",
     "length": 33.0,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": ".357 Sig",
@@ -511,7 +637,10 @@
     "ballisticCoefficient": 0.140,
     "ballisticCoefficientProfile": "G1",
     "length": 20.4,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   },
   {
     "name": ".44 Magnum",
@@ -523,6 +652,9 @@
     "ballisticCoefficient": 0.175,
     "ballisticCoefficientProfile": "G1",
     "length": 32.0,
-    "lengthUnit": "MM"
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
   }
 ]

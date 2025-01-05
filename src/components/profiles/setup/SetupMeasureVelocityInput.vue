@@ -1,5 +1,5 @@
 <template>
-  <div class="row q-gutter-md">
+  <div class="row q-gutter-x-md">
     <div class="col">
       <q-input
         v-model.number="velocity"

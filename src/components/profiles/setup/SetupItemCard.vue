@@ -22,12 +22,12 @@
         </div>
       </div>
       <div
-        class="row q-gutter-md"
+        class="row items-center q-gutter-md"
         style="height:50px"
       >
         <div class="col-auto">
           <q-icon
-            name="start"
+            name="svguse:icons.svg#sniper-rifle"
             size="sm"
           />
         </div>
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div
-        class="row q-gutter-md"
+        class="row items-center q-gutter-md"
         style="height:50px"
       >
         <div class="col-auto">
@@ -57,9 +57,12 @@
           class="col"
           style="padding-left:40px"
         >
-          <div class="row q-gutter-x-md">
+          <div class="row  items-center q-gutter-x-md">
             <div class="col-auto">
-              <q-icon name="density_large" />
+              <q-icon
+                name="svguse:icons.svg#height"
+                size="md"
+              />
             </div>
             <div class="col">
               {{ setup.measureOpticHeight }} {{ setup.measureOpticHeightUnit }}
@@ -67,11 +70,11 @@
           </div>
         </div>
         <div class="col">
-          <div class="row q-gutter-x-md">
+          <div class="row items-center q-gutter-x-md">
             <div class="col-auto">
               <q-icon
-                style="rotate:45deg"
-                name="open_in_full"
+                name="svguse:icons.svg#human-target"
+                size="md"
               />
             </div>
             <div class="col">
@@ -81,12 +84,11 @@
         </div>
       </div>
       <div
-        class="row q-gutter-md"
-        style="height:50px"
+        class="row items-center q-gutter-md"
       >
         <div class="col-auto">
           <q-icon
-            name="align_vertical_bottom"
+            name="svguse:icons.svg#ammunition"
             size="sm"
           />
         </div>
@@ -94,12 +96,15 @@
           {{ setup.ammunition.name }}
         </div>
       </div>
-      <div class="row q-gutter-x-md">
+      <div class="row items-center q-gutter-x-md">
         <div
           class="col-auto"
           style="padding-left:40px"
         >
-          <q-icon name="speed" />
+          <q-icon
+            name="svguse:icons.svg#bullet-speed"
+            size="md"
+          />
         </div>
         <div class="col">
           {{ setup.measureVelocity }} {{ setup.measureVelocityUnit }} at {{ setup.measureVelocityTemperature }} {{ setup.measureVelocityTemperatureUnit }}

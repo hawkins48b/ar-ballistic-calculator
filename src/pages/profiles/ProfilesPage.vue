@@ -4,25 +4,25 @@
     <NavCard
       label="Setups"
       to="/profiles/setups"
-      icon="category"
+      icon="svguse:icons.svg#setup"
     />
     <NavCard
       class="q-mt-md"
       label="Firearms"
       to="/profiles/firearms"
-      icon="start"
+      icon="svguse:icons.svg#sniper-rifle"
     />
     <NavCard
       class="q-mt-md"
       label="Optics"
       to="/profiles/optics"
-      icon="fiber_smart_record"
+      icon="svguse:icons.svg#scope-reticle"
     />
     <NavCard
       class="q-mt-md"
       label="Ammunitions"
       to="/profiles/ammunitions"
-      icon="align_vertical_bottom"
+      icon="svguse:icons.svg#ammunition"
     />
   </q-page>
 </template>

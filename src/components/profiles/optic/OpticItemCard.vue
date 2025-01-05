@@ -46,7 +46,7 @@
           <div class="row items-center">
             <div class="col-auto">
               <q-icon
-                name="build_circle"
+                name="svguse:icons.svg#sight-adjust"
                 size="md"
               />
             </div>

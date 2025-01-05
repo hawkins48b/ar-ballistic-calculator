@@ -27,9 +27,9 @@ export const useOpticStore = defineStore('optic', () => {
         case 'red dot':
           return 'adjust'
         case 'prism':
-          return 'center_focus_weak'
+          return 'svguse:icons.svg#prism-reticle'
         case 'scope':
-          return 'fiber_smart_record'
+          return 'svguse:icons.svg#scope-reticle'
         default: return ''
       }
     }

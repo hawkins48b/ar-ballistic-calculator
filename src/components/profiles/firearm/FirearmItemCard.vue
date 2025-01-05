@@ -19,7 +19,7 @@
           <div class="row items-center">
             <div class="col-auto">
               <q-icon
-                name="start"
+                name="svguse:icons.svg#length"
                 size="md"
               />
             </div>

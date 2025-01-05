@@ -4,17 +4,17 @@
       v-model="optic.type"
       :options="[
         {
-          icon: 'adjust',
+          icon: opticStore.opticIcon('red dot'),
           label: 'Red dot',
           value: 'red dot'
         },
         {
-          icon: 'center_focus_weak',
+          icon: opticStore.opticIcon('prism'),
           label: 'Prism',
           value: 'prism'
         },
         {
-          icon: 'fiber_smart_record',
+          icon: opticStore.opticIcon('scope'),
           label: 'Scope',
           value: 'scope'
         }

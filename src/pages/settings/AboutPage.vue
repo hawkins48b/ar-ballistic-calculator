@@ -59,6 +59,19 @@
         </div>
       </q-card-section>
     </q-card>
+    <q-card class="q-mt-md">
+      <q-card-section>
+        <div class="text-h6">
+          Icons
+        </div>
+        <div class="text-body1">
+          <a
+            href="https://www.flaticon.com/free-icons/ammunition"
+            title="ammunition icons"
+          >Ammunition icons created by ultimatearm - Flaticon</a>
+        </div>
+      </q-card-section>
+    </q-card>
   </q-page>
 </template>
 

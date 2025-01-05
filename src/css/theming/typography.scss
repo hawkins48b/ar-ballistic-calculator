@@ -2,7 +2,7 @@ body {
   a {
     text-decoration: none;
   }
-  .text-body1 a{
+  .text-body1 a, .text-body1 a:visited {
     color: $primary !important;
     font-weight:bold;
   }

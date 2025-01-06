@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import setupModel from 'src/models/setup'
 import { useAmmunitionStore } from './ammunition'
 import { useOpticStore } from './optic'
@@ -48,9 +48,16 @@ export const useSetupStore = defineStore('setup', () => {
     setupList.value.push({ ...setup })
 
     // clear new setup
-    newSetup.value = getSetupModel()
+    resetNewSetup()
 
     return setup.id
+  }
+
+  function resetNewSetup () {
+    newSetup.value = getSetupModel()
+    nextTick(() => {
+      newSetup.value = getSetupModel()
+    })
   }
 
   function duplicateSetup (id) {
@@ -129,7 +136,8 @@ export const useSetupStore = defineStore('setup', () => {
     editSetup,
     removeSetup,
     filterSetup,
-    setupStatus
+    setupStatus,
+    resetNewSetup
   }
 },
 { persist: true }

@@ -3,3 +3,21 @@ body {
     background-color: transparent;
   }
 }
+
+
+body.body--light {
+  .q-header {
+    .q-card {
+      background-color: $light-menu;
+    }
+  }
+}
+
+
+body.body--dark {
+  .q-header {
+    .q-card {
+      background-color: $dark-menu;
+    }
+  }
+}

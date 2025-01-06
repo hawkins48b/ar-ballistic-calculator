@@ -1,37 +1,3 @@
 body.body--light {
   background-color: $light-page;
-  color: black;
-
-  .q-header {
-    .q-card {
-      background-color: $light-menu;
-    }
-  }
-  .q-footer {
-    .q-card {
-      background-color: $light-menu;
-    }
-  }
-
-  .q-card {
-    background-color: $light;
-    .q-card {
-      background-color:$light-page;
-    }
-    &.active {
-      background-color: $primary;
-      color: white
-    }
-  }
-
-  .q-input {
-    .q-field__control {
-        background-color: $light;
-      }
-
-  }
-
-  a {
-    color: black
-  }
 }

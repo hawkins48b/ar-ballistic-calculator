@@ -1,18 +1,20 @@
 body {
-  .q-input {
+  .q-select {
     font-size: $body-font-size
   }
 }
 
 body.body--light {
-  .q-input {
+  .q-select {
     .q-field__control {
       background-color: $light;
     }
   }
-  .q-card .q-input {
-    .q-field__control {
-      background-color: mix(#000, $light, 5%);
+  .q-card {
+    .q-select {
+      .q-field__control {
+        background-color: mix(#000, $light, 5%);
+      }
     }
   }
 }

@@ -7,3 +7,16 @@ body {
     font-weight:bold;
   }
 }
+
+body.body--light {
+  color: black;
+
+  a {
+    color: black
+  }
+}
+
+/*
+body.body--dark {
+}
+*/

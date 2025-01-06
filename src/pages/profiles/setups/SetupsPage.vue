@@ -29,7 +29,7 @@
         ref="itemEditBtnRefs"
         @edit="edit(setup)"
         @duplicate="duplicate(setup, index)"
-        @remove="remove(setup)"
+        @remove="remove(setup, index)"
       />
     </SetupItemCard>
     <div
@@ -81,8 +81,11 @@ const duplicate = function (setup, index) {
   itemEditBtn.dialogClose()
 }
 
-const remove = function (setup) {
+const remove = function (setup, index) {
   setupStore.removeSetup(setup.id)
+
+  const itemEditBtn = itemEditBtnRefs.value[index]
+  itemEditBtn.dialogClose()
 }
 
 </script>

@@ -118,8 +118,13 @@ function getProfilesInJson () {
   const { opticList } = storeToRefs(opticStore)
   const { ammunitionList } = storeToRefs(ammunitionStore)
 
+  // export only completed setups
+  const completedSetupList = setupList.value.filter(setup => {
+    return setupStore.setupStatus(setup) === 'completed'
+  })
+
   const data = {
-    setupList: setupList.value,
+    setupList: completedSetupList,
     firearmList: firearmList.value,
     opticList: opticList.value,
     ammunitionList: ammunitionList.value

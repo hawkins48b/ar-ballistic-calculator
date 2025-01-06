@@ -48,6 +48,8 @@ export const useOpticStore = defineStore('optic', () => {
     newOptic.id = nextId.value
     nextId.value++
     opticList.value.push({ ...newOptic })
+
+    return newOptic.id
   }
 
   function duplicateOptic (id) {
@@ -77,6 +79,7 @@ export const useOpticStore = defineStore('optic', () => {
   // available
   return {
     opticList,
+    nextId,
     opticIcon,
     getOptic,
     getOpticModel,

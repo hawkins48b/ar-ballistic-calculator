@@ -29,7 +29,7 @@
         ref="itemEditBtnRefs"
         @edit="edit(ammunition)"
         @duplicate="duplicate(ammunition, index)"
-        @remove="remove(ammunition)"
+        @remove="remove(ammunition, index)"
       />
     </AmmunitionItemCard>
     <div
@@ -76,13 +76,13 @@ const edit = function (ammunition) {
 const itemEditBtnRefs = ref([])
 const duplicate = function (ammunition, index) {
   ammunitionStore.duplicateAmmunition(ammunition.id)
+}
+
+const remove = function (ammunition, index) {
+  ammunitionStore.removeAmmunition(ammunition.id)
 
   const itemEditBtn = itemEditBtnRefs.value[index]
   itemEditBtn.dialogClose()
-}
-
-const remove = function (ammunition) {
-  ammunitionStore.removeAmmunition(ammunition.id)
 }
 
 </script>

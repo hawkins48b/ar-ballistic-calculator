@@ -32,6 +32,8 @@ export const useFirearmStore = defineStore('firearm', () => {
     newFirearm.id = nextId.value
     nextId.value++
     firearmList.value.push({ ...newFirearm })
+
+    return newFirearm.id
   }
 
   function duplicateFirearm (id) {
@@ -61,6 +63,7 @@ export const useFirearmStore = defineStore('firearm', () => {
   // available
   return {
     firearmList,
+    nextId,
     getFirearm,
     getFirearmModel,
     addFirearm,

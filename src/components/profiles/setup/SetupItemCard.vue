@@ -22,6 +22,7 @@
         </div>
       </div>
       <div
+        v-if="setup.firearm"
         class="row items-center q-gutter-md"
         style="height:50px"
       >
@@ -36,6 +37,7 @@
         </div>
       </div>
       <div
+        v-if="setup.optic"
         class="row items-center q-gutter-md"
         style="height:50px"
       >
@@ -84,6 +86,7 @@
         </div>
       </div>
       <div
+        v-if="setup.ammunition"
         class="row items-center q-gutter-md"
       >
         <div class="col-auto">

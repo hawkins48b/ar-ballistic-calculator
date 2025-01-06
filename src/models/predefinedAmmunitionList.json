@@ -253,6 +253,20 @@
     "powderModifieryUnit": "FPS/°F"
   },
   {
+    "name": "7.62x39",
+    "weight": 123,
+    "weightUnit": "GR",
+    "diameter": 7.62,
+    "diameterUnit": "MM",
+    "ballisticCoefficient": 0.305,
+    "ballisticCoefficientProfile": "G1",
+    "length": 56,
+    "lengthUnit": "MM",
+    "usePowderSensitivity": false,
+    "powderModifier": 0,
+    "powderModifieryUnit": "FPS/°F"
+  },
+  {
     "name": "270 Winchester",
     "notes": "6.8x65",
     "weight": 130,

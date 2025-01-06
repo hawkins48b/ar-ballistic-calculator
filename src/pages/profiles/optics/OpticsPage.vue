@@ -29,7 +29,7 @@
         ref="itemEditBtnRefs"
         @edit="edit(optic)"
         @duplicate="duplicate(optic, index)"
-        @remove="remove(optic)"
+        @remove="remove(optic, index)"
       />
     </OpticItemCard>
     <div
@@ -81,8 +81,11 @@ const duplicate = function (optic, index) {
   itemEditBtn.dialogClose()
 }
 
-const remove = function (optic) {
+const remove = function (optic, index) {
   opticStore.removeOptic(optic.id)
+
+  const itemEditBtn = itemEditBtnRefs.value[index]
+  itemEditBtn.dialogClose()
 }
 
 </script>

@@ -43,11 +43,14 @@ export const useSetupStore = defineStore('setup', () => {
 
   function addSetup (setup) {
     setup.id = nextId.value
-    nextId.value++
+    nextId.value = nextId.value + 1
+
     setupList.value.push({ ...setup })
 
     // clear new setup
-    newSetup.value = { ...getSetupModel() }
+    newSetup.value = getSetupModel()
+
+    return setup.id
   }
 
   function duplicateSetup (id) {
@@ -117,6 +120,7 @@ export const useSetupStore = defineStore('setup', () => {
   // available
   return {
     setupList,
+    nextId,
     newSetup,
     getSetup,
     getSetupModel,

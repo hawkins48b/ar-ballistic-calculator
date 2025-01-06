@@ -40,6 +40,8 @@ export const useAmmunitionStore = defineStore('ammunition', () => {
     newAmmunition.id = nextId.value
     nextId.value++
     ammunitionList.value.push({ ...newAmmunition })
+
+    return newAmmunition.id
   }
 
   function duplicateAmmunition (id) {
@@ -79,6 +81,7 @@ export const useAmmunitionStore = defineStore('ammunition', () => {
   // available
   return {
     ammunitionList,
+    nextId,
     getAmmunition,
     getAmmunitionModel,
     addAmmunition,

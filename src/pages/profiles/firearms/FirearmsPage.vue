@@ -29,7 +29,7 @@
         ref="itemEditBtnRefs"
         @edit="edit(firearm)"
         @duplicate="duplicate(firearm, index)"
-        @remove="remove(firearm)"
+        @remove="remove(firearm, index)"
       />
     </FirearmItemCard>
     <div
@@ -81,8 +81,11 @@ const duplicate = function (firearm, index) {
   itemEditBtn.dialogClose()
 }
 
-const remove = function (firearm) {
+const remove = function (firearm, index) {
   firearmStore.removeFirearm(firearm.id)
+
+  const itemEditBtn = itemEditBtnRefs.value[index]
+  itemEditBtn.dialogClose()
 }
 
 </script>

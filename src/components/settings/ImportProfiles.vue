@@ -1,17 +1,23 @@
 <template>
-  <q-file
-    v-model="uploadedFile"
-    label="Upload profiles"
-    outlined
-    dense
-    accept=".json"
-    style="max-width:180px"
-    @update:model-value="fileUploaded"
-  >
-    <template #prepend>
-      <q-icon name="attach_file" />
-    </template>
-  </q-file>
+  <div>
+    <q-file
+      ref="fileRef"
+      v-model="uploadedFile"
+      style="display: none;"
+      outlined
+      dense
+      accept=".json"
+      @update:model-value="fileUploaded"
+    />
+    <q-btn
+      icon="attach_file"
+      outline
+      style="width:180px"
+      @click="pickFile()"
+    >
+      Upload file
+    </q-btn>
+  </div>
 </template>
 
 <script setup>
@@ -24,6 +30,12 @@ import { useOpticStore } from 'stores/profiles/optic'
 
 const $q = useQuasar()
 const uploadedFile = ref(null) // Holds the selected file
+
+const fileRef = ref(null)
+function pickFile () {
+  fileRef.value.pickFiles()
+}
+
 function fileUploaded () {
   if (uploadedFile.value) {
     const fileReader = new FileReader()

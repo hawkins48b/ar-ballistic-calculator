@@ -1,0 +1,27 @@
+body {
+  .q-file {
+    font-size: $body-font-size
+  }
+}
+
+body.body--light {
+  .q-file {
+    .q-field__control {
+      background-color: $light;
+    }
+  }
+  .q-card .q-input {
+    .q-field__control {
+      background-color: mix(#000, $light, 5%);
+    }
+  }
+}
+
+body.body--dark {
+  .q-file {
+    .q-field__control {
+      background-color: $dark;
+      color: white
+    }
+  }
+}

@@ -44,7 +44,7 @@ defineProps({
     default: ''
   },
   to: {
-    type: String,
+    type: [String, Object],
     required: true
   }
 })

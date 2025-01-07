@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <PageHeader back />
+    <PageHeader />
     <OpticForm
       v-model="optic"
       @submited="router.back()"

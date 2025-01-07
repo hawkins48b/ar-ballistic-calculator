@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <PageHeader back>
+    <PageHeader>
       <q-btn
         icon="add"
         class="desktop-only"

@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <PageHeader back>
+    <PageHeader>
       <q-btn
         icon="add"
         class="desktop-only"
@@ -24,6 +24,7 @@
       v-for="(setup, index) in setupList"
       :key="index"
       :setup="setup"
+      class="q-mt-md"
     >
       <ItemEditBtn
         ref="itemEditBtnRefs"

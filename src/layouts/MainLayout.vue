@@ -1,39 +1,36 @@
 <template>
-  <q-layout view="lHh lpR fFf">
+  <q-layout view="hHh lpR fFf">
     <q-drawer
       v-if="$q.platform.is.desktop"
       v-model="drawer"
-      class="bg-grey-3"
-      :class="{'bg-grey-10':$q.dark.isActive}"
       no-swipe-close
       persistent
       no-swipe-open
       behavior="desktop"
     >
       <div
-        class="text-center q-mt-md cursor-pointer"
+        class="cursor-pointer"
         @click="$router.push('/')"
       >
-        <div class="row items-center no-wrap">
-          <div class="col text-h6">
-            <q-img
-              src="~/assets/zro-logo.svg"
-              style="height: 40px"
-              fit="fill"
-            />Ballistic calculator
+        <div class="row items-center q-gutter-md">
+          <div class="col-auto q-pt-sm q-pl-sm">
+            <q-avatar>
+              <q-img
+                src="~/assets/zro-logo.svg"
+                style="height: 40px"
+                fit="fill"
+              />
+            </q-avatar>
+          </div>
+          <div class="col">
+            <div class="text-h6 q-pt-sm">
+              ZRO Ballistic
+            </div>
           </div>
         </div>
       </div>
 
       <MenuList class="q-mt-sm" />
-
-      <div class="text-center text-body1 q-mt-md">
-        by <a
-          href="https://chocolate-warfare.com"
-          target="_blank"
-        >Chocolate Warfare
-        </a>
-      </div>
     </q-drawer>
 
     <q-page-container>

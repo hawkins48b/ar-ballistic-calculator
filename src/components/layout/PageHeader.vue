@@ -1,48 +1,18 @@
 <template>
-  <div class="q-py-md row items-center">
-    <div class="col">
-      <q-btn
-        v-if="backTo"
-        icon="arrow_back"
-        flat
-        class="q-mr-sm"
-        round
-        @click="router.push(props.backTo)"
-      />
-      <q-btn
-        v-if="back"
-        icon="arrow_back"
-        flat
-        class="q-mr-sm"
-        round
-        @click="router.back()"
-      />
-    </div>
-    <div class="col-auto text-h6 text-bold">
-      {{ $route.name }}
-    </div>
-    <div class="col text-right">
+  <div>
+    <DesktopHeader v-if="$q.platform.is.desktop">
       <slot />
-    </div>
+    </DesktopHeader>
+    <MobileHeader v-if="$q.platform.is.mobile">
+      <slot />
+    </MobileHeader>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
+import { useQuasar } from 'quasar'
+import MobileHeader from './MobileHeader.vue'
+import DesktopHeader from './DesktopHeader.vue'
 
-const router = useRouter()
-
-const props = defineProps({
-  backTo: {
-    type: String,
-    required: false,
-    default: ''
-  },
-  back: {
-    type: Boolean,
-    required: false,
-    default: false
-  }
-})
-
+const $q = useQuasar()
 </script>

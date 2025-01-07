@@ -1,7 +1,5 @@
 <template>
-  <q-card
-    class="q-mt-md"
-  >
+  <q-card>
     <q-badge
 
       v-if="setupStore.setupStatus(setup) === 'draft'"

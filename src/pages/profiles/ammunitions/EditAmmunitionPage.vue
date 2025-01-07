@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <PageHeader back>
+    <PageHeader>
       <AmmunitionFinderBtn v-model="ammunition" />
     </PageHeader>
     <AmmunitionForm

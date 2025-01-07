@@ -10,7 +10,7 @@
       label="share"
       icon="share"
       outline
-      class="mobile-only q-ml-sm"
+      class="mobile-only q-ml-md"
       @click="shareProfiles"
     />
   </div>

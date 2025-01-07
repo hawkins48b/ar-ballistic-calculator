@@ -1,5 +1,7 @@
 <template>
-  <router-view />
+  <div :class="{limitWidth:$q.platform.is.desktop}">
+    <router-view />
+  </div>
 </template>
 
 <script setup>
@@ -21,3 +23,10 @@ watch(() => general.value.darkMode, (newValue) => {
 })
 
 </script>
+
+<style lang="scss">
+.limitWidth {
+  max-width: 800px;
+}
+
+</style>

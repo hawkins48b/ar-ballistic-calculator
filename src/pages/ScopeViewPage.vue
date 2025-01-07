@@ -17,5 +17,4 @@
 import ProfileSelectorCard from 'components/scope-view/ProfileSelectorCard.vue'
 import ConditionsCard from 'src/components/scope-view/ConditionsCard.vue'
 import ResultsCard from 'src/components/scope-view/ResultsCard.vue'
-
 </script>

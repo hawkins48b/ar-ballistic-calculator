@@ -1,0 +1,12 @@
+body.body--light {
+  .q-drawer {
+    background-color: $light;
+  }
+}
+
+
+body.body--dark {
+  .q-drawer {
+    background-color: $dark;
+  }
+}

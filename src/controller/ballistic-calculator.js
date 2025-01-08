@@ -1,80 +1,27 @@
 import * as BC from 'js-ballistics'
 import Calculator from 'js-ballistics'
+import { useSetupStore } from 'src/stores/profiles/setup'
 
-export default function (params, addExtra) {
-  let results = null
+export default async function (setupId, options) {
 
-  // define weapon parameters
-  let opticHeight
-  if (params.optic.heightUnit === 'IN') {
-    opticHeight = BC.UNew.Inch(parseFloat(params.optic.height))
-  }
-  if (params.optic.heightUnit === 'CM') {
-    opticHeight = BC.UNew.Centimeter(parseFloat(params.optic.height))
-  }
+  return new Promise((resolve, reject) => {
+    const setupStore = useSetupStore()
+    const setup = setupStore.getSetup(setupId)
 
-  let zeroDistance
-  if (params.optic.zeroUnit === 'YD') {
-    zeroDistance = BC.UNew.Yard(Math.abs(parseFloat(params.optic.zero)))
-  }
-  if (params.optic.zeroUnit === 'M') {
-    zeroDistance = BC.UNew.Meter(Math.abs(parseFloat(params.optic.zero)))
-  }
+    if(setupStore.setupStatus(setup) === 'completed') {
+      let shotFired = null
 
-  let barrelTwist = BC.UNew.Inch(0)
-  if (params.options.enableSpinDrift) {
-    if (params.weapon.barrelTwistUnit === 'IN') {
-      barrelTwist = BC.UNew.Inch(parseFloat(params.weapon.barrelTwist))
+      const weapon = newWeapon(setup)
+      const dragModel = newDragModel(setup)
+      const atmo = newAtmo(options)
+
+      resolve(shotFired)
+
     }
-    if (params.weapon.barrelTwistUnit === 'MM') {
-      barrelTwist = BC.UNew.Millimeter(parseFloat(params.weapon.barrelTwist))
+    else {
+      reject('Setup not completed')
     }
   }
-  /*
-  sightHeight: (number | Distance) = UNew.Inch(2),
-  zeroDistance: (number | Distance) = UNew.Yard(100),
-  twist: (number | Distance) = UNew.Inch(0),
-  zeroLookAngle: (number | Angular) = UNew.MIL(0)
-  */
-  const weapon = new BC.Weapon(opticHeight, zeroDistance, barrelTwist)
-
-  // define ammo parameters
-  let bulletWeight
-  if (params.bullet.weightUnit === 'GR') {
-    bulletWeight = BC.UNew.Grain(parseFloat(params.bullet.weight))
-  }
-  if (params.bullet.weightUnit === 'G') {
-    bulletWeight = BC.UNew.Gram(parseFloat(params.bullet.weight))
-  }
-
-  let bulletDiameter
-  if (params.bullet.diameterUnit === 'IN') {
-    bulletDiameter = BC.UNew.Inch(parseFloat(params.bullet.diameter))
-  }
-  if (params.bullet.diameterUnit === 'MM') {
-    bulletDiameter = BC.UNew.Millimeter(parseFloat(params.bullet.diameter))
-  }
-
-  let bulletVelocity
-  if (params.measures.velocityUnit === 'FPS') {
-    bulletVelocity = BC.UNew.FPS(parseFloat(params.measures.velocity))
-  }
-  if (params.measures.velocityUnit === 'MPS') {
-    bulletVelocity = BC.UNew.MPS(parseFloat(params.measures.velocity))
-  }
-
-  // dragModel
-  const ballisticCoefficient = parseFloat(params.bullet.ballisticCoefficient)
-
-  let ballisticCoefficientTable
-  if (params.bullet.ballisticCoefficientProfile === 'G1') {
-    ballisticCoefficientTable = BC.Table.G1
-  }
-  if (params.bullet.ballisticCoefficientProfile === 'G7') {
-    ballisticCoefficientTable = BC.Table.G7
-  }
-
-  const dragModel = new BC.DragModel(ballisticCoefficient, ballisticCoefficientTable, bulletWeight, bulletDiameter)
 
   // range
   let maxRange
@@ -93,37 +40,7 @@ export default function (params, addExtra) {
     rangeStep = BC.UNew.Meter(Math.abs(parseFloat(params.range.step)))
   }
 
-  // atmosphere
-  let atmo = new BC.Atmo()
-  if (params.atmosphere) {
-    let altitude
-    if (params.atmosphere.altitudeUnit === 'FT') {
-      altitude = BC.UNew.Foot(parseFloat(params.atmosphere.altitude))
-    }
-    if (params.atmosphere.altitudeUnit === 'M') {
-      altitude = BC.UNew.Meter(parseFloat(params.atmosphere.altitude))
-    }
 
-    let pressure
-    if (params.atmosphere.pressureUnit === 'IN/HG') {
-      pressure = BC.UNew.InHg(parseFloat(params.atmosphere.pressure))
-    }
-    if (params.atmosphere.pressureUnit === 'HPA') {
-      pressure = BC.UNew.hPa(parseFloat(params.atmosphere.pressure))
-    }
-
-    let temperature
-    if (params.atmosphere.temperatureUnit === '°F') {
-      temperature = BC.UNew.Fahrenheit(parseFloat(params.atmosphere.temperature))
-    }
-    if (params.atmosphere.temperatureUnit === '°C') {
-      temperature = BC.UNew.Celsius(parseFloat(params.atmosphere.temperature))
-    }
-
-    const humidity = parseFloat(params.atmosphere.humidity) / 100
-    // set atmosphere
-    atmo = new BC.Atmo(altitude, pressure, temperature, humidity)
-  }
 
   // Wind conditions
   const windsArray = []
@@ -215,6 +132,117 @@ export default function (params, addExtra) {
   }
 
   return results
+}
+
+function newWeapon(setup) {
+
+  let opticHeight
+  if (setup.measureOpticHeightUnit === 'IN') {
+    opticHeight = BC.UNew.Inch(parseFloat(setup.measureOpticHeight))
+  }
+  if (setup.measureOpticHeightUnit === 'CM') {
+    opticHeight = BC.UNew.Centimeter(parseFloat(setup.measureOpticHeight))
+  }
+
+  let zeroDistance
+  if (setup.measureZeroDistanceUnit === 'YD') {
+    zeroDistance = BC.UNew.Yard(Math.abs(parseFloat(setup.measureZeroDistance)))
+  }
+  if (setup.measureZeroDistanceUnit === 'M') {
+    zeroDistance = BC.UNew.Meter(Math.abs(parseFloat(setup.measureZeroDistance)))
+  }
+
+  let barrelTwist
+  if (setup.firearm.barrelTwistUnit === 'IN') {
+    barrelTwist = BC.UNew.Inch(parseFloat(setup.firearm.barrelTwist))
+  }
+  if (setup.firearm.barrelTwistUnit === 'MM') {
+    barrelTwist = BC.UNew.Millimeter(parseFloat(setup.firearm.barrelTwist))
+  }
+
+  /*
+  sightHeight: (number | Distance) = UNew.Inch(2),
+  zeroDistance: (number | Distance) = UNew.Yard(100),
+  twist: (number | Distance) = UNew.Inch(0),
+  zeroLookAngle: (number | Angular) = UNew.MIL(0)
+  */
+  const weapon = new BC.Weapon(opticHeight, zeroDistance, barrelTwist)
+
+  return weapon
+}
+
+function newDragModel(setup) {
+  let bulletWeight
+  if (setup.ammunition.weightUnit === 'GR') {
+    bulletWeight = BC.UNew.Grain(parseFloat(setup.ammunition.weight))
+  }
+  if (setup.ammunition.weightUnit === 'G') {
+    bulletWeight = BC.UNew.Gram(parseFloat(setup.ammunition.weight))
+  }
+
+  let bulletDiameter
+  if (setup.ammunition.diameterUnit === 'IN') {
+    bulletDiameter = BC.UNew.Inch(parseFloat(setup.ammunition.diameter))
+  }
+  if (setup.ammunition.diameterUnit === 'MM') {
+    bulletDiameter = BC.UNew.Millimeter(parseFloat(setup.ammunition.diameter))
+  }
+
+  let bulletVelocity
+  if (setup.measureVelocityUnit === 'FPS') {
+    bulletVelocity = BC.UNew.FPS(parseFloat(setup.measureVelocity))
+  }
+  if (setup.measureVelocityUnit === 'MPS') {
+    bulletVelocity = BC.UNew.MPS(parseFloat(setup.measureVelocity))
+  }
+
+  // dragModel
+  const ballisticCoefficient = parseFloat(setup.ammunition.ballisticCoefficient)
+
+  let ballisticCoefficientTable
+  if (setup.ammunition.ballisticCoefficientProfile === 'G1') {
+    ballisticCoefficientTable = BC.Table.G1
+  }
+  if (setup.ammunition.ballisticCoefficientProfile === 'G7') {
+    ballisticCoefficientTable = BC.Table.G7
+  }
+
+  const dragModel = new BC.DragModel(ballisticCoefficient, ballisticCoefficientTable, bulletWeight, bulletDiameter)
+  return dragModel
+}
+
+function newAtmo(options) {
+  // atmosphere
+  let atmo = new BC.Atmo()
+  if (options.atmosphere) {
+    let altitude
+    if (options.atmosphere.altitudeUnit === 'FT') {
+      altitude = BC.UNew.Foot(parseFloat(params.atmosphere.altitude))
+    }
+    if (options.atmosphere.altitudeUnit === 'M') {
+      altitude = BC.UNew.Meter(parseFloat(params.atmosphere.altitude))
+    }
+
+    let pressure
+    if (options.atmosphere.pressureUnit === 'IN/HG') {
+      pressure = BC.UNew.InHg(parseFloat(params.atmosphere.pressure))
+    }
+    if (options.atmosphere.pressureUnit === 'HPA') {
+      pressure = BC.UNew.hPa(parseFloat(params.atmosphere.pressure))
+    }
+
+    let temperature
+    if (options.atmosphere.temperatureUnit === '°F') {
+      temperature = BC.UNew.Fahrenheit(parseFloat(params.atmosphere.temperature))
+    }
+    if (options.atmosphere.temperatureUnit === '°C') {
+      temperature = BC.UNew.Celsius(parseFloat(params.atmosphere.temperature))
+    }
+
+    const humidity = parseFloat(options.atmosphere.humidity) / 100
+    // set atmosphere
+    atmo = new BC.Atmo(altitude, pressure, temperature, humidity)
+  }
 }
 
 function addExtraData (shot) {

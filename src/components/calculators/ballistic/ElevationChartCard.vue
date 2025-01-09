@@ -42,7 +42,7 @@
 import { useBallisticStore } from 'stores/ballistic'
 import ElevationShotList from 'components/calculators/ballistic/ElevationShotList.vue'
 import * as BC from 'js-ballistics'
-import { ref, reactive, computed, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { colors, useQuasar } from 'quasar'
 
 // the chart ref
@@ -52,44 +52,67 @@ const chart = ref(null)
 const $q = useQuasar()
 
 // chart options
-const options = reactive({
-  chart: {
-    id: 'elevation-chart',
-    toolbar: {
-      show: false
-    },
-    zoom: {
-      enabled: false
-    },
-    fontFamily: 'Mallanna, sans-serif',
-    background: 'transparent'
-  },
-  stroke: {
-    curve: 'straight'
-  },
-  colors: [colors.getPaletteColor('primary')],
-  theme: {
-    mode: $q.dark.isActive ? 'dark' : 'light'
-  },
-  yaxis: [{
-    title: {
-      style: {
-        fontSize: '1em'
-      },
-      offsetX: -10,
-      text: ''
-    }
+const options = computed(() => {
+  let xAxisTitle, yAxisTitle
+  if (ballisticStore.distanceUnit === BC.Unit.Yard) {
+    // labels
+    xAxisTitle = 'RANGE (YD)'
   }
-  ],
-  xaxis: {
-    title: {
-      style: {
-        fontSize: '1em'
+  if (ballisticStore.distanceUnit === BC.Unit.Meter) {
+    // labels
+    xAxisTitle = 'RANGE (M)'
+  }
+  if (ballisticStore.elevationUnit === BC.Unit.Inch) {
+    // labels
+    yAxisTitle = 'ELEVATION (IN)'
+  }
+  if (ballisticStore.elevationUnit === BC.Unit.Centimeter) {
+    // labels
+    yAxisTitle = 'ELEVATION (CM)'
+  }
+
+  const tickAmount = ballisticStore.range.distance / ballisticStore.range.step - 1
+
+  return {
+    chart: {
+      id: 'elevation-chart',
+      toolbar: {
+        show: false
       },
-      offsetY: -10,
-      text: ''
+      zoom: {
+        enabled: false
+      },
+      fontFamily: 'Mallanna, sans-serif',
+      background: 'transparent'
     },
-    type: 'numeric'
+    stroke: {
+      curve: 'straight'
+    },
+    colors: [colors.getPaletteColor('primary')],
+    theme: {
+      mode: $q.dark.isActive ? 'dark' : 'light'
+    },
+    yaxis: [{
+      title: {
+        style: {
+          fontSize: '1em'
+        },
+        offsetX: -10,
+        text: yAxisTitle
+      }
+    }
+    ],
+    xaxis: {
+      title: {
+        style: {
+          fontSize: '1em'
+        },
+        offsetY: -10,
+        text: xAxisTitle
+      },
+      type: 'numeric',
+      tickAmount
+    }
   }
 })
 
@@ -124,43 +147,6 @@ const buildSeries = () => {
     name: serieName,
     data
   }]
-}
-
-/*
- * Set options
- */
-const setOptions = () => {
-  let xAxisTitle, yAxisTitle
-  if (ballisticStore.distanceUnit === BC.Unit.Yard) {
-    // labels
-    xAxisTitle = 'RANGE (YD)'
-  }
-  if (ballisticStore.distanceUnit === BC.Unit.Meter) {
-    // labels
-    xAxisTitle = 'RANGE (M)'
-  }
-  if (ballisticStore.elevationUnit === BC.Unit.Inch) {
-    // labels
-    yAxisTitle = 'ELEVATION (IN)'
-  }
-  if (ballisticStore.elevationUnit === BC.Unit.Centimeter) {
-    // labels
-    yAxisTitle = 'ELEVATION (CM)'
-  }
-
-  // set correct legend
-  options.xaxis.title.text = xAxisTitle
-  options.yaxis[0].title.text = yAxisTitle
-
-  // adjust data & axis
-  options.xaxis.tickAmount = ballisticStore.range.distance / ballisticStore.range.step - 1
-
-  // ensure chart theme
-  options.theme.mode = $q.dark.isActive ? 'dark' : 'light'
-
-  if (chart.value) { // chart may be null if not mounted
-    chart.value.updateOptions(options)
-  }
 }
 
 /*
@@ -254,7 +240,6 @@ const step = computed(() => ballisticStore.range.step)
 watch([shot, step], () => {
   if (shot.value !== null && step.value !== null) {
     buildSeries()
-    setOptions()
     // remove annotations
     showAnnotations.value = false
   }
@@ -262,13 +247,6 @@ watch([shot, step], () => {
 {
   deep: true,
   immediate: true
-})
-
-/*
- * update chart if theme changes
- */
-watch(() => $q.dark.isActive, () => {
-  setOptions()
 })
 
 </script>

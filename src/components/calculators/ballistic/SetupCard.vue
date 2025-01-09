@@ -1,16 +1,18 @@
 <template>
   <q-card>
-    <ProfileSelector v-model="profileId" />
+    <q-card-section>
+      <setupSelect v-model="setupId" />
+    </q-card-section>
   </q-card>
 </template>
 
 <script setup>
 // imports
-import ProfileSelector from 'components/profiles/selector/ProfileSelector.vue'
+import SetupSelect from 'components/profiles/setup/SetupSelect.vue'
 import { useBallisticStore } from 'stores/ballistic'
 import { storeToRefs } from 'pinia'
 
 // set calculation profile
 const ballisticStore = useBallisticStore()
-const { profileId } = storeToRefs(ballisticStore)
+const { setupId } = storeToRefs(ballisticStore)
 </script>

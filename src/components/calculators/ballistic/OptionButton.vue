@@ -4,7 +4,6 @@
     icon="more_vert"
     @click="dialog=true"
   >
-    Options
     <q-dialog
       v-model="dialog"
     >

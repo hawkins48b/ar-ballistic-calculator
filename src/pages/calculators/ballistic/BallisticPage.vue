@@ -1,20 +1,10 @@
 <template>
-  <div>
-    <div class="row justify-between">
-      <div class="col-auto">
-        <q-btn
-          flat
-          to="/calculators"
-          icon="arrow_back"
-        />
-      </div>
-
-      <div class="col-auto q-pr-sm">
-        <OptionButton />
-      </div>
-    </div>
+  <q-page class="q-pa-md">
+    <pageHeader>
+      <OptionButton />
+    </pageHeader>
     <!-- Profiles -->
-    <ProfileCard class="q-mt-md" />
+    <SetupCard class="q-mt-md" />
     <div class="row q-mt-xs q-col-gutter-md items-stretch">
       <div class="col-xs-12 col-sm-6">
         <RangeCard />
@@ -39,13 +29,14 @@
       </div>
     </div>
     <ResultCalculator v-if="showCalcResult" />
-  </div>
+  </q-page>
 </template>
 
 <script setup>
 // imports
+import PageHeader from 'src/components/layout/PageHeader.vue'
 import OptionButton from 'components/calculators/ballistic/OptionButton.vue'
-import ProfileCard from 'components/calculators/ballistic/ProfileCard.vue'
+import SetupCard from 'components/calculators/ballistic/SetupCard.vue'
 import RangeCard from 'components/calculators/ballistic/RangeCard.vue'
 import ResultCalculator from 'components/calculators/ballistic/ResultCalculator.vue'
 import AtmosphereCard from 'components/calculators/ballistic/AtmosphereCard.vue'

@@ -1,8 +1,6 @@
 // imports
 import ballisticCalculator from 'src/controller/ballistic-calculator'
 import { defineStore } from 'pinia'
-import { useProfilesStore } from './profiles'
-import { ref } from 'vue'
 import * as BC from 'js-ballistics'
 
 // International Standard Atmosphere ISA
@@ -16,7 +14,7 @@ const ISA_HUMIDITY = 78
 
 export const useBallisticStore = defineStore('ballistic', {
   state: () => ({
-    profileId: null,
+    setupId: null,
     range: {
       distance: 500,
       unit: 'YD',
@@ -96,18 +94,10 @@ export const useBallisticStore = defineStore('ballistic', {
       }
       return unit
     },
-    calculateShot: (state) => {
+    calculateShot: async (state) => {
       let results = null
-      if (state.profileId) {
-        const ProfilesStore = useProfilesStore()
-        const profile = ref(ProfilesStore.profilebyId(state.profileId))
-
-        const params = {
-          weapon: profile.value.weapon,
-          optic: profile.value.optic,
-          bullet: profile.value.bullet,
-          measures: profile.value.measures,
-          options: profile.value.options,
+      if (state.setupId) {
+        const options = {
           range: state.range,
           atmosphere: state.atmosphere,
           wind: state.wind,
@@ -115,23 +105,15 @@ export const useBallisticStore = defineStore('ballistic', {
         }
 
         if (state.isCalculationValid) {
-          results = ballisticCalculator(params)
+          results = await ballisticCalculator(state.setupId, options)
         }
       }
       return results
     },
     calculateShotStep1: (state) => {
       let results = null
-      if (state.profileId) {
-        const ProfilesStore = useProfilesStore()
-        const profile = ref(ProfilesStore.profilebyId(state.profileId))
-
-        const params = {
-          weapon: profile.value.weapon,
-          optic: profile.value.optic,
-          bullet: profile.value.bullet,
-          measures: profile.value.measures,
-          options: profile.value.options,
+      if (state.setupId) {
+        const options = {
           range: {
             distance: state.range.distance,
             unit: state.range.unit,
@@ -143,7 +125,7 @@ export const useBallisticStore = defineStore('ballistic', {
           sightAdjustment: state.sightAdjustment
         }
         if (state.isCalculationValid) {
-          results = ballisticCalculator(params, true)
+          results = ballisticCalculator(state.setupId, options, true)
         }
       }
       return results

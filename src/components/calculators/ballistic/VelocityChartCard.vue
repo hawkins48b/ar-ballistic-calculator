@@ -32,7 +32,7 @@
 
 <script setup>
 // imports
-import { useBallisticStore } from 'stores/ballistic'
+import { useBallisticStore } from 'stores/calculators/ballistic'
 import { ref, computed } from 'vue'
 import { colors, useQuasar } from 'quasar'
 

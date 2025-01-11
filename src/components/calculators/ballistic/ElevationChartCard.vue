@@ -39,7 +39,7 @@
 
 <script setup>
 // imports
-import { useBallisticStore } from 'stores/ballistic'
+import { useBallisticStore } from 'stores/calculators/ballistic'
 import ElevationShotList from 'components/calculators/ballistic/ElevationShotList.vue'
 import * as BC from 'js-ballistics'
 import { ref, computed, watch } from 'vue'
@@ -234,11 +234,11 @@ const annotationMaxOrdinance = computed(() => {
  * Calculate shot
  */
 const ballisticStore = useBallisticStore()
-const shot = computed(() => ballisticStore.calculateShotStep1)
-const step = computed(() => ballisticStore.range.step)
+const shot = ref(null)
 
-watch([shot, step], () => {
-  if (shot.value !== null && step.value !== null) {
+watch(ballisticStore, async () => {
+  shot.value = await ballisticStore.calculateShotStep1()
+  if (shot.value) {
     buildSeries()
     // remove annotations
     showAnnotations.value = false
@@ -248,5 +248,4 @@ watch([shot, step], () => {
   deep: true,
   immediate: true
 })
-
 </script>

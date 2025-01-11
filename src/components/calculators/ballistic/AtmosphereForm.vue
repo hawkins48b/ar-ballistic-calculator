@@ -90,7 +90,7 @@
 
 <script setup>
 // imports
-import { useBallisticStore } from 'stores/ballistic'
+import { useBallisticStore } from 'stores/calculators/ballistic'
 import * as BC from 'js-ballistics'
 
 // ballistic store

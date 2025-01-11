@@ -32,7 +32,7 @@
 <script setup>
 // imports
 import { computed } from 'vue'
-import { useBallisticStore } from 'stores/ballistic'
+import { useBallisticStore } from 'stores/calculators/ballistic'
 import * as BC from 'js-ballistics'
 
 // props

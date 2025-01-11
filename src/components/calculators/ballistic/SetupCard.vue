@@ -9,7 +9,7 @@
 <script setup>
 // imports
 import SetupSelect from 'components/profiles/setup/SetupSelect.vue'
-import { useBallisticStore } from 'stores/ballistic'
+import { useBallisticStore } from 'stores/calculators/ballistic'
 import { storeToRefs } from 'pinia'
 
 // set calculation profile

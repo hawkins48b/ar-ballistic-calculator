@@ -42,12 +42,12 @@ import ResultCalculator from 'components/calculators/ballistic/ResultCalculator.
 import AtmosphereCard from 'components/calculators/ballistic/AtmosphereCard.vue'
 import WindConditionsCard from 'components/calculators/ballistic/WindConditionsCard.vue'
 import SightAdjustmentCard from 'components/calculators/ballistic/SightAdjustmentCard.vue'
-import { useBallisticStore } from 'stores/ballistic'
+import { useBallisticStore } from 'stores/calculators/ballistic'
 import { computed } from 'vue'
 
 // options
 // ballistic store
 const ballisticStore = useBallisticStore()
 const options = computed(() => ballisticStore.options)
-const showCalcResult = computed(() => ballisticStore.profileId)
+const showCalcResult = computed(() => ballisticStore.setupId)
 </script>

@@ -60,7 +60,7 @@
 <script setup>
 // imports
 import { storeToRefs } from 'pinia'
-import { useBallisticStore } from 'stores/ballistic'
+import { useBallisticStore } from 'stores/calculators/ballistic'
 import { watch } from 'vue'
 
 // ballistic store

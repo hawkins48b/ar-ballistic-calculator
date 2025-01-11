@@ -14,7 +14,7 @@ const ISA_HUMIDITY = 78
 
 export const useBallisticStore = defineStore('ballistic', {
   state: () => ({
-    setupId: null,
+    setupId: 1,
     range: {
       distance: 500,
       unit: 'YD',
@@ -94,49 +94,16 @@ export const useBallisticStore = defineStore('ballistic', {
       }
       return unit
     },
-    calculateShot: async (state) => {
-      let results = null
-      if (state.setupId) {
-        const options = {
-          range: state.range,
-          atmosphere: state.atmosphere,
-          wind: state.wind,
-          sightAdjustment: state.sightAdjustment
-        }
-
-        if (state.isCalculationValid) {
-          results = await ballisticCalculator(state.setupId, options)
-        }
-      }
-      return results
-    },
-    calculateShotStep1: (state) => {
-      let results = null
-      if (state.setupId) {
-        const options = {
-          range: {
-            distance: state.range.distance,
-            unit: state.range.unit,
-            step: 1
-          },
-          zero: state.zero,
-          atmosphere: state.atmosphere,
-          wind: state.wind,
-          sightAdjustment: state.sightAdjustment
-        }
-        if (state.isCalculationValid) {
-          results = ballisticCalculator(state.setupId, options, true)
-        }
-      }
-      return results
-    },
     isCalculationValid: (state) => {
-      let isValid = false
+      let isValid = true
+
+      if (state.setupId) {
+        isValid = false
+      }
 
       const distance = parseFloat(state.range.distance)
-
-      if (distance <= 3000) {
-        isValid = true
+      if (distance > 3000) {
+        isValid = false
       }
 
       return isValid
@@ -166,6 +133,33 @@ export const useBallisticStore = defineStore('ballistic', {
     },
     removeProfile () {
       this.profileId = null
+    },
+    async calculateShot () {
+      let results = null
+      if (this.isCalculationValid) {
+        const options = {
+          range: this.range,
+          atmosphere: this.atmosphere,
+          wind: this.wind,
+          sightAdjustment: this.sightAdjustment
+        }
+        results = await ballisticCalculator(this.setupId, options)
+      }
+      return results
+    },
+    async calculateShotStep1 () {
+      let results = null
+      if (this.isCalculationValid) {
+        const options = {
+          range: this.range,
+          atmosphere: this.atmosphere,
+          wind: this.wind,
+          sightAdjustment: this.sightAdjustment
+        }
+        options.range.step = 1
+        results = await ballisticCalculator(this.setupId, options)
+      }
+      return results
     }
   },
   persist: true

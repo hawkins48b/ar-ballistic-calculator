@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { useBallisticStore } from 'stores/ballistic'
+import { useBallisticStore } from 'stores/calculators/ballistic'
 import { storeToRefs } from 'pinia'
 import RangeForm from 'components/calculators/ballistic/RangeForm.vue'// set calculation profile
 

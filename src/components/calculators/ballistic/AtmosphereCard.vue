@@ -24,7 +24,7 @@
 // imports
 import AtmosphereForm from 'components/calculators/ballistic/AtmosphereForm.vue'
 import { storeToRefs } from 'pinia'
-import { useBallisticStore } from 'stores/ballistic'
+import { useBallisticStore } from 'stores/calculators/ballistic'
 
 // ballistic store
 const ballisticStore = useBallisticStore()

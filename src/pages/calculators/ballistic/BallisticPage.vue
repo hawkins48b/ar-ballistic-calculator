@@ -4,7 +4,7 @@
       <OptionButton />
     </pageHeader>
     <!-- Profiles -->
-    <SetupCard class="q-mt-md" />
+    <SetupCard />
     <div class="row q-mt-xs q-col-gutter-md items-stretch">
       <div class="col-xs-12 col-sm-6">
         <RangeCard />

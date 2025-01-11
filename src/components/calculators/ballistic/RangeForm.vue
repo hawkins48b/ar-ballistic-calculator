@@ -1,72 +1,53 @@
 <template>
   <q-form>
+    <RadioCard
+      v-model="range.unit"
+      :options="[
+        { label:'YD', value: 'YD' },
+        { label:'M', value: 'M' }
+      ]"
+      label-class="text-body1"
+    />
     <q-input
       v-model="range.distance"
-      label="Range"
+      debounce="500"
       filled
-      step="any"
+      label="Range"
       type="number"
+      :suffix="range.unit"
       lazy-rules
       :rules="[
         val => val && val > 0 || 'Range must be positive',
-        val => val <= 3000 || 'Range must be inferior or equal to 3000'
+        val => val && val <= 3000 || 'Range excessive'
       ]"
       class="q-mt-md"
-      hint="e.g 500 YD or 500 M"
-      debounce="500"
-    >
-      <template #append>
-        <q-btn-toggle
-          v-model="range.unit"
-          no-caps
-          :options="[
-            {label: 'YD', value: 'YD'},
-            {label: 'M', value: 'M'}
-          ]"
-          @update:model-value="changeRangeUnit()"
-        />
-      </template>
-    </q-input>
-
-    <q-input
-      v-model="range.step"
-      label="Step"
-      filled
-      type="number"
-      lazy-rules
-      :rules="[
-        val => val && val > 0 || 'Step must be positive',
-        val => val && val <= parseFloat(range.distance) || 'Step must be lower or equal than range'
-      ]"
-      class="q-mt-md"
-      hint="Recommended value is 25"
-      debounce="500"
     />
+
+    <div>
+      <div clasS="q-mb-sm">
+        Divider
+      </div>
+      <RadioCard
+        v-model="range.step"
+        :options="[
+          { label:`1${range.unit}`, value: 1 },
+          { label:`25${range.unit}`, value: 25 },
+          { label:`50${range.unit}`, value: 50 },
+          { label:`100${range.unit}`, value: 100 }
+        ]"
+        label-class="text-caption"
+      />
+    </div>
   </q-form>
 </template>
 
 <script setup>
-// imports
-import * as BC from 'js-ballistics'
+import RadioCard from 'src/components/RadioCard.vue'
 
+// imports
 const range = defineModel({
   type: Object,
   required: true
 })
-
-/*
- * Unit conversion
- */
-// conversion range distance
-const changeRangeUnit = function () {
-  if (range.value.unit === 'YD') {
-    range.value.distance = BC.UNew.Meter(parseFloat(range.value.distance)).In(BC.Unit.Yard)
-    range.value.distance = Math.round(range.value.distance * 10) / 10
-  }
-  if (range.value.unit === 'M') {
-    range.value.distance = BC.UNew.Yard(parseFloat(range.value.distance)).In(BC.Unit.Meter)
-    range.value.distance = Math.round(range.value.distance * 10) / 10
-  }
-}
 
 </script>

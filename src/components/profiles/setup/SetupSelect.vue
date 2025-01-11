@@ -6,7 +6,20 @@
     option-value="id"
     map-options
     label="Setup"
-  />
+  >
+    <template #append>
+      <q-btn
+        round
+        dense
+        flat
+        size="sm"
+        icon="edit"
+        :to="{name:'edit-setup',params: {setupId}}"
+      >
+        <template #loading />
+      </q-btn>
+    </template>
+  </q-select>
 </template>
 
 <script setup>

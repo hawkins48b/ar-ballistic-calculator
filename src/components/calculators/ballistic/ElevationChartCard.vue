@@ -16,7 +16,7 @@
         </div>
         <div class="col-auto">
           <q-toggle v-model="showAnnotations">
-            Show Annotations
+            Annotations
           </q-toggle>
         </div>
       </div>
@@ -238,7 +238,6 @@ const shot = ref(null)
 
 watch(ballisticStore, async () => {
   shot.value = await ballisticStore.calculateShotStep1(true)
-  console.log('shot value', shot.value)
   if (shot.value) {
     buildSeries()
     // remove annotations

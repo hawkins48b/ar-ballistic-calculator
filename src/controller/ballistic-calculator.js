@@ -289,5 +289,9 @@ function addExtraData (shot) {
     }
   })
 
+  // if the zero distance is below 100y, use the zero distance for near zero
+  if (shot.weapon.zeroDistance.In(BC.Unit.Yard) <= 100) {
+    shot.nearZero = shot.weapon.zeroDistance
+  }
   return shot
 }

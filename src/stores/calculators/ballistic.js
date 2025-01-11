@@ -97,7 +97,7 @@ export const useBallisticStore = defineStore('ballistic', {
     isCalculationValid: (state) => {
       let isValid = true
 
-      if (state.setupId) {
+      if (!state.setupId) {
         isValid = false
       }
 
@@ -147,17 +147,17 @@ export const useBallisticStore = defineStore('ballistic', {
       }
       return results
     },
-    async calculateShotStep1 () {
+    async calculateShotStep1 (addExtra) {
       let results = null
       if (this.isCalculationValid) {
         const options = {
-          range: this.range,
+          range: { ...this.range },
           atmosphere: this.atmosphere,
           wind: this.wind,
           sightAdjustment: this.sightAdjustment
         }
         options.range.step = 1
-        results = await ballisticCalculator(this.setupId, options)
+        results = await ballisticCalculator(this.setupId, options, addExtra)
       }
       return results
     }

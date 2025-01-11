@@ -9,11 +9,6 @@
     >
       <q-card>
         <q-card-section>
-          <p class="text-h3">
-            Calculator Options
-          </p>
-        </q-card-section>
-        <q-card-section>
           <p class="text-h6">
             Parameters
           </p>

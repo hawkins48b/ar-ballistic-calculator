@@ -237,7 +237,8 @@ const ballisticStore = useBallisticStore()
 const shot = ref(null)
 
 watch(ballisticStore, async () => {
-  shot.value = await ballisticStore.calculateShotStep1()
+  shot.value = await ballisticStore.calculateShotStep1(true)
+  console.log('shot value', shot.value)
   if (shot.value) {
     buildSeries()
     // remove annotations

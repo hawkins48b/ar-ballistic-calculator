@@ -1,7 +1,7 @@
 body {
-  q.card {
+  .q-card {
     &.active {
-      background-color: $primary;
+      background-color: $primary !important;
     }
   }
 }
